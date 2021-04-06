@@ -1,3 +1,18 @@
+2021/04/06 22:10
+★ツルツルモードの実装 - 移動の実装
+・プレイヤーオブジェクトへCharacterControllerコンポーネント追加など
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・スティック入力を取得
+　自動でプレイヤーが移動する処理。（速さ100で設定 等速で3マス/1秒移動）
+　スティックで入力される割合（-1~1）
+　加速度「スティックで入力される割合×速さ×deltatime」を毎フレーム加算
+　テープ拡大時の最高速の設定　4００で２マス/１秒で動く
+main_scene\CalamariTape\Assets\Scripts\MoveController.cs
+
+★ツルツルモードの実装 - 切り替えの実装
+・切り替えの際に位置がリセットされる不具合を修正
+main_scene\CalamariTape\Assets\Scripts\ModeChanger.cs
+
 2021/04/05 22:43
 ★ツルツルモードの実装 - 切り替えの実装
 ・プレイヤー用のオブジェクト作成して、仮の床オブジェクトを配置

@@ -22,7 +22,7 @@ public class ModeChanger : MonoBehaviour
     private bool _tsurutsuruInput;
 
     /// <summary>モード状態</summary>
-    [SerializeField]　private string _mode;
+    private string _mode;
 
     void Start()
     {
@@ -66,6 +66,8 @@ public class ModeChanger : MonoBehaviour
     /// </summary>
     private void CalamariModeDisabledChange()
     {
+        _calamari.transform.position = _tsurutsuru.transform.position;
+        _calamari.transform.eulerAngles = _tsurutsuru.transform.eulerAngles;
         _calamari.SetActive(true);
         _nenchak.SetActive(false);
         _tsurutsuru.SetActive(false);
@@ -88,6 +90,8 @@ public class ModeChanger : MonoBehaviour
     /// </summary>
     private void TsurutsuruModeEnabledChange()
     {
+        _tsurutsuru.transform.position = _calamari.transform.position;
+        _tsurutsuru.transform.eulerAngles = _calamari.transform.eulerAngles;
         _calamari.SetActive(false);
         _nenchak.SetActive(false);
         _tsurutsuru.SetActive(true);
