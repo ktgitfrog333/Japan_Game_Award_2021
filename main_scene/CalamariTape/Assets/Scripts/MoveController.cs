@@ -32,11 +32,19 @@ public class MoveController : MonoBehaviour
     /// <summary>カメラの正面補正</summary>
     private Vector3 _mainCameraForward;
 
+    /// <summary>スティック入力（横）の保存</summary>
+    private float _registedHorizontal;
+    /// <summary>スティック入力（縦）の保存</summary>
+    private float _registedVertical;
+
     void Start()
     {
         _transform = this.transform;
         _registedScale = _scale;
         _offSetMoveSpeed = _moveSpeed;
+
+        _registedHorizontal = 0f;
+        _registedVertical = 0f;
         if (Camera.main != null)
         {
             _mainCameraTransform = Camera.main.transform;
@@ -65,8 +73,18 @@ public class MoveController : MonoBehaviour
         var h = CrossPlatformInputManager.GetAxis("Horizontal");
         var v = CrossPlatformInputManager.GetAxis("Vertical");
 
-        _moveVelocity.x = h * _moveSpeed;
-        _moveVelocity.z = v * _moveSpeed;
+        // 入力されたスティック入力をゼロにしない
+        if (Mathf.Abs(_registedHorizontal) < Mathf.Abs(h))
+        {
+            _registedHorizontal = h;
+        }
+        if (Mathf.Abs(_registedVertical) < Mathf.Abs(v))
+        {
+            _registedVertical = v;
+        }
+
+        _moveVelocity.x = _registedHorizontal * _moveSpeed;
+        _moveVelocity.z = _registedVertical * _moveSpeed;
 
         if (_mainCameraTransform != null)
         {
