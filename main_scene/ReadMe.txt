@@ -1,3 +1,16 @@
+2021/04/08 20:56
+★コリジョン
+プレイヤーとブロック、テープ、ゴール判定の仮当て
+main_scene\CalamariTape\Assets\Prefabs\GoalTrigger.prefab
+main_scene\CalamariTape\Assets\Prefabs\Tape.prefab
+main_scene\CalamariTape\Assets\Scripts\GoalEvent.cs
+★ブロック
+壁にぶつかった際、プレイヤーが通れなくする
+プレイヤーが上に乗れるようにする
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・プレイヤーの各モード情報管理スクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\PlayerManager.cs
+
 2021/04/07 19:05
 ★ツルツルモードの実装 - 移動の実装
 ・スティック入力を取得
