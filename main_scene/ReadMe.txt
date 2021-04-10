@@ -1,3 +1,25 @@
+2021/04/10 11:59
+★ジャンプの実装
+Ａ/スペースの入力の取得
+高さ(プレイヤー最小サイズ)２.５マス分（２マス登れる分）移動
+高さ(プレイヤー最大サイズ)４.５マス分（４マス登れる分）移動
+ジャンプ中の最大横移動幅は４マス先までにする（※ここは要調整）
+空中にいる場合はジャンプ不可
+★他
+プレイヤーの壁に衝突した際の判定部分の不具合を修正
+
+・デモステージ少し拡張
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・プレイヤー操作ロジックにジャンプを実装
+・壁にぶつかっても止まっていなかった処理を止まるように修正
+main_scene\CalamariTape\Assets\Scripts\MoveController.cs
+・InputManagerにてコントーラーのAボタンを指定
+main_scene\CalamariTape\ProjectSettings\InputManager.asset
+・ゲームオブジェクトへ壁判定用のタグ追加
+main_scene\CalamariTape\ProjectSettings\TagManager.asset
+・壁のゲームオブジェクトのプレハブ作成
+main_scene\CalamariTape\Assets\Prefabs\CubeWall.prefab
+
 2021/04/08 20:56
 ★コリジョン
 プレイヤーとブロック、テープ、ゴール判定の仮当て

@@ -37,6 +37,13 @@ public class MoveController : MonoBehaviour
     /// <summary>スティック入力（縦）の保存</summary>
     private float _registedVertical;
 
+    /// <summary>ジャンプ力の設定値</summary>
+    [SerializeField,Range(130,230)] private float _jumpPower = 130f;
+    /// <summary>ジャンプ制御値</summary>
+    private float _jumpScale;
+    /// <summary>ジャンプ中の判定フラグ</summary>
+    private bool _jumpAction;
+
     void Start()
     {
         _transform = this.transform;
@@ -45,6 +52,7 @@ public class MoveController : MonoBehaviour
 
         _registedHorizontal = 0f;
         _registedVertical = 0f;
+        _jumpScale = _jumpPower;
         if (Camera.main != null)
         {
             _mainCameraTransform = Camera.main.transform;
@@ -62,6 +70,29 @@ public class MoveController : MonoBehaviour
         {
             _transform.localScale = new Vector3(1, 1, 1) * _scale;
             _moveSpeed = _offSetMoveSpeed * _scale;
+        }
+
+        if (1 < _scale)
+        {
+            _jumpScale = _jumpPower + (25 * _scale);
+        }
+        else
+        {
+            _jumpScale = _jumpPower;
+        }
+
+        if (_characterController.isGrounded && _jumpAction != true)
+        {
+            _jumpAction = CrossPlatformInputManager.GetButtonDown("Jump");
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag.Equals("Wall"))
+        {
+            _registedHorizontal = 0f;
+            _registedVertical = 0f;
         }
     }
 
@@ -96,13 +127,11 @@ public class MoveController : MonoBehaviour
             _moveVelocity = _moveVelocity.z * Vector3.forward + _moveVelocity.x * Vector3.right;
         }
 
-        if (_characterController.isGrounded)
+        if (_characterController.isGrounded && _jumpAction == true)
         {
-            //if (Input.GetButtonDown("Jump"))
-            //{
-            //    // ジャンプ処理
-            //    _moveVelocity.y = _jumpPower; // ジャンプの際は上方向に移動させる
-            //}
+            // ジャンプ処理
+            _moveVelocity.y = _jumpScale; // ジャンプの際は上方向に移動させる
+            _jumpAction = false;
         }
         else
         {
