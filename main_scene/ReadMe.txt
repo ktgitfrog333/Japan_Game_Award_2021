@@ -1,3 +1,21 @@
+2021/04/10 19:20
+★テープ長さに関する縮小・拡大処理の実装
+Xボタン長押し・マウスホイール上回転でテープのサイズを拡大
+最大のテープサイズを「等倍～4倍」設定（要調整）
+Yボタン長押し・マウスホイール下回転でテープのサイズを縮小
+最小のテープサイズを「等倍～4倍」設定（要調整）
+
+・プレイヤー、壁、ゴールのゲームオブジェクトへタグ設定
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・ゴール判定スクリプトクラス修正
+main_scene\CalamariTape\Assets\Scripts\GoalEvent.cs
+・プレイヤー操作スクリプトクラスへ拡大・縮小ロジック追加
+main_scene\CalamariTape\Assets\Scripts\MoveController.cs
+・InputManagerにてScaleUp（拡大）・ScaleDown（縮小）のキー設定
+main_scene\CalamariTape\ProjectSettings\InputManager.asset
+・ゴール判定用のタグを設定
+main_scene\CalamariTape\ProjectSettings\TagManager.asset
+
 2021/04/10 11:59
 ★ジャンプの実装
 Ａ/スペースの入力の取得

@@ -7,16 +7,22 @@ using UnityEngine;
 /// </summary>
 public class GoalEvent : MonoBehaviour
 {
-    /// <summary>プレイヤー判定</summary>
-    [SerializeField] private PlayerManager _mode;
+    /// <summary>ゴール床オブジェクト接着判定</summary>
+    [SerializeField] private bool _goalTrigger;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name.Equals(_mode._calamari.name)
-            || other.gameObject.name.Equals(_mode._nenchak.name)
-            || other.gameObject.name.Equals(_mode._tsurutsuru.name))
+        if (_goalTrigger == true && other.gameObject.tag.Equals("Player"))
         {
             Debug.Log("ゴール処理を起動");
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag.Equals("GoalFloor"))
+        {
+            _goalTrigger = true;
         }
     }
 }
