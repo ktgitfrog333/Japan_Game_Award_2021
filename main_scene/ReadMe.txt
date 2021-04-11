@@ -1,3 +1,24 @@
+2021/04/11 20:30
+★ネンチャクモードの実装
+切り替えの実装
+　Lボタンでネンチャクモードに切り替え
+　再度Lボタン押下でネンチャクモード解除の処理。（カラマリモードに切り替え）
+main_scene\CalamariTape\Assets\Scripts\ModeChanger.cs
+
+★ツルツルモードの実装（速度・重力の調整）
+移動の実装後の調整
+　自動でプレイヤーが移動する処理。（速さ100で設定 等速で3マス/1秒移動　→　速さ3で設定 等速で3マス/1秒移動）
+　テープ拡大時の最高速の設定　（4００で２マス/１秒で動く　→　2で２マス/１秒で動く）
+空中移動の実装後の調整
+　入力された方向に速さ100で設定 等速で2マス/1秒移動[要調整]　→　速さ2で設定 等速で2マス/1秒移動
+　最高速の設定　４００で２マス/１秒で動く　→　2で２マス/１秒で動く
+main_scene\CalamariTape\Assets\Scripts\MoveController.cs
+
+・プレイヤーオブジェクトへ位置情報を追加
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・InputManagerにてネンチャクモード切り替えのキー設定
+main_scene\CalamariTape\ProjectSettings\InputManager.asset
+
 2021/04/10 19:41
 ReadMeを少し修正
 
