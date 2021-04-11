@@ -11,7 +11,7 @@ public class MoveController : MonoBehaviour
     /// <summary>移動速度</summary>
     [SerializeField] private float _moveSpeed = 3f;
     /// <summary>移動速度の初期値</summary>
-    private float _groundSetMoveSpeed;
+    [SerializeField] private float _groundSetMoveSpeed;
     /// <summary>移動速度の初期値</summary>
     private float _airSetMoveSpeed;
 
@@ -39,9 +39,13 @@ public class MoveController : MonoBehaviour
     private float _registedVertical;
 
     /// <summary>ジャンプ力の設定値</summary>
-    [SerializeField,Range(130,230)] private float _jumpPower = 130f;
+    [SerializeField] private float _jumpPower = 5f;
     /// <summary>ジャンプ制御値</summary>
-    private float _jumpScale;
+    private float _jumpVelocity;
+    /// <summary>ジャンプ制御の最大値</summary>
+    [SerializeField] private float _jumpMax = 35f;
+    /// <summary>ジャンプ制御の最大値の一時保存</summary>
+    private float _registedJumpMax;
     /// <summary>ジャンプ中の判定フラグ</summary>
     private bool _jumpAction;
 
@@ -59,7 +63,6 @@ public class MoveController : MonoBehaviour
 
         _registedHorizontal = 0f;
         _registedVertical = 0f;
-        _jumpScale = _jumpPower;
         _gravityAcceleration = 0f;
         if (Camera.main != null)
         {
@@ -88,24 +91,22 @@ public class MoveController : MonoBehaviour
             _transform.localScale = new Vector3(1, 1, 1) * _scale;
             // 大きさに合わせて速度を計算
             var x = _scale - 1f;
-            x = 1f * (x / 3);
-            var speed = ((3 - x) / 3);
-            _groundSetMoveSpeed *= speed;
+            //x = 1f * (x / 3);
+            //var speed = ((3 - x) / 3);
+            //_groundSetMoveSpeed *= speed;
+            x = _moveSpeed + (1f * (x / 3));
+            _groundSetMoveSpeed = x;
+
+            // 大きさに合わせてジャンプを計算
+            var y = _scale - 1f;
+            y = _jumpMax + (10f * (y / 3));
+            _registedJumpMax = y;
         }
 
         // 空中の移動速度補正
         if (_characterController.isGrounded == false)
         {
             _airSetMoveSpeed = 2f;
-        }
-
-        if (1 < _scale)
-        {
-            _jumpScale = _jumpPower + (25 * _scale);
-        }
-        else
-        {
-            _jumpScale = _jumpPower;
         }
 
         // デバッグ：移動計測のコルーチンを起動する
@@ -248,18 +249,24 @@ public class MoveController : MonoBehaviour
             _moveVelocity = _moveVelocity.z * Vector3.forward + _moveVelocity.x * Vector3.right;
         }
 
-        if (_characterController.isGrounded == true)
+        if (_characterController.isGrounded == true && _jumpAction == true)
         {
-            if (_jumpAction == true)
-            {
-                // ジャンプ処理
-                _moveVelocity.y = _jumpScale; // ジャンプの際は上方向に移動させる
-                _jumpAction = false;
-            }
+            // ジャンプ処理
+            _jumpVelocity += _jumpPower;
+            _moveVelocity.y = _jumpVelocity; // ジャンプの際は上方向に移動させる
+            _gravityAcceleration = 0f;
+        }
+        else if (_characterController.isGrounded == false && _jumpAction == true && _jumpVelocity < _registedJumpMax)
+        {
+            // ジャンプ処理
+            _jumpVelocity += _jumpPower;
+            _moveVelocity.y = _jumpVelocity; // ジャンプの際は上方向に移動させる
             _gravityAcceleration = 0f;
         }
         else
         {
+            _jumpAction = false;
+            _jumpVelocity = 0f;
             // 重力による加速
             _gravityAcceleration += Time.deltaTime;
             _moveVelocity.y = Physics.gravity.y * _gravityAcceleration;
