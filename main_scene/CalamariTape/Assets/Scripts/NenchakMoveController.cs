@@ -70,10 +70,7 @@ public class NenchakMoveController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_wallRun == true)
-        {
-            CharacterMovement();
-        }
+        CharacterMovement();
     }
 
     private void Update()
@@ -213,7 +210,7 @@ public class NenchakMoveController : MonoBehaviour
         var h = CrossPlatformInputManager.GetAxis("Horizontal");
         var v = CrossPlatformInputManager.GetAxis("Vertical");
 
-        if (0 < _value._parameter && _value._adhesive == true)
+        if (0 < _value._parameter && _value._adhesive == true && _wallRun == true)
         {
             _moveVelocity.x = h * _groundSetMoveSpeed;
             _moveVelocity.y = v * _groundSetMoveSpeed;
@@ -251,7 +248,7 @@ public class NenchakMoveController : MonoBehaviour
         _movedSpeedToAnimator = new Vector3(_moveVelocity.x, 0, _moveVelocity.z).magnitude;
         //_animator.SetFloat("MoveSpeed", _movedSpeedToAnimator);
 
-        if (0 < _movedSpeedToAnimator && 0 < _value._parameter && _value._adhesive == true)
+        if (0 < _movedSpeedToAnimator && 0 < _value._parameter && _value._adhesive == true && _wallRun == true)
         {
             _value._parameter -= Time.deltaTime;
             Debug.Log("耐久値：" + _value._parameter);
