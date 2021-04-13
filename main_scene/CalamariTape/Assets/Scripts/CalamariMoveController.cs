@@ -82,20 +82,17 @@ public class CalamariMoveController : MonoBehaviour
         ScaleChangeForController();
         ScaleChangeForMouse();
 
-        if (_registedScale != _scale)
-        {
-            _registedScale = _scale;
-            _transform.localScale = new Vector3(1, 1, 1) * _scale;
-            // 大きさに合わせて速度を計算
-            var x = _scale - 1f;
-            x = _moveSpeed + (1f * (x / 3));
-            _groundSetMoveSpeed = x;
+        _registedScale = _scale;
+        _transform.localScale = new Vector3(1, 1, 1) * _scale;
+        // 大きさに合わせて速度を計算
+        var x = _scale - 1f;
+        x = _moveSpeed + (1f * (x / 3));
+        _groundSetMoveSpeed = x;
 
-            // 大きさに合わせてジャンプを計算
-            var y = _scale - 1f;
-            y = _jumpMax + (10f * (y / 3));
-            _registedJumpMax = y;
-        }
+        // 大きさに合わせてジャンプを計算
+        var y = _scale - 1f;
+        y = _jumpMax + (10f * (y / 3));
+        _registedJumpMax = y;
 
         // 空中の移動速度補正
         if (_characterController.isGrounded == false)
