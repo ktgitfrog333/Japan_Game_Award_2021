@@ -1109,7 +1109,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.21018352, y: -0.000000008411011, z: 0.0000000018082486, w: 0.97766197}
+  m_LocalRotation: {x: 0.21018352, y: 0.000000008411011, z: -0.0000000018082486, w: 0.97766197}
   m_LocalPosition: {x: 0, y: 4.818, z: -6.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1443,7 +1443,7 @@ MonoBehaviour:
   _characterController: {fileID: 1124906950}
   _positionCashDebugOff: 1
   _value: {fileID: 2073178509}
-  _localGravity: {x: 0, y: 0, z: 0}
+  _wallPosition: {x: 0, y: 0, z: 0}
   _wallRun: 0
 --- !u!143 &1124906950
 CharacterController:
@@ -1522,7 +1522,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1145615035}
-  m_LocalRotation: {x: 0.21018352, y: -0.000000008411011, z: 0.0000000018082486, w: 0.97766197}
+  m_LocalRotation: {x: 0.21018352, y: 0.000000008411011, z: -0.0000000018082486, w: 0.97766197}
   m_LocalPosition: {x: 0, y: 4.818, z: -6.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1588,7 +1588,7 @@ GameObject:
   - component: {fileID: 1231767567}
   - component: {fileID: 1231767566}
   - component: {fileID: 1231767570}
-  - component: {fileID: 1231767569}
+  - component: {fileID: 1231767571}
   m_Layer: 0
   m_Name: Calamari
   m_TagString: Player
@@ -1672,25 +1672,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1231767564}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1231767569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1231767564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fa5ea8b88280a444825aa16f971ae94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moveSpeed: 3
-  _groundSetMoveSpeed: 0
-  _scale: 1
-  _characterController: {fileID: 1231767570}
-  _jumpPower: 3
-  _jumpMax: 30
-  _positionCashDebugOff: 0
 --- !u!143 &1231767570
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1709,6 +1690,25 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1231767571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231767564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc3cfafc0af14154e8e5a459c4f4ddb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeed: 3
+  _groundSetMoveSpeed: 0
+  _scale: 1
+  _characterController: {fileID: 1231767570}
+  _jumpPower: 5
+  _jumpMax: 35
+  _positionCashDebugOff: 0
 --- !u!1001 &1267536461
 PrefabInstance:
   m_ObjectHideFlags: 0

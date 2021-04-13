@@ -1,3 +1,18 @@
+2021/04/13 21:15
+★移動(カラマリモード)の実装
+移動の実装
+　スティック入力を取得
+　自動でプレイヤーが移動と停止を繰り返す処理。（速さ100で設定 等速で3マス/1秒移動）
+　スティックで入力される割合（-1~1）
+　加速度「スティックで入力される割合×速さ×deltatime」を毎フレーム加算
+
+・カラマリモードのゲームオブジェクトのスクリプトコンポーネント修正
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・ゲーム起動時にカラマリモード切り替えのデバッグ出力追加
+main_scene\CalamariTape\Assets\Scripts\ModeChanger.cs
+・カラマリモードの移動操作スクリプトクラス作成（※MoveController.cs削除予定）
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+
 2021/04/13 20:09
 ★ネンチャクモードの実装
 移動の実装

@@ -54,20 +54,21 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\SampleScenes\Scripts\ParticleSceneControls.cs" />
+    <Compile Include="Assets\Scripts\NenchakMoveController.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
     <Compile Include="Assets\Scripts\ModeChanger.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\LevelReset.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
+    <Compile Include="Assets\Scripts\DurableValue.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\CameraSwitch.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
     <Compile Include="Assets\Scripts\MoveController.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
-    <Compile Include="Assets\Scripts\GoalEvent.cs" />
     <Compile Include="Assets\Scripts\TsuruTsuruMoveController.cs" />
-    <Compile Include="Assets\Scripts\NenchakMoveController.cs" />
-    <Compile Include="Assets\Scripts\DurableValue.cs" />
+    <Compile Include="Assets\Scripts\GoalEvent.cs" />
+    <Compile Include="Assets\Scripts\CalamariMoveController.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />

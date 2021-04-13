@@ -28,6 +28,7 @@ public class ModeChanger : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("カラマリモード");
         _calamari.SetActive(true);
         _mode = _calamari.name.ToString();
     }
