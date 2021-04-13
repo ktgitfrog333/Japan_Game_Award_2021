@@ -1,3 +1,24 @@
+2021/04/13 20:09
+★ネンチャクモードの実装
+移動の実装
+　地上での移動不可の処理
+　壁との当たり判定処理
+　壁とくっついた後の移動処理
+　（※壁斜めの挙動については要調整）
+　壁とくっついた時の耐久ゲージ処理
+　耐久ゲージ０になった際の落下処理
+
+・壁用のオブジェクトをプレハブ化
+main_scene\CalamariTape\Assets\Prefabs\CubeWall.prefab
+・壁移動の検証用に壁オブジェクト配置
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・耐久値オブジェクト（耐久値デバッグ表示）
+main_scene\CalamariTape\Assets\Scripts\DurableValue.cs
+・ネンチャクモードの移動操作スクリプトクラス作成
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+・ツルツルモードの移動操作スクリプトクラス作成（※MoveController.csからの派生）
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruMoveController.cs
+
 2021/04/11 23:00
 ★ツルツルモードの実装（ジャンプの調整）
 ジャンプの実装後の調整

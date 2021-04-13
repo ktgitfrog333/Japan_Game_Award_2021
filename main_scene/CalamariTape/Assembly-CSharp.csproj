@@ -65,6 +65,9 @@
     <Compile Include="Assets\Scripts\MoveController.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\GoalEvent.cs" />
+    <Compile Include="Assets\Scripts\TsuruTsuruMoveController.cs" />
+    <Compile Include="Assets\Scripts\NenchakMoveController.cs" />
+    <Compile Include="Assets\Scripts\DurableValue.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
