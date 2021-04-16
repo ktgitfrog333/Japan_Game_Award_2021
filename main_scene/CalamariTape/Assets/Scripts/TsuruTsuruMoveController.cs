@@ -55,6 +55,11 @@ public class TsuruTsuruMoveController : MonoBehaviour
     /// <summary>位置フラグを一時保存</summary>
     [SerializeField] private bool _positionCashDebugOff;
 
+    /// <summary>SE再生用のゲームオブジェクト</summary>
+    [SerializeField] private SfxPlay _sfxPlay;
+    /// <summary>SE再生中フラグ</summary>
+    private bool _sfxPlayed;
+
     void Start()
     {
         _transform = this.transform;
@@ -85,23 +90,17 @@ public class TsuruTsuruMoveController : MonoBehaviour
         ScaleChangeForController();
         ScaleChangeForMouse();
 
-        if (_registedScale != _scale)
-        {
-            _registedScale = _scale;
-            _transform.localScale = new Vector3(1, 1, 1) * _scale;
-            // 大きさに合わせて速度を計算
-            var x = _scale - 1f;
-            //x = 1f * (x / 3);
-            //var speed = ((3 - x) / 3);
-            //_groundSetMoveSpeed *= speed;
-            x = _moveSpeed + (1f * (x / 3));
-            _groundSetMoveSpeed = x;
+        _registedScale = _scale;
+        _transform.localScale = new Vector3(1, 1, 1) * _scale;
+        // 大きさに合わせて速度を計算
+        var x = _scale - 1f;
+        x = _moveSpeed + (1f * (x / 3));
+        _groundSetMoveSpeed = x;
 
-            // 大きさに合わせてジャンプを計算
-            var y = _scale - 1f;
-            y = _jumpMax + (10f * (y / 3));
-            _registedJumpMax = y;
-        }
+        // 大きさに合わせてジャンプを計算
+        var y = _scale - 1f;
+        y = _jumpMax + (10f * (y / 3));
+        _registedJumpMax = y;
 
         // 空中の移動速度補正
         if (_characterController.isGrounded == false)
@@ -255,6 +254,9 @@ public class TsuruTsuruMoveController : MonoBehaviour
             _jumpVelocity += _jumpPower;
             _moveVelocity.y = _jumpVelocity; // ジャンプの際は上方向に移動させる
             _gravityAcceleration = 0f;
+
+            // 効果音を再生する
+            PlaySoundEffect();
         }
         else if (_characterController.isGrounded == false && _jumpAction == true && _jumpVelocity < _registedJumpMax)
         {
@@ -262,10 +264,14 @@ public class TsuruTsuruMoveController : MonoBehaviour
             _jumpVelocity += _jumpPower;
             _moveVelocity.y = _jumpVelocity; // ジャンプの際は上方向に移動させる
             _gravityAcceleration = 0f;
+
+            // 効果音を再生する
+            PlaySoundEffect();
         }
         else
         {
             _jumpAction = false;
+            _sfxPlayed = false;
             _jumpVelocity = 0f;
             // 重力による加速
             _gravityAcceleration += Time.deltaTime;
@@ -273,6 +279,25 @@ public class TsuruTsuruMoveController : MonoBehaviour
         }
 
         MoveAndAnimation();
+    }
+
+    /// <summary>
+    /// 効果音を再生する
+    /// </summary>
+    private void PlaySoundEffect()
+    {
+        if (_sfxPlayed == false)
+        {
+            _sfxPlayed = true;
+            if (_registedJumpMax < 40)
+            {
+                _sfxPlay.PlaySFX("jump_1");
+            }
+            else
+            {
+                _sfxPlay.PlaySFX("jump_2");
+            }
+        }
     }
 
     /// <summary>

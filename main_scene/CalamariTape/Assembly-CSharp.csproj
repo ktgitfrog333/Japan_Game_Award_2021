@@ -60,6 +60,7 @@
     <Compile Include="Assets\SampleScenes\Scripts\LevelReset.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
     <Compile Include="Assets\Scripts\DurableValue.cs" />
+    <Compile Include="Assets\Scripts\CalamariMoveController.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\CameraSwitch.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
@@ -68,7 +69,7 @@
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\TsuruTsuruMoveController.cs" />
     <Compile Include="Assets\Scripts\GoalEvent.cs" />
-    <Compile Include="Assets\Scripts\CalamariMoveController.cs" />
+    <Compile Include="Assets\Scripts\SfxPlay.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />

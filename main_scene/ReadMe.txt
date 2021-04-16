@@ -1,3 +1,25 @@
+2021/04/17 4:15
+★移動(カラマリモード)の実装
+ジャンプの実装
+　ジャンプした時のSEを再生
+★ツルツルモードの実装
+ジャンプの実装
+　ジャンプした時のSEを再生
+
+・効果音制御ゲームオブジェクトの作成やプレイヤーへコンポネントセットなど
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・カラマリモードにてジャンプ（サイズ小～中）SE再生とハイジャンプ（サイズ中～最大）SE再生処理を追加
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+・ツルツルモードにてジャンプ（サイズ小～中）SE再生とハイジャンプ（サイズ中～最大）SE再生処理を追加かつ、
+サイズ調整に合わせてジャンプ力調整の不具合修正。
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruMoveController.cs
+・ジャンプ（サイズ小～中）SEファイルを追加
+main_scene\CalamariTape\Assets\Audio\SFX\jump_1.wav
+・ハイジャンプ（サイズ中～最大）SEファイルを追加
+main_scene\CalamariTape\Assets\Audio\SFX\jump_2.wav
+・効果音再生スクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\SfxPlay.cs
+
 2021/04/17 2:40
 ★移動(カラマリモード)の実装
 空中移動の実装

@@ -70,6 +70,10 @@ public class CalamariMoveController : MonoBehaviour
     /// <summary>2点間の距離</summary>
     private Vector2 _distancePoint;
 
+    /// <summary>SE再生用のゲームオブジェクト</summary>
+    [SerializeField] private SfxPlay _sfxPlay;
+    /// <summary>SE再生中フラグ</summary>
+    private bool _sfxPlayed;
 
     void Start()
     {
@@ -319,6 +323,9 @@ public class CalamariMoveController : MonoBehaviour
                 _jumpVelocity += _jumpPower;
                 _moveVelocity.y = _jumpVelocity; // ジャンプの際は上方向に移動させる
                 _gravityAcceleration = 0f;
+
+                // 効果音を再生する
+                PlaySoundEffect();
             }
             else if (_characterController.isGrounded == false && _jumpAction == true && _jumpVelocity < _registedJumpMax)
             {
@@ -326,10 +333,14 @@ public class CalamariMoveController : MonoBehaviour
                 _jumpVelocity += _jumpPower;
                 _moveVelocity.y = _jumpVelocity; // ジャンプの際は上方向に移動させる
                 _gravityAcceleration = 0f;
+
+                // 効果音を再生する
+                PlaySoundEffect();
             }
             else
             {
                 _jumpAction = false;
+                _sfxPlayed = false;
                 _jumpVelocity = 0f;
                 // 重力による加速
                 _gravityAcceleration += Time.deltaTime;
@@ -338,6 +349,25 @@ public class CalamariMoveController : MonoBehaviour
         }
 
         MoveAndAnimation();
+    }
+
+    /// <summary>
+    /// 効果音を再生する
+    /// </summary>
+    private void PlaySoundEffect()
+    {
+        if (_sfxPlayed == false)
+        {
+            _sfxPlayed = true;
+            if (_registedJumpMax < 40)
+            {
+                _sfxPlay.PlaySFX("jump_1");
+            }
+            else
+            {
+                _sfxPlay.PlaySFX("jump_2");
+            }
+        }
     }
 
     /// <summary>
