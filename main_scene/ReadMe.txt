@@ -1,3 +1,18 @@
+2021/04/17 2:40
+★移動(カラマリモード)の実装
+空中移動の実装
+　スティック入力を取得
+　入力された方向に速さ100で設定 等速で2マス/1秒移動[要調整]
+　スティックで入力される割合（-1~1）
+他、移動処理にて、移動←→止まるのサイクル基準を距離にするよう修正。
+
+・カラマリモードゲームオブジェクトへ耐久ゲージゲームオブジェクトをサブオブジェクトとして配置
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・2点間の距離を測りながら、移動←→止まるを繰り返す処理を追加
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+・耐久ゲージゲームオブジェクトのPrefab作成
+main_scene\CalamariTape\Assets\Prefabs\DurableValue.prefab
+
 2021/04/13 21:57
 ★ネンチャクモードの実装
 テープ長さに関する縮小・拡大処理の実装
