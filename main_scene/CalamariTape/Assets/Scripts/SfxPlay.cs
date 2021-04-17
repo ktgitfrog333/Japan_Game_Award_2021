@@ -26,6 +26,18 @@ public class SfxPlay : MonoBehaviour
         {
             _audio.clip = _clip[1];
         }
+        if (clipToPlay.Equals("se_menu"))
+        {
+            _audio.clip = _clip[2];
+        }
+        if (clipToPlay.Equals("se_close"))
+        {
+            _audio.clip = _clip[3];
+        }
+        if (clipToPlay.Equals("se_decided"))
+        {
+            _audio.clip = _clip[4];
+        }
 
         _audio.Play();
     }
