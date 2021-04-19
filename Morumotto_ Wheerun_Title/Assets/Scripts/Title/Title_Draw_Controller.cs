@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Title_Draw_Controller : MonoBehaviour
 {
@@ -12,27 +13,28 @@ public class Title_Draw_Controller : MonoBehaviour
     [SerializeField] GameObject icon;
     [SerializeField] GameObject load_now;
     [SerializeField] GameObject data_dalete_complete;
+    [SerializeField] Image      fade_panel;
 
     private GameObject player_Draw;
+    private Image fade_Draw;
     private float load_now_x;
     private float data_delete_complete_y;
     private float timer;
     private Player player;
     
-
     void Start()
     {
         player_Draw = GameObject.Find("DrawController");
         player = player_Draw.GetComponent<Player>();
-        Player_Init();
-
     }
     public void Player_Init()
     {
         player.sence = Player.Character_Sence.PUSH_GAME_START;
         player.input = Player.Player_Input.UP;
         load_now_x = -6.71f;        // ロード画面の初期座標位置
+        
     }
+    
 
     // Update is called once per frame
     void Update()
@@ -205,7 +207,16 @@ public class Title_Draw_Controller : MonoBehaviour
 
     public void GameEnd_Draw()
     {
-        // フェードイン (ゲーム終了の処理)
+        timer += Time.deltaTime;
+        // ３秒経過後にフェードイン (ゲーム終了の処理)
+        if (timer >=3)
+        {
+            #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+            #else
+            Application.Quit();
+            #endif
+        }
     }
 
 }
