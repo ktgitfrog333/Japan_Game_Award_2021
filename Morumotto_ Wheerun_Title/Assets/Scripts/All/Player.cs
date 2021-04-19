@@ -15,7 +15,15 @@ public class Player : MonoBehaviour
         GAME_END               // ゲーム終了(exeを終了)
     };
 
+    public enum Player_Input
+    {
+        UP,                    // 上
+        CENTER,                // 真ん中
+        DOWN,                  // 下
+    }
+
     public Character_Sence sence;
+    public Player_Input input;
 
     /** 
      * シーン取得
@@ -23,6 +31,11 @@ public class Player : MonoBehaviour
     public void getSence(Character_Sence sence)
     {
         this.sence = sence;
+    }
+
+    public void getInput(Player_Input input)
+    {
+        this.input = input;
     }
 
     // Start is called before the first frame update
