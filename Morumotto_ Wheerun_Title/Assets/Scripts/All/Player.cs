@@ -15,14 +15,12 @@ public class Player : MonoBehaviour
         GAME_END               // ゲーム終了(exeを終了)
     };
 
-    private Character_Sence sence;
+    public Character_Sence sence;
 
-    public Player()
-    {
-
-    }
-
-    public Player(Character_Sence sence)
+    /** 
+     * シーン取得
+     */
+    public void getSence(Character_Sence sence)
     {
         this.sence = sence;
     }
@@ -30,12 +28,12 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Player player = new Player(Character_Sence.PUSH_GAME_START);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
