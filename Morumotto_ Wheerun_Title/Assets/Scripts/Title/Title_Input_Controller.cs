@@ -10,7 +10,7 @@ public class Title_Input_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player_input = GameObject.Find("DrawController");
+        player_input = GameObject.Find("Canvas");
         player = player_input.GetComponent<Player>();
         player.sence = Player.Character_Sence.PUSH_GAME_START;
         player.input = Player.Player_Input.UP;

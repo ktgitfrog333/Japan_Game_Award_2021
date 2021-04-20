@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Title_Draw_Controller : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField] GameObject title_background_object;
     [SerializeField] GameObject push_game_object;
     [SerializeField] GameObject select_object;
     [SerializeField] GameObject game_datadelete_check;
@@ -13,26 +14,28 @@ public class Title_Draw_Controller : MonoBehaviour
     [SerializeField] GameObject icon;
     [SerializeField] GameObject load_now;
     [SerializeField] GameObject data_dalete_complete;
-    [SerializeField] Image      fade_panel;
 
     private GameObject player_Draw;
     private Image fade_Draw;
     private float load_now_x;
     private float data_delete_complete_y;
     private float timer;
+    private RectTransform icon_rect;
     private Player player;
     
     void Start()
     {
-        player_Draw = GameObject.Find("DrawController");
+        player_Draw = GameObject.Find("Canvas");
         player = player_Draw.GetComponent<Player>();
+        Player_Init();
     }
     public void Player_Init()
     {
         player.sence = Player.Character_Sence.PUSH_GAME_START;
         player.input = Player.Player_Input.UP;
-        load_now_x = -6.71f;        // ロード画面の初期座標位置
-        
+        load_now_x = -1920.0f;        // ロード画面の初期座標位置
+        title_background_object.SetActive(true);
+        icon_rect = icon.GetComponent<RectTransform>();
     }
     
 
@@ -105,7 +108,7 @@ public class Title_Draw_Controller : MonoBehaviour
         {
             case Player.Player_Input.UP:
             {
-                icon.transform.position = new Vector2(-2.2f,0.56f);
+                icon.transform.position = new Vector2(-3.0f, -1.0f);
                 break;
             }
             case Player.Player_Input.CENTER:
