@@ -6,36 +6,56 @@ using UnityEngine.UI;
 public class Title_Draw_Controller : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] GameObject title_background_object;
-    [SerializeField] GameObject push_game_object;
-    [SerializeField] GameObject select_object;
-    [SerializeField] GameObject game_datadelete_check;
-    [SerializeField] GameObject game_end_check;
-    [SerializeField] GameObject icon;
-    [SerializeField] GameObject load_now;
-    [SerializeField] GameObject data_dalete_complete;
+    [SerializeField] private GameObject title_background_object;
+    [SerializeField] private GameObject push_game_object;
+    [SerializeField] private GameObject select_object;
+    [SerializeField] private GameObject game_datadelete_check;
+    [SerializeField] private GameObject game_end_check;
+    [SerializeField] private GameObject icon;
+    [SerializeField] private GameObject load_now;
+    [SerializeField] private GameObject data_dalete_complete;
+    [SerializeField] private GameObject fade_in;
 
-    private GameObject player_Draw;
-    private Image fade_Draw;
-    private float load_now_x;
-    private float data_delete_complete_y;
-    private float timer;
     private RectTransform icon_rect;
+    private RectTransform load_now_rect;
+    private RectTransform data_delete_complete_rect;
+    private Image fade_Draw;
+    private GameObject player_Draw;
     private Player player;
+    
+    private float load_now_position_x;
+    private float data_delete_complete_position_y;
+    private float data_delete_complete_position_x;
+    private float timer;
+    private float alpha;
+    private float alpha_speed;
+
     
     void Start()
     {
-        player_Draw = GameObject.Find("Canvas");
-        player = player_Draw.GetComponent<Player>();
         Player_Init();
+        Texture_Draw_Init();
     }
     public void Player_Init()
     {
-        player.sence = Player.Character_Sence.PUSH_GAME_START;
-        player.input = Player.Player_Input.UP;
-        load_now_x = -1920.0f;        // ロード画面の初期座標位置
+        player_Draw = GameObject.Find("Canvas");
+        player = player_Draw.GetComponent<Player>();
+        player.getSence(Player.Character_Sence.PUSH_GAME_START);
+        player.getInput(Player.Player_Input.UP);
+    }
+
+    public void Texture_Draw_Init()
+    {
         title_background_object.SetActive(true);
         icon_rect = icon.GetComponent<RectTransform>();
+        load_now_rect = load_now.GetComponent<RectTransform>();
+        data_delete_complete_rect = data_dalete_complete.GetComponent<RectTransform>();
+        fade_Draw = fade_in.GetComponent<Image>();
+        load_now_position_x = -1920.0f;        // ロード画面の初期座標位置
+        data_delete_complete_position_x = 650.0f;
+        data_delete_complete_position_y = 700.0f;
+        alpha = 0;
+        alpha_speed = 0.001f;
     }
     
 
@@ -103,22 +123,27 @@ public class Title_Draw_Controller : MonoBehaviour
         game_datadelete_check.SetActive(false);
         game_end_check.SetActive(false);
         icon.SetActive(true);
+        float updown_tex_position_x = -200.0f;
+        float center_tex_position_x = -310.0f;
+        float up_tex_position_y = -50.0f;
+        float center_tex_position_y = -230.0f;
+        float center_tex_position_z = -380.0f;
 
-        switch(player.input)
+        switch (player.input)
         {
             case Player.Player_Input.UP:
             {
-                icon.transform.position = new Vector2(-3.0f, -1.0f);
+                icon_rect.anchoredPosition = new Vector2(updown_tex_position_x,up_tex_position_y);
                 break;
             }
             case Player.Player_Input.CENTER:
             {
-                icon.transform.position = new Vector2(-3.0f,-1.0f);
+                icon_rect.anchoredPosition = new Vector2(center_tex_position_x,center_tex_position_y);
                 break;
             }
             case Player.Player_Input.DOWN:
             {
-                icon.transform.position = new Vector2(-2.25f,-2.27f);
+                icon_rect.anchoredPosition = new Vector2(updown_tex_position_x, center_tex_position_z);
                 break;
             }
         }
@@ -127,9 +152,10 @@ public class Title_Draw_Controller : MonoBehaviour
     public void GameStart_Draw()
     {
         load_now.SetActive(true);
-        if (load_now.transform.position.x <= 0.0)
+        float Load_Now_Max_Position = 0.0f;
+        if (load_now_rect.anchoredPosition.x <= Load_Now_Max_Position)
         {
-            load_now.transform.position -= new Vector3(load_now_x * Time.deltaTime, 0, 0);
+            load_now_rect.anchoredPosition -= new Vector2(load_now_position_x * Time.deltaTime, 0);
         }
         else
         {
@@ -144,21 +170,7 @@ public class Title_Draw_Controller : MonoBehaviour
         game_datadelete_check.SetActive(true);
         game_end_check.SetActive(false);
         icon.SetActive(true);
-
-        switch (player.input)
-        {
-            case Player.Player_Input.UP:
-            {
-                icon.transform.position = new Vector2(-1.56f, -0.11f);
-                break;
-            }
-
-            case Player.Player_Input.DOWN:
-            {
-                icon.transform.position = new Vector2(-1.84f, -1.91f);
-                break;
-            }
-        }
+        YesNo_Draw(player);
     }
 
     public void GameDatadelete_Draw()
@@ -167,19 +179,24 @@ public class Title_Draw_Controller : MonoBehaviour
         icon.SetActive(false);
         data_dalete_complete.SetActive(true);
         select_object.SetActive(true);
-        if (data_dalete_complete.transform.position.y > 3.55f)
+        float max_rect_y = 490.0f;
+        if (data_delete_complete_rect.anchoredPosition.y >= max_rect_y)
         {
-            data_dalete_complete.transform.position -= new Vector3(0, data_delete_complete_y * Time.deltaTime, 0);
+            data_delete_complete_rect.anchoredPosition -= new Vector2(0.0f, data_delete_complete_position_y * Time.deltaTime * 0.5f);
         }
         else
         {
-            timer += Time.deltaTime;
+            
+           timer += Time.deltaTime;
+            float EndTime = 2.0f;
             // 2秒経過した後に「GameSelect_Draw」へ遷移
-            if (timer >= 2)
+            if (timer >= EndTime)
             {
                 timer = 0;
                 data_dalete_complete.SetActive(false);
                 player.getSence(Player.Character_Sence.GAME_SELECT);
+                data_delete_complete_position_y = 600.0f;
+                data_delete_complete_rect.anchoredPosition = new Vector2(data_delete_complete_position_x, data_delete_complete_position_y);
             }
         }
  
@@ -192,27 +209,42 @@ public class Title_Draw_Controller : MonoBehaviour
         game_datadelete_check.SetActive(false);
         game_end_check.SetActive(true);
         icon.SetActive(true);
+        YesNo_Draw(player);
+    }
 
+    public void YesNo_Draw(Player player)
+    {
+        float yes_position = -150.0f;
+        float no_position_x = -200.0f;
+        float no_position_y = -350.0f;
         switch (player.input)
         {
             case Player.Player_Input.UP:
-            {
-                icon.transform.position = new Vector2(-1.56f, -0.11f);
-                break;
-            }
+                {
+                    icon_rect.anchoredPosition = new Vector2(yes_position, yes_position);
+                    break;
+                }
+
             case Player.Player_Input.DOWN:
-            {
-                icon.transform.position = new Vector2(-1.84f, -1.91f);
-                break;
-            }
+                {
+                    icon_rect.anchoredPosition = new Vector2(no_position_x, no_position_y);
+                    break;
+                }
         }
     }
 
     public void GameEnd_Draw()
     {
+        fade_in.SetActive(true);
         timer += Time.deltaTime;
+        float EndTimer = 2.0f;
+        int MaxColor = 255;
+
+        fade_Draw.color = new Color(MaxColor, MaxColor, MaxColor,alpha);
+        alpha += alpha_speed;        
+
         // ３秒経過後にフェードイン (ゲーム終了の処理)
-        if (timer >=3)
+        if (timer >= EndTimer || alpha >= 255)
         {
             #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
