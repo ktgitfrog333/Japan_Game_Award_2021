@@ -63,7 +63,7 @@ public class Title_Input_Controller : MonoBehaviour
 
     public void PushGameStart_Input(Player player)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Decision"))
         {
             player.getSence(Player.Character_Sence.GAME_SELECT);
         }
@@ -75,11 +75,11 @@ public class Title_Input_Controller : MonoBehaviour
         {
             case Player.Player_Input.UP:
             {
-                if (Input.GetKeyDown(KeyCode.B))
+                if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
                     player.getInput(Player.Player_Input.CENTER);
                 }
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetButtonDown("Decision"))
                 {
                     player.getSence(Player.Character_Sence.GAME_START);
                 }
@@ -87,15 +87,15 @@ public class Title_Input_Controller : MonoBehaviour
             }
             case Player.Player_Input.CENTER:
             {
-                if(Input.GetKeyDown(KeyCode.A))
+                if(Input.GetKeyDown(KeyCode.UpArrow))
                 {
                     player.getInput(Player.Player_Input.UP);
                 }
-                if(Input.GetKeyDown(KeyCode.C))
+                if(Input.GetKeyDown(KeyCode.DownArrow))
                 {
                     player.getInput(Player.Player_Input.DOWN);
                 }
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetButtonDown("Decision"))
                 {
                     player.getSence(Player.Character_Sence.GAME_DATADELETE_CHECK);
                     player.getInput(Player.Player_Input.UP);
@@ -104,11 +104,11 @@ public class Title_Input_Controller : MonoBehaviour
             }
             case Player.Player_Input.DOWN:
             {
-                if(Input.GetKeyDown(KeyCode.B))
+                if(Input.GetKeyDown(KeyCode.UpArrow))
                 {
                     player.getInput(Player.Player_Input.CENTER);
                 }
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetButtonDown("Decision"))
                 {
                     player.getSence(Player.Character_Sence.GAME_END_CHECK);
                     player.getInput(Player.Player_Input.UP);
@@ -116,7 +116,7 @@ public class Title_Input_Controller : MonoBehaviour
                 break;
             }
         }
-        if(Input.GetKeyDown(KeyCode.Backspace))
+        if (Input.GetButtonDown("Cancel"))
         {
             player.getSence(Player.Character_Sence.PUSH_GAME_START);
         }
@@ -128,11 +128,11 @@ public class Title_Input_Controller : MonoBehaviour
         {
             case Player.Player_Input.UP:
             {
-                if(Input.GetKeyDown(KeyCode.B))
+                if(Input.GetKeyDown(KeyCode.DownArrow))
                 {
                     player.getInput(Player.Player_Input.DOWN);
                 }
-                if(Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetButtonDown("Decision"))
                 {
                     player.getSence(Player.Character_Sence.GAME_DATADELETE);
                 }
@@ -140,11 +140,11 @@ public class Title_Input_Controller : MonoBehaviour
             }
             case Player.Player_Input.DOWN:
             {
-                if(Input.GetKeyDown(KeyCode.A))
+                if(Input.GetKeyDown(KeyCode.UpArrow))
                 {
                     player.getInput(Player.Player_Input.UP);
                 }
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetButtonDown("Decision"))
                 {
                     player.getSence(Player.Character_Sence.GAME_SELECT);
                     player.getInput(Player.Player_Input.CENTER);
@@ -152,7 +152,7 @@ public class Title_Input_Controller : MonoBehaviour
                 break;
             }
         }
-        if(Input.GetKeyDown(KeyCode.Backspace))
+        if (Input.GetButtonDown("Cancel"))
         {
             player.getSence(Player.Character_Sence.GAME_SELECT);
             player.getInput(Player.Player_Input.CENTER);
@@ -165,11 +165,11 @@ public class Title_Input_Controller : MonoBehaviour
         {
             case Player.Player_Input.UP:
             {
-                if(Input.GetKeyDown(KeyCode.B))
+                if(Input.GetKeyDown(KeyCode.DownArrow))
                 {
                     player.getInput(Player.Player_Input.DOWN);
                 }
-                if(Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetButtonDown("Decision"))
                 {
                     player.getSence(Player.Character_Sence.GAME_END);
                 }
@@ -177,18 +177,18 @@ public class Title_Input_Controller : MonoBehaviour
             }
             case Player.Player_Input.DOWN:
             {
-                if(Input.GetKeyDown(KeyCode.A))
+                if(Input.GetKeyDown(KeyCode.UpArrow))
                 {
                     player.getInput(Player.Player_Input.UP);
                 }
-                if(Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetButtonDown("Decision"))
                 {
                     player.getSence(Player.Character_Sence.GAME_SELECT);
                 }
                 break;
             }
         }
-        if (Input.GetKeyDown(KeyCode.Backspace))
+        if (Input.GetButtonDown("Cancel"))
         {
             player.getSence(Player.Character_Sence.GAME_SELECT);
             player.getInput(Player.Player_Input.DOWN);
