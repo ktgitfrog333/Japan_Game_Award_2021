@@ -11,13 +11,22 @@ public class GameRedo : MonoBehaviour
     [SerializeField] private PauseWindowManager _window;
     /// <summary>効果音ゲームオブジェクト</summary>
     [SerializeField] private SfxPlay _sfx;
+    /// <summary>黒い背景</summary>
+    [SerializeField] private GameObject _blackBackGround;
+    /// <summary>メニューを連続を実行フラグ</summary>
+    private bool _flag;
 
     /// <summary>
     /// ステージをやりなおすイベントを実行
     /// </summary>
     public void EventGameRedo()
     {
-        _sfx.PlaySFX("se_decided");
-        Debug.Log("ステージをやりなおす");
+        if (_flag == false)
+        {
+            _flag = true;
+            _sfx.PlaySFX("se_decided");
+            _blackBackGround.SetActive(true);
+            Debug.Log("ステージをやりなおす");
+        }
     }
 }

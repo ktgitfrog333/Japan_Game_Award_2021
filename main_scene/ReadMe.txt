@@ -1,3 +1,18 @@
+2021/04/24 1:53
+★ポーズ画面
+　やりなおすを選択でフェードアウト
+　フェードアウト終了後現在のステージを初期状態に戻す
+　ステージ初期状態に戻した後フェードイン開始
+
+・フェード処理用のCanvas配置など
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・やりなおすメニュー選択時にフェードアウト演出開始処理を追加
+main_scene\CalamariTape\Assets\Scripts\GameRedo.cs
+・UIフェードイン演出スクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\UIFadeIn.cs
+・UIフェードアウト演出スクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\UIFadeOut.cs
+
 2021/04/17 14:19
 ★ポーズ画面
 　STARTボタン入力でポーズ画面を表示
