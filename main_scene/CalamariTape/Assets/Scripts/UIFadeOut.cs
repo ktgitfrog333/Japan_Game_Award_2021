@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// UIへフェード演出を入れるスクリプトクラス
@@ -11,6 +10,8 @@ public class UIFadeOut : MonoBehaviour
 {
     /// <summary>UIの画像</summary>
     [SerializeField] private Image _image;
+    /// <summary>次に移動するシーン情報</summary>
+    [SerializeField] private SceneMove _nextScene;
 
     /// <summary>赤色のレベル</summary>
     private float _redColorLevel;
@@ -52,7 +53,7 @@ public class UIFadeOut : MonoBehaviour
             yield return null;
             if (0.9 < _alphaColorLevel)
             {
-                SceneManager.LoadScene("main");
+                _nextScene.NextScene();
                 StopCoroutine(FadeOut());
             }
         }

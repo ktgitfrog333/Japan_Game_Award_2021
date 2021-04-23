@@ -13,6 +13,11 @@ public class GameRedo : MonoBehaviour
     [SerializeField] private SfxPlay _sfx;
     /// <summary>黒い背景</summary>
     [SerializeField] private GameObject _blackBackGround;
+    /// <summary>遷移先のシーン名</summary>
+    [SerializeField] private string _nextSceneName;
+    /// <summary>遷移先のシーン管理</summary>
+    [SerializeField] private SceneMove _nextScene;
+
     /// <summary>メニューを連続を実行フラグ</summary>
     private bool _flag;
 
@@ -23,10 +28,11 @@ public class GameRedo : MonoBehaviour
     {
         if (_flag == false)
         {
-            _flag = true;
             _sfx.PlaySFX("se_decided");
+            _nextScene.sceneName = _nextSceneName;
             _blackBackGround.SetActive(true);
-            Debug.Log("ステージをやりなおす");
+
+            _flag = true;
         }
     }
 }

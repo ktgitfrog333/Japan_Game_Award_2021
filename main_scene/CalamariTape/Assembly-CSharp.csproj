@@ -77,8 +77,9 @@
     <Compile Include="Assets\Scripts\GoalEvent.cs" />
     <Compile Include="Assets\Scripts\GameBack.cs" />
     <Compile Include="Assets\Scripts\UIFadeOut.cs" />
-    <Compile Include="Assets\Scripts\PauseWindowManager.cs" />
     <Compile Include="Assets\Scripts\UIFadeIn.cs" />
+    <Compile Include="Assets\Scripts\PauseWindowManager.cs" />
+    <Compile Include="Assets\Scripts\SceneMove.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />

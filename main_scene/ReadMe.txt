@@ -1,3 +1,25 @@
+2021/04/24 5:30
+★ポーズ画面
+　ゲームに戻るを選択で0.5秒後（要調整）にゲームプレイに戻る
+　Aボタン入力で0.5秒後（要調整）にゲームプレイに戻る
+　ステージセレクトに戻るを選択でフェードアウト（※シーン先をmainで仮実装）
+　フェードアウト終了後ステージセレクトレベルに遷移（※シーン先をmainで仮実装）
+
+・やりなおすとゲームに戻るとステージセレクトに戻るのUI設定変更、フェードの設定変更
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・ゲームに戻るが何度も実行されないように修正
+main_scene\CalamariTape\Assets\Scripts\GameBack.cs
+・ステージをやりなおすでmainシーンを再読み込み処理追加
+main_scene\CalamariTape\Assets\Scripts\GameRedo.cs
+・他のステージを遊ぶを選択する処理にて、mainシーンを再読み込み処理追加
+main_scene\CalamariTape\Assets\Scripts\GameSelect.cs
+・ゲームに戻る際に0.5秒の待機時間を用意するよう処理を追加
+main_scene\CalamariTape\Assets\Scripts\PauseWindowManager.cs
+・フェードアウト処理内からシーン制御を切り離し
+main_scene\CalamariTape\Assets\Scripts\UIFadeOut.cs
+・シーン制御用のスクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\SceneMove.cs
+
 2021/04/24 3:52
 ★ポーズ画面
 　遊び方確認を選択で遊び方を確認する表を表示

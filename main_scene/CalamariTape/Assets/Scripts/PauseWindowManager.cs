@@ -16,6 +16,8 @@ public class PauseWindowManager : MonoBehaviour
     [SerializeField] private NenchakMoveController _nenchakController;
     /// <summary>ツルツルモードの操作スクリプト</summary>
     [SerializeField] private TsuruTsuruMoveController _tsurutsuruController;
+    /// <summary>メニューを閉じる際に一度のみ実行するよう制御するフラグ</summary>
+    private bool _menuClose;
 
     private void Update()
     {
@@ -28,11 +30,36 @@ public class PauseWindowManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        _menuClose = false;
+    }
+
     /// <summary>
     /// メニューを閉じる
     /// </summary>
     public void MenuClose()
     {
-        Debug.Log("メニューを閉じる");
+        if (_menuClose == false)
+        {
+            StartCoroutine(MenuCloseHalfSec());
+            _menuClose = true;
+        }
+    }
+
+    /// <summary>
+    /// 0.5秒後にメニューを閉じる
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator MenuCloseHalfSec()
+    {
+        yield return new WaitForSeconds(0.5f);
+        _calamariController.enabled = true;
+        _nenchakController.enabled = true;
+        _tsurutsuruController.enabled = true;
+        _menuClose = false;
+        _menu.SetActive(false);
+
+        StopCoroutine(MenuCloseHalfSec());
     }
 }

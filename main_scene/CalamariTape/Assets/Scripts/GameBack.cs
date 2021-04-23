@@ -11,13 +11,25 @@ public class GameBack : MonoBehaviour
     [SerializeField] private PauseWindowManager _window;
     /// <summary>効果音ゲームオブジェクト</summary>
     [SerializeField] private SfxPlay _sfx;
+    /// <summary>メニューを閉じる際に一度のみ実行するよう制御するフラグ</summary>
+    private bool _menuClose;
+
+    private void OnEnable()
+    {
+        _menuClose = false;
+    }
 
     /// <summary>
     /// ゲームに戻るイベントを実行
     /// </summary>
     public void EventGameBack()
     {
-        _sfx.PlaySFX("se_decided");
-        _window.MenuClose();
+        if (_menuClose == false)
+        {
+            _sfx.PlaySFX("se_decided");
+            _window.MenuClose();
+
+            _menuClose = true;
+        }
     }
 }
