@@ -1,3 +1,17 @@
+2021/04/24 3:52
+★ポーズ画面
+　遊び方確認を選択で遊び方を確認する表を表示
+　遊び方を確認する表が表示されているときにAボタン入力で表示を消す
+　遊び方を確認する表が表示されているときにAボタン入力でキャンセルSE再生
+
+・遊び方を確認の際に表示される操作方法UIオブジェクトを追加
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・遊び方マニュアルの表示と非表示切り替えるよう変更
+main_scene\CalamariTape\Assets\Scripts\GameCheck.cs
+・PC操作方法とコントーラー操作方法の仮画像
+main_scene\CalamariTape\Assets\Images\game_manual_pc.png
+main_scene\CalamariTape\Assets\Images\game_manual_xbox.png
+
 2021/04/24 1:53
 ★ポーズ画面
 　やりなおすを選択でフェードアウト

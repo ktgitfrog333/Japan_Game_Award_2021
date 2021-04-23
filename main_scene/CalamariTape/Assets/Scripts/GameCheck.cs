@@ -11,13 +11,27 @@ public class GameCheck : MonoBehaviour
     [SerializeField] private PauseWindowManager _window;
     /// <summary>効果音ゲームオブジェクト</summary>
     [SerializeField] private SfxPlay _sfx;
+    /// <summary>操作方法UI</summary>
+    [SerializeField] private GameObject _manual;
+    /// <summary>画面表示フラグ</summary>
+    private bool _openerFlag;
 
     /// <summary>
     /// 遊び方の確認イベントを実行
     /// </summary>
     public void EventGameCheck()
     {
-        _sfx.PlaySFX("se_decided");
-        Debug.Log("遊び方の確認");
+        if (_openerFlag == false)
+        {
+            _sfx.PlaySFX("se_decided");
+            _manual.SetActive(true);
+            _openerFlag = true;
+        }
+        else
+        {
+            _sfx.PlaySFX("se_close");
+            _manual.SetActive(false);
+            _openerFlag = false;
+        }
     }
 }
