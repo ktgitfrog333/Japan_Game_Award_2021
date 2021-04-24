@@ -7,8 +7,6 @@ using UnityEngine;
 /// </summary>
 public class GameRedo : MonoBehaviour
 {
-    /// <summary>ポーズ画面表示制御スクリプトクラス</summary>
-    [SerializeField] private PauseWindowManager _window;
     /// <summary>効果音ゲームオブジェクト</summary>
     [SerializeField] private SfxPlay _sfx;
     /// <summary>黒い背景</summary>

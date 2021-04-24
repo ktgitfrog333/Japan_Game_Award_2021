@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 /// <summary>
 /// クリア画面の制御スクリプトクラス
@@ -15,6 +16,12 @@ public class ClearManager : MonoBehaviour
     [SerializeField] private GameObject _nextUI;
     /// <summary>最終ステージ遷移の可否フラグ</summary>
     [SerializeField] private bool _finalStage;
+    /// <summary>選択項目のUIオブジェクト</summary>
+    [SerializeField] private UIController _firstElement;
+    /// <summary>選択項目のUIオブジェクト</summary>
+    [SerializeField] private GameObject _firstObject;
+    /// <summary>イベントシステム</summary>
+    [SerializeField] private EventSystem _event;
 
     private void OnEnable()
     {
@@ -38,6 +45,8 @@ public class ClearManager : MonoBehaviour
             _nextUI.SetActive(true);
         }
 
+        _event.SetSelectedGameObject(_firstObject);
+        _firstElement.Selected();
         StopCoroutine(OpenMenu());
     }
 }

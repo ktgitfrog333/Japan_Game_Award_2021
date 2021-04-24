@@ -1,3 +1,22 @@
+2021/04/24 21:37
+★クリア画面
+３秒後
+　上下入力で選択
+　Bボタン入力で決定
+　決定するとフェードイン
+　もう一度遊ぶで同じステージ
+　次のステージを遊ぶで次のステージ（※mainシーン遷移で仮対応）
+　他のステージを遊ぶでステージセレクトレベルに遷移（※mainシーン遷移で仮対応）
+
+・クリア画面にて各メニュー設定を変更
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・クリア画面の各メニュー選択制御を修正
+main_scene\CalamariTape\Assets\Scripts\ClearManager.cs
+・不要な処理を削除
+main_scene\CalamariTape\Assets\Scripts\GameRedo.cs
+・メニュー画面の各メニュー選択制御を修正
+main_scene\CalamariTape\Assets\Scripts\Menu.cs
+
 2021/04/24 17:25
 ★ポーズ画面
 ゲームクリアロゴ表示
