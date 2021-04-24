@@ -7,14 +7,27 @@ using UnityEngine;
 /// </summary>
 public class GoalEvent : MonoBehaviour
 {
+    /// <summary>カラマリモードの操作スクリプト</summary>
+    [SerializeField] private CalamariMoveController _calamariController;
+    /// <summary>ネンチャクモードの操作スクリプト</summary>
+    [SerializeField] private NenchakMoveController _nenchakController;
+    /// <summary>ツルツルモードの操作スクリプト</summary>
+    [SerializeField] private TsuruTsuruMoveController _tsurutsuruController;
+
+    /// <summary>クリア画面のUI</summary>
+    [SerializeField] private GameObject _clearUI;
+
     /// <summary>ゴール床オブジェクト接着判定</summary>
-    [SerializeField] private bool _goalTrigger;
+    private bool _goalTrigger;
 
     private void OnTriggerEnter(Collider other)
     {
         if (_goalTrigger == true && other.gameObject.tag.Equals("Player"))
         {
-            Debug.Log("ゴール処理を起動");
+            _calamariController.enabled = false;
+            _nenchakController.enabled = false;
+            _tsurutsuruController.enabled = false;
+            _clearUI.SetActive(true);
         }
     }
 

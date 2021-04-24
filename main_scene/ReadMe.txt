@@ -1,3 +1,26 @@
+2021/04/24 17:25
+★ポーズ画面
+ゲームクリアロゴ表示
+３秒後
+　もう一度遊ぶ表示
+　他のステージを遊ぶ表示
+　最終ステージ以外の時は次のステージを遊ぶを表示
+
+・クリア画面にて、各メニュー表示UIを追加
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・ゴール判定処理にて、プレイヤー操作を禁止にしてクリア画面を表示する処理を追加
+main_scene\CalamariTape\Assets\Scripts\GoalEvent.cs
+・クリア画面のメニューUI画像を追加
+main_scene\CalamariTape\Assets\Images\game_clear_logo.png
+main_scene\CalamariTape\Assets\Images\game_proceed.png
+main_scene\CalamariTape\Assets\Images\game_retry.png
+・メニュー画面とクリア画面で使用するUIをPrefab化
+main_scene\CalamariTape\Assets\Prefabs\ClearScreen.prefab
+main_scene\CalamariTape\Assets\Prefabs\GameRedo.prefab
+main_scene\CalamariTape\Assets\Prefabs\GameSelect.prefab
+・クリア画面のメニューUI表示制御用のスクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\ClearManager.cs
+
 2021/04/24 5:30
 ★ポーズ画面
 　ゲームに戻るを選択で0.5秒後（要調整）にゲームプレイに戻る
