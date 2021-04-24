@@ -14,6 +14,7 @@ public class Title_Input_Controller : MonoBehaviour
         player = player_input.GetComponent<Player>();
         player.sence = Player.Character_Sence.PUSH_GAME_START;
         player.input = Player.Player_Input.UP;
+        player.set_Data_Complete_FalseFlg();
     }
 
     // Update is called once per frame
@@ -134,7 +135,8 @@ public class Title_Input_Controller : MonoBehaviour
                 }
                 if (Input.GetButtonDown("Decision"))
                 {
-                    player.getSence(Player.Character_Sence.GAME_DATADELETE);
+                    player.set_Data_Complete_TrueFlg();
+                    player.getSence(Player.Character_Sence.GAME_SELECT);
                 }
                 break;
             }

@@ -56,11 +56,11 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Controller Tester\Scripts\DetectUnknownControllerMappings.cs" />
     <Compile Include="Assets\Scripts\Title\Title_Input_Controller.cs" />
     <Compile Include="Assets\Scripts\Title\Title_Draw_Controller.cs" />
     <Compile Include="Assets\Scripts\All\Player.cs" />
     <Compile Include="Assets\Scripts\Title\Title_Sound_Manager.cs" />
-    <Compile Include="Assets\Controller Tester\Scripts\DetectUnknownControllerMappings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

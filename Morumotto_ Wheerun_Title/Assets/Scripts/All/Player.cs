@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
     public Character_Sence sence;
     public Player_Input input;
 
+    [SerializeField] private bool game_datacomplete_flg;
+
     /** 
      * ƒV[ƒ“æ“¾
      */
@@ -36,6 +38,25 @@ public class Player : MonoBehaviour
     public void getInput(Player_Input input)
     {
         this.input = input;
+    }
+
+    public void set_Data_Complete_TrueFlg()
+    {
+        game_datacomplete_flg = true;
+    }
+
+    public void set_Data_Complete_FalseFlg()
+    {
+        game_datacomplete_flg = false;
+    }
+
+    public bool Data_Complete_FlgCheck()
+    {
+        if(game_datacomplete_flg==true)
+        {
+            return true;
+        }
+        return false;
     }
 
     // Start is called before the first frame update

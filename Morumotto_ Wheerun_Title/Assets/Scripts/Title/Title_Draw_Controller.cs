@@ -29,7 +29,6 @@ public class Title_Draw_Controller : MonoBehaviour
     private float timer;
     private float alpha;
     private float alpha_speed;
-
     
     void Start()
     {
@@ -42,6 +41,7 @@ public class Title_Draw_Controller : MonoBehaviour
         player = player_Draw.GetComponent<Player>();
         player.getSence(Player.Character_Sence.PUSH_GAME_START);
         player.getInput(Player.Player_Input.UP);
+        player.set_Data_Complete_FalseFlg();
     }
 
     public void Texture_Draw_Init()
@@ -91,7 +91,6 @@ public class Title_Draw_Controller : MonoBehaviour
             }
             case Player.Character_Sence.GAME_DATADELETE:
             {
-                GameDatadelete_Draw();
                 break;
             }
             case Player.Character_Sence.GAME_END_CHECK:
@@ -128,6 +127,11 @@ public class Title_Draw_Controller : MonoBehaviour
         float up_tex_position_y = -50.0f;
         float center_tex_position_y = -230.0f;
         float center_tex_position_z = -380.0f;
+
+        if(player.Data_Complete_FlgCheck())
+        {
+            GameDatadelete_Draw();
+        }
 
         switch (player.input)
         {
@@ -175,10 +179,7 @@ public class Title_Draw_Controller : MonoBehaviour
 
     public void GameDatadelete_Draw()
     {
-        game_datadelete_check.SetActive(false);
-        icon.SetActive(false);
         data_dalete_complete.SetActive(true);
-        select_object.SetActive(true);
         float max_rect_y = 490.0f;
         if (data_delete_complete_rect.anchoredPosition.y >= max_rect_y)
         {
@@ -186,7 +187,6 @@ public class Title_Draw_Controller : MonoBehaviour
         }
         else
         {
-            
            timer += Time.deltaTime;
             float EndTime = 2.0f;
             // 2ïbåoâﬂÇµÇΩå„Ç…ÅuGameSelect_DrawÅvÇ÷ëJà⁄
@@ -194,7 +194,7 @@ public class Title_Draw_Controller : MonoBehaviour
             {
                 timer = 0;
                 data_dalete_complete.SetActive(false);
-                player.getSence(Player.Character_Sence.GAME_SELECT);
+                player.set_Data_Complete_FalseFlg() ;
                 data_delete_complete_position_y = 600.0f;
                 data_delete_complete_rect.anchoredPosition = new Vector2(data_delete_complete_position_x, data_delete_complete_position_y);
             }
