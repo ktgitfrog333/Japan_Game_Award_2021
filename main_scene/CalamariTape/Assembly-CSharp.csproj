@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\SfxPlay.cs" />
     <Compile Include="Assets\Scripts\Menu.cs" />
     <Compile Include="Assets\Scripts\MoveController.cs" />
+    <Compile Include="Assets\Scripts\ClearManager.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\TsuruTsuruMoveController.cs" />
     <Compile Include="Assets\Scripts\SceneMove.cs" />
@@ -80,7 +81,8 @@
     <Compile Include="Assets\Scripts\UIFadeOut.cs" />
     <Compile Include="Assets\Scripts\UIFadeIn.cs" />
     <Compile Include="Assets\Scripts\PauseWindowManager.cs" />
-    <Compile Include="Assets\Scripts\ClearManager.cs" />
+    <Compile Include="Assets\Scripts\MessageScroll.cs" />
+    <Compile Include="Assets\Scripts\MessageManager.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />

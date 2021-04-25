@@ -1,3 +1,27 @@
+2021/04/25 15:06
+★ステージ
+チュートリアル
+　モルモットのアドバイス中はボタン入力を行ってもプレイヤーが動かないようにする
+　モルモットのアドバイス中はボタン入力を行うとアドバイスを全て表示させる
+　アドバイスが全て表示されたらプレイヤーが動けるようにする
+
+・チュートリアル画面のUIを配置
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・プレイヤー管理スクリプトへ各モード操作情報を定義
+main_scene\CalamariTape\Assets\Scripts\PlayerManager.cs
+・メッセージ1（サンプル）のアニメーションを作成
+main_scene\CalamariTape\Assets\Animations\Message001.anim
+main_scene\CalamariTape\Assets\Animations\Message001.controller
+main_scene\CalamariTape\Assets\Animations\MessageComplete001.anim
+・チュートリアルメッセージとメッセージ枠とメッセージ1（サンプル）の画像ファイルを作成
+main_scene\CalamariTape\Assets\Images\game_tutorial_message.png
+main_scene\CalamariTape\Assets\Images\game_tutorial_serit.png
+main_scene\CalamariTape\Assets\Images\game_tutorial_serit001.png
+・プレイヤー接触時のメッセージ制御スクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\MessageManager.cs
+・メッセージスクロールアニメーション制御スクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\MessageScroll.cs
+
 2021/04/24 21:37
 ★クリア画面
 ３秒後
