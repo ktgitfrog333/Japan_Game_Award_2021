@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
 
     public Character_Sence sence;
     public Player_Input input;
+    public int select_stage_number;
 
     [SerializeField] private bool game_datacomplete_flg;
 
@@ -61,6 +62,11 @@ public class Player : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public void set_stage_select_number(int select_stage_number)
+    {
+        this.select_stage_number = select_stage_number;
     }
 
     // Start is called before the first frame update
