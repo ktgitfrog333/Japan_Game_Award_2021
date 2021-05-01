@@ -21,7 +21,7 @@ public class Select_Draw_Screenimage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Draw_Screen_Image();        
+        Draw_Screen_Image();
     }
 
     public void Draw_Screen_Image()

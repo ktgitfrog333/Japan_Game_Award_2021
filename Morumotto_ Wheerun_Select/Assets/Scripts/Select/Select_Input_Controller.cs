@@ -36,12 +36,10 @@ public class Select_Input_Controller : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            /*
-            if(screen_image.stage_select_number > 0)
+            if(player.select_stage_number > 0)
             {
-                 screen_image.stage_select_number--;
-            }
-            */
+                player.select_stage_number--;
+            }           
         }
     }
 
@@ -49,12 +47,10 @@ public class Select_Input_Controller : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            /*
-            if (screen_image.stage_select_number < 4)
+            if (player.select_stage_number < 4)
             {
-                 screen_image.stage_select_number++;
+                 player.select_stage_number++;
             }
-            */
         }
     }
 

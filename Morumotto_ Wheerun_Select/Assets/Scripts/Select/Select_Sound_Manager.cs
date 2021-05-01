@@ -40,7 +40,10 @@ public class Select_Sound_Manager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
         {
-            audioSource.PlayOneShot(se_scroll);
+            if(player.select_stage_number > 0 && player.select_stage_number < 4)
+            {
+                audioSource.PlayOneShot(se_scroll);
+            }
         }
     }
 
