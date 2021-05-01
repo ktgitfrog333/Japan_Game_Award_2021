@@ -62,8 +62,10 @@ public class CalamariMoveController : MonoBehaviour
     /// <summary>重力値の角度</summary>
     [SerializeField] private Vector3 _wallPosition;
 
-    /// <summary>壁走り</summary>
-    [SerializeField] private bool _wallRun = false;
+    /// <summary>壁走り（縦）</summary>
+    [SerializeField] private bool _wallRunVertical = false;
+    /// <summary>壁走り（横）</summary>
+    [SerializeField] private bool _wallRunHorizontal = false;
 
     /// <summary>2点間の距離を測る際の一つ目を記録したか否か</summary>
     private bool _distanceFirstPointSaved;
@@ -74,6 +76,13 @@ public class CalamariMoveController : MonoBehaviour
     [SerializeField] private SfxPlay _sfxPlay;
     /// <summary>SE再生中フラグ</summary>
     private bool _sfxPlayed;
+
+    /// <summary>
+    /// 横にある壁に対して横方向へ入力すると登るモード<para/>
+    /// 1：右方向入力で登り、左方向で下りる<para/>
+    /// -1：左方向入力で登り、右方向で下りる
+    /// </summary>
+    private int _wallRunHorizontalMode = (int)WallRunHorizontalMode.RIGHT_IS_FRONT;
 
     void Start()
     {
@@ -95,7 +104,7 @@ public class CalamariMoveController : MonoBehaviour
 
     private void Update()
     {
-        if (_wallRun == false)
+        if (_wallRunVertical == false && _wallRunHorizontal == false)
         {
             if (_characterController.isGrounded && _jumpAction != true)
             {
@@ -153,25 +162,52 @@ public class CalamariMoveController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag.Equals("Wall"))
+        // 前後にある壁に対して前後方向へ入力すると登る
+        if (other.gameObject.tag.Equals("VerticalWall"))
         {
-            _wallRun = true;
+            _wallRunVertical = true;
+            _wallRunHorizontal = false;
             var r = other.gameObject.transform.position;
             _wallPosition = new Vector3(r.x, r.y, r.z);
+        }
+
+        // 横にある壁に対して横方向へ入力すると登る
+        if (other.gameObject.tag.Equals("HorizontalWall"))
+        {
+            _wallRunHorizontal = true;
+            _wallRunVertical = false;
+
+            var i = _transform.position;
+            if (Physics.Raycast(i, Vector3.right, 2f) == true)
+            {
+                _wallRunHorizontalMode = (int) WallRunHorizontalMode.RIGHT_IS_FRONT;
+            }
+            else if (Physics.Raycast(i, Vector3.left, 2f) == true)
+            {
+                _wallRunHorizontalMode = (int) WallRunHorizontalMode.LEFT_IS_FRONT;
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag.Equals("Wall"))
+        // 前後方向で登る挙動を不可にする
+        if (other.gameObject.tag.Equals("VerticalWall"))
         {
-            _wallRun = false;
+            _wallRunVertical = false;
+        }
+
+        // 横方向で登る挙動を不可にする
+        if (other.gameObject.tag.Equals("HorizontalWall"))
+        {
+            _wallRunHorizontal = false;
         }
     }
 
     private void OnEnable()
     {
-        _wallRun = false;
+        _wallRunVertical = false;
+        _wallRunHorizontal = false;
     }
 
 
@@ -291,18 +327,52 @@ public class CalamariMoveController : MonoBehaviour
             v = 0;
         }
 
-        if (0 < _value._parameter && _value._adhesive == true && _wallRun == true)
+        // 前後方向で登る制御
+        if (0 < _value._parameter && _value._adhesive == true && _wallRunVertical == true && _wallRunHorizontal == false)
         {
             _moveVelocity.x = h * speed;
             _moveVelocity.y = v * speed;
         }
+        // 横方向で登る制御
+        else if (0 < _value._parameter && _value._adhesive == true && _wallRunHorizontal == true)
+        {
+            // 右側に壁があった際の床上移動と壁移動
+            if (_wallRunHorizontalMode == (int) WallRunHorizontalMode.RIGHT_IS_FRONT && Physics.Raycast(_transform.position, Vector3.down, 0.75f) == true)
+            {
+                if (0 < h)
+                {
+                    Debug.Log("h:" + h);
+                    Debug.Log("speed:" + speed);
+                    Debug.Log("_wallRunHorizontalMode:" + _wallRunHorizontalMode);
+                    _moveVelocity.y = h * speed * _wallRunHorizontalMode;
+                }
+                else if (h < 0)
+                {
+                    _moveVelocity.x = h * speed * _wallRunHorizontalMode;
+                }
+            }
+            // 左側に壁があった際の床上移動と壁移動
+            else if (_wallRunHorizontalMode == (int)WallRunHorizontalMode.LEFT_IS_FRONT && Physics.Raycast(_transform.position, Vector3.down, 0.75f) == true)
+            {
+                if (h < 0)
+                {
+                    _moveVelocity.y = h * speed * _wallRunHorizontalMode;
+                }
+                else if (0 < h)
+                {
+                    _moveVelocity.x = h * speed * _wallRunHorizontalMode;
+                }
+            }
+            _moveVelocity.z = v * speed;
+        }
+        // 壁を登らない
         else
         {
             _moveVelocity.x = h * speed;
             _moveVelocity.z = v * speed;
         }
 
-        if (_wallRun == false)
+        if (_wallRunVertical == false && _wallRunHorizontal == false)
         {
             if (_mainCameraTransform != null)
             {
@@ -315,7 +385,7 @@ public class CalamariMoveController : MonoBehaviour
             }
         }
 
-        if (_wallRun == false)
+        if (_wallRunVertical == false && _wallRunHorizontal == false)
         {
             if (_characterController.isGrounded == true && _jumpAction == true)
             {
@@ -398,25 +468,39 @@ public class CalamariMoveController : MonoBehaviour
             if (_distanceFirstPointSaved == false)
             {
                 _distanceFirstPointSaved = true;
-                if (_wallRun == false)
+                // 壁を登らない
+                if (_wallRunVertical == false && _wallRunHorizontal == false)
                 {
                     _distancePoint = new Vector2(_transform.position.x, _transform.position.z);
                 }
-                else
+                // 前後方向で登る制御
+                else if (_wallRunVertical == true && _wallRunHorizontal == false)
                 {
                     _distancePoint = new Vector2(_transform.position.x, _transform.position.y);
+                }
+                // 横方向で登る制御
+                else
+                {
+                    _distancePoint = new Vector2(_transform.position.y, _transform.position.z);
                 }
             }
             else
             {
                 var point = new Vector2();
-                if (_wallRun == false)
+                // 壁を登らない
+                if (_wallRunVertical == false && _wallRunHorizontal == false)
                 {
                     point = new Vector2(_transform.position.x, _transform.position.z);
                 }
-                else
+                // 前後方向で登る制御
+                else if (_wallRunVertical == true && _wallRunHorizontal == false)
                 {
                     point = new Vector2(_transform.position.x, _transform.position.y);
+                }
+                // 横方向で登る制御
+                else
+                {
+                    point = new Vector2(_transform.position.y, _transform.position.z);
                 }
                 var distance = Vector2.Distance(_distancePoint, point);
                 if (2 < Mathf.Abs(distance) && _distanceFirstPointSaved == true)
@@ -428,7 +512,7 @@ public class CalamariMoveController : MonoBehaviour
         }
 
         // テープの耐久ゲージを減らす
-        if (0 < _movedSpeedToAnimator && 0 < _value._parameter && _value._adhesive == true && _wallRun == true)
+        if (0 < _movedSpeedToAnimator && 0 < _value._parameter && _value._adhesive == true && _wallRunVertical == true)
         {
             _value._parameter -= Time.deltaTime;
             Debug.Log("耐久値：" + _value._parameter);
@@ -440,4 +524,15 @@ public class CalamariMoveController : MonoBehaviour
             }
         }
     }
+}
+
+/// <summary>
+/// 横にある壁に対して横方向へ入力すると登るモードオプション
+/// </summary>
+public enum WallRunHorizontalMode
+{
+    /// <summary>1：右方向入力で登り、左方向で下りる</summary>
+    RIGHT_IS_FRONT = 1,
+    /// <summary>-1：左方向入力で登り、右方向で下りる</summary>
+    LEFT_IS_FRONT = -1
 }
