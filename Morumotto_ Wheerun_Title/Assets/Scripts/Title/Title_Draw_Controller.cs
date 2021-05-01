@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Title_Draw_Controller : MonoBehaviour
 {
@@ -164,6 +165,7 @@ public class Title_Draw_Controller : MonoBehaviour
         else
         {
             // セレクトシーンに切り替える処理を記載（a版の結合時実施）
+            SceneManager.LoadScene("Select_Sence");
         }
     }
 
