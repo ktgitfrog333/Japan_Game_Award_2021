@@ -1,3 +1,12 @@
+2021/05/02 13:21
+★不具合修正　カメラ操作の追従
+・不要なCinamechineを削除。プレイヤーオブジェクトの設定を変更。
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・モード切り替えの際に追従カメラ対象を切り替える処理を追加
+main_scene\CalamariTape\Assets\Scripts\ModeChanger.cs
+・Cinamechineへ追従カメラ対象を切り替えるスクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\CameraPointMove.cs
+
 2021/05/02 10:36
 ★不具合修正　壁昇り操作
 ・カラマリモード操作にて、壁（縦）と壁（横）に対して昇り降りの挙動時の不具合修正

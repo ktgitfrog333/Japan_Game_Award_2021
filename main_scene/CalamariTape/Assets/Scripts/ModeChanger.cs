@@ -26,10 +26,14 @@ public class ModeChanger : MonoBehaviour
     /// <summary>モード状態</summary>
     private string _mode;
 
+    /// <summary>追従させるカメラを切り替える</summary>
+    [SerializeField] CameraPointMove _cameraPoint;
+
     void Start()
     {
         Debug.Log("カラマリモード");
         _calamari.SetActive(true);
+        _cameraPoint.PlayerCameraLook(_calamari);
         _mode = _calamari.name.ToString();
     }
 
@@ -106,6 +110,7 @@ public class ModeChanger : MonoBehaviour
         _calamari.transform.position = p;
         _calamari.transform.eulerAngles = r;
         _calamari.SetActive(true);
+        _cameraPoint.PlayerCameraLook(_calamari);
         _nenchak.SetActive(false);
         _tsurutsuru.SetActive(false);
         _mode = _calamari.name.ToString();
@@ -121,6 +126,7 @@ public class ModeChanger : MonoBehaviour
         _nenchak.transform.eulerAngles = _calamari.transform.eulerAngles;
         _calamari.SetActive(false);
         _nenchak.SetActive(true);
+        _cameraPoint.PlayerCameraLook(_nenchak);
         _tsurutsuru.SetActive(false);
         _mode = _nenchak.name.ToString();
     }
@@ -136,6 +142,7 @@ public class ModeChanger : MonoBehaviour
         _calamari.SetActive(false);
         _nenchak.SetActive(false);
         _tsurutsuru.SetActive(true);
+        _cameraPoint.PlayerCameraLook(_tsurutsuru);
         _mode = _tsurutsuru.name.ToString();
     }
 }
