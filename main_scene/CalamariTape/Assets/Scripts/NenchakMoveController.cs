@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using Controller.Wall;
+using Const.Tag;
 
 /// <summary>
 /// プレイヤー操作スクリプトクラス
@@ -52,8 +54,17 @@ public class NenchakMoveController : MonoBehaviour
     /// <summary>重力値の角度</summary>
     [SerializeField] private Vector3 _wallPosition;
 
-    /// <summary>壁走り</summary>
-    [SerializeField] private bool _wallRun = false;
+    /// <summary>壁走り（縦）</summary>
+    [SerializeField] private bool _wallRunVertical = false;
+    /// <summary>壁走り（横）</summary>
+    [SerializeField] private bool _wallRunHorizontal = false;
+
+    /// <summary>
+    /// 横にある壁に対して横方向へ入力すると登るモード<para/>
+    /// 1：右方向入力で登り、左方向で下りる<para/>
+    /// -1：左方向入力で登り、右方向で下りる
+    /// </summary>
+    private int _wallRunHorizontalMode = (int)WallRunHorizontalMode.RIGHT_IS_FRONT;
 
     void Start()
     {
@@ -75,9 +86,12 @@ public class NenchakMoveController : MonoBehaviour
 
     private void Update()
     {
-        if (_characterController.isGrounded && _jumpAction != true)
+        if (_wallRunVertical == false && _wallRunHorizontal == false)
         {
-            _jumpAction = CrossPlatformInputManager.GetButtonDown("Jump");
+            if (_characterController.isGrounded && _jumpAction != true)
+            {
+                _jumpAction = CrossPlatformInputManager.GetButtonDown("Jump");
+            }
         }
 
         ScaleChangeForController();
@@ -118,25 +132,52 @@ public class NenchakMoveController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag.Equals("Wall"))
+        // 前後にある壁に対して前後方向へ入力すると登る
+        if (other.gameObject.tag.Equals(TagManager.VERTICAL_WALL))
         {
-            _wallRun = true;
+            _wallRunVertical = true;
+            _wallRunHorizontal = false;
             var r = other.gameObject.transform.position;
             _wallPosition = new Vector3(r.x, r.y, r.z);
+        }
+
+        // 横にある壁に対して横方向へ入力すると登る
+        if (other.gameObject.tag.Equals(TagManager.HORIZONTAL_WALL))
+        {
+            _wallRunHorizontal = true;
+            _wallRunVertical = false;
+
+            var i = _transform.position;
+            if (Physics.Raycast(i, Vector3.right, 2f) == true)
+            {
+                _wallRunHorizontalMode = (int)WallRunHorizontalMode.RIGHT_IS_FRONT;
+            }
+            else if (Physics.Raycast(i, Vector3.left, 2f) == true)
+            {
+                _wallRunHorizontalMode = (int)WallRunHorizontalMode.LEFT_IS_FRONT;
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag.Equals("Wall"))
+        // 前後方向で登る挙動を不可にする
+        if (other.gameObject.tag.Equals(TagManager.VERTICAL_WALL))
         {
-            _wallRun = false;
+            _wallRunVertical = false;
+        }
+
+        // 横方向で登る挙動を不可にする
+        if (other.gameObject.tag.Equals(TagManager.HORIZONTAL_WALL))
+        {
+            _wallRunHorizontal = false;
         }
     }
 
     private void OnEnable()
     {
-        _wallRun = false;
+        _wallRunVertical = false;
+        _wallRunHorizontal = false;
     }
 
     /// <summary>
@@ -210,11 +251,19 @@ public class NenchakMoveController : MonoBehaviour
         var h = CrossPlatformInputManager.GetAxis("Horizontal");
         var v = CrossPlatformInputManager.GetAxis("Vertical");
 
-        if (0 < _value._parameter && _value._adhesive == true && _wallRun == true)
+        // 前後方向で登る制御
+        if (0 < _value._parameter && _value._adhesive == true && _wallRunVertical == true && _wallRunHorizontal == false)
         {
             _moveVelocity.x = h * _groundSetMoveSpeed;
             _moveVelocity.y = v * _groundSetMoveSpeed;
         }
+        // 横方向で登る制御
+        else if (0 < _value._parameter && _value._adhesive == true && _wallRunHorizontal == true)
+        {
+            _moveVelocity.y = h * _groundSetMoveSpeed * _wallRunHorizontalMode;
+            _moveVelocity.z = v * _groundSetMoveSpeed;
+        }
+        // 壁を登らない
         else
         {
             _moveVelocity.x = 0f;
@@ -248,7 +297,7 @@ public class NenchakMoveController : MonoBehaviour
         _movedSpeedToAnimator = new Vector3(_moveVelocity.x, 0, _moveVelocity.z).magnitude;
         //_animator.SetFloat("MoveSpeed", _movedSpeedToAnimator);
 
-        if (0 < _movedSpeedToAnimator && 0 < _value._parameter && _value._adhesive == true && _wallRun == true)
+        if (0 < _movedSpeedToAnimator && 0 < _value._parameter && _value._adhesive == true && _wallRunVertical == true)
         {
             _value._parameter -= Time.deltaTime;
             Debug.Log("耐久値：" + _value._parameter);

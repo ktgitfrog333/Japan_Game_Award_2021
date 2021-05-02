@@ -1,3 +1,18 @@
+2021/05/02 10:36
+★不具合修正　壁昇り操作
+・カラマリモード操作にて、壁（縦）と壁（横）に対して昇り降りの挙動時の不具合修正
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+・ネンチャクモード操作にて、壁（縦）と壁（横）に対して昇り降りの挙動時の不具合修正
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+・InputManagerにてメニュー操作時の決定（Decition）項目を追加
+main_scene\CalamariTape\ProjectSettings\InputManager.asset
+・タグマネージャーにてWallタグを追加
+main_scene\CalamariTape\ProjectSettings\TagManager.asset
+・タグ定義クラスを作成
+main_scene\CalamariTape\Assets\Scripts\Common\TagManager.cs
+・壁判定用のパブリックenumを作成
+main_scene\CalamariTape\Assets\Scripts\Common\WallRunHorizontalMode.cs
+
 2021/05/01 14:03
 ★マージ前の対応
 
