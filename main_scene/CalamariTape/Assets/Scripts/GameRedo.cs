@@ -9,8 +9,10 @@ public class GameRedo : MonoBehaviour
 {
     /// <summary>効果音ゲームオブジェクト</summary>
     [SerializeField] private SfxPlay _sfx;
-    /// <summary>黒い背景</summary>
-    [SerializeField] private GameObject _blackBackGround;
+    /// <summary>シーン遷移の演出画像</summary>
+    [SerializeField] private GameObject _loadNowSprite;
+    /// <summary>シーン遷移スクリプト</summary>
+    [SerializeField] private ScreenDirectInOut _direct;
     /// <summary>遷移先のシーン名</summary>
     [SerializeField] private string _nextSceneName;
     /// <summary>遷移先のシーン管理</summary>
@@ -28,7 +30,8 @@ public class GameRedo : MonoBehaviour
         {
             _sfx.PlaySFX("se_decided");
             _nextScene.sceneName = _nextSceneName;
-            _blackBackGround.SetActive(true);
+            _loadNowSprite.SetActive(true);
+            _direct._drawLoadNowFadeOutTrigger = true;
 
             _flag = true;
         }

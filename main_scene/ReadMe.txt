@@ -1,3 +1,20 @@
+2021/05/03 13:47
+★不具合修正　シーン遷移先の指定とフェード演出をセレクト画面に合わせる
+・フェード演出用のUIオブジェクトの作成と不要になったフェードUIを削除
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・ステージをやり直すUIへフェード背景の変更
+main_scene\CalamariTape\Assets\Scripts\GameRedo.cs
+・他のステージを選ぶUIへフェード背景の変更
+main_scene\CalamariTape\Assets\Scripts\GameSelect.cs
+・（削除）フェードイン演出スクリプトクラスを削除
+main_scene\CalamariTape\Assets\Scripts\UIFadeIn.cs
+・（削除）フェードアウト演出スクリプトクラスを削除
+main_scene\CalamariTape\Assets\Scripts\UIFadeOut.cs
+・フェードインアウト演出スクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\ScreenDirectInOut.cs
+・ロード画面のイメージを追加
+main_scene\CalamariTape\Assets\Textures\eye_chaching.png
+
 2021/05/02 13:21
 ★不具合修正　カメラ操作の追従
 ・不要なCinamechineを削除。プレイヤーオブジェクトの設定を変更。
