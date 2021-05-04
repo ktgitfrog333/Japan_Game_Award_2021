@@ -1,3 +1,17 @@
+2021/05/04 18:22
+★リソースの差し替え
+・メニュー画面、クリア画面のUI差し替え
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・メニュー画面内の遊び方を確認する項目の画像を追加
+main_scene\CalamariTape\Assets\Images\joystick_manual_icon.png
+main_scene\CalamariTape\Assets\Images\joystick_manual_table.png
+main_scene\CalamariTape\Assets\Images\joystick_manual_title.png
+main_scene\CalamariTape\Assets\Images\keybord_mouse_manual_icon.png
+main_scene\CalamariTape\Assets\Images\keybord_mouse_manual_table.png
+main_scene\CalamariTape\Assets\Images\keybord_mouse_manual_title.png
+・メニュー画面内の選択アイコン画像を追加
+main_scene\CalamariTape\Assets\Textures\morumotto.png
+
 2021/05/03 13:47
 ★不具合修正　シーン遷移先の指定とフェード演出をセレクト画面に合わせる
 ・フェード演出用のUIオブジェクトの作成と不要になったフェードUIを削除
