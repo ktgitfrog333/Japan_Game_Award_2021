@@ -15,11 +15,11 @@ C:/Users/kzpaqu/Documents/Japan_Game_Award_2021/main_scene/CalamariTape
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-50488
+51251
 Successfully changed project path to: C:/Users/kzpaqu/Documents/Japan_Game_Award_2021/main_scene/CalamariTape
 C:/Users/kzpaqu/Documents/Japan_Game_Award_2021/main_scene/CalamariTape
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 30.54 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 27.14 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.2f1 (8fd9074bf66c)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.2f1/Editor/Data/Resources/UnitySubsystems
@@ -35,22 +35,22 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.2f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.2f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56984
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56700
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.001888 seconds.
+Registered in 0.001965 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 28.12 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 27.26 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.002 seconds
+- Completed reload, in  1.006 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.000702 seconds.
+Registered in 0.000726 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Refreshing native plugins compatible for Editor in 0.27 ms, found 0 plugins.
@@ -59,175 +59,64 @@ Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.733 seconds
+- Completed reload, in  0.752 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
-Refreshing native plugins compatible for Editor in 0.28 ms, found 0 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
+Refreshing native plugins compatible for Editor in 0.27 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 1450 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 76.6 MB.
 System memory in use after: 76.3 MB.
 
 Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 1898.
-Total: 2.723900 ms (FindLiveObjects: 0.228400 ms CreateObjectMapping: 0.069500 ms MarkObjects: 2.028100 ms  DeleteObjects: 0.396300 ms)
+Total: 1.789100 ms (FindLiveObjects: 0.155100 ms CreateObjectMapping: 0.044800 ms MarkObjects: 1.318500 ms  DeleteObjects: 0.269600 ms)
 
 ========================================================================
 Received Import Request.
-  path: Assets/Images/joystick_manual_icon.png
-  artifactKey: Guid(ea8100349b2a5c942900c531a0c31ca5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Images/joystick_manual_icon.png using Guid(ea8100349b2a5c942900c531a0c31ca5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f6ec063e8d4dd1d27cf920cdb774d98a') in 0.089542 seconds
-  Import took 0.092161 seconds .
+  path: Assets/Audio
+  artifactKey: Guid(93db2bd31013b2b41b264ed4cd2b5ab4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Audio using Guid(93db2bd31013b2b41b264ed4cd2b5ab4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5d498ff351f98f2d50aefa6c01263cb2') in 0.003364 seconds
+  Import took 0.010543 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000216 seconds.
-  path: Assets/Images/joystick_manual_title.png
-  artifactKey: Guid(3a58df144d6c0f245a1cae8c398536bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Images/joystick_manual_title.png using Guid(3a58df144d6c0f245a1cae8c398536bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2f795af0e24bce0e424a8ac778bf345d') in 0.004979 seconds
-  Import took 0.006887 seconds .
+  Time since last request: 2.671381 seconds.
+  path: Assets/Audio/BGM
+  artifactKey: Guid(9de85692c63bd9843ac0eec18449c917) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Audio/BGM using Guid(9de85692c63bd9843ac0eec18449c917) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '05ff541b21637c524526c96dc9e8e790') in 0.001544 seconds
+  Import took 0.004253 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 6.299098 seconds.
-  path: Assets/Images/joystick_manual_title.png
-  artifactKey: Guid(3a58df144d6c0f245a1cae8c398536bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Images/joystick_manual_title.png using Guid(3a58df144d6c0f245a1cae8c398536bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '18a25af3c680ab86ded0aa7095abb96d') in 0.044177 seconds
-  Import took 0.046684 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 5.846610 seconds.
-  path: Assets/Images/joystick_manual_table.png
-  artifactKey: Guid(2e68e79df5cd654479f742373cea3742) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Images/joystick_manual_table.png using Guid(2e68e79df5cd654479f742373cea3742) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd548fc88f29346fe0811288680c8af1a') in 0.006975 seconds
-  Import took 0.009060 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 9.267701 seconds.
-  path: Assets/Images/joystick_manual_table.png
-  artifactKey: Guid(2e68e79df5cd654479f742373cea3742) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Images/joystick_manual_table.png using Guid(2e68e79df5cd654479f742373cea3742) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2895126a05fa56d375ccb21114b705a7') in 0.034084 seconds
-  Import took 0.036471 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 7.289119 seconds.
-  path: Assets/Images/joystick_manual_icon.png
-  artifactKey: Guid(ea8100349b2a5c942900c531a0c31ca5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Images/joystick_manual_icon.png using Guid(ea8100349b2a5c942900c531a0c31ca5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0c5b2752aeaa60dd1cc7d56aad4fe74c') in 0.009989 seconds
-  Import took 0.012171 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 87.420533 seconds.
-  path: Assets/Images/keybord_mouse_manual_icon.png
-  artifactKey: Guid(21fb6eb995193364cabc45d78f1f5577) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Images/keybord_mouse_manual_icon.png using Guid(21fb6eb995193364cabc45d78f1f5577) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'af636675af0ca04571fa64943fbc56f9') in 0.005256 seconds
-  Import took 0.007780 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.004153 seconds.
-  path: Assets/Images/keybord_mouse_manual_icon.png
-  artifactKey: Guid(21fb6eb995193364cabc45d78f1f5577) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Images/keybord_mouse_manual_icon.png using Guid(21fb6eb995193364cabc45d78f1f5577) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'af636675af0ca04571fa64943fbc56f9') in 0.005228 seconds
-  Import took 0.007368 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.710699 seconds.
-  path: Assets/Images/keybord_mouse_manual_icon.png
-  artifactKey: Guid(21fb6eb995193364cabc45d78f1f5577) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Images/keybord_mouse_manual_icon.png using Guid(21fb6eb995193364cabc45d78f1f5577) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '410dac00a0318cd6f94d4afb39c3c080') in 0.009660 seconds
-  Import took 0.011784 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.470422 seconds.
-  path: Assets/Images/keybord_mouse_manual_table.png
-  artifactKey: Guid(1c3e9e3822e9a0a44884f8ea73b1345a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Images/keybord_mouse_manual_table.png using Guid(1c3e9e3822e9a0a44884f8ea73b1345a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7e9b2e3f8f22dd8502c70fa42f0eb14b') in 0.004481 seconds
-  Import took 0.006601 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.143708 seconds.
-  path: Assets/Images/keybord_mouse_manual_table.png
-  artifactKey: Guid(1c3e9e3822e9a0a44884f8ea73b1345a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Images/keybord_mouse_manual_table.png using Guid(1c3e9e3822e9a0a44884f8ea73b1345a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2adefee3afe457a9d3c46980437ad4a1') in 0.009596 seconds
-  Import took 0.012238 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000661 seconds.
-  path: Assets/Images/keybord_mouse_manual_table.png
-  artifactKey: Guid(1c3e9e3822e9a0a44884f8ea73b1345a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Images/keybord_mouse_manual_table.png using Guid(1c3e9e3822e9a0a44884f8ea73b1345a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2adefee3afe457a9d3c46980437ad4a1') in 0.009000 seconds
-  Import took 0.011404 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.418383 seconds.
-  path: Assets/Images/keybord_mouse_manual_title.png
-  artifactKey: Guid(bb662ae8217e16f468c364f8c0a2d2d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Images/keybord_mouse_manual_title.png using Guid(bb662ae8217e16f468c364f8c0a2d2d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8cb094a2be7b3093e18deb9a208abee8') in 0.004263 seconds
-  Import took 0.006641 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.062373 seconds.
-  path: Assets/Images/keybord_mouse_manual_title.png
-  artifactKey: Guid(bb662ae8217e16f468c364f8c0a2d2d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Images/keybord_mouse_manual_title.png using Guid(bb662ae8217e16f468c364f8c0a2d2d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e3f14451b3e252e7210cc6cccc4c2650') in 0.007874 seconds
-  Import took 0.010234 seconds .
+  Time since last request: 0.000336 seconds.
+  path: Assets/Audio/BGM
+  artifactKey: Guid(9de85692c63bd9843ac0eec18449c917) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Audio/BGM using Guid(9de85692c63bd9843ac0eec18449c917) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '05ff541b21637c524526c96dc9e8e790') in 0.001431 seconds
+  Import took 0.003595 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.000910 seconds.
+Registered in 0.000929 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.27 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.28 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.688 seconds
+- Completed reload, in  0.745 seconds
 Platform modules already initialized, skipping
 Refreshing native plugins compatible for Editor in 0.27 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 1423 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 77.5 MB.
-System memory in use after: 77.2 MB.
+System memory in use before: 74.4 MB.
+System memory in use after: 74.1 MB.
 
-Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 1913.
-Total: 1.767100 ms (FindLiveObjects: 0.161700 ms CreateObjectMapping: 0.044200 ms MarkObjects: 1.307500 ms  DeleteObjects: 0.252900 ms)
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.000893 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.27 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  0.753 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.27 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1423 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 77.5 MB.
-System memory in use after: 77.3 MB.
-
-Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 1916.
-Total: 2.128700 ms (FindLiveObjects: 0.178700 ms CreateObjectMapping: 0.038400 ms MarkObjects: 1.561100 ms  DeleteObjects: 0.349600 ms)
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 1901.
+Total: 1.914200 ms (FindLiveObjects: 0.150400 ms CreateObjectMapping: 0.037600 ms MarkObjects: 1.444000 ms  DeleteObjects: 0.281200 ms)
 
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file
