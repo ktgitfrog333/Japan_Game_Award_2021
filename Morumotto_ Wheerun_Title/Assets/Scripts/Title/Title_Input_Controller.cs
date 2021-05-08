@@ -66,7 +66,7 @@ public class Title_Input_Controller : MonoBehaviour
     {
         if (Input.GetButtonDown("Decision"))
         {
-            player.getSence(Player.Character_Sence.GAME_SELECT);
+            player.setSence(Player.Character_Sence.GAME_SELECT);
         }
     }
 
@@ -78,11 +78,11 @@ public class Title_Input_Controller : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    player.getInput(Player.Player_Input.CENTER);
+                    player.setInput(Player.Player_Input.CENTER);
                 }
                 if (Input.GetButtonDown("Decision"))
                 {
-                    player.getSence(Player.Character_Sence.GAME_START);
+                    player.setSence(Player.Character_Sence.GAME_START);
                 }
                 break;
             }
@@ -90,16 +90,16 @@ public class Title_Input_Controller : MonoBehaviour
             {
                 if(Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    player.getInput(Player.Player_Input.UP);
+                    player.setInput(Player.Player_Input.UP);
                 }
                 if(Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    player.getInput(Player.Player_Input.DOWN);
+                    player.setInput(Player.Player_Input.DOWN);
                 }
                 if (Input.GetButtonDown("Decision"))
                 {
-                    player.getSence(Player.Character_Sence.GAME_DATADELETE_CHECK);
-                    player.getInput(Player.Player_Input.UP);
+                    player.setSence(Player.Character_Sence.GAME_DATADELETE_CHECK);
+                    player.setInput(Player.Player_Input.UP);
                 }
                 break;
             }
@@ -107,19 +107,19 @@ public class Title_Input_Controller : MonoBehaviour
             {
                 if(Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    player.getInput(Player.Player_Input.CENTER);
+                    player.setInput(Player.Player_Input.CENTER);
                 }
                 if (Input.GetButtonDown("Decision"))
                 {
-                    player.getSence(Player.Character_Sence.GAME_END_CHECK);
-                    player.getInput(Player.Player_Input.UP);
+                    player.setSence(Player.Character_Sence.GAME_END_CHECK);
+                    player.setInput(Player.Player_Input.UP);
                 }
                 break;
             }
         }
         if (Input.GetButtonDown("Cancel"))
         {
-            player.getSence(Player.Character_Sence.PUSH_GAME_START);
+            player.setSence(Player.Character_Sence.PUSH_GAME_START);
         }
     }
 
@@ -131,12 +131,12 @@ public class Title_Input_Controller : MonoBehaviour
             {
                 if(Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    player.getInput(Player.Player_Input.DOWN);
+                    player.setInput(Player.Player_Input.DOWN);
                 }
                 if (Input.GetButtonDown("Decision"))
                 {
                     player.set_Data_Complete_TrueFlg();
-                    player.getSence(Player.Character_Sence.GAME_SELECT);
+                    player.setSence(Player.Character_Sence.GAME_SELECT);
                 }
                 break;
             }
@@ -144,20 +144,20 @@ public class Title_Input_Controller : MonoBehaviour
             {
                 if(Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    player.getInput(Player.Player_Input.UP);
+                    player.setInput(Player.Player_Input.UP);
                 }
                 if (Input.GetButtonDown("Decision"))
                 {
-                    player.getSence(Player.Character_Sence.GAME_SELECT);
-                    player.getInput(Player.Player_Input.CENTER);
+                    player.setSence(Player.Character_Sence.GAME_SELECT);
+                    player.setInput(Player.Player_Input.CENTER);
                 }
                 break;
             }
         }
         if (Input.GetButtonDown("Cancel"))
         {
-            player.getSence(Player.Character_Sence.GAME_SELECT);
-            player.getInput(Player.Player_Input.CENTER);
+            player.setSence(Player.Character_Sence.GAME_SELECT);
+            player.setInput(Player.Player_Input.CENTER);
         }
     }
 
@@ -169,11 +169,11 @@ public class Title_Input_Controller : MonoBehaviour
             {
                 if(Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    player.getInput(Player.Player_Input.DOWN);
+                    player.setInput(Player.Player_Input.DOWN);
                 }
                 if (Input.GetButtonDown("Decision"))
                 {
-                    player.getSence(Player.Character_Sence.GAME_END);
+                    player.setSence(Player.Character_Sence.GAME_END);
                 }
                 break;
             }
@@ -181,19 +181,19 @@ public class Title_Input_Controller : MonoBehaviour
             {
                 if(Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    player.getInput(Player.Player_Input.UP);
+                    player.setInput(Player.Player_Input.UP);
                 }
                 if (Input.GetButtonDown("Decision"))
                 {
-                    player.getSence(Player.Character_Sence.GAME_SELECT);
+                    player.setSence(Player.Character_Sence.GAME_SELECT);
                 }
                 break;
             }
         }
         if (Input.GetButtonDown("Cancel"))
         {
-            player.getSence(Player.Character_Sence.GAME_SELECT);
-            player.getInput(Player.Player_Input.DOWN);
+            player.setSence(Player.Character_Sence.GAME_SELECT);
+            player.setInput(Player.Player_Input.DOWN);
         }
     }
 }

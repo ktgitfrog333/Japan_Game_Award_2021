@@ -17,8 +17,8 @@ public class Title_Sound_Manager : MonoBehaviour
     {
         player_Draw = GameObject.Find("Canvas");
         player = player_Draw.GetComponent<Player>();
-        player.getSence(Player.Character_Sence.PUSH_GAME_START);
-        player.getInput(Player.Player_Input.UP);
+        player.setSence(Player.Character_Sence.PUSH_GAME_START);
+        player.setInput(Player.Player_Input.UP);
         audioSource = GetComponent<AudioSource>();
     }
 

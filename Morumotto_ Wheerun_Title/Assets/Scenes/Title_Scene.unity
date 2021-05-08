@@ -1074,7 +1074,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sence: 0
+  before_check_sence: 0
   input: 0
+  select_stage_number: 0
   game_datacomplete_flg: 0
 --- !u!114 &1010449558
 MonoBehaviour:
@@ -1331,6 +1333,7 @@ MonoBehaviour:
   load_now: {fileID: 124578196}
   data_dalete_complete: {fileID: 876447391}
   fade_in: {fileID: 676600816}
+  alpha: 0
 --- !u!114 &1245046215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1343,8 +1346,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 846815045343b81419eab62740768c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sence: 0
+  sence: 1
+  before_check_sence: 1
   input: 0
+  select_stage_number: 0
   game_datacomplete_flg: 0
 --- !u!1 &1251361783
 GameObject:

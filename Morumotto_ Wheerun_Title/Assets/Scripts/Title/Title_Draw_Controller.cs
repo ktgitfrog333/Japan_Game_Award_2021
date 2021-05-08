@@ -28,9 +28,10 @@ public class Title_Draw_Controller : MonoBehaviour
     private float data_delete_complete_position_y;
     private float data_delete_complete_position_x;
     private float timer;
-    private float alpha;
+    [SerializeField] private float alpha;
     private float alpha_speed;
-    
+    float red, green, blue;
+
     void Start()
     {
         Player_Init();
@@ -40,9 +41,30 @@ public class Title_Draw_Controller : MonoBehaviour
     {
         player_Draw = GameObject.Find("Canvas");
         player = player_Draw.GetComponent<Player>();
-        player.getSence(Player.Character_Sence.PUSH_GAME_START);
-        player.getInput(Player.Player_Input.UP);
+        Player_Sence_Check();
+        player.setInput(Player.Player_Input.UP);
         player.set_Data_Complete_FalseFlg();
+    }
+
+    public void Player_Sence_Check()
+    {
+        player.before_check_sence = Player.Character_Sence.OPENING_MOVIE;
+        // player.before_check_sence = Player.Character_Sence.NEXT_GAMETITLE;
+        // 結合時に以下の処理に変更
+        // player.before_check_sence = player.brfore_getSence();
+        // 以前のシーンを確認
+        if (player.before_check_sence == Player.Character_Sence.OPENING_MOVIE)
+        {
+            player.setSence(Player.Character_Sence.NEXT_GAMESTART);
+        }
+        else if (player.before_check_sence == Player.Character_Sence.NEXT_GAMETITLE)
+        {
+            player.setSence(Player.Character_Sence.NEXT_GAMETITLE);
+        }
+        else
+        {
+            player.setSence(Player.Character_Sence.PUSH_GAME_START);
+        }
     }
 
     public void Texture_Draw_Init()
@@ -52,11 +74,31 @@ public class Title_Draw_Controller : MonoBehaviour
         load_now_rect = load_now.GetComponent<RectTransform>();
         data_delete_complete_rect = data_dalete_complete.GetComponent<RectTransform>();
         fade_Draw = fade_in.GetComponent<Image>();
-        load_now_position_x = -1920.0f;        // ロード画面の初期座標位置
+        Fade_Init();            // フェードの初期化メソッド
         data_delete_complete_position_x = 650.0f;
         data_delete_complete_position_y = 700.0f;
-        alpha = 0;
-        alpha_speed = 0.001f;
+        alpha_speed = 0.5f;
+    }
+
+    public void Fade_Init()
+    {
+        if (player.sence == Player.Character_Sence.NEXT_GAMESTART)
+        {
+            alpha = 1;
+        }
+        else
+        {
+            alpha = 0;
+        }
+        if (player.sence == Player.Character_Sence.NEXT_GAMETITLE)
+        {
+            float load_now_position = 0.0f;
+            load_now_rect.anchoredPosition = new Vector2(load_now_position, load_now_position);
+        }
+        else
+        {
+            load_now_position_x = -1920.0f;        // ロード画面の初期座標位置
+        }
     }
     
 
@@ -66,10 +108,21 @@ public class Title_Draw_Controller : MonoBehaviour
         Draw_Texture(player);
     }
 
+    // 各シーンの画面描画分岐処理
     public void Draw_Texture(Player player)
     {
         switch(player.sence)
         {
+            case Player.Character_Sence.NEXT_GAMESTART:
+            {
+                NextGameStart_Draw();
+                break;
+            }
+            case Player.Character_Sence.NEXT_GAMETITLE:
+            {
+                NextGameTitle_Draw();
+                break;
+            }
             case Player.Character_Sence.PUSH_GAME_START:
             {
                 PushGameStart_Draw();
@@ -104,6 +157,50 @@ public class Title_Draw_Controller : MonoBehaviour
                 GameEnd_Draw();
                 break;
             }
+        }
+    }
+
+    // オープニングムービーからタイトルへ遷移した時の処理
+    public void NextGameStart_Draw()
+    {
+        push_game_object.SetActive(true);
+        select_object.SetActive(false);
+        game_datadelete_check.SetActive(false);
+        game_end_check.SetActive(false);
+        icon.SetActive(false);
+
+        fade_in.SetActive(true);
+        timer += Time.deltaTime;
+        float EndTimer = 2.0f;
+        float MaxColor = 255;
+
+        fade_Draw.color = new Color(0, 0, 0, alpha);
+        alpha -= alpha_speed * Time.deltaTime;
+
+        // timer >= EndTimer || 
+        // ３秒経過後にフェードアウト
+        if (alpha <= 0)
+        {
+            player.sence = Player.Character_Sence.PUSH_GAME_START;
+        }
+
+    }
+    public void NextGameTitle_Draw()
+    {
+        push_game_object.SetActive(true);
+        select_object.SetActive(false);
+        game_datadelete_check.SetActive(false);
+        game_end_check.SetActive(false);
+        icon.SetActive(false);
+        load_now.SetActive(true);
+        float Load_Now_Min_Position = -1920.0f;
+        if (load_now_rect.anchoredPosition.x >= Load_Now_Min_Position)
+        {
+            load_now_rect.anchoredPosition += new Vector2(-1000 * Time.deltaTime, 0);
+        }
+        else
+        {
+            player.sence = Player.Character_Sence.PUSH_GAME_START;
         }
     }
 
@@ -164,7 +261,9 @@ public class Title_Draw_Controller : MonoBehaviour
         }
         else
         {
-            // セレクトシーンに切り替える処理を記載（a版の結合時実施）
+            // 以前のシーンを格納
+            player.before_setSence(Player.Character_Sence.GAME_SELECT);
+            // セレクトシーンに切り替える処理を記載
             SceneManager.LoadScene("Select_Sence");
         }
     }
@@ -216,14 +315,15 @@ public class Title_Draw_Controller : MonoBehaviour
 
     public void YesNo_Draw(Player player)
     {
-        float yes_position = -150.0f;
+        float yes_position_x = -150.0f;
+        float yes_position_y = -200.0f; 
         float no_position_x = -200.0f;
-        float no_position_y = -350.0f;
+        float no_position_y = -400.0f;
         switch (player.input)
         {
             case Player.Player_Input.UP:
                 {
-                    icon_rect.anchoredPosition = new Vector2(yes_position, yes_position);
+                    icon_rect.anchoredPosition = new Vector2(yes_position_x, yes_position_y);
                     break;
                 }
 
@@ -239,14 +339,13 @@ public class Title_Draw_Controller : MonoBehaviour
     {
         fade_in.SetActive(true);
         timer += Time.deltaTime;
-        float EndTimer = 2.0f;
         int MaxColor = 255;
 
         fade_Draw.color = new Color(MaxColor, MaxColor, MaxColor,alpha);
-        alpha += alpha_speed;        
+        alpha += alpha_speed * Time.deltaTime;        
 
         // ３秒経過後にフェードイン (ゲーム終了の処理)
-        if (timer >= EndTimer || alpha >= 255)
+        if (alpha >= 1)
         {
             #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
