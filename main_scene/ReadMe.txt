@@ -1,3 +1,16 @@
+2021/05/09 22:17
+★リソースの差し替え
+プレイヤー（ネンチャクモード、ツルツルモード）
+　モルモット
+　セロハンテープ
+
+・ネンチャクモード、ツルツルモードの設定変更
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・ネンチャクモードにてスケール処理調整、接地判定の調整、登る壁の判定調整
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+・ツルツルモードにてスケール処理調整、接地判定の調整、回転する動き実装
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruMoveController.cs
+
 2021/05/09 14:42
 ★リソースの差し替え
 プレイヤー（カラマリモード、ネンチャクモード（途中））
