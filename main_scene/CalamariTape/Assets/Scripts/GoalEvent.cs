@@ -7,12 +7,8 @@ using UnityEngine;
 /// </summary>
 public class GoalEvent : MonoBehaviour
 {
-    /// <summary>カラマリモードの操作スクリプト</summary>
-    [SerializeField] private CalamariMoveController _calamariController;
-    /// <summary>ネンチャクモードの操作スクリプト</summary>
-    [SerializeField] private NenchakMoveController _nenchakController;
-    /// <summary>ツルツルモードの操作スクリプト</summary>
-    [SerializeField] private TsuruTsuruMoveController _tsurutsuruController;
+    /// <summary>プレイヤーのモード管理</summary>
+    [SerializeField] private PlayerManager _playerManager;
 
     /// <summary>クリア画面のUI</summary>
     [SerializeField] private GameObject _clearUI;
@@ -24,9 +20,9 @@ public class GoalEvent : MonoBehaviour
     {
         if (_goalTrigger == true && other.gameObject.tag.Equals("Player"))
         {
-            _calamariController.enabled = false;
-            _nenchakController.enabled = false;
-            _tsurutsuruController.enabled = false;
+            _playerManager.GetComponent<CalamariMoveController>().enabled = false;
+            _playerManager.GetComponent<NenchakMoveController>().enabled = false;
+            _playerManager.GetComponent<TsuruTsuruMoveController>().enabled = false;
             _clearUI.SetActive(true);
         }
     }

@@ -47,7 +47,7 @@ public class NenchakMoveController : MonoBehaviour
     [SerializeField] private DurableValue _value;
 
     /// <summary>アニメーション</summary>
-    private float _movedSpeedToAnimator;
+    [SerializeField] private float _movedSpeedToAnimator;
 
     /// <summary>重力値の加速度</summary>
     private float _gravityAcceleration;
@@ -58,6 +58,10 @@ public class NenchakMoveController : MonoBehaviour
     [SerializeField] private bool _wallRunVertical = false;
     /// <summary>壁走り（横）</summary>
     [SerializeField] private bool _wallRunHorizontal = false;
+    /// <summary>RayCast判定の距離値（右）</summary>
+    [SerializeField] private float _maxDistanceRight = 2f;
+    /// <summary>RayCast判定の距離値（左）</summary>
+    [SerializeField] private float _maxDistanceLeft = 2f;
 
     /// <summary>
     /// 横にある壁に対して横方向へ入力すると登るモード<para/>
@@ -65,6 +69,16 @@ public class NenchakMoveController : MonoBehaviour
     /// -1：左方向入力で登り、右方向で下りる
     /// </summary>
     private int _wallRunHorizontalMode = (int)WallRunHorizontalMode.RIGHT_IS_FRONT;
+
+    /// <summary>モルモットのアニメーター</summary>
+    [SerializeField] private Animator _animator;
+
+    /// <summary>テープ（外側）の位置情報</summary>
+    [SerializeField] private Transform _tapeOutside;
+    /// <summary>モルモットの位置情報</summary>
+    [SerializeField] private Transform _morumotto;
+    /// <summary>回転スピード</summary>
+    [SerializeField] private float _rollSpeed = 5f;
 
     void Start()
     {
@@ -148,11 +162,13 @@ public class NenchakMoveController : MonoBehaviour
             _wallRunVertical = false;
 
             var i = _transform.position;
-            if (Physics.Raycast(i, Vector3.right, 2f) == true)
+            Debug.DrawRay(i, Vector3.right * _maxDistanceRight, Color.green);
+            Debug.DrawRay(i, Vector3.left * _maxDistanceLeft, Color.green);
+            if (Physics.Raycast(i, Vector3.right, _maxDistanceRight) == true)
             {
                 _wallRunHorizontalMode = (int)WallRunHorizontalMode.RIGHT_IS_FRONT;
             }
-            else if (Physics.Raycast(i, Vector3.left, 2f) == true)
+            else if (Physics.Raycast(i, Vector3.left, _maxDistanceLeft) == true)
             {
                 _wallRunHorizontalMode = (int)WallRunHorizontalMode.LEFT_IS_FRONT;
             }
@@ -275,6 +291,23 @@ public class NenchakMoveController : MonoBehaviour
         MoveAndAnimation();
     }
 
+    [SerializeField] private Vector3 _vt;
+    [SerializeField] private Vector3 _vm;
+
+    /// <summary>
+    /// 移動速度に応じて各オブジェクトを回転させる
+    /// </summary>
+    private void RollObject()
+    {
+        _tapeOutside.eulerAngles += new Vector3(0, 0, _rollSpeed * -1);
+        _morumotto.eulerAngles += new Vector3(_rollSpeed, 0, 0);
+
+        //tapeOutside = new Vector3(tapeOutside.x, tapeOutside.y, tapeOutside.z + (_rollSpeed * -1));
+        //_tapeOutside.eulerAngles += new Vector3(0, 0, 0) + _vt;
+        //morumotto = new Vector3(morumotto.x + (_rollSpeed), morumotto.y, morumotto.z);
+        //_morumotto.eulerAngles = new Vector3(0, 0, 0) + _vm;
+    }
+
     /// <summary>
     /// キャラクターを動かす
     /// </summary>
@@ -294,11 +327,13 @@ public class NenchakMoveController : MonoBehaviour
         }
 
         // 移動スピードをanimatorに反映
-        _movedSpeedToAnimator = new Vector3(_moveVelocity.x, 0, _moveVelocity.z).magnitude;
-        //_animator.SetFloat("MoveSpeed", _movedSpeedToAnimator);
+        _movedSpeedToAnimator = new Vector3(_moveVelocity.x, _moveVelocity.y, _moveVelocity.z).magnitude;
+        _animator.SetFloat("MoveSpeed", _movedSpeedToAnimator);
 
         if (0 < _movedSpeedToAnimator && 0 < _value._parameter && _value._adhesive == true && _wallRunVertical == true)
         {
+            RollObject();
+
             _value._parameter -= Time.deltaTime;
             Debug.Log("耐久値：" + _value._parameter);
             if (_value._parameter <= 0)

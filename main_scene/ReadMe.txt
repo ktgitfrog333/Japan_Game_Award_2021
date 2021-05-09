@@ -1,3 +1,36 @@
+2021/05/09 14:42
+★リソースの差し替え
+プレイヤー（カラマリモード、ネンチャクモード（途中））
+　モルモット
+　セロハンテープ
+
+・ゴールトリガーのPrefabへ各モードオブジェクト情報を追加
+main_scene\CalamariTape\Assets\Prefabs\GoalTrigger.prefab
+・プレイヤーのカラマリモードとネンチャクモードへリソースの差し替え、でもオブジェクト配置、レベルデザインへレイヤー情報追加
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・カラマリモードにてスケール処理調整、接地判定の調整、回転する動き実装、登る壁の判定調整
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+・ゴールイベントにてプレイヤー各モード管理方法の修正
+main_scene\CalamariTape\Assets\Scripts\GoalEvent.cs
+・ネンチャクモードにてリソースの差し替え後の調整（途中）
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+・レイヤー情報へ地面判定レイヤー（レイヤー3：Field）を追加
+main_scene\CalamariTape\ProjectSettings\TagManager.asset
+・モルモットのアニメーターコントローラーを追加
+main_scene\CalamariTape\Assets\Animations\Morumotto 1.controller
+main_scene\CalamariTape\Assets\Animations\Morumotto.controller
+main_scene\CalamariTape\Assets\Animations\MorumottoStanding.anim
+・モルモットの3Dモデルを追加
+main_scene\CalamariTape\Assets\Models\morumotto.fbx
+・セロハンテープの3Dモデルを追加
+main_scene\CalamariTape\Assets\Models\Scotch_tape.fbx
+main_scene\CalamariTape\Assets\Models\Materials\BodyColor.mat
+main_scene\CalamariTape\Assets\Models\Materials\Circle_Color.mat
+・セロハンテープ（外側のみ）の3Dモデルを追加
+main_scene\CalamariTape\Assets\Models\Scotch_tape_outside.fbx
+・レイヤー情報管理スクリプトenumを作成
+main_scene\CalamariTape\Assets\Scripts\Common\LayerManager.cs
+
 2021/05/04 20:16
 ★リソースの差し替え
 　ステージ１～３のBGM

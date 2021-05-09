@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using Controller.Wall;
 using Const.Tag;
+using Const.Layer;
 
 /// <summary>
 /// プレイヤー操作スクリプトクラス
@@ -13,9 +14,11 @@ public class CalamariMoveController : MonoBehaviour
     /// <summary>移動速度</summary>
     [SerializeField] private float _moveSpeed = 3f;
     /// <summary>移動速度の初期値</summary>
-    [SerializeField] private float _groundSetMoveSpeed;
+    private float _groundSetMoveSpeed;
     /// <summary>移動速度の初期値</summary>
     private float _airSetMoveSpeed;
+    /// <summary>移動速度（最大）</summary>
+    [SerializeField] private float _maxMoveSpeed = 4f;
 
     /// <summary>拡大率</summary>
     [SerializeField,Range(1, 4)] private float _scale = 1;
@@ -43,6 +46,8 @@ public class CalamariMoveController : MonoBehaviour
     [SerializeField] private float _jumpMax = 35f;
     /// <summary>ジャンプ制御の最大値の一時保存</summary>
     private float _registedJumpMax;
+    /// <summary>ジャンプ制御の最大値（最大）</summary>
+    [SerializeField] private float _maxJumpMax = 45f;
     /// <summary>ジャンプ中の判定フラグ</summary>
     private bool _jumpAction;
 
@@ -68,6 +73,12 @@ public class CalamariMoveController : MonoBehaviour
     [SerializeField] private bool _wallRunVertical = false;
     /// <summary>壁走り（横）</summary>
     [SerializeField] private bool _wallRunHorizontal = false;
+    /// <summary>RayCast判定の距離値</summary>
+    [SerializeField] private float _maxDistance = 2.3f;
+    /// <summary>RayCast判定の距離の処理内で扱う</summary>
+    private float _registMaxDistance;
+    /// <summary>RayCast判定の距離値（最大）</summary>
+    [SerializeField] private float _maxMaxDistance = 8.5f;
 
     /// <summary>2点間の距離を測る際の一つ目を記録したか否か</summary>
     private bool _distanceFirstPointSaved;
@@ -86,11 +97,22 @@ public class CalamariMoveController : MonoBehaviour
     /// </summary>
     private int _wallRunHorizontalMode = (int)WallRunHorizontalMode.RIGHT_IS_FRONT;
 
+    /// <summary>モルモットのアニメーター</summary>
+    [SerializeField] private Animator _animator;
+
+    /// <summary>テープ（外側）の位置情報</summary>
+    [SerializeField] private Transform _tapeOutside;
+    /// <summary>モルモットの位置情報</summary>
+    [SerializeField] private Transform _morumotto;
+    /// <summary>回転スピード</summary>
+    [SerializeField] private float _rollSpeed = 5f;
+
     void Start()
     {
         _transform = this.transform;
         _registedScale = _scale;
         _groundSetMoveSpeed = _moveSpeed;
+        _registMaxDistance = _maxDistance;
 
         _gravityAcceleration = 0f;
         if (Camera.main != null)
@@ -108,7 +130,7 @@ public class CalamariMoveController : MonoBehaviour
     {
         if (_wallRunVertical == false && _wallRunHorizontal == false)
         {
-            if (_characterController.isGrounded && _jumpAction != true)
+            if (IsGrounded() && _jumpAction != true)
             {
                 _jumpAction = CrossPlatformInputManager.GetButtonDown("Jump");
             }
@@ -120,17 +142,16 @@ public class CalamariMoveController : MonoBehaviour
         _registedScale = _scale;
         _transform.localScale = new Vector3(1, 1, 1) * _scale;
         // 大きさに合わせて速度を計算
-        var x = _scale - 1f;
-        x = _moveSpeed + (1f * (x / 3));
-        _groundSetMoveSpeed = x;
+        _groundSetMoveSpeed = ParameterMatchScale(_moveSpeed, _maxMoveSpeed);
 
         // 大きさに合わせてジャンプを計算
-        var y = _scale - 1f;
-        y = _jumpMax + (10f * (y / 3));
-        _registedJumpMax = y;
+        _registedJumpMax = ParameterMatchScale(_jumpMax, _maxJumpMax);
+
+        // 大きさに合わせてRayの距離を計算
+        _registMaxDistance = ParameterMatchScale(_maxDistance, _maxMaxDistance);
 
         // 空中の移動速度補正
-        if (_characterController.isGrounded == false)
+        if (IsGrounded() == false)
         {
             _airSetMoveSpeed = 2f;
         }
@@ -140,26 +161,6 @@ public class CalamariMoveController : MonoBehaviour
         {
             StartCoroutine(PositionCash());
         }
-    }
-
-    /// <summary>
-    /// 移動距離を測定する
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator PositionCash()
-    {
-        Debug.Log("計測開始");
-        var pos1 = new Vector2(_transform.position.x, _transform.position.z);
-
-        yield return new WaitForSeconds(1f);
-
-        // 距離を計測
-        var pos2 = new Vector2(_transform.position.x, _transform.position.z);
-        var distance = Vector2.Distance(pos1, pos2);
-        Debug.Log(distance);
-        Debug.Log("計測終了");
-
-        StopCoroutine(PositionCash());
     }
 
     private void OnTriggerStay(Collider other)
@@ -180,11 +181,13 @@ public class CalamariMoveController : MonoBehaviour
             _wallRunVertical = false;
 
             var i = _transform.position;
-            if (Physics.Raycast(i, Vector3.right, 2f) == true)
+            Debug.DrawRay(i, Vector3.right * _registMaxDistance, Color.green);
+            Debug.DrawRay(i, Vector3.left * _registMaxDistance, Color.green);
+            if (Physics.Raycast(i, Vector3.right, _registMaxDistance) == true)
             {
                 _wallRunHorizontalMode = (int) WallRunHorizontalMode.RIGHT_IS_FRONT;
             }
-            else if (Physics.Raycast(i, Vector3.left, 2f) == true)
+            else if (Physics.Raycast(i, Vector3.left, _registMaxDistance) == true)
             {
                 _wallRunHorizontalMode = (int) WallRunHorizontalMode.LEFT_IS_FRONT;
             }
@@ -212,6 +215,347 @@ public class CalamariMoveController : MonoBehaviour
         _wallRunHorizontal = false;
     }
 
+
+    /// <summary>
+    /// キャラクターの操作制御
+    /// </summary>
+    private void CharacterMovement()
+    {
+        var h = CrossPlatformInputManager.GetAxis("Horizontal");
+        var v = CrossPlatformInputManager.GetAxis("Vertical");
+
+        var speed = 0f;
+        if (IsGrounded() == true)
+        {
+            speed = _groundSetMoveSpeed;
+        }
+        else
+        {
+            speed = _airSetMoveSpeed;
+        }
+
+        // 移動速度を断続的にする制御
+        if (_calamariStop == true)
+        {
+            h = 0;
+            v = 0;
+        }
+
+        // 前後方向で登る制御
+        if (0 < _value._parameter && _value._adhesive == true && _wallRunVertical == true && _wallRunHorizontal == false)
+        {
+            Debug.DrawRay(_transform.position, Vector3.down * _registMaxDistance, Color.green);
+            if (0f < v)
+            {
+                _moveVelocity.y = v * speed;
+            }
+            else if (v < 0f && Physics.Raycast(_transform.position, Vector3.down, _registMaxDistance) == true)
+            {
+                _moveVelocity.z = v * speed;
+            }
+            else if (v < 0f)
+            {
+                _moveVelocity.y = v * speed;
+            }
+            else
+            {
+                _moveVelocity.y = 0f;
+            }
+            _moveVelocity.x = h * speed;
+        }
+        // 横方向で登る制御
+        else if (0 < _value._parameter && _value._adhesive == true && _wallRunHorizontal == true)
+        {
+            // 右側に壁があった際の床上移動と壁移動
+            if (_wallRunHorizontalMode == (int)WallRunHorizontalMode.RIGHT_IS_FRONT)
+            {
+                Debug.DrawRay(_transform.position, Vector3.down * _registMaxDistance, Color.green);
+                if (0f < h)
+                {
+                    _moveVelocity.y = h * speed * _wallRunHorizontalMode;
+                }
+                else if (h < 0f && Physics.Raycast(_transform.position, Vector3.down, _registMaxDistance) == true)
+                {
+                    _moveVelocity.x = h * speed;
+                }
+                else if (h < 0f)
+                {
+                    _moveVelocity.y = h * speed * _wallRunHorizontalMode;
+                }
+                else
+                {
+                    _moveVelocity.y = 0f;
+                }
+            }
+            // 左側に壁があった際の床上移動と壁移動
+            else if (_wallRunHorizontalMode == (int)WallRunHorizontalMode.LEFT_IS_FRONT)
+            {
+                Debug.DrawRay(_transform.position, Vector3.down * _registMaxDistance, Color.green);
+                if (h < 0f)
+                {
+                    _moveVelocity.y = h * speed * _wallRunHorizontalMode;
+                }
+                else if (0f < h && Physics.Raycast(_transform.position, Vector3.down, _registMaxDistance) == true)
+                {
+                    _moveVelocity.x = h * speed;
+                }
+                else if (0f < h)
+                {
+                    _moveVelocity.y = h * speed * _wallRunHorizontalMode;
+                }
+                else
+                {
+                    _moveVelocity.y = 0f;
+                }
+            }
+            _moveVelocity.z = v * speed;
+        }
+        // 壁を登らない
+        else
+        {
+            _moveVelocity.x = h * speed;
+            _moveVelocity.z = v * speed;
+        }
+
+        if (_wallRunVertical == false && _wallRunHorizontal == false)
+        {
+            if (_mainCameraTransform != null)
+            {
+                _mainCameraForward = Vector3.Scale(_mainCameraTransform.forward, new Vector3(1, 0, 1)).normalized;
+                _moveVelocity = _moveVelocity.z * _mainCameraForward + _moveVelocity.x * _mainCameraTransform.right;
+            }
+            else
+            {
+                _moveVelocity = _moveVelocity.z * Vector3.forward + _moveVelocity.x * Vector3.right;
+            }
+        }
+
+        if ((_wallRunVertical == false && _wallRunHorizontal == false) || _value._parameter <= 0)
+        {
+            if (IsGrounded() == true && _jumpAction == true)
+            {
+                // ジャンプ処理
+                _jumpVelocity += _jumpPower;
+                _moveVelocity.y = _jumpVelocity; // ジャンプの際は上方向に移動させる
+                _gravityAcceleration = 0f;
+
+                // 効果音を再生する
+                PlaySoundEffect();
+            }
+            else if (IsGrounded() == false && _jumpAction == true && _jumpVelocity < _registedJumpMax)
+            {
+                // ジャンプ処理
+                _jumpVelocity += _jumpPower;
+                _moveVelocity.y = _jumpVelocity; // ジャンプの際は上方向に移動させる
+                _gravityAcceleration = 0f;
+
+                // 効果音を再生する
+                PlaySoundEffect();
+            }
+            else if (IsGrounded() == false)
+            {
+                // 重力による加速
+                _gravityAcceleration += Time.deltaTime;
+                _moveVelocity.y = Physics.gravity.y * _gravityAcceleration;
+                if (_jumpAction == true)
+                {
+                    _jumpAction = false;
+                }
+            }
+            else
+            {
+                _jumpAction = false;
+                _sfxPlayed = false;
+                _jumpVelocity = 0f;
+            }
+        }
+
+        MoveAndAnimation();
+
+        // 値を0へ戻す
+        _moveVelocity = Vector3.zero;
+        _movedSpeedToAnimator = 0f;
+    }
+
+    /// <summary>
+    /// キャラクターを動かす
+    /// </summary>
+    private void MoveAndAnimation()
+    {
+        // 移動方向に向く
+        if (_wallRunVertical == true)
+        {
+            _transform.LookAt(_transform.position + new Vector3(_moveVelocity.x, 0, _moveVelocity.z), Vector3.forward);
+        }
+        else
+        {
+            _transform.LookAt(_transform.position + new Vector3(_moveVelocity.x, 0, _moveVelocity.z));
+        }
+
+        // オブジェクトを動かす
+        _characterController.Move(_moveVelocity * Time.deltaTime);
+
+        // デバッグ：移動計測のコルーチンを起動する
+        if (_positionCashDebugOff == false && (0 < _moveVelocity.x || 0 < _moveVelocity.z))
+        {
+            _positionCashDebugOff = true;
+            //StartCoroutine(PositionCash());
+        }
+
+        // 移動スピードをanimatorに反映
+        if (_wallRunVertical == true && 0 < _value._parameter && _value._adhesive == true)
+        {
+            _movedSpeedToAnimator = new Vector3(_moveVelocity.x, _moveVelocity.y, 0).magnitude;
+        }
+        else
+        {
+            _movedSpeedToAnimator = new Vector3(_moveVelocity.x, 0, _moveVelocity.z).magnitude;
+        }
+        _animator.SetFloat("MoveSpeed", _movedSpeedToAnimator);
+
+        // 2点間の距離を測って一時的に停止する処理を呼び出す
+        if (0 < _movedSpeedToAnimator)
+        {
+            RollObject();
+            if (_distanceFirstPointSaved == false)
+            {
+                _distanceFirstPointSaved = true;
+                // 壁を登らない
+                if (_wallRunVertical == false && _wallRunHorizontal == false)
+                {
+                    _distancePoint = new Vector2(_transform.position.x, _transform.position.z);
+                }
+                // 壁を登る
+                else
+                {
+                    _distancePoint = new Vector2(_transform.position.x, _transform.position.y);
+                }
+            }
+            else
+            {
+                var point = new Vector2();
+                // 壁を登らない
+                if (_wallRunVertical == false && _wallRunHorizontal == false)
+                {
+                    point = new Vector2(_transform.position.x, _transform.position.z);
+                }
+                // 壁を登る
+                else
+                {
+                    point = new Vector2(_transform.position.x, _transform.position.y);
+                }
+                var distance = Vector2.Distance(_distancePoint, point);
+                if (2 < Mathf.Abs(distance) && _distanceFirstPointSaved == true)
+                {
+                    _distanceFirstPointSaved = false;
+                    StartCoroutine(CalamariStop());
+                }
+            }
+        }
+
+        // テープの耐久ゲージを減らす
+        if (0 < _movedSpeedToAnimator && 0 < _value._parameter && _value._adhesive == true && (_wallRunVertical == true || _wallRunHorizontal == true))
+        {
+            _value._parameter -= Time.deltaTime;
+            Debug.Log("耐久値：" + _value._parameter);
+            if (_value._parameter <= 0)
+            {
+                _value._parameter = 0f;
+                _value._adhesive = false;
+                Debug.Log("耐久値無し");
+            }
+        }
+    }
+
+    /// <summary>
+    /// 移動を断続的に停止
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator CalamariStop()
+    {
+        if (_calamariStop == false)
+        {
+            _calamariStop = true;
+        }
+        else
+        {
+            _calamariStop = false;
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        if (_calamariStop == false)
+        {
+            _calamariStop = true;
+        }
+        else
+        {
+            _calamariStop = false;
+        }
+        StopCoroutine(CalamariStop());
+    }
+
+    /// <summary>
+    /// 効果音を再生する
+    /// </summary>
+    private void PlaySoundEffect()
+    {
+        if (_sfxPlayed == false)
+        {
+            _sfxPlayed = true;
+            if (_registedJumpMax < 40)
+            {
+                _sfxPlay.PlaySFX("jump_1");
+            }
+            else
+            {
+                _sfxPlay.PlaySFX("jump_2");
+            }
+        }
+    }
+
+    /// <summary>
+    /// 移動速度に応じて各オブジェクトを回転させる
+    /// </summary>
+    private void RollObject()
+    {
+        if (_calamariStop == false)
+        {
+            if (_wallRunVertical == true)
+            {
+                _tapeOutside.eulerAngles += new Vector3(0, 0, _rollSpeed/* * -1*/);
+            }
+            else
+            {
+                _tapeOutside.eulerAngles += new Vector3(0, 0, _rollSpeed * -1);
+            }
+            _morumotto.eulerAngles += new Vector3(_rollSpeed, 0, 0);
+        }
+    }
+
+    /// <summary>
+    /// 接地判定
+    /// </summary>
+    /// <returns>接地状態か否か</returns>
+    private bool IsGrounded()
+    {
+        var result = _characterController.isGrounded;
+
+        if (result == false)
+        {
+            Debug.DrawRay(_transform.position + Vector3.up * 0.1f, Vector3.down * _registMaxDistance, Color.green);
+            var ray = new Ray(_transform.position + Vector3.up * 0.1f, Vector3.down);
+            foreach (RaycastHit hit in Physics.RaycastAll(ray, _registMaxDistance))
+            {
+                if (hit.collider.gameObject.layer == (int)LayerManager.FIELD)
+                {
+                    result = true;
+                }
+            }
+        }
+
+        return result;
+    }
 
     /// <summary>
     /// コントーローラーによる拡大・縮小
@@ -277,263 +621,35 @@ public class CalamariMoveController : MonoBehaviour
     }
 
     /// <summary>
-    /// 移動を断続的に停止
+    /// スケールの大きさに合わせて各パラメータを調整する
+    /// </summary>
+    /// <param name="min">基準値（初期値/最小値）</param>
+    /// <param name="max">最大値</param>
+    /// <returns>計算後の値</returns>
+    private float ParameterMatchScale(float min, float max)
+    {
+        var v = _scale - 1f;
+        v = min + ((max - min) * (v / 3));
+        return v;
+    }
+
+    /// <summary>
+    /// 移動距離を測定する
     /// </summary>
     /// <returns></returns>
-    private IEnumerator CalamariStop()
+    private IEnumerator PositionCash()
     {
-        if (_calamariStop == false)
-        {
-            _calamariStop = true;
-        }
-        else
-        {
-            _calamariStop = false;
-        }
+        Debug.Log("計測開始");
+        var pos1 = new Vector2(_transform.position.x, _transform.position.z);
 
         yield return new WaitForSeconds(1f);
 
-        if (_calamariStop == false)
-        {
-            _calamariStop = true;
-        }
-        else
-        {
-            _calamariStop = false;
-        }
-        StopCoroutine(CalamariStop());
-    }
+        // 距離を計測
+        var pos2 = new Vector2(_transform.position.x, _transform.position.z);
+        var distance = Vector2.Distance(pos1, pos2);
+        Debug.Log(distance);
+        Debug.Log("計測終了");
 
-    /// <summary>
-    /// キャラクターの操作制御
-    /// </summary>
-    private void CharacterMovement()
-    {
-        var h = CrossPlatformInputManager.GetAxis("Horizontal");
-        var v = CrossPlatformInputManager.GetAxis("Vertical");
-
-        var speed = 0f;
-        if (_characterController.isGrounded == true)
-        {
-            speed = _groundSetMoveSpeed;
-        }
-        else
-        {
-            speed = _airSetMoveSpeed;
-        }
-
-        // 移動速度を断続的にする制御
-        if (_calamariStop == true)
-        {
-            h = 0;
-            v = 0;
-        }
-
-        // 前後方向で登る制御
-        if (0 < _value._parameter && _value._adhesive == true && _wallRunVertical == true && _wallRunHorizontal == false)
-        {
-            if (v < 0 && Physics.Raycast(_transform.position, Vector3.down, 0.75f) == true)
-            {
-                _moveVelocity.z = v * speed;
-            }
-            else
-            {
-                _moveVelocity.y = v * speed;
-            }
-            _moveVelocity.x = h * speed;
-        }
-        // 横方向で登る制御
-        else if (0 < _value._parameter && _value._adhesive == true && _wallRunHorizontal == true)
-        {
-            // 右側に壁があった際の床上移動と壁移動
-            if (_wallRunHorizontalMode == (int)WallRunHorizontalMode.RIGHT_IS_FRONT)
-            {
-                if (0f < h)
-                {
-                    _moveVelocity.y = h * speed * _wallRunHorizontalMode;
-                }
-                else if (h < 0f && Physics.Raycast(_transform.position, Vector3.down, 0.75f) == true)
-                {
-                    _moveVelocity.x = h * speed;
-                }
-                else if (h < 0f)
-                {
-                    _moveVelocity.y = h * speed * _wallRunHorizontalMode;
-                }
-                else
-                {
-                    _moveVelocity.y = 0f;
-                }
-            }
-            // 左側に壁があった際の床上移動と壁移動
-            else if (_wallRunHorizontalMode == (int)WallRunHorizontalMode.LEFT_IS_FRONT)
-            {
-                if (h < 0f)
-                {
-                    _moveVelocity.y = h * speed * _wallRunHorizontalMode;
-                }
-                else if (0f < h && Physics.Raycast(_transform.position, Vector3.down, 0.75f) == true)
-                {
-                    _moveVelocity.x = h * speed;
-                }
-                else if (0f < h)
-                {
-                    _moveVelocity.y = h * speed * _wallRunHorizontalMode;
-                }
-                else
-                {
-                    _moveVelocity.y = 0f;
-                }
-            }
-            _moveVelocity.z = v * speed;
-        }
-        // 壁を登らない
-        else
-        {
-            _moveVelocity.x = h * speed;
-            _moveVelocity.z = v * speed;
-        }
-
-        if (_wallRunVertical == false && _wallRunHorizontal == false)
-        {
-            if (_mainCameraTransform != null)
-            {
-                _mainCameraForward = Vector3.Scale(_mainCameraTransform.forward, new Vector3(1, 0, 1)).normalized;
-                _moveVelocity = _moveVelocity.z * _mainCameraForward + _moveVelocity.x * _mainCameraTransform.right;
-            }
-            else
-            {
-                _moveVelocity = _moveVelocity.z * Vector3.forward + _moveVelocity.x * Vector3.right;
-            }
-        }
-
-        if (_wallRunVertical == false && _wallRunHorizontal == false)
-        {
-            if (_characterController.isGrounded == true && _jumpAction == true)
-            {
-                // ジャンプ処理
-                _jumpVelocity += _jumpPower;
-                _moveVelocity.y = _jumpVelocity; // ジャンプの際は上方向に移動させる
-                _gravityAcceleration = 0f;
-
-                // 効果音を再生する
-                PlaySoundEffect();
-            }
-            else if (_characterController.isGrounded == false && _jumpAction == true && _jumpVelocity < _registedJumpMax)
-            {
-                // ジャンプ処理
-                _jumpVelocity += _jumpPower;
-                _moveVelocity.y = _jumpVelocity; // ジャンプの際は上方向に移動させる
-                _gravityAcceleration = 0f;
-
-                // 効果音を再生する
-                PlaySoundEffect();
-            }
-            else
-            {
-                _jumpAction = false;
-                _sfxPlayed = false;
-                _jumpVelocity = 0f;
-                // 重力による加速
-                _gravityAcceleration += Time.deltaTime;
-                _moveVelocity.y = Physics.gravity.y * _gravityAcceleration;
-            }
-        }
-
-        MoveAndAnimation();
-    }
-
-    /// <summary>
-    /// 効果音を再生する
-    /// </summary>
-    private void PlaySoundEffect()
-    {
-        if (_sfxPlayed == false)
-        {
-            _sfxPlayed = true;
-            if (_registedJumpMax < 40)
-            {
-                _sfxPlay.PlaySFX("jump_1");
-            }
-            else
-            {
-                _sfxPlay.PlaySFX("jump_2");
-            }
-        }
-    }
-
-    /// <summary>
-    /// キャラクターを動かす
-    /// </summary>
-    private void MoveAndAnimation()
-    {
-        // 移動方向に向く
-        _transform.LookAt(_transform.position + new Vector3(_moveVelocity.x, 0, _moveVelocity.z));
-
-        // オブジェクトを動かす
-        _characterController.Move(_moveVelocity * Time.deltaTime);
-
-        // デバッグ：移動計測のコルーチンを起動する
-        if (_positionCashDebugOff == false && (0 < _moveVelocity.x || 0 < _moveVelocity.z))
-        {
-            _positionCashDebugOff = true;
-            //StartCoroutine(PositionCash());
-        }
-
-        // 移動スピードをanimatorに反映
-        _movedSpeedToAnimator = new Vector3(_moveVelocity.x, 0, _moveVelocity.z).magnitude;
-        //_animator.SetFloat("MoveSpeed", _movedSpeedToAnimator);
-
-        // 2点間の距離を測って一時的に停止する処理を呼び出す
-        if (0 < _movedSpeedToAnimator)
-        {
-            if (_distanceFirstPointSaved == false)
-            {
-                _distanceFirstPointSaved = true;
-                // 壁を登らない
-                if (_wallRunVertical == false && _wallRunHorizontal == false)
-                {
-                    _distancePoint = new Vector2(_transform.position.x, _transform.position.z);
-                }
-                // 壁を登る
-                else
-                {
-                    _distancePoint = new Vector2(_transform.position.x, _transform.position.y);
-                }
-            }
-            else
-            {
-                var point = new Vector2();
-                // 壁を登らない
-                if (_wallRunVertical == false && _wallRunHorizontal == false)
-                {
-                    point = new Vector2(_transform.position.x, _transform.position.z);
-                }
-                // 壁を登る
-                else
-                {
-                    point = new Vector2(_transform.position.x, _transform.position.y);
-                }
-                var distance = Vector2.Distance(_distancePoint, point);
-                if (2 < Mathf.Abs(distance) && _distanceFirstPointSaved == true)
-                {
-                    _distanceFirstPointSaved = false;
-                    StartCoroutine(CalamariStop());
-                }
-            }
-        }
-
-        // テープの耐久ゲージを減らす
-        if (0 < _movedSpeedToAnimator && 0 < _value._parameter && _value._adhesive == true && (_wallRunVertical == true || _wallRunHorizontal == true))
-        {
-            _value._parameter -= Time.deltaTime;
-            Debug.Log("耐久値：" + _value._parameter);
-            if (_value._parameter <= 0)
-            {
-                _value._parameter = 0f;
-                _value._adhesive = false;
-                Debug.Log("耐久値無し");
-            }
-        }
+        StopCoroutine(PositionCash());
     }
 }
