@@ -23,6 +23,7 @@ public class Title_Draw_Controller : MonoBehaviour
     private Image fade_Draw;
     private GameObject player_Draw;
     private Player player;
+    private Player_Data player_data;
     
     private float load_now_position_x;
     private float data_delete_complete_position_y;
@@ -40,6 +41,8 @@ public class Title_Draw_Controller : MonoBehaviour
     public void Player_Init()
     {
         player_Draw = GameObject.Find("Canvas");
+        player_data = GameObject.Find("Canvas").GetComponent<Player_Data>();
+        player_data.Load_Data(player_data, player_data.datapath);
         player = player_Draw.GetComponent<Player>();
         Player_Sence_Check();
         player.setInput(Player.Player_Input.UP);
@@ -295,6 +298,10 @@ public class Title_Draw_Controller : MonoBehaviour
             {
                 timer = 0;
                 data_dalete_complete.SetActive(false);
+                // データ削除処理
+                player_data.delete_Data(player_data.max_stage);
+                // セーブ処理
+                player_data.Save_Data(player_data);
                 player.set_Data_Complete_FalseFlg() ;
                 data_delete_complete_position_y = 600.0f;
                 data_delete_complete_rect.anchoredPosition = new Vector2(data_delete_complete_position_x, data_delete_complete_position_y);

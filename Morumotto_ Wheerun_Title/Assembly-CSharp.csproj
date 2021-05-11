@@ -61,6 +61,7 @@
     <Compile Include="Assets\Scripts\Title\Title_Draw_Controller.cs" />
     <Compile Include="Assets\Scripts\All\Player.cs" />
     <Compile Include="Assets\Scripts\Title\Title_Sound_Manager.cs" />
+    <Compile Include="Assets\Scripts\All\Player_Data.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
