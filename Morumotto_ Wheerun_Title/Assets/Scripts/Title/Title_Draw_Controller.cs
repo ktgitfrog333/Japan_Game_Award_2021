@@ -48,6 +48,7 @@ public class Title_Draw_Controller : MonoBehaviour
         player.setInput(Player.Player_Input.UP);
         player.set_Data_Complete_FalseFlg();
         player_data.max_stage = 5;
+        player_data.delete_start = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -297,6 +298,14 @@ public class Title_Draw_Controller : MonoBehaviour
     public void GameDatadelete_Draw()
     {
         data_dalete_complete.SetActive(true);
+        if (!player_data.delete_start)
+        {
+            // データ削除処理
+            player_data.delete_Data(player_data.max_stage);
+            // セーブ処理
+            player_data.Save_Data(player_data);
+            player_data.delete_start = true;
+        }
         float max_rect_y = 490.0f;
         if (data_delete_complete_rect.anchoredPosition.y >= max_rect_y)
         {
@@ -311,10 +320,6 @@ public class Title_Draw_Controller : MonoBehaviour
             {
                 timer = 0;
                 data_dalete_complete.SetActive(false);
-                // データ削除処理
-                player_data.delete_Data(player_data.max_stage);
-                // セーブ処理
-                player_data.Save_Data(player_data);
                 player.set_Data_Complete_FalseFlg();
                 data_delete_complete_position_y = 600.0f;
                 data_delete_complete_rect.anchoredPosition = new Vector2(data_delete_complete_position_x, data_delete_complete_position_y);
