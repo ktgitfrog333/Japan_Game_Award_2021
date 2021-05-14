@@ -48,6 +48,8 @@ public class Title_Draw_Controller : MonoBehaviour
         player.setInput(Player.Player_Input.UP);
         player.set_Data_Complete_FalseFlg();
         player_data.max_stage = 5;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void Player_Sence_Check()
