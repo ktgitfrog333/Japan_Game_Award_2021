@@ -9,9 +9,10 @@ public class GoalEvent : MonoBehaviour
 {
     /// <summary>プレイヤーのモード管理</summary>
     [SerializeField] private PlayerManager _playerManager;
-
     /// <summary>クリア画面のUI</summary>
     [SerializeField] private GameObject _clearUI;
+    /// <summary>セーブ実行スクリプト</summary>
+    [SerializeField] private SaveControllerScene _saveController;
 
     /// <summary>ゴール床オブジェクト接着判定</summary>
     private bool _goalTrigger;
@@ -20,10 +21,11 @@ public class GoalEvent : MonoBehaviour
     {
         if (_goalTrigger == true && other.gameObject.tag.Equals("Player"))
         {
-            _playerManager.GetComponent<CalamariMoveController>().enabled = false;
-            _playerManager.GetComponent<NenchakMoveController>().enabled = false;
-            _playerManager.GetComponent<TsuruTsuruMoveController>().enabled = false;
+            _playerManager._calamariController.enabled = false;
+            _playerManager._nenchakController.enabled = false;
+            _playerManager._tsurutsuruController.enabled = false;
             _clearUI.SetActive(true);
+            _saveController.SaveDataWrite();
         }
     }
 

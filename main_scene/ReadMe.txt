@@ -1,3 +1,22 @@
+2021/05/15 21:20
+★セーブロード
+　ゲームクリア時セーブデータにクリア情報を書き込む
+
+・セーブデータ管理オブジェクトの配置とゴールイベントトリガーへセーブデータ書き込み処理を呼び出す
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・ゴールイベントスクリプトにて、セーブ実行とプレイヤーの各モード操作停止処理の不具合修正。
+main_scene\CalamariTape\Assets\Scripts\GoalEvent.cs
+・セーブデータのjsonファイル配置
+main_scene\CalamariTape\Assets\data\data.json
+・プレイヤーデータの管理スクリプトクラスを配置（Selectシーン、Titleシーン同様）
+main_scene\CalamariTape\Assets\Scripts\Player_Data_Main.cs
+・セーブデータ操作を行うスクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\SaveControllerScene.cs
+・クリア状態管理するenumを作成
+main_scene\CalamariTape\Assets\Scripts\Common\StageClearNumber.cs
+・ステージ名を管理する定義クラスを作成
+main_scene\CalamariTape\Assets\Scripts\Common\StageNameManager.cs
+
 2021/05/15 14:05
 ★リソースの差し替え
 　はさみ
