@@ -282,8 +282,6 @@ public class TsuruTsuruMoveController : MonoBehaviour
     /// <returns>壁に当たったか否か</returns>
     private bool IsWallCollisitioned()
     {
-        Debug.Log(_moveVelocity);
-
         bool result = false;
         Debug.DrawRay(_transform.position, Vector3.forward * _registMaxDistance, Color.green);
         Debug.DrawRay(_transform.position, Vector3.back * _registMaxDistance, Color.green);
