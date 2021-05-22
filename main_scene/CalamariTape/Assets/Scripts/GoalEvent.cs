@@ -13,6 +13,8 @@ public class GoalEvent : MonoBehaviour
     [SerializeField] private GameObject _clearUI;
     /// <summary>セーブ実行スクリプト</summary>
     [SerializeField] private SaveControllerScene _saveController;
+    /// <summary>花火パーティクル</summary>
+    [SerializeField] private GameObject[] _fireworks;
 
     /// <summary>ゴール床オブジェクト接着判定</summary>
     private bool _goalTrigger;
@@ -26,7 +28,22 @@ public class GoalEvent : MonoBehaviour
             _playerManager._tsurutsuruController.enabled = false;
             _clearUI.SetActive(true);
             _saveController.SaveDataWrite();
+            StartCoroutine(BloomFire());
         }
+    }
+
+    /// <summary>
+    /// パーティクルで花火を生成する
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator BloomFire()
+    {
+        for (int i = 0; i < _fireworks.Length; i++)
+        {
+            yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
+            _fireworks[i].SetActive(true);
+        }
+        StopCoroutine(BloomFire());
     }
 
     private void OnTriggerStay(Collider other)

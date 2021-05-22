@@ -18,6 +18,8 @@ public class ScreenDirectInOut : MonoBehaviour
     public bool _drawLoadNowFadeInTrigger { get; set; }
     /// <summary>ロード画面を画面内へ移動させる挙動のトリガー</summary>
     public bool _drawLoadNowFadeOutTrigger { get; set; }
+    /// <summary>スタート演出</summary>
+    [SerializeField] private GameObject _startPoint;
 
     /// <summary>次に移動するシーン情報</summary>
     [SerializeField] private SceneMove _nextScene;
@@ -54,6 +56,7 @@ public class ScreenDirectInOut : MonoBehaviour
         {
             _loadNowRect.anchoredPosition = new Vector2(LOAD_NOW_MAX_POSITION, 0);
             _drawLoadNowFadeInTrigger = false;
+            ActiveObject();
         }
     }
 
@@ -72,5 +75,13 @@ public class ScreenDirectInOut : MonoBehaviour
             _drawLoadNowFadeOutTrigger = false;
             _nextScene.NextScene();
         }
+    }
+
+    /// <summary>
+    /// タイミングごとにオブジェクトを有効にする
+    /// </summary>
+    private void ActiveObject()
+    {
+        _startPoint.SetActive(true);
     }
 }

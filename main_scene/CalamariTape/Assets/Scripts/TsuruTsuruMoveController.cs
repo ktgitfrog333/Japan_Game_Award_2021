@@ -85,6 +85,9 @@ public class TsuruTsuruMoveController : MonoBehaviour
     /// <summary>回転スピード</summary>
     [SerializeField] private float _rollSpeed = 5f;
 
+    /// <summary>エフェクトのスクリプト</summary>
+    [SerializeField] private TsuruTsuruEffectController _effectController;
+
     void Start()
     {
         _transform = this.transform;
@@ -109,6 +112,10 @@ public class TsuruTsuruMoveController : MonoBehaviour
         {
             _registedHorizontal = 0f;
             _registedVertical = 0f;
+        }
+        else
+        {
+            _effectController._effectActive = false;
         }
     }
 
@@ -296,6 +303,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
                 if (hit.collider.gameObject.layer == (int)LayerManager.FIELD)
                 {
                     result = true;
+                    _effectController.AppearEffectCollision(hit.collider);
                 }
             }
         }
@@ -308,6 +316,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
                 if (hit.collider.gameObject.layer == (int)LayerManager.FIELD)
                 {
                     result = true;
+                    _effectController.AppearEffectCollision(hit.collider);
                 }
             }
         }
@@ -320,6 +329,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
                 if (hit.collider.gameObject.layer == (int)LayerManager.FIELD)
                 {
                     result = true;
+                    _effectController.AppearEffectCollision(hit.collider);
                 }
             }
         }
@@ -332,6 +342,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
                 if (hit.collider.gameObject.layer == (int)LayerManager.FIELD)
                 {
                     result = true;
+                    _effectController.AppearEffectCollision(hit.collider);
                 }
             }
         }
