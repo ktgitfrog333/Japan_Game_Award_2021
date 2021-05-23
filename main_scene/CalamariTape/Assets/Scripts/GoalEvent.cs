@@ -23,13 +23,31 @@ public class GoalEvent : MonoBehaviour
     {
         if (_goalTrigger == true && other.gameObject.tag.Equals("Player"))
         {
-            _playerManager._calamariController.enabled = false;
-            _playerManager._nenchakController.enabled = false;
-            _playerManager._tsurutsuruController.enabled = false;
+            StopPlayer();
             _clearUI.SetActive(true);
             _saveController.SaveDataWrite();
             StartCoroutine(BloomFire());
         }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag.Equals("GoalFloor"))
+        {
+            _goalTrigger = true;
+        }
+    }
+
+    /// <summary>
+    /// プレイヤーの各モード操作と移動を止める
+    /// </summary>
+    private void StopPlayer()
+    {
+        _playerManager._calamariController._characterStop = true;
+        _playerManager._calamariController.enabled = false;
+        _playerManager._nenchakController.enabled = false;
+        _playerManager._tsurutsuruController._characterStop = true;
+        _playerManager._tsurutsuruController.enabled = false;
     }
 
     /// <summary>
@@ -44,13 +62,5 @@ public class GoalEvent : MonoBehaviour
             _fireworks[i].SetActive(true);
         }
         StopCoroutine(BloomFire());
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.tag.Equals("GoalFloor"))
-        {
-            _goalTrigger = true;
-        }
     }
 }

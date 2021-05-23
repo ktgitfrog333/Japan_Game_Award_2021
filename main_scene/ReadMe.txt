@@ -1,3 +1,24 @@
+2021/05/23 12:11
+★要調整項目
+　地上移動の速さ
+　ターン時の慣性
+他、不具合修正
+
+・プレイヤーの移動速度設定の変更
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・カラマリモードにて移動に慣性をもたせる処理とスタート・ゴール時の停止処理を追加
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+・特定の条件でプレイヤーの操作と移動を停止する処理を追加
+main_scene\CalamariTape\Assets\Scripts\GoalEvent.cs
+・ツルツルモードの移動中はモード切り替えを禁止する処理を追加
+main_scene\CalamariTape\Assets\Scripts\ModeChanger.cs
+・ネンチャクモードにて移動中の角度を調整
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+・シーンのスタート時にプレイヤーの操作を禁止する処理を追加
+main_scene\CalamariTape\Assets\Scripts\ScreenDirectInOut.cs
+・ツルツルモードにて移動速度の調整と移動中はモード切り替えを禁止する処理を追加
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruMoveController.cs
+
 2021/05/23 2:31
 ★エフェクト
 　スタート時のエフェクトを実装

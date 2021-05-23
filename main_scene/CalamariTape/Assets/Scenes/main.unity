@@ -1352,6 +1352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startPoint: {fileID: 618013290}
   _nextScene: {fileID: 315583358}
+  _playerManager: {fileID: 978842448}
 --- !u!114 &463940903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3509,8 +3510,6 @@ MonoBehaviour:
   _tapeOutside: {fileID: 397707741}
   _morumotto: {fileID: 96929505}
   _rollSpeed: 5
-  _vt: {x: 0, y: 0, z: 0}
-  _vm: {x: 0, y: 0, z: 0}
 --- !u!143 &1124906950
 CharacterController:
   m_ObjectHideFlags: 0
@@ -6301,8 +6300,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bb3a959cfd25c4ca3e73886219e5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 3
-  _maxMoveSpeed: 4
+  _moveSpeed: 7
+  _maxMoveSpeed: 8
   _scale: 1
   _characterController: {fileID: 1842392299}
   _jumpPower: 5
@@ -7499,7 +7498,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035709078}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
   m_LocalPosition: {x: 0.09000015, y: 1.66, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -7520,8 +7519,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc3cfafc0af14154e8e5a459c4f4ddb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 3
-  _maxMoveSpeed: 4
+  _moveSpeed: 5
+  _maxMoveSpeed: 6
   _scale: 1
   _characterController: {fileID: 2035709083}
   _jumpPower: 5

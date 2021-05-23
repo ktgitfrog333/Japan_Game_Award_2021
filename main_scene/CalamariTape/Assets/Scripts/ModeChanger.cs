@@ -70,9 +70,13 @@ public class ModeChanger : MonoBehaviour
             // 入力チェック（ツルツルモード）
             if (_calamariInput == false && inputActive == false && _mode.Equals(_tsurutsuru.name.ToString()))
             {
-                _tsurutsuruInput = false;
-                _calamariInput = CrossPlatformInputManager.GetButtonDown("RB");
-                inputActive = true;
+                // ツルツルモードのみ移動中はモード切り替え不可とする
+                if (_tsurutsuru.GetComponent<TsuruTsuruMoveController>()._modeChangeEnable == true)
+                {
+                    _tsurutsuruInput = false;
+                    _calamariInput = CrossPlatformInputManager.GetButtonDown("RB");
+                    inputActive = true;
+                }
             }
 
             // 入力チェック（ネンチャクモード）

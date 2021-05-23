@@ -218,9 +218,6 @@ public class NenchakMoveController : MonoBehaviour
         _movedSpeedToAnimator = 0f;
     }
 
-    [SerializeField] private Vector3 _vt;
-    [SerializeField] private Vector3 _vm;
-
     /// <summary>
     /// 移動速度に応じて各オブジェクトを回転させる
     /// </summary>
@@ -228,11 +225,6 @@ public class NenchakMoveController : MonoBehaviour
     {
         _tapeOutside.eulerAngles += new Vector3(0, 0, _rollSpeed * -1);
         _morumotto.eulerAngles += new Vector3(_rollSpeed, 0, 0);
-
-        //tapeOutside = new Vector3(tapeOutside.x, tapeOutside.y, tapeOutside.z + (_rollSpeed * -1));
-        //_tapeOutside.eulerAngles += new Vector3(0, 0, 0) + _vt;
-        //morumotto = new Vector3(morumotto.x + (_rollSpeed), morumotto.y, morumotto.z);
-        //_morumotto.eulerAngles = new Vector3(0, 0, 0) + _vm;
     }
 
     /// <summary>
@@ -241,7 +233,7 @@ public class NenchakMoveController : MonoBehaviour
     private void MoveAndAnimation()
     {
         // 移動方向に向く
-        _transform.LookAt(_transform.position + new Vector3(_moveVelocity.x, 0, _moveVelocity.y));
+        CharacterLookAt();
 
         // オブジェクトを動かす
         _characterController.Move(_moveVelocity * Time.deltaTime);
@@ -269,6 +261,50 @@ public class NenchakMoveController : MonoBehaviour
                 _value._adhesive = false;
                 Debug.Log("耐久値無し");
             }
+        }
+    }
+
+    /// <summary>
+    /// キャラクターを動かす際の向きを調整する
+    /// ※各モードによって角度が異なるため注意
+    /// </summary>
+    private void CharacterLookAt()
+    {
+        if (_wallRunVertical == true)
+        {
+            if (0 < Mathf.Abs(_moveVelocity.y) || 0 < Mathf.Abs(_moveVelocity.x))
+            {
+                if (Mathf.Abs(_moveVelocity.x) < Mathf.Abs(_moveVelocity.y))
+                {
+                    // 上方向なら縦向き
+                    if (0f < _moveVelocity.y)
+                    {
+                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 0f);
+                    }
+                    // 下向きなら縦向き
+                    else if (_moveVelocity.y < 0f)
+                    {
+                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 0f);
+                    }
+                }
+                else
+                {
+                    // 左向きなら横向き
+                    if (0f < _moveVelocity.x)
+                    {
+                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, -90f);
+                    }
+                    // 右向きなら横向き
+                    else if (_moveVelocity.x < 0f)
+                    {
+                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 90f);
+                    }
+                }
+            }
+        }
+        else
+        {
+            _transform.LookAt(_transform.position + new Vector3(_moveVelocity.x, 0, _moveVelocity.z));
         }
     }
 
