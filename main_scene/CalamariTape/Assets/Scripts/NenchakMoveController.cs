@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using Controller.Wall;
+using Const.Tag;
 
 /// <summary>
 /// プレイヤー操作スクリプトクラス
@@ -11,7 +13,9 @@ public class NenchakMoveController : MonoBehaviour
     /// <summary>移動速度</summary>
     [SerializeField] private float _moveSpeed = 3f;
     /// <summary>移動速度の初期値</summary>
-    [SerializeField] private float _groundSetMoveSpeed;
+    private float _groundSetMoveSpeed;
+    /// <summary>移動速度（最大）</summary>
+    [SerializeField] private float _maxMoveSpeed = 4f;
 
     /// <summary>拡大率</summary>
     [SerializeField,Range(1, 4)] private float _scale = 1;
@@ -45,15 +49,45 @@ public class NenchakMoveController : MonoBehaviour
     [SerializeField] private DurableValue _value;
 
     /// <summary>アニメーション</summary>
-    private float _movedSpeedToAnimator;
+    [SerializeField] private float _movedSpeedToAnimator;
 
     /// <summary>重力値の加速度</summary>
     private float _gravityAcceleration;
     /// <summary>重力値の角度</summary>
     [SerializeField] private Vector3 _wallPosition;
 
-    /// <summary>壁走り</summary>
-    [SerializeField] private bool _wallRun = false;
+    /// <summary>壁走り（縦）</summary>
+    [SerializeField] private bool _wallRunVertical = false;
+    /// <summary>壁走り（横）</summary>
+    [SerializeField] private bool _wallRunHorizontal = false;
+    /// <summary>RayCast判定の距離値</summary>
+    [SerializeField] private float _maxDistance = 2.3f;
+    /// <summary>RayCast判定の距離の処理内で扱う</summary>
+    private float _registMaxDistance;
+    /// <summary>RayCast判定の距離値（最大）</summary>
+    [SerializeField] private float _maxMaxDistance = 8.5f;
+
+    /// <summary>
+    /// 横にある壁に対して横方向へ入力すると登るモード<para/>
+    /// 1：右方向入力で登り、左方向で下りる<para/>
+    /// -1：左方向入力で登り、右方向で下りる
+    /// </summary>
+    private int _wallRunHorizontalMode = (int)WallRunHorizontalMode.RIGHT_IS_FRONT;
+
+    /// <summary>モルモットのアニメーター</summary>
+    [SerializeField] private Animator _animator;
+
+    /// <summary>テープ（外側）の位置情報</summary>
+    [SerializeField] private Transform _tapeOutside;
+    /// <summary>モルモットの位置情報</summary>
+    [SerializeField] private Transform _morumotto;
+    /// <summary>回転スピード</summary>
+    [SerializeField] private float _rollSpeed = 5f;
+
+    /// <summary>SE再生用のゲームオブジェクト</summary>
+    [SerializeField] private SfxPlay _sfxPlay;
+    /// <summary>移動SE再生中フラグ</summary>
+    private bool _sfxPlayedMove;
 
     void Start()
     {
@@ -61,6 +95,7 @@ public class NenchakMoveController : MonoBehaviour
         _registedScale = _scale;
         _groundSetMoveSpeed = _moveSpeed;
         _gravityAcceleration = 0f;
+        _registMaxDistance = _maxDistance;
 
         if (Camera.main != null)
         {
@@ -75,9 +110,12 @@ public class NenchakMoveController : MonoBehaviour
 
     private void Update()
     {
-        if (_characterController.isGrounded && _jumpAction != true)
+        if (_wallRunVertical == false && _wallRunHorizontal == false)
         {
-            _jumpAction = CrossPlatformInputManager.GetButtonDown("Jump");
+            if (_characterController.isGrounded && _jumpAction != true)
+            {
+                _jumpAction = CrossPlatformInputManager.GetButtonDown("Jump");
+            }
         }
 
         ScaleChangeForController();
@@ -85,9 +123,10 @@ public class NenchakMoveController : MonoBehaviour
 
         _transform.localScale = new Vector3(1, 1, 1) * _scale;
         // 大きさに合わせて速度を計算
-        var x = _scale - 1f;
-        x = _moveSpeed + (1f * (x / 3));
-        _groundSetMoveSpeed = x;
+        _groundSetMoveSpeed = ParameterMatchScale(_moveSpeed, _maxMoveSpeed);
+
+        // 大きさに合わせてRayの距離を計算
+        _registMaxDistance = ParameterMatchScale(_maxDistance, _maxMaxDistance);
 
         // デバッグ：移動計測のコルーチンを起動する
         if (Input.GetKeyDown(KeyCode.T))
@@ -96,47 +135,202 @@ public class NenchakMoveController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 移動距離を測定する
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator PositionCash()
-    {
-        Debug.Log("計測開始");
-        var pos1 = new Vector2(_transform.position.x, _transform.position.z);
-
-        yield return new WaitForSeconds(1f/* * Time.deltaTime*/);
-
-        // 距離を計測
-        var pos2 = new Vector2(_transform.position.x, _transform.position.z);
-        var distance = Vector2.Distance(pos1, pos2);
-        Debug.Log(distance);
-        Debug.Log("計測終了");
-
-        StopCoroutine(PositionCash());
-    }
-
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag.Equals("Wall"))
+        // 前後にある壁に対して前後方向へ入力すると登る
+        if (other.gameObject.tag.Equals(TagManager.VERTICAL_WALL))
         {
-            _wallRun = true;
+            _wallRunVertical = true;
+            _wallRunHorizontal = false;
             var r = other.gameObject.transform.position;
             _wallPosition = new Vector3(r.x, r.y, r.z);
+        }
+
+        // 横にある壁に対して横方向へ入力すると登る
+        if (other.gameObject.tag.Equals(TagManager.HORIZONTAL_WALL))
+        {
+            _wallRunHorizontal = true;
+            _wallRunVertical = false;
+
+            var i = _transform.position;
+            Debug.DrawRay(i, Vector3.right * _registMaxDistance, Color.green);
+            Debug.DrawRay(i, Vector3.left * _registMaxDistance, Color.green);
+            if (Physics.Raycast(i, Vector3.right, _registMaxDistance) == true)
+            {
+                _wallRunHorizontalMode = (int)WallRunHorizontalMode.RIGHT_IS_FRONT;
+            }
+            else if (Physics.Raycast(i, Vector3.left, _registMaxDistance) == true)
+            {
+                _wallRunHorizontalMode = (int)WallRunHorizontalMode.LEFT_IS_FRONT;
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag.Equals("Wall"))
+        // 前後方向で登る挙動を不可にする
+        if (other.gameObject.tag.Equals(TagManager.VERTICAL_WALL))
         {
-            _wallRun = false;
+            _wallRunVertical = false;
+        }
+
+        // 横方向で登る挙動を不可にする
+        if (other.gameObject.tag.Equals(TagManager.HORIZONTAL_WALL))
+        {
+            _wallRunHorizontal = false;
         }
     }
 
     private void OnEnable()
     {
-        _wallRun = false;
+        _wallRunVertical = false;
+        _wallRunHorizontal = false;
+    }
+
+    /// <summary>
+    /// キャラクターの操作制御
+    /// </summary>
+    private void CharacterMovement()
+    {
+        var h = CrossPlatformInputManager.GetAxis("Horizontal");
+        var v = CrossPlatformInputManager.GetAxis("Vertical");
+
+        // 前後方向で登る制御
+        if (0 < _value._parameter && _value._adhesive == true && _wallRunVertical == true && _wallRunHorizontal == false)
+        {
+            _moveVelocity.x = h * _groundSetMoveSpeed;
+            _moveVelocity.y = v * _groundSetMoveSpeed;
+        }
+        // 横方向で登る制御
+        else if (0 < _value._parameter && _value._adhesive == true && _wallRunHorizontal == true)
+        {
+            _moveVelocity.y = h * _groundSetMoveSpeed * _wallRunHorizontalMode;
+            _moveVelocity.z = v * _groundSetMoveSpeed;
+        }
+        // 壁を登らない
+        else
+        {
+            _moveVelocity.x = 0f;
+            // 重力による加速
+            _gravityAcceleration += Time.deltaTime;
+            _moveVelocity.y = Physics.gravity.y * _gravityAcceleration;
+        }
+
+        MoveAndAnimation();
+
+        // 値を0へ戻す
+        _moveVelocity = Vector3.zero;
+        _movedSpeedToAnimator = 0f;
+    }
+
+    /// <summary>
+    /// 移動速度に応じて各オブジェクトを回転させる
+    /// </summary>
+    private void RollObject()
+    {
+        _tapeOutside.eulerAngles += new Vector3(0, 0, _rollSpeed * -1);
+        _morumotto.eulerAngles += new Vector3(_rollSpeed, 0, 0);
+    }
+
+    /// <summary>
+    /// キャラクターを動かす
+    /// </summary>
+    private void MoveAndAnimation()
+    {
+        // 移動方向に向く
+        CharacterLookAt();
+
+        // オブジェクトを動かす
+        _characterController.Move(_moveVelocity * Time.deltaTime);
+
+        // デバッグ：移動計測のコルーチンを起動する
+        if (_positionCashDebugOff == false && (0 < _moveVelocity.x || 0 < _moveVelocity.y))
+        {
+            _positionCashDebugOff = true;
+            StartCoroutine(PositionCash());
+        }
+
+        // 移動スピードをanimatorに反映
+        _movedSpeedToAnimator = new Vector3(_moveVelocity.x, _moveVelocity.y, _moveVelocity.z).magnitude;
+        _animator.SetFloat("MoveSpeed", _movedSpeedToAnimator);
+        if (0 < _movedSpeedToAnimator)
+        {
+            PlaySoundEffectMove();
+        }
+        else
+        {
+            _sfxPlayedMove = false;
+        }
+
+        if (0 < _movedSpeedToAnimator && 0 < _value._parameter && _value._adhesive == true && _wallRunVertical == true)
+        {
+            RollObject();
+
+            _value._parameter -= Time.deltaTime;
+            Debug.Log("耐久値：" + _value._parameter);
+            if (_value._parameter <= 0)
+            {
+                _value._parameter = 0f;
+                _value._adhesive = false;
+                Debug.Log("耐久値無し");
+            }
+        }
+    }
+
+    /// <summary>
+    /// キャラクターを動かす際の向きを調整する
+    /// ※各モードによって角度が異なるため注意
+    /// </summary>
+    private void CharacterLookAt()
+    {
+        if (_wallRunVertical == true)
+        {
+            if (0 < Mathf.Abs(_moveVelocity.y) || 0 < Mathf.Abs(_moveVelocity.x))
+            {
+                if (Mathf.Abs(_moveVelocity.x) < Mathf.Abs(_moveVelocity.y))
+                {
+                    // 上方向なら縦向き
+                    if (0f < _moveVelocity.y)
+                    {
+                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 0f);
+                    }
+                    // 下向きなら縦向き
+                    else if (_moveVelocity.y < 0f)
+                    {
+                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 0f);
+                    }
+                }
+                else
+                {
+                    // 左向きなら横向き
+                    if (0f < _moveVelocity.x)
+                    {
+                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, -90f);
+                    }
+                    // 右向きなら横向き
+                    else if (_moveVelocity.x < 0f)
+                    {
+                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 90f);
+                    }
+                }
+            }
+        }
+        else
+        {
+            _transform.LookAt(_transform.position + new Vector3(_moveVelocity.x, 0, _moveVelocity.z));
+        }
+    }
+
+    /// <summary>
+    /// 移動効果音を再生する
+    /// </summary>
+    private void PlaySoundEffectMove()
+    {
+        if (_sfxPlayedMove == false)
+        {
+            _sfxPlayedMove = true;
+            _sfxPlay.PlaySFX("se_move");
+        }
     }
 
     /// <summary>
@@ -203,61 +397,35 @@ public class NenchakMoveController : MonoBehaviour
     }
 
     /// <summary>
-    /// キャラクターの操作制御
+    /// スケールの大きさに合わせて各パラメータを調整する
     /// </summary>
-    private void CharacterMovement()
+    /// <param name="min">基準値（初期値/最小値）</param>
+    /// <param name="max">最大値</param>
+    /// <returns>計算後の値</returns>
+    private float ParameterMatchScale(float min, float max)
     {
-        var h = CrossPlatformInputManager.GetAxis("Horizontal");
-        var v = CrossPlatformInputManager.GetAxis("Vertical");
-
-        if (0 < _value._parameter && _value._adhesive == true && _wallRun == true)
-        {
-            _moveVelocity.x = h * _groundSetMoveSpeed;
-            _moveVelocity.y = v * _groundSetMoveSpeed;
-        }
-        else
-        {
-            _moveVelocity.x = 0f;
-            // 重力による加速
-            _gravityAcceleration += Time.deltaTime;
-            _moveVelocity.y = Physics.gravity.y * _gravityAcceleration;
-        }
-
-        MoveAndAnimation();
+        var v = _scale - 1f;
+        v = min + ((max - min) * (v / 3));
+        return v;
     }
 
     /// <summary>
-    /// キャラクターを動かす
+    /// 移動距離を測定する
     /// </summary>
-    private void MoveAndAnimation()
+    /// <returns></returns>
+    private IEnumerator PositionCash()
     {
-        // 移動方向に向く
-        _transform.LookAt(_transform.position + new Vector3(_moveVelocity.x, 0, _moveVelocity.y));
+        Debug.Log("計測開始");
+        var pos1 = new Vector2(_transform.position.x, _transform.position.z);
 
-        // オブジェクトを動かす
-        _characterController.Move(_moveVelocity * Time.deltaTime);
+        yield return new WaitForSeconds(1f/* * Time.deltaTime*/);
 
-        // デバッグ：移動計測のコルーチンを起動する
-        if (_positionCashDebugOff == false && (0 < _moveVelocity.x || 0 < _moveVelocity.y))
-        {
-            _positionCashDebugOff = true;
-            StartCoroutine(PositionCash());
-        }
+        // 距離を計測
+        var pos2 = new Vector2(_transform.position.x, _transform.position.z);
+        var distance = Vector2.Distance(pos1, pos2);
+        Debug.Log(distance);
+        Debug.Log("計測終了");
 
-        // 移動スピードをanimatorに反映
-        _movedSpeedToAnimator = new Vector3(_moveVelocity.x, 0, _moveVelocity.z).magnitude;
-        //_animator.SetFloat("MoveSpeed", _movedSpeedToAnimator);
-
-        if (0 < _movedSpeedToAnimator && 0 < _value._parameter && _value._adhesive == true && _wallRun == true)
-        {
-            _value._parameter -= Time.deltaTime;
-            Debug.Log("耐久値：" + _value._parameter);
-            if (_value._parameter <= 0)
-            {
-                _value._parameter = 0f;
-                _value._adhesive = false;
-                Debug.Log("耐久値無し");
-            }
-        }
+        StopCoroutine(PositionCash());
     }
 }

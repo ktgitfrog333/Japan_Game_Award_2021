@@ -1,3 +1,210 @@
+2021/05/23 15:28
+★SE・BGMの追加
+・SEとBGMのセット
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・移動SEのセット
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruMoveController.cs
+・移動SEのセット
+main_scene\CalamariTape\Assets\Scripts\SfxPlay.cs
+
+2021/05/23 12:11
+★要調整項目
+　地上移動の速さ
+　ターン時の慣性
+他、不具合修正
+
+・プレイヤーの移動速度設定の変更
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・カラマリモードにて移動に慣性をもたせる処理とスタート・ゴール時の停止処理を追加
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+・特定の条件でプレイヤーの操作と移動を停止する処理を追加
+main_scene\CalamariTape\Assets\Scripts\GoalEvent.cs
+・ツルツルモードの移動中はモード切り替えを禁止する処理を追加
+main_scene\CalamariTape\Assets\Scripts\ModeChanger.cs
+・ネンチャクモードにて移動中の角度を調整
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+・シーンのスタート時にプレイヤーの操作を禁止する処理を追加
+main_scene\CalamariTape\Assets\Scripts\ScreenDirectInOut.cs
+・ツルツルモードにて移動速度の調整と移動中はモード切り替えを禁止する処理を追加
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruMoveController.cs
+
+2021/05/23 2:31
+★エフェクト
+　スタート時のエフェクトを実装
+　壁にぶつかったときのエフェクトを実装
+　ゴール時エフェクト実装
+
+・パーティクルエフェクトの配置
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・ゴールスクリプトにて花火を発生される処理を追加
+main_scene\CalamariTape\Assets\Scripts\GoalEvent.cs
+・ゲームスタートスクリプトにてクラッカー演出処理を追加
+main_scene\CalamariTape\Assets\Scripts\ScreenDirectInOut.cs
+・ツルツルモードにて壁に衝突した際にエフェクトを出す処理を追加
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruMoveController.cs
+・ツルツルモード用のエフェクトスクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruEffectController.cs
+・花火（衝突）マテリアル
+main_scene\CalamariTape\Assets\Materials\Fireworks.mat
+・クラッカーの紙マテリアル
+main_scene\CalamariTape\Assets\Materials\Paper.mat
+・衝突演出のプレハブを作成
+main_scene\CalamariTape\Assets\Prefabs\Collision.prefab
+・花火のプレハブを作成
+main_scene\CalamariTape\Assets\Prefabs\Fireworks.prefab
+・クラッカーの紙のプレハブ
+main_scene\CalamariTape\Assets\Prefabs\Paper.prefab
+
+2021/05/15 21:20
+★セーブロード
+　ゲームクリア時セーブデータにクリア情報を書き込む
+
+・セーブデータ管理オブジェクトの配置とゴールイベントトリガーへセーブデータ書き込み処理を呼び出す
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・ゴールイベントスクリプトにて、セーブ実行とプレイヤーの各モード操作停止処理の不具合修正。
+main_scene\CalamariTape\Assets\Scripts\GoalEvent.cs
+・セーブデータのjsonファイル配置
+main_scene\CalamariTape\Assets\data\data.json
+・プレイヤーデータの管理スクリプトクラスを配置（Selectシーン、Titleシーン同様）
+main_scene\CalamariTape\Assets\Scripts\Player_Data_Main.cs
+・セーブデータ操作を行うスクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\SaveControllerScene.cs
+・クリア状態管理するenumを作成
+main_scene\CalamariTape\Assets\Scripts\Common\StageClearNumber.cs
+・ステージ名を管理する定義クラスを作成
+main_scene\CalamariTape\Assets\Scripts\Common\StageNameManager.cs
+
+2021/05/15 14:05
+★リソースの差し替え
+　はさみ
+　ゴール
+
+・はさみオブジェクトの配置、ゴールオブジェクトの配置
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・モードチェンジ実施する際にはさみがテープを切る動きを追加
+main_scene\CalamariTape\Assets\Scripts\ModeChanger.cs
+・ツルツルモードのスクリプトクラスにて不要な記述を削除
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruMoveController.cs
+・ゴールの3Dモデル追加
+main_scene\CalamariTape\Assets\Flag
+・はさみの3Dモデル追加
+main_scene\CalamariTape\Assets\Models\scissors.obj
+・はさみのプレハブを作成
+main_scene\CalamariTape\Assets\Prefabs\Scissors.prefab
+・はさみ挙動制御スクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\Scissors.cs
+・はさみ衝突挙動制御スクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\ScissorsCollision.cs
+
+2021/05/09 22:17
+★リソースの差し替え
+プレイヤー（ネンチャクモード、ツルツルモード）
+　モルモット
+　セロハンテープ
+
+・ネンチャクモード、ツルツルモードの設定変更
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・ネンチャクモードにてスケール処理調整、接地判定の調整、登る壁の判定調整
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+・ツルツルモードにてスケール処理調整、接地判定の調整、回転する動き実装
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruMoveController.cs
+
+2021/05/09 14:42
+★リソースの差し替え
+プレイヤー（カラマリモード、ネンチャクモード（途中））
+　モルモット
+　セロハンテープ
+
+・ゴールトリガーのPrefabへ各モードオブジェクト情報を追加
+main_scene\CalamariTape\Assets\Prefabs\GoalTrigger.prefab
+・プレイヤーのカラマリモードとネンチャクモードへリソースの差し替え、でもオブジェクト配置、レベルデザインへレイヤー情報追加
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・カラマリモードにてスケール処理調整、接地判定の調整、回転する動き実装、登る壁の判定調整
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+・ゴールイベントにてプレイヤー各モード管理方法の修正
+main_scene\CalamariTape\Assets\Scripts\GoalEvent.cs
+・ネンチャクモードにてリソースの差し替え後の調整（途中）
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+・レイヤー情報へ地面判定レイヤー（レイヤー3：Field）を追加
+main_scene\CalamariTape\ProjectSettings\TagManager.asset
+・モルモットのアニメーターコントローラーを追加
+main_scene\CalamariTape\Assets\Animations\Morumotto 1.controller
+main_scene\CalamariTape\Assets\Animations\Morumotto.controller
+main_scene\CalamariTape\Assets\Animations\MorumottoStanding.anim
+・モルモットの3Dモデルを追加
+main_scene\CalamariTape\Assets\Models\morumotto.fbx
+・セロハンテープの3Dモデルを追加
+main_scene\CalamariTape\Assets\Models\Scotch_tape.fbx
+main_scene\CalamariTape\Assets\Models\Materials\BodyColor.mat
+main_scene\CalamariTape\Assets\Models\Materials\Circle_Color.mat
+・セロハンテープ（外側のみ）の3Dモデルを追加
+main_scene\CalamariTape\Assets\Models\Scotch_tape_outside.fbx
+・レイヤー情報管理スクリプトenumを作成
+main_scene\CalamariTape\Assets\Scripts\Common\LayerManager.cs
+
+2021/05/04 20:16
+★リソースの差し替え
+　ステージ１～３のBGM
+・チュートリアルステージ用のシーンへBGMをセット
+main_scene\CalamariTape\Assets\Scenes\main.unity
+
+2021/05/04 18:22
+★リソースの差し替え
+・メニュー画面、クリア画面のUI差し替え
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・メニュー画面内の遊び方を確認する項目の画像を追加
+main_scene\CalamariTape\Assets\Images\joystick_manual_icon.png
+main_scene\CalamariTape\Assets\Images\joystick_manual_table.png
+main_scene\CalamariTape\Assets\Images\joystick_manual_title.png
+main_scene\CalamariTape\Assets\Images\keybord_mouse_manual_icon.png
+main_scene\CalamariTape\Assets\Images\keybord_mouse_manual_table.png
+main_scene\CalamariTape\Assets\Images\keybord_mouse_manual_title.png
+・メニュー画面内の選択アイコン画像を追加
+main_scene\CalamariTape\Assets\Textures\morumotto.png
+
+2021/05/03 13:47
+★不具合修正　シーン遷移先の指定とフェード演出をセレクト画面に合わせる
+・フェード演出用のUIオブジェクトの作成と不要になったフェードUIを削除
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・ステージをやり直すUIへフェード背景の変更
+main_scene\CalamariTape\Assets\Scripts\GameRedo.cs
+・他のステージを選ぶUIへフェード背景の変更
+main_scene\CalamariTape\Assets\Scripts\GameSelect.cs
+・（削除）フェードイン演出スクリプトクラスを削除
+main_scene\CalamariTape\Assets\Scripts\UIFadeIn.cs
+・（削除）フェードアウト演出スクリプトクラスを削除
+main_scene\CalamariTape\Assets\Scripts\UIFadeOut.cs
+・フェードインアウト演出スクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\ScreenDirectInOut.cs
+・ロード画面のイメージを追加
+main_scene\CalamariTape\Assets\Textures\eye_chaching.png
+
+2021/05/02 13:21
+★不具合修正　カメラ操作の追従
+・不要なCinamechineを削除。プレイヤーオブジェクトの設定を変更。
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・モード切り替えの際に追従カメラ対象を切り替える処理を追加
+main_scene\CalamariTape\Assets\Scripts\ModeChanger.cs
+・Cinamechineへ追従カメラ対象を切り替えるスクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\CameraPointMove.cs
+
+2021/05/02 10:36
+★不具合修正　壁昇り操作
+・カラマリモード操作にて、壁（縦）と壁（横）に対して昇り降りの挙動時の不具合修正
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+・ネンチャクモード操作にて、壁（縦）と壁（横）に対して昇り降りの挙動時の不具合修正
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+・InputManagerにてメニュー操作時の決定（Decition）項目を追加
+main_scene\CalamariTape\ProjectSettings\InputManager.asset
+・タグマネージャーにてWallタグを追加
+main_scene\CalamariTape\ProjectSettings\TagManager.asset
+・タグ定義クラスを作成
+main_scene\CalamariTape\Assets\Scripts\Common\TagManager.cs
+・壁判定用のパブリックenumを作成
+main_scene\CalamariTape\Assets\Scripts\Common\WallRunHorizontalMode.cs
+
 2021/05/01 14:03
 ★マージ前の対応
 

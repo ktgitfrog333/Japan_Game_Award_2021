@@ -7,11 +7,12 @@ TagManager:
   - GoalFloor
   - VerticalWall
   - HorizontalWall
+  - Wall
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Field
   - Water
   - UI
   - 

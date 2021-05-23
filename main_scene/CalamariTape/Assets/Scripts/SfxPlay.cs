@@ -38,6 +38,10 @@ public class SfxPlay : MonoBehaviour
         {
             _audio.clip = _clip[4];
         }
+        if (clipToPlay.Equals("se_move"))
+        {
+            _audio.clip = _clip[5];
+        }
 
         _audio.Play();
     }
