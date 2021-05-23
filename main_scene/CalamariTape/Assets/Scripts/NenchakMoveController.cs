@@ -84,6 +84,11 @@ public class NenchakMoveController : MonoBehaviour
     /// <summary>回転スピード</summary>
     [SerializeField] private float _rollSpeed = 5f;
 
+    /// <summary>SE再生用のゲームオブジェクト</summary>
+    [SerializeField] private SfxPlay _sfxPlay;
+    /// <summary>移動SE再生中フラグ</summary>
+    private bool _sfxPlayedMove;
+
     void Start()
     {
         _transform = this.transform;
@@ -248,6 +253,14 @@ public class NenchakMoveController : MonoBehaviour
         // 移動スピードをanimatorに反映
         _movedSpeedToAnimator = new Vector3(_moveVelocity.x, _moveVelocity.y, _moveVelocity.z).magnitude;
         _animator.SetFloat("MoveSpeed", _movedSpeedToAnimator);
+        if (0 < _movedSpeedToAnimator)
+        {
+            PlaySoundEffectMove();
+        }
+        else
+        {
+            _sfxPlayedMove = false;
+        }
 
         if (0 < _movedSpeedToAnimator && 0 < _value._parameter && _value._adhesive == true && _wallRunVertical == true)
         {
@@ -305,6 +318,18 @@ public class NenchakMoveController : MonoBehaviour
         else
         {
             _transform.LookAt(_transform.position + new Vector3(_moveVelocity.x, 0, _moveVelocity.z));
+        }
+    }
+
+    /// <summary>
+    /// 移動効果音を再生する
+    /// </summary>
+    private void PlaySoundEffectMove()
+    {
+        if (_sfxPlayedMove == false)
+        {
+            _sfxPlayedMove = true;
+            _sfxPlay.PlaySFX("se_move");
         }
     }
 

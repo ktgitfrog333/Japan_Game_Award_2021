@@ -1,3 +1,14 @@
+2021/05/23 15:28
+★SE・BGMの追加
+・SEとBGMのセット
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・移動SEのセット
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruMoveController.cs
+・移動SEのセット
+main_scene\CalamariTape\Assets\Scripts\SfxPlay.cs
+
 2021/05/23 12:11
 ★要調整項目
 　地上移動の速さ

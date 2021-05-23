@@ -92,6 +92,9 @@ public class TsuruTsuruMoveController : MonoBehaviour
     /// <summary>プレイヤーのモードチェンジ有効フラグ</summary>
     public bool _modeChangeEnable { set; get; } = true;
 
+    /// <summary>移動SE再生中フラグ</summary>
+    private bool _sfxPlayedMove;
+
     void Start()
     {
         _transform = this.transform;
@@ -258,6 +261,14 @@ public class TsuruTsuruMoveController : MonoBehaviour
         // 移動スピードをanimatorに反映
         _movedSpeedToAnimator = new Vector3(_moveVelocity.x, 0, _moveVelocity.z).magnitude;
         _animator.SetFloat("MoveSpeed", _movedSpeedToAnimator);
+        if (0 < _movedSpeedToAnimator)
+        {
+            PlaySoundEffectMove();
+        }
+        else
+        {
+            _sfxPlayedMove = false;
+        }
 
         if (0 < _movedSpeedToAnimator)
         {
@@ -281,6 +292,18 @@ public class TsuruTsuruMoveController : MonoBehaviour
             {
                 _sfxPlay.PlaySFX("jump_2");
             }
+        }
+    }
+
+    /// <summary>
+    /// 移動効果音を再生する
+    /// </summary>
+    private void PlaySoundEffectMove()
+    {
+        if (_sfxPlayedMove == false)
+        {
+            _sfxPlayedMove = true;
+            _sfxPlay.PlaySFX("se_move");
         }
     }
 

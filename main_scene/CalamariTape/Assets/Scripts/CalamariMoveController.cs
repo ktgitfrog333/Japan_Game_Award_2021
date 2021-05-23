@@ -88,7 +88,7 @@ public class CalamariMoveController : MonoBehaviour
     /// <summary>SE再生用のゲームオブジェクト</summary>
     [SerializeField] private SfxPlay _sfxPlay;
     /// <summary>SE再生中フラグ</summary>
-    private bool _sfxPlayed;
+    private bool _sfxPlayedJump;
 
     /// <summary>
     /// 横にある壁に対して横方向へ入力すると登るモード<para/>
@@ -113,6 +113,9 @@ public class CalamariMoveController : MonoBehaviour
     public bool _characterControlInput { set; get; } = true;
     /// <summary>慣性ありフラグ</summary>
     private bool _inertia;
+
+    /// <summary>移動SE再生中フラグ</summary>
+    private bool _sfxPlayedMove;
 
     void Start()
     {
@@ -376,7 +379,7 @@ public class CalamariMoveController : MonoBehaviour
                 _gravityAcceleration = 0f;
 
                 // 効果音を再生する
-                PlaySoundEffect();
+                PlaySoundEffectJump();
             }
             else if (IsGrounded() == false && _jumpAction == true && _jumpVelocity < _registedJumpMax)
             {
@@ -386,7 +389,7 @@ public class CalamariMoveController : MonoBehaviour
                 _gravityAcceleration = 0f;
 
                 // 効果音を再生する
-                PlaySoundEffect();
+                PlaySoundEffectJump();
             }
             else if (IsGrounded() == false)
             {
@@ -401,7 +404,7 @@ public class CalamariMoveController : MonoBehaviour
             else
             {
                 _jumpAction = false;
-                _sfxPlayed = false;
+                _sfxPlayedJump = false;
                 _jumpVelocity = 0f;
             }
         }
@@ -456,6 +459,14 @@ public class CalamariMoveController : MonoBehaviour
             _movedSpeedToAnimator = new Vector3(_moveVelocity.x, 0, _moveVelocity.z).magnitude;
         }
         _animator.SetFloat("MoveSpeed", _movedSpeedToAnimator);
+        if (0 < _movedSpeedToAnimator)
+        {
+            PlaySoundEffectMove();
+        }
+        else
+        {
+            _sfxPlayedMove = false;
+        }
 
         // 2点間の距離を測って一時的に停止する処理を呼び出す
         if (0 < _movedSpeedToAnimator)
@@ -584,13 +595,13 @@ public class CalamariMoveController : MonoBehaviour
     }
 
     /// <summary>
-    /// 効果音を再生する
+    /// ジャンプ効果音を再生する
     /// </summary>
-    private void PlaySoundEffect()
+    private void PlaySoundEffectJump()
     {
-        if (_sfxPlayed == false)
+        if (_sfxPlayedJump == false)
         {
-            _sfxPlayed = true;
+            _sfxPlayedJump = true;
             if (_registedJumpMax < 40)
             {
                 _sfxPlay.PlaySFX("jump_1");
@@ -599,6 +610,18 @@ public class CalamariMoveController : MonoBehaviour
             {
                 _sfxPlay.PlaySFX("jump_2");
             }
+        }
+    }
+
+    /// <summary>
+    /// 移動効果音を再生する
+    /// </summary>
+    private void PlaySoundEffectMove()
+    {
+        if (_sfxPlayedMove == false)
+        {
+            _sfxPlayedMove = true;
+            _sfxPlay.PlaySFX("se_move");
         }
     }
 
