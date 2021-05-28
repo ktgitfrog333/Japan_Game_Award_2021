@@ -1,3 +1,19 @@
+2021/05/29 0215
+★メニュー選択とゴール時のメニュー選択を修正
+・mainテンプレート更新
+main_scene\CalamariTape\Assets\Scenes\main.scenetemplate
+・メニューとゴールメニューの修正
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+・ゲーム開始時にメニュー表示操作を不可にする修正を追加
+main_scene\CalamariTape\Assets\Scripts\ScreenDirectInOut.cs
+・ステージ選択SEを追加
+main_scene\CalamariTape\Assets\Scripts\SfxPlay.cs
+・メニューUIの拡大演出を追加
+main_scene\CalamariTape\Assets\Scripts\UIController.cs
+・メニューセレクトSEファイルを追加
+main_scene\CalamariTape\Assets\Audio\SFX\se_select.wav
+
 2021/05/28 23:40
 ★ステージ１（チュートリアル）実装とステージテンプレート作成
 ・（※削除予定）テロップのアニメーション

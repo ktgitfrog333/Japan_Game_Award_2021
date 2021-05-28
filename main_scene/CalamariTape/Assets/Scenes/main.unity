@@ -978,7 +978,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 148618798690591142, guid: bcc914c1a847f2d49bf78750711df337, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -555
+      value: -645
       objectReference: {fileID: 0}
     - target: {fileID: 148618798690591142, guid: bcc914c1a847f2d49bf78750711df337, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1635,6 +1635,7 @@ MonoBehaviour:
   _startPoint: {fileID: 618013290}
   _nextScene: {fileID: 315583358}
   _playerManager: {fileID: 978842448}
+  _pauseWindowManager: {fileID: 978842449}
 --- !u!114 &463940903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3461,7 +3462,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.21018352, y: 0.000000008411012, z: -0.0000000018082488, w: 0.97766197}
+  m_LocalRotation: {x: 0.21018352, y: 0.000000008411011, z: -0.0000000018082486, w: 0.97766197}
   m_LocalPosition: {x: -8.91, y: 8.69, z: -6.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4363,7 +4364,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1145615035}
-  m_LocalRotation: {x: 0.21018352, y: 0.000000008411012, z: -0.0000000018082488, w: 0.97766197}
+  m_LocalRotation: {x: 0.21018352, y: 0.000000008411011, z: -0.0000000018082486, w: 0.97766197}
   m_LocalPosition: {x: -8.91, y: 8.69, z: -6.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6199,6 +6200,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c4e3e8810d6c4c548b90e3b580d52c73, type: 3}
   - {fileID: 8300000, guid: 293901f5c63ce9b439fbc6c7a172052f, type: 3}
   - {fileID: 8300000, guid: eb0e63c39704acd4d828ba71e312cb12, type: 3}
+  - {fileID: 8300000, guid: e195d292d0426fa4db81c90ac2aa53cf, type: 3}
 --- !u!4 &1525769981
 Transform:
   m_ObjectHideFlags: 0
@@ -6570,7 +6572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 148618798690591142, guid: bcc914c1a847f2d49bf78750711df337, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -555
+      value: -645
       objectReference: {fileID: 0}
     - target: {fileID: 148618798690591142, guid: bcc914c1a847f2d49bf78750711df337, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -9346,7 +9348,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 381375675646235530, guid: 3af1074512e661d46b087c02ef2abea9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -555
+      value: -645
       objectReference: {fileID: 0}
     - target: {fileID: 529994474646807572, guid: 3af1074512e661d46b087c02ef2abea9, type: 3}
       propertyPath: _sfx
@@ -9378,7 +9380,7 @@ PrefabInstance:
       objectReference: {fileID: 463940900}
     - target: {fileID: 529994474646807574, guid: 3af1074512e661d46b087c02ef2abea9, type: 3}
       propertyPath: _nextSceneName
-      value: Select_Sence
+      value: Select_Scene
       objectReference: {fileID: 0}
     - target: {fileID: 529994474646807574, guid: 3af1074512e661d46b087c02ef2abea9, type: 3}
       propertyPath: _blackBackGround
@@ -9596,7 +9598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5315486199453154990, guid: f645edfb1aefec64fa197e9897fe34b7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -555
+      value: -645
       objectReference: {fileID: 0}
     - target: {fileID: 5464104997674267844, guid: f645edfb1aefec64fa197e9897fe34b7, type: 3}
       propertyPath: m_Name
@@ -9933,7 +9935,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2835243683946193037, guid: 96be1828c2c3f4d4a9e518fb368016f7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -580
+      value: -685
       objectReference: {fileID: 0}
     - target: {fileID: 3222172858645547692, guid: 96be1828c2c3f4d4a9e518fb368016f7, type: 3}
       propertyPath: m_Sprite
@@ -9953,7 +9955,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7253502819705757816, guid: 96be1828c2c3f4d4a9e518fb368016f7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -580
+      value: -685
       objectReference: {fileID: 0}
     - target: {fileID: 7402121601526487001, guid: 96be1828c2c3f4d4a9e518fb368016f7, type: 3}
       propertyPath: m_Navigation.m_SelectOnUp
@@ -10025,7 +10027,7 @@ PrefabInstance:
       objectReference: {fileID: 463940900}
     - target: {fileID: 7621852777434757721, guid: 96be1828c2c3f4d4a9e518fb368016f7, type: 3}
       propertyPath: _nextSceneName
-      value: Select_Sence
+      value: Select_Scene
       objectReference: {fileID: 0}
     - target: {fileID: 7621852777434757721, guid: 96be1828c2c3f4d4a9e518fb368016f7, type: 3}
       propertyPath: _blackBackGround
@@ -10061,7 +10063,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7770471576452124101, guid: 96be1828c2c3f4d4a9e518fb368016f7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -580
+      value: -685
       objectReference: {fileID: 0}
     - target: {fileID: 7970431887530489344, guid: 96be1828c2c3f4d4a9e518fb368016f7, type: 3}
       propertyPath: m_Pivot.x

@@ -63,6 +63,11 @@ public class SfxPlay : MonoBehaviour
         {
             _audio.clip = _clip[8];
         }
+        // ステージセレクト
+        if (clipToPlay.Equals("se_select"))
+        {
+            _audio.clip = _clip[9];
+        }
 
         _audio.Play();
     }

@@ -23,9 +23,10 @@ public class ScreenDirectInOut : MonoBehaviour
 
     /// <summary>次に移動するシーン情報</summary>
     [SerializeField] private SceneMove _nextScene;
-
     /// <summary>プレイヤーのモード管理</summary>
     [SerializeField] private PlayerManager _playerManager;
+    /// <summary>メニュー操作を管理</summary>
+    [SerializeField] private PauseWindowManager _pauseWindowManager;
 
     private void Start()
     {
@@ -33,6 +34,7 @@ public class ScreenDirectInOut : MonoBehaviour
         _loadNowRect.anchoredPosition = new Vector2(LOAD_NOW_MIN_POSITION, 0);
         _drawLoadNowFadeInTrigger = true;
         _playerManager._calamariController._characterControlInput = false;
+        _pauseWindowManager.enabled = false;
     }
 
     private void Update()
@@ -88,5 +90,6 @@ public class ScreenDirectInOut : MonoBehaviour
     {
         _startPoint.SetActive(true);
         _playerManager._calamariController._characterControlInput = true;
+        _pauseWindowManager.enabled = true;
     }
 }
