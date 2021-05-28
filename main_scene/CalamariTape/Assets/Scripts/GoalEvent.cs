@@ -16,6 +16,9 @@ public class GoalEvent : MonoBehaviour
     /// <summary>花火パーティクル</summary>
     [SerializeField] private GameObject[] _fireworks;
 
+    /// <summary>SE・ME管理オブジェクト</summary>
+    [SerializeField] private SfxPlay _sfx;
+
     /// <summary>ゴール床オブジェクト接着判定</summary>
     private bool _goalTrigger;
 
@@ -25,6 +28,7 @@ public class GoalEvent : MonoBehaviour
         {
             StopPlayer();
             _clearUI.SetActive(true);
+            _sfx.PlaySFX("me_game_clear");
             _saveController.SaveDataWrite();
             StartCoroutine(BloomFire());
         }

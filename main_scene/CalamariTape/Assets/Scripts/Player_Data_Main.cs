@@ -31,6 +31,8 @@ public class Player_Data_Main : MonoBehaviour
 
     public void Load_Data(Player_Data_Main player_data,string datapath)
     {
+        // ユーザごとに保管するディレクトリが異なる為、Pathを再度設定
+        datapath = Application.dataPath + "/data/data.json";
         // パスを読み込む
         StreamReader reader = new StreamReader(datapath);
         // ファイルを読み込む

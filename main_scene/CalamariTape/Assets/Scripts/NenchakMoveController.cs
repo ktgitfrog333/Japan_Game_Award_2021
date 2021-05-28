@@ -88,6 +88,10 @@ public class NenchakMoveController : MonoBehaviour
     [SerializeField] private SfxPlay _sfxPlay;
     /// <summary>移動SE再生中フラグ</summary>
     private bool _sfxPlayedMove;
+    /// <summary>耐久ゲージ減少SE再生中フラグ</summary>
+    private bool _sfxPlayedDerable;
+    /// <summary>スケール拡大SE再生可フラグ</summary>
+    private bool _sfxPlayedScaleUp;
 
     void Start()
     {
@@ -96,6 +100,7 @@ public class NenchakMoveController : MonoBehaviour
         _groundSetMoveSpeed = _moveSpeed;
         _gravityAcceleration = 0f;
         _registMaxDistance = _maxDistance;
+        _sfxPlayedScaleUp = true;
 
         if (Camera.main != null)
         {
@@ -262,9 +267,11 @@ public class NenchakMoveController : MonoBehaviour
             _sfxPlayedMove = false;
         }
 
+        // テープの耐久ゲージを減らす
         if (0 < _movedSpeedToAnimator && 0 < _value._parameter && _value._adhesive == true && _wallRunVertical == true)
         {
             RollObject();
+            PlaySoundEffectDerableDecrease();
 
             _value._parameter -= Time.deltaTime;
             Debug.Log("耐久値：" + _value._parameter);
@@ -275,6 +282,30 @@ public class NenchakMoveController : MonoBehaviour
                 Debug.Log("耐久値無し");
             }
         }
+    }
+
+    /// <summary>
+    /// 耐久ゲージ減少SEを再生する
+    /// </summary>
+    private void PlaySoundEffectDerableDecrease()
+    {
+        if (_sfxPlayedDerable == false)
+        {
+            _sfxPlayedDerable = true;
+            StartCoroutine(SleepTimeSoundEffectDerableDecrease());
+            _sfxPlay.PlaySFX("se_derable_decrease");
+        }
+    }
+
+    /// <summary>
+    /// 耐久ゲージ減少SEの連続再生を防ぐ処理
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator SleepTimeSoundEffectDerableDecrease()
+    {
+        yield return new WaitForSeconds(0.75f);
+        _sfxPlayedDerable = false;
+        StopCoroutine(SleepTimeSoundEffectDerableDecrease());
     }
 
     /// <summary>
@@ -334,6 +365,17 @@ public class NenchakMoveController : MonoBehaviour
     }
 
     /// <summary>
+    /// 拡大SEを再生
+    /// </summary>
+    private void PlaySoundEffectScaleUp()
+    {
+        if (_sfxPlayedScaleUp == true)
+        {
+            _sfxPlay.PlaySFX("se_player_expansion");
+        }
+    }
+
+    /// <summary>
     /// コントーローラーによる拡大・縮小
     /// </summary>
     private void ScaleChangeForController()
@@ -344,10 +386,12 @@ public class NenchakMoveController : MonoBehaviour
             if (_scale < 4.01f)
             {
                 _scale += 0.01f;
+                PlaySoundEffectScaleUp();
             }
             else
             {
                 _scale = 4.0f;
+                _sfxPlayedScaleUp = false;
             }
         }
         // 縮小
@@ -356,6 +400,7 @@ public class NenchakMoveController : MonoBehaviour
             if (0.99f < _scale)
             {
                 _scale -= 0.01f;
+                _sfxPlayedScaleUp = true;
             }
             else
             {
@@ -376,10 +421,12 @@ public class NenchakMoveController : MonoBehaviour
             if (_scale + m_scroll < 4.01f)
             {
                 _scale += m_scroll;
+                PlaySoundEffectScaleUp();
             }
             else
             {
                 _scale = 4.0f;
+                _sfxPlayedScaleUp = false;
             }
         }
         // 縮小
@@ -388,6 +435,7 @@ public class NenchakMoveController : MonoBehaviour
             if (0.99f < _scale + m_scroll)
             {
                 _scale += m_scroll;
+                _sfxPlayedScaleUp = true;
             }
             else
             {

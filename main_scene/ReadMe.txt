@@ -1,3 +1,46 @@
+2021/05/28 23:40
+★ステージ１（チュートリアル）実装とステージテンプレート作成
+・（※削除予定）テロップのアニメーション
+main_scene\CalamariTape\Assets\Animations\Message001.anim
+main_scene\CalamariTape\Assets\Animations\Message001.controller
+main_scene\CalamariTape\Assets\Images\game_tutorial_serit001.png
+・チュートリアルのテロップ作成、SkyBox、マテリアルなど
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・カラマリモードにて耐久ゲージ減少SE、スケール拡大SEを追加
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+・ゴール時のクリアMEを再生
+main_scene\CalamariTape\Assets\Scripts\GoalEvent.cs
+・メッセージ表示の際にメニュー表示操作とモードチェンジ操作を禁止する処理を追加
+main_scene\CalamariTape\Assets\Scripts\MessageManager.cs
+・（※削除予定）テロップのアニメーション処理スクリプト
+main_scene\CalamariTape\Assets\Scripts\MessageScroll.cs
+・ツルツルモードにて移動中でもモード変更可能だった為、再度修正。（仕様認識ミス）
+main_scene\CalamariTape\Assets\Scripts\ModeChanger.cs
+・ネンチャクモードにて耐久ゲージ減少SE、スケール拡大SEを追加
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+・セーブ管理スクリプトクラスにてロード機能を変更
+main_scene\CalamariTape\Assets\Scripts\Player_Data_Main.cs
+・SFX管理スクリプトクラスにてゲームクリア、耐久ゲージ減少、スケール変更SEを追加
+main_scene\CalamariTape\Assets\Scripts\SfxPlay.cs
+・ツルツルモードにて耐久ゲージ減少SE、スケール拡大SEを追加。
+　移動中でもモード変更可能だった為、再度修正。（仕様認識ミス）
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruMoveController.cs
+・ビルド設定へステージ2を追加
+main_scene\CalamariTape\ProjectSettings\EditorBuildSettings.asset
+・仄暗い雰囲気のSkyboxを追加
+main_scene\CalamariTape\Assets\8K Skybox Pack Free\
+・レベルデザイン用のマテリアルを追加
+main_scene\CalamariTape\Assets\Prototype Textures\Materials\Blue\Blue_1.mat
+・mainシーンのシーンテンプレート作成
+main_scene\CalamariTape\Assets\Scenes\main.scenetemplate
+main_scene\CalamariTape\ProjectSettings\SceneTemplateSettings.json
+・ステージ２「Stage2_Scene」シーンを作成
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+・UIのテキスト送りスクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\MessageScrollText.cs
+・床のマテリアルを追加
+main_scene\CalamariTape\Assets\Wood Patterns\
+
 2021/05/23 15:28
 ★SE・BGMの追加
 ・SEとBGMのセット

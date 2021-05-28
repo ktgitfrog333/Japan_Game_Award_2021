@@ -18,6 +18,9 @@ public class MessageScroll : MonoBehaviour
     /// <summary>メッセージ処理管理スクリプト</summary>
     [SerializeField] private MessageManager _messageManager;
 
+    /// <summary>SE・ME管理オブジェクト</summary>
+    [SerializeField] private SfxPlay _sfx;
+
     /// <summary>メッセージスキップを動的に制御するフラグ</summary>
     private bool _messageSkip;
     /// <summary>メッセージハッシュ（遷移先）</summary>
@@ -43,6 +46,7 @@ public class MessageScroll : MonoBehaviour
         {
             // アニメーションを終了
             _anim.Play(_messageHash, 0, 1);
+            _sfx.PlaySFX("se_decided");
             _messageSkip = true;
         }
 

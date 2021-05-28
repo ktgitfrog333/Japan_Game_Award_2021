@@ -89,11 +89,13 @@ public class TsuruTsuruMoveController : MonoBehaviour
     [SerializeField] private TsuruTsuruEffectController _effectController;
     /// <summary>プレイヤーの移動制御を停止するフラグ</summary>
     public bool _characterStop { set; get; } = false;
-    /// <summary>プレイヤーのモードチェンジ有効フラグ</summary>
-    public bool _modeChangeEnable { set; get; } = true;
+    ///// <summary>プレイヤーのモードチェンジ有効フラグ</summary>
+    //public bool _modeChangeEnable { set; get; } = true;
 
     /// <summary>移動SE再生中フラグ</summary>
     private bool _sfxPlayedMove;
+    /// <summary>スケール拡大SE再生可フラグ</summary>
+    private bool _sfxPlayedScaleUp;
 
     void Start()
     {
@@ -102,6 +104,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
         _groundSetMoveSpeed = _moveSpeed;
 
         _registMaxDistance = _maxDistance;
+        _sfxPlayedScaleUp = true;
 
         _registedHorizontal = 0f;
         _registedVertical = 0f;
@@ -122,7 +125,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
         {
             _registedHorizontal = 0f;
             _registedVertical = 0f;
-            _modeChangeEnable = true;
+            //_modeChangeEnable = true;
         }
         else
         {
@@ -176,12 +179,12 @@ public class TsuruTsuruMoveController : MonoBehaviour
         if (Mathf.Abs(_registedHorizontal) < Mathf.Abs(h))
         {
             _registedHorizontal = h;
-            _modeChangeEnable = false;
+            //_modeChangeEnable = false;
         }
         if (Mathf.Abs(_registedVertical) < Mathf.Abs(v))
         {
             _registedVertical = v;
-            _modeChangeEnable = false;
+            //_modeChangeEnable = false;
         }
 
         var speed = 0f;
@@ -408,6 +411,17 @@ public class TsuruTsuruMoveController : MonoBehaviour
     }
 
     /// <summary>
+    /// 拡大SEを再生
+    /// </summary>
+    private void PlaySoundEffectScaleUp()
+    {
+        if (_sfxPlayedScaleUp == true)
+        {
+            _sfxPlay.PlaySFX("se_player_expansion");
+        }
+    }
+
+    /// <summary>
     /// コントーローラーによる拡大・縮小
     /// </summary>
     private void ScaleChangeForController()
@@ -418,10 +432,12 @@ public class TsuruTsuruMoveController : MonoBehaviour
             if (_scale < 4.01f)
             {
                 _scale += 0.01f;
+                PlaySoundEffectScaleUp();
             }
             else
             {
                 _scale = 4.0f;
+                _sfxPlayedScaleUp = false;
             }
         }
         // 縮小
@@ -430,6 +446,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
             if (0.99f < _scale)
             {
                 _scale -= 0.01f;
+                _sfxPlayedScaleUp = true;
             }
             else
             {
@@ -450,10 +467,12 @@ public class TsuruTsuruMoveController : MonoBehaviour
             if (_scale + m_scroll < 4.01f)
             {
                 _scale += m_scroll;
+                PlaySoundEffectScaleUp();
             }
             else
             {
                 _scale = 4.0f;
+                _sfxPlayedScaleUp = false;
             }
         }
         // 縮小
@@ -462,6 +481,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
             if (0.99f < _scale + m_scroll)
             {
                 _scale += m_scroll;
+                _sfxPlayedScaleUp = true;
             }
             else
             {

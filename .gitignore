@@ -11,8 +11,3 @@
 /*.userprefs
 /*.pidb
 /*.booproj
-#Standard Assets (for Unity 2018.4)
-Standard Assets/
-SampleScenes/
-#音声素材
-Audio/
