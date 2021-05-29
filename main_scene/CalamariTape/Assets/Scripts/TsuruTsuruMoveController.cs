@@ -133,6 +133,15 @@ public class TsuruTsuruMoveController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 外部からツルツルモードの速度を止めたい時に使用する
+    /// </summary>
+    public void OtherActionTsurutsuruStop()
+    {
+        _registedHorizontal = 0f;
+        _registedVertical = 0f;
+    }
+
     private void Update()
     {
         if (IsGrounded() && _jumpAction != true)
