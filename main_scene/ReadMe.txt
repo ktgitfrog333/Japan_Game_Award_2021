@@ -1,3 +1,12 @@
+2021/05/29 11:35
+★ステージ３実装
+・Stage3_Sceneの作成
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+・ビルドへステージ４を追加
+main_scene\CalamariTape\ProjectSettings\EditorBuildSettings.asset
+・Stage4_Sceneを仮作成
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+
 2021/05/29 10:34
 ★ステージ２実装
 ・mainシーンを微調整

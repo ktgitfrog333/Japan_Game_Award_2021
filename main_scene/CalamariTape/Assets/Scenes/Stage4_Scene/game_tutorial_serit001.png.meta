@@ -1,0 +1,780 @@
+fileFormatVersion: 2
+guid: 98feedbbe185c284abb32e8f25816b1e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5030400297740130123
+    second: game_tutorial_serit001_0
+  - first:
+      213: 1666792662896704555
+    second: game_tutorial_serit001_1
+  - first:
+      213: -5010695207583124565
+    second: game_tutorial_serit001_2
+  - first:
+      213: -5604488341764285844
+    second: game_tutorial_serit001_3
+  - first:
+      213: 7792796835558227674
+    second: game_tutorial_serit001_4
+  - first:
+      213: -4068575456823139453
+    second: game_tutorial_serit001_5
+  - first:
+      213: 3684330041142912330
+    second: game_tutorial_serit001_6
+  - first:
+      213: -8451912622665392429
+    second: game_tutorial_serit001_7
+  - first:
+      213: 6120544979274470238
+    second: game_tutorial_serit001_8
+  - first:
+      213: 2397351078124108977
+    second: game_tutorial_serit001_9
+  - first:
+      213: 8380215010189995877
+    second: game_tutorial_serit001_10
+  - first:
+      213: 5185298325567877369
+    second: game_tutorial_serit001_11
+  - first:
+      213: 3425248060581942671
+    second: game_tutorial_serit001_12
+  - first:
+      213: -1008841745750312739
+    second: game_tutorial_serit001_13
+  - first:
+      213: -3739373373225488137
+    second: game_tutorial_serit001_14
+  - first:
+      213: 964548026647913165
+    second: game_tutorial_serit001_15
+  - first:
+      213: -5435444659091603484
+    second: game_tutorial_serit001_16
+  - first:
+      213: -5558227611974100864
+    second: game_tutorial_serit001_17
+  - first:
+      213: -5295566022911332328
+    second: game_tutorial_serit001_18
+  - first:
+      213: -328414426042636775
+    second: game_tutorial_serit001_19
+  - first:
+      213: -4787418087175267670
+    second: game_tutorial_serit001_20
+  - first:
+      213: 3166076997271867257
+    second: game_tutorial_serit001_21
+  - first:
+      213: -1650790051333890924
+    second: game_tutorial_serit001_22
+  - first:
+      213: 4010378393344048715
+    second: game_tutorial_serit001_23
+  - first:
+      213: -5625565065171124315
+    second: game_tutorial_serit001_24
+  - first:
+      213: -7291860225612659219
+    second: game_tutorial_serit001_25
+  - first:
+      213: 167029389518046187
+    second: game_tutorial_serit001_26
+  - first:
+      213: 7653729798433611064
+    second: game_tutorial_serit001_27
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: game_tutorial_serit001_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4590
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b47d1d82b629fc540800000000000000
+      internalID: 5030400297740130123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4420
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2c7f2a8813a12710800000000000000
+      internalID: 1666792662896704555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4250
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba3714aa14f667ab0800000000000000
+      internalID: -5010695207583124565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4080
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6a52590c8bd832b0800000000000000
+      internalID: -5604488341764285844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3910
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ade7c361f63952c60800000000000000
+      internalID: 7792796835558227674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3740
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3832f22ad248987c0800000000000000
+      internalID: -4068575456823139453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3570
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a45af99e6ae512330800000000000000
+      internalID: 3684330041142912330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3400
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3de9365ff36c4ba80800000000000000
+      internalID: -8451912622665392429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3230
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5394790b3b80f450800000000000000
+      internalID: 6120544979274470238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3060
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bcbc759a1a154120800000000000000
+      internalID: 2397351078124108977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2890
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56f65c7c6218c4470800000000000000
+      internalID: 8380215010189995877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2720
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f0b6edaa51e5f740800000000000000
+      internalID: 5185298325567877369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2550
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f85159e96fce88f20800000000000000
+      internalID: 3425248060581942671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2380
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd8b7fdf6cfdff1f0800000000000000
+      internalID: -1008841745750312739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2210
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f03756aab31b1cc0800000000000000
+      internalID: -3739373373225488137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2040
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc22721e153c26d00800000000000000
+      internalID: 964548026647913165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1870
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4effc8a71eb6194b0800000000000000
+      internalID: -5435444659091603484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1700
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08814878f653dd2b0800000000000000
+      internalID: -5558227611974100864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1530
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 810fdbf52ce5286b0800000000000000
+      internalID: -5295566022911332328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1360
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9166d9cc1dc317bf0800000000000000
+      internalID: -328414426042636775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1190
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aaa53a25d9caf8db0800000000000000
+      internalID: -4787418087175267670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1020
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97fcce1214a20fb20800000000000000
+      internalID: 3166076997271867257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 850
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49c9e7fc1373719e0800000000000000
+      internalID: -1650790051333890924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_23
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 680
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4e7c2e96e9b7a730800000000000000
+      internalID: 4010378393344048715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 510
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5afb0a5f06afde1b0800000000000000
+      internalID: -5625565065171124315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 340
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de5ce8c32cb1eca90800000000000000
+      internalID: -7291860225612659219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 170
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be306454858615200800000000000000
+      internalID: 167029389518046187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_tutorial_serit001_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1500
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83d157253b2873a60800000000000000
+      internalID: 7653729798433611064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
