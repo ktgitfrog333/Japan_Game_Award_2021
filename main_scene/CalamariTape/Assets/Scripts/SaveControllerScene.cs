@@ -50,6 +50,22 @@ public class SaveControllerScene : MonoBehaviour
         {
             index = (int)StageClearNumber.SECTION_000_STAGE_001;
         }
+        if (name.Equals(StageNameManager.SECTION_001_STAGE_002))
+        {
+            index = (int)StageClearNumber.SECTION_001_STAGE_002;
+        }
+        if (name.Equals(StageNameManager.SECTION_001_STAGE_003))
+        {
+            index = (int)StageClearNumber.SECTION_001_STAGE_003;
+        }
+        if (name.Equals(StageNameManager.SECTION_001_STAGE_004))
+        {
+            index = (int)StageClearNumber.SECTION_001_STAGE_004;
+        }
+        if (name.Equals(StageNameManager.SECTION_002_STAGE_005))
+        {
+            index = (int)StageClearNumber.SECTION_002_STAGE_005;
+        }
         return index;
     }
 }

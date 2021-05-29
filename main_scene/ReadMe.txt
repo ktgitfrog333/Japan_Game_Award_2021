@@ -1,4 +1,22 @@
-2021/05/29 0215
+2021/05/29 10:34
+★ステージ２実装
+・mainシーンを微調整
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・Stage2_Sceneを作成
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+・５ステージ分のセーブ管理を追加
+main_scene\CalamariTape\Assets\Scripts\SaveControllerScene.cs
+main_scene\CalamariTape\Assets\Scripts\Common\StageNameManager.cs
+・ビルドへステージ３を追加
+main_scene\CalamariTape\ProjectSettings\EditorBuildSettings.asset
+・ステージ演出のプレハブ化
+main_scene\CalamariTape\Assets\Prefabs\StartPoint.prefab
+・mainシーンのテンプレート追加
+main_scene\CalamariTape\Assets\Scenes\main 1.scenetemplate
+・Stage3_Sceneを仮作成
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+
+2021/05/29 02:15
 ★メニュー選択とゴール時のメニュー選択を修正
 ・mainテンプレート更新
 main_scene\CalamariTape\Assets\Scenes\main.scenetemplate
