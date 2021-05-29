@@ -1,3 +1,19 @@
+2021/05/29 17:18
+★ステージ５実装
+・ステージ１～４マウスポインタ非表示対応
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+・Stage5_Sceneの作成
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+・コングラチュレーションロゴを追加
+main_scene\CalamariTape\Assets\Images\game_allclear_logo.png
+・カーソル非表示制御のオブジェクト追加
+main_scene\CalamariTape\Assets\Prefabs\CursorController.prefab
+・カーソル非表示制御のスクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\CursorManager.cs
+
 2021/05/29 13:00
 ★ステージ５仮実装
 ・Stage4_Sceneの作成
