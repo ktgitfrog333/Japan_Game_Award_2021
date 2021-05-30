@@ -176,6 +176,12 @@ public class TsuruTsuruMoveController : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        _scale = 1.0f;
+        OtherActionTsurutsuruStop();
+    }
+
     /// <summary>
     /// キャラクターの操作制御
     /// </summary>

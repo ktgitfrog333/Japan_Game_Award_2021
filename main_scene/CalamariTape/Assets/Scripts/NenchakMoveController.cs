@@ -190,6 +190,7 @@ public class NenchakMoveController : MonoBehaviour
     {
         _wallRunVertical = false;
         _wallRunHorizontal = false;
+        _scale = 1.0f;
     }
 
     /// <summary>

@@ -3238,7 +3238,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 4efd8d383c2fec549a5800003e99a81c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7a331b728b31f4c43af204dd0cfd9d48, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -7354,6 +7354,10 @@ PrefabInstance:
       value: 43.239353
       objectReference: {fileID: 0}
     - target: {fileID: 3890080683638684579, guid: 1440fade2ced3e44bb9f83161054dfbb, type: 3}
+      propertyPath: m_Size.y
+      value: 13.656741
+      objectReference: {fileID: 0}
+    - target: {fileID: 3890080683638684579, guid: 1440fade2ced3e44bb9f83161054dfbb, type: 3}
       propertyPath: m_Size.z
       value: 18.320383
       objectReference: {fileID: 0}
@@ -7362,8 +7366,12 @@ PrefabInstance:
       value: -25.745844
       objectReference: {fileID: 0}
     - target: {fileID: 3890080683638684579, guid: 1440fade2ced3e44bb9f83161054dfbb, type: 3}
+      propertyPath: m_Center.y
+      value: -6.32837
+      objectReference: {fileID: 0}
+    - target: {fileID: 3890080683638684579, guid: 1440fade2ced3e44bb9f83161054dfbb, type: 3}
       propertyPath: m_Center.z
-      value: -1.0282959
+      value: -1.0282962
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1440fade2ced3e44bb9f83161054dfbb, type: 3}

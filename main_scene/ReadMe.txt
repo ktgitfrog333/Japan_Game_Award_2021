@@ -1,3 +1,26 @@
+2021/05/30
+★デバッグ不備対応
+・ゲームオーバーゾーン修正
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・ゲームオーバーゾーン修正と2～3用のBGM差し替え
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+・ゲームオーバーゾーン修正と4～5用のBGM差し替え
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+・カラマリモードにてモードチェンジの際にサイズを元に戻す処理を追加
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+・ネンチャクモードにてモードチェンジの際にサイズを元に戻す処理を追加
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+・フェード速度を1500へ修正
+main_scene\CalamariTape\Assets\Scripts\ScreenDirectInOut.cs
+・ツルツルモードにてモードチェンジの際にサイズと速度を元に戻す処理を追加
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruMoveController.cs
+・セクション2～3のBGMを追加
+main_scene\CalamariTape\Assets\Audio\BGM\bgm_section_02_03.mp3
+・セクション4～5のBGMを追加
+main_scene\CalamariTape\Assets\Audio\BGM\bgm_section_04_05.mp3
+
 2021/05/29 21:26
 ★落下時に自動復旧されない不具合を修正
 ・ステージ１へゲームオーバーゾーンを追加

@@ -232,6 +232,7 @@ public class CalamariMoveController : MonoBehaviour
         _wallRunVertical = false;
         _wallRunHorizontal = false;
         _calamariStop = false;
+        _scale = 1.0f;
     }
 
     /// <summary>

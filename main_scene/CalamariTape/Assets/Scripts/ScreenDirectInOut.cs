@@ -56,7 +56,7 @@ public class ScreenDirectInOut : MonoBehaviour
     {
         if (_loadNowRect.anchoredPosition.x >= LOAD_NOW_MAX_POSITION)
         {
-            _loadNowRect.anchoredPosition += new Vector2(-1000 * Time.deltaTime, 0);
+            _loadNowRect.anchoredPosition += new Vector2(-1500 * Time.deltaTime, 0);
         }
         else
         {
@@ -73,7 +73,7 @@ public class ScreenDirectInOut : MonoBehaviour
     {
         if (_loadNowRect.anchoredPosition.x <= LOAD_NOW_MIN_POSITION)
         {
-            _loadNowRect.anchoredPosition += new Vector2(1000 * Time.deltaTime, 0);
+            _loadNowRect.anchoredPosition += new Vector2(1500 * Time.deltaTime, 0);
         }
         else
         {
