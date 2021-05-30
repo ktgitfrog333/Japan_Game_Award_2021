@@ -1,3 +1,20 @@
+2021/05/30 14:22
+★アドバイス画像差し替え
+・各ステージのオブジェクト情報の更新
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+・各ステージへ画像ファイル追加
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene\game_tutorial_message.png
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene\game_tutorial_message.png
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene\game_tutorial_message.png
+main_scene\CalamariTape\Assets\Images\game_tutorial_message_.png
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene\game_tutorial_message_.png
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene\game_tutorial_message_.png
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene\game_tutorial_message_.png
+
 2021/05/30
 ★デバッグ不備対応
 ・ゲームオーバーゾーン修正
