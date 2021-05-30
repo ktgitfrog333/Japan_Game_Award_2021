@@ -3921,7 +3921,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.21018352, y: -0.000000008411012, z: 0.0000000018082488, w: 0.97766197}
+  m_LocalRotation: {x: 0.21018352, y: 0.000000008411011, z: -0.0000000018082486, w: 0.97766197}
   m_LocalPosition: {x: -8.91, y: 8.69, z: -6.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4918,7 +4918,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1145615035}
-  m_LocalRotation: {x: 0.21018352, y: -0.000000008411012, z: 0.0000000018082488, w: 0.97766197}
+  m_LocalRotation: {x: 0.21018352, y: 0.000000008411011, z: -0.0000000018082486, w: 0.97766197}
   m_LocalPosition: {x: -8.91, y: 8.69, z: -6.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -10039,6 +10039,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1863423488}
     - target: {fileID: 1509915194916068793, guid: 3dcb6fb725cc57342ba0adfe9a762d0f, type: 3}
+      propertyPath: _modeChanger
+      value: 
+      objectReference: {fileID: 978842452}
+    - target: {fileID: 1509915194916068793, guid: 3dcb6fb725cc57342ba0adfe9a762d0f, type: 3}
       propertyPath: _playerManager
       value: 
       objectReference: {fileID: 978842448}
@@ -10046,6 +10050,10 @@ PrefabInstance:
       propertyPath: _saveController
       value: 
       objectReference: {fileID: 1639430250}
+    - target: {fileID: 1509915194916068793, guid: 3dcb6fb725cc57342ba0adfe9a762d0f, type: 3}
+      propertyPath: _pauseWindowManager
+      value: 
+      objectReference: {fileID: 978842449}
     - target: {fileID: 1509915194916068793, guid: 3dcb6fb725cc57342ba0adfe9a762d0f, type: 3}
       propertyPath: _fireworks.Array.size
       value: 3

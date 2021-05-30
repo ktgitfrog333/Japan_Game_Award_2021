@@ -7,8 +7,12 @@ using UnityEngine;
 /// </summary>
 public class GoalEvent : MonoBehaviour
 {
+    /// <summary>モード変更の制御</summary>
+    [SerializeField] private ModeChanger _modeChanger;
     /// <summary>プレイヤーのモード管理</summary>
     [SerializeField] private PlayerManager _playerManager;
+    /// <summary>メニュー制御</summary>
+    [SerializeField] private PauseWindowManager _pauseWindowManager;
     /// <summary>クリア画面のUI</summary>
     [SerializeField] private GameObject _clearUI;
     /// <summary>セーブ実行スクリプト</summary>
@@ -47,11 +51,13 @@ public class GoalEvent : MonoBehaviour
     /// </summary>
     private void StopPlayer()
     {
+        _modeChanger.enabled = false;
         _playerManager._calamariController._characterStop = true;
         _playerManager._calamariController.enabled = false;
         _playerManager._nenchakController.enabled = false;
         _playerManager._tsurutsuruController._characterStop = true;
         _playerManager._tsurutsuruController.enabled = false;
+        _pauseWindowManager.enabled = false;
     }
 
     /// <summary>

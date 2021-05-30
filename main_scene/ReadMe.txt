@@ -1,3 +1,18 @@
+2021/05/30 15:21
+★ゲージ減少SE、ゴール時の別メニュー表示不備の修正
+・ゴールトリガーの変更
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+・カラマリモードにてゲージ減少SE連続停止フラグのリセット
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+・ゴール処理スクリプトにてメニュー表示とモードチェンジ禁止処理追加
+main_scene\CalamariTape\Assets\Scripts\GoalEvent.cs
+・ネンチャクモードにてゲージ減少SE連続停止フラグのリセット
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+
 2021/05/30 14:22
 ★アドバイス画像差し替え
 ・各ステージのオブジェクト情報の更新

@@ -191,6 +191,13 @@ public class NenchakMoveController : MonoBehaviour
         _wallRunVertical = false;
         _wallRunHorizontal = false;
         _scale = 1.0f;
+
+        // 切り替えた際にSEがオフになっていない場合はオフにする
+        if (_sfxPlayedDerable == true)
+        {
+            _sfxPlayedDerable = false;
+            StopCoroutine(SleepTimeSoundEffectDerableDecrease());
+        }
     }
 
     /// <summary>
