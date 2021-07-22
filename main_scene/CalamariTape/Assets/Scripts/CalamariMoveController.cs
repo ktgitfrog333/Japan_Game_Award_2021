@@ -599,6 +599,34 @@ public class CalamariMoveController : MonoBehaviour
                 }
             }
         }
+        else if (_wallRunHorizontal == true)
+        {
+            Debug.Log(_wallRunHorizontal);
+            if (0 < Mathf.Abs(_moveVelocity.y) || 0 < Mathf.Abs(_moveVelocity.z))
+            {
+                if (Mathf.Abs(_moveVelocity.y) < Mathf.Abs(_moveVelocity.z))
+                {
+                    // 正面なら縦向き
+                    if (0f < _moveVelocity.z)
+                    {
+                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 0f);
+                    }
+                }
+                else
+                {
+                    // 左向きなら横向き
+                    if (0f  < _moveVelocity.y)
+                    {
+                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 90f, 0f);
+                    }
+                    // 右向きなら横向き
+                    else if (_moveVelocity.y < 0f)
+                    {
+                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, -90f, 0f);
+                    }
+                }
+            }
+        }
         else
         {
             _transform.LookAt(_transform.position + new Vector3(_moveVelocity.x, 0, _moveVelocity.z));
@@ -671,14 +699,22 @@ public class CalamariMoveController : MonoBehaviour
     {
         if (_calamariStop == false)
         {
-            if (_wallRunVertical == true)
+            if (_wallRunVertical == true || _wallRunHorizontal == true)
             {
                 _tapeOutside.eulerAngles += new Vector3(0, 0, _rollSpeed/* * -1*/);
             }
-            else
+            else/* if (_wallRunVertical == false && _wallRunHorizontal == false)*/
             {
                 _tapeOutside.eulerAngles += new Vector3(0, 0, _rollSpeed * -1);
             }
+            //else if (_wallRunHorizontal == true)
+            //{
+            //    _tapeOutside.eulerAngles += new Vector3(0, _rollSpeed, 0);
+            //}
+            //else
+            //{
+            //    _tapeOutside.eulerAngles += new Vector3(0, _rollSpeed * -1, 0);
+            //}
             _morumotto.eulerAngles += new Vector3(_rollSpeed, 0, 0);
         }
     }
