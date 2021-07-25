@@ -1,3 +1,19 @@
+2021/07/25 11:41
+★カラマリモードの転がりモーション修正
+・カラマリモードへアニメーション部分を別ロジックへ切り分け
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・カラマリモードの転がりモーションへAnimator適用
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+main_scene\CalamariTape\Assets\Scripts\MessageManager.cs
+main_scene\CalamariTape\Assets\Scripts\PlayerManager.cs
+main_scene\CalamariTape\Assets\Animations\CalamariTapeOutside.anim
+main_scene\CalamariTape\Assets\Animations\CalamariTapeOutsideStanding.anim
+main_scene\CalamariTape\Assets\Animations\Scotch_tape_outside.controller
+main_scene\CalamariTape\Assets\Scripts\CalamariAnimation.cs
+main_scene\CalamariTape\Assets\Scripts\CalamariState.cs
+・セーブロジック検証
+main_scene\CalamariTape\Assets\Scripts\Player_Data_Main.cs
+
 2021/07/22 13:34
 ★デバッグ機能の追加とゴール演出の修正
 ・ゴールトリガーにデバッグの追加
