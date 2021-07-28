@@ -26,7 +26,7 @@ public class GameBack : MonoBehaviour
     {
         if (_menuClose == false)
         {
-            _sfx.PlaySFX("se_decided");
+            _sfx.PlaySFX("se_close");
             _window.MenuClose();
 
             _menuClose = true;

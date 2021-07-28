@@ -22,10 +22,13 @@ public class MessageScrollText : MonoBehaviour
 
     /// <summary>メッセージスキップを動的に制御するフラグ</summary>
     private bool _messageSkip;
+    /// <summary>SEを一度だけ再生制御するフラグ</summary>
+    private bool _skipPlaySFX;
 
     private void OnEnable()
     {
         _messageSkip = false;
+        _skipPlaySFX = false;
         _waitSeconds = 0.075f;
         StartCoroutine(ScrollSentence());
     }
@@ -34,7 +37,11 @@ public class MessageScrollText : MonoBehaviour
     {
         if (CrossPlatformInputManager.GetButtonDown("Submit") && _messageSkip == false)
         {
-            _sfx.PlaySFX("se_decided");
+            if (_skipPlaySFX == false)
+            {
+                _sfx.PlaySFX("se_decided");
+                _skipPlaySFX = true;
+            }
             _messageSkip = true;
             _waitSeconds = 0f;
         }

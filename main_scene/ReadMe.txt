@@ -1,3 +1,19 @@
+2021/07/28 9:16
+★カラマリモードの回転モーション、チュートリアル修正
+・各シーンへカラマリモードのスクリプトコンポネント追加
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+・回転モーションのアニメーションのループチェック及び移動時の向き調整
+main_scene\CalamariTape\Assets\Scripts\CalamariAnimation.cs
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+・メニュー画面でゲームに戻る際のSEを変更
+main_scene\CalamariTape\Assets\Scripts\GameBack.cs
+・チュートリアルメッセージが全文表示されたらスキップSEを出さない
+main_scene\CalamariTape\Assets\Scripts\MessageManager.cs
+main_scene\CalamariTape\Assets\Scripts\MessageScrollText.cs
+
 2021/07/25 11:41
 ★カラマリモードの転がりモーション修正
 ・カラマリモードへアニメーション部分を別ロジックへ切り分け

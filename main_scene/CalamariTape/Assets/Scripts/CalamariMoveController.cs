@@ -104,8 +104,6 @@ public class CalamariMoveController : MonoBehaviour
     [SerializeField] private Transform _tapeOutside;
     /// <summary>モルモットの位置情報</summary>
     [SerializeField] private Transform _morumotto;
-    /// <summary>回転スピード</summary>
-    [SerializeField] private float _rollSpeed = 5f;
 
     /// <summary>プレイヤーの移動制御を停止するフラグ</summary>
     public bool _characterStop { set; get; } = false;
@@ -178,6 +176,15 @@ public class CalamariMoveController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             StartCoroutine(PositionCash());
+        }
+
+        //// アニメーションのループ対策
+        if (_wallRunVertical == false && _wallRunHorizontal == false)
+        {
+            if (_animation.getAnimationLoop("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator) == true)
+            {
+                _animation.setAnimetionParameters("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator);
+            }
         }
     }
 
@@ -470,7 +477,7 @@ public class CalamariMoveController : MonoBehaviour
         }
 
         // 移動スピードをanimatorに反映
-        if (_wallRunVertical == true && 0 < _value._parameter && _value._adhesive == true)
+        if ((_wallRunVertical == true || _wallRunHorizontal == true) && 0 < _value._parameter && _value._adhesive == true)
         {
             _movedSpeedToAnimator = new Vector3(_moveVelocity.x, _moveVelocity.y, 0).magnitude;
         }
@@ -612,23 +619,61 @@ public class CalamariMoveController : MonoBehaviour
             {
                 if (Mathf.Abs(_moveVelocity.y) < Mathf.Abs(_moveVelocity.z))
                 {
-                    // 正面なら縦向き
-                    if (0f < _moveVelocity.z)
+                    if (_wallRunHorizontalMode == (int)WallRunHorizontalMode.RIGHT_IS_FRONT)
                     {
-                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 0f);
+                        // 正面なら縦向き
+                        if (0f < _moveVelocity.z)
+                        {
+                            //_transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 0f);
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 90f);
+                        }
+                        else if (_moveVelocity.z < 0f)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, -90f);
+                        }
+                    }
+                    else if (_wallRunHorizontalMode == (int)WallRunHorizontalMode.LEFT_IS_FRONT)
+                    {
+                        // 正面なら縦向き
+                        if (0f < _moveVelocity.z)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, -90f);
+                        }
+                        else if (_moveVelocity.z < 0f)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 90f);
+                        }
                     }
                 }
                 else
                 {
-                    // 左向きなら横向き
-                    if (0f  < _moveVelocity.y)
+                    // 右側に壁があった際の床上移動と壁移動
+                    if (_wallRunHorizontalMode == (int)WallRunHorizontalMode.RIGHT_IS_FRONT)
                     {
-                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 90f, 0f);
+                        // 左向きなら横向き
+                        if (0f < _moveVelocity.y)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 90f, 0f);
+                        }
+                        // 右向きなら横向き
+                        else if (_moveVelocity.y < 0f)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, -90f, 0f);
+                        }
                     }
-                    // 右向きなら横向き
-                    else if (_moveVelocity.y < 0f)
+                    // 左側に壁があった際の床上移動と壁移動
+                    else if (_wallRunHorizontalMode == (int)WallRunHorizontalMode.LEFT_IS_FRONT)
                     {
-                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, -90f, 0f);
+                        // 左向きなら横向き
+                        if (0f < _moveVelocity.y)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, -90f, 0f);
+                        }
+                        // 右向きなら横向き
+                        else if (_moveVelocity.y < 0f)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 90f, 0f);
+                        }
                     }
                 }
             }

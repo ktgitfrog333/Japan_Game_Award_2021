@@ -14,6 +14,31 @@ public class CalamariAnimation : MonoBehaviour
     private float _animationSpeed = 0f;
 
     /// <summary>
+    /// アニメーションループチェック
+    /// </summary>
+    /// <param name="animatorName">アニメータ名</param>
+    /// <param name="name">パラメータ名</param>
+    /// <param name="value">値</param>
+    /// <returns></returns>
+    public bool getAnimationLoop(string animatorName, string name, float value)
+    {
+        var result = false;
+        if (animatorName.Equals(_state._animatorTape.name))
+        {
+            if (0f < Mathf.Abs(_state._animatorTape.speed) && Mathf.Abs(value) < 1.5f)
+            {
+                result = true;
+            }
+        }
+        else
+        {
+            Debug.Log("不明なAnimator指定:[" + animatorName + "]");
+        }
+
+        return result;
+    }
+
+    /// <summary>
     /// アニメーションをセット
     /// </summary>
     /// <param name="animatorName">アニメータ名</param>
