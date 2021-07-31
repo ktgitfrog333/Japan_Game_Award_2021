@@ -76,21 +76,17 @@ public class TsuruTsuruMoveController : MonoBehaviour
     private bool _sfxPlayed;
 
     /// <summary>モルモットのアニメーター</summary>
-    [SerializeField] private Animator _animator;
+    [SerializeField] private TsuruTsuruAnimation _animation;
 
     /// <summary>テープ（外側）の位置情報</summary>
     [SerializeField] private Transform _tapeOutside;
     /// <summary>モルモットの位置情報</summary>
     [SerializeField] private Transform _morumotto;
-    /// <summary>回転スピード</summary>
-    [SerializeField] private float _rollSpeed = 5f;
 
     /// <summary>エフェクトのスクリプト</summary>
     [SerializeField] private TsuruTsuruEffectController _effectController;
     /// <summary>プレイヤーの移動制御を停止するフラグ</summary>
     public bool _characterStop { set; get; } = false;
-    ///// <summary>プレイヤーのモードチェンジ有効フラグ</summary>
-    //public bool _modeChangeEnable { set; get; } = true;
 
     /// <summary>移動SE再生中フラグ</summary>
     private bool _sfxPlayedMove;
@@ -173,6 +169,13 @@ public class TsuruTsuruMoveController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             StartCoroutine(PositionCash());
+        }
+
+        // アニメーションのループ対策
+        if (_animation.getAnimationLoop("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator) == true)
+        {
+            //Debug.Log("停止ループ");
+            _animation.setAnimetionParameters("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator);
         }
     }
 
@@ -278,7 +281,8 @@ public class TsuruTsuruMoveController : MonoBehaviour
 
         // 移動スピードをanimatorに反映
         _movedSpeedToAnimator = new Vector3(_moveVelocity.x, 0, _moveVelocity.z).magnitude;
-        _animator.SetFloat("MoveSpeed", _movedSpeedToAnimator);
+        _animation.setAnimetionParameters("Morumotto", "MoveSpeed", _movedSpeedToAnimator);
+        _animation.setAnimetionParameters("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator);
         if (0 < _movedSpeedToAnimator)
         {
             PlaySoundEffectMove();
@@ -286,11 +290,6 @@ public class TsuruTsuruMoveController : MonoBehaviour
         else
         {
             _sfxPlayedMove = false;
-        }
-
-        if (0 < _movedSpeedToAnimator)
-        {
-            RollObject();
         }
     }
 
@@ -326,15 +325,6 @@ public class TsuruTsuruMoveController : MonoBehaviour
     }
 
     /// <summary>
-    /// 移動速度に応じて各オブジェクトを回転させる
-    /// </summary>
-    private void RollObject()
-    {
-        _tapeOutside.eulerAngles += new Vector3(0, 0, _rollSpeed * -1);
-        _morumotto.eulerAngles += new Vector3(_rollSpeed, 0, 0);
-    }
-
-    /// <summary>
     /// 壁衝突判定
     /// </summary>
     /// <returns>壁に当たったか否か</returns>
@@ -355,6 +345,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
                 {
                     result = true;
                     _effectController.AppearEffectCollision(hit.collider);
+                    _animation.PauseAnimation("Scotch_tape_outside");
                 }
             }
         }
@@ -368,6 +359,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
                 {
                     result = true;
                     _effectController.AppearEffectCollision(hit.collider);
+                    _animation.PauseAnimation("Scotch_tape_outside");
                 }
             }
         }
@@ -381,6 +373,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
                 {
                     result = true;
                     _effectController.AppearEffectCollision(hit.collider);
+                    _animation.PauseAnimation("Scotch_tape_outside");
                 }
             }
         }
@@ -394,6 +387,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
                 {
                     result = true;
                     _effectController.AppearEffectCollision(hit.collider);
+                    _animation.PauseAnimation("Scotch_tape_outside");
                 }
             }
         }

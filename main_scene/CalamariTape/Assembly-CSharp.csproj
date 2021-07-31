@@ -100,6 +100,8 @@
     <Compile Include="Assets\Scripts\ScreenDirectInOut.cs" />
     <Compile Include="Assets\Scripts\CameraPointMove.cs" />
     <Compile Include="Assets\Scripts\PauseWindowManager.cs" />
+    <Compile Include="Assets\Scripts\TsuruTsuruAnimation.cs" />
+    <Compile Include="Assets\Scripts\TsuruTsuruState.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\8K Skybox Pack Free\ReadMe.txt" />

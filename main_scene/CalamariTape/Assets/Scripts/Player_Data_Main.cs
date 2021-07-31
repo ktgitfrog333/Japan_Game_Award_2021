@@ -19,22 +19,22 @@ public class Player_Data_Main : MonoBehaviour, DebugDemo
     {
         // ユーザごとに保管するディレクトリが異なる為、Pathを再度設定
         datapath = Application.dataPath + "/data/data.json";
-        DebugDemo1("datapath:" + datapath);
+        //DebugDemo1("datapath:" + datapath);
         // JSONに変換
         string json = JsonUtility.ToJson(player_data);
-        DebugDemo1("json:" + json);
+        //DebugDemo1("json:" + json);
         // 保存先を開く
         StreamWriter writer = new StreamWriter(datapath, false);
-        DebugDemo1("writer:" + writer);
+        //DebugDemo1("writer:" + writer);
         // JSONデータ書き込み
         writer.WriteLine(json);
-        DebugDemo1("JSONデータ書き込み");
+        //DebugDemo1("JSONデータ書き込み");
         // バッファクリア
         writer.Flush();
-        DebugDemo1("バッファクリア");
+        //DebugDemo1("バッファクリア");
         // ファイルを閉じる
         writer.Close();
-        DebugDemo1("ファイルを閉じる");
+        //DebugDemo1("ファイルを閉じる");
     }
 
     public void Load_Data(Player_Data_Main player_data,string datapath)

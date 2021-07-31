@@ -178,7 +178,7 @@ public class CalamariMoveController : MonoBehaviour
             StartCoroutine(PositionCash());
         }
 
-        //// アニメーションのループ対策
+        // アニメーションのループ対策
         if (_wallRunVertical == false && _wallRunHorizontal == false)
         {
             if (_animation.getAnimationLoop("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator) == true)

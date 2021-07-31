@@ -1,3 +1,33 @@
+2021/07/31 17:29
+★モードチェンジ演出変更とツルツルモードのモーション修正
+・各ステージのプレイヤー情報更新（ツルツルモードのコンポネント追加）
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+・カラマリモードにてコメント修正
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+・ゴール時にアニメーションを止める
+main_scene\CalamariTape\Assets\Scripts\GoalEvent.cs
+・チュートリアルメッセージ表示時にアニメーションを止める
+main_scene\CalamariTape\Assets\Scripts\MessageManager.cs
+・モードチェンジ時にエフェクト発生（ハサミ追尾は廃止）
+main_scene\CalamariTape\Assets\Scripts\ModeChanger.cs
+・メニュー画面表示時にアニメーションを止める
+main_scene\CalamariTape\Assets\Scripts\PauseWindowManager.cs
+・ビルド画面用のデバッグ機能コメントアウト
+main_scene\CalamariTape\Assets\Scripts\Player_Data_Main.cs
+・プレイヤー管理機能へツルツルモードのアクション制御スクリプト追加
+main_scene\CalamariTape\Assets\Scripts\PlayerManager.cs
+・ツルツルモードの回転モーションをアニメーション化
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruMoveController.cs
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruAnimation.cs
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruState.cs
+・モードチェンジのパーティクル
+main_scene\CalamariTape\Assets\Materials\ScissorsEffect.mat
+main_scene\CalamariTape\Assets\Prefabs\ScissorsEffect.prefab
+
 2021/07/28 9:16
 ★カラマリモードの回転モーション、チュートリアル修正
 ・各シーンへカラマリモードのスクリプトコンポネント追加

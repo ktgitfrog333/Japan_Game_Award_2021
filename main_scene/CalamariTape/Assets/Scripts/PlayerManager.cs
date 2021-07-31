@@ -22,4 +22,6 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] public NenchakMoveController _nenchakController;
     /// <summary>ツルツルモードの操作スクリプト</summary>
     [SerializeField] public TsuruTsuruMoveController _tsurutsuruController;
+    /// <summary>ツルツルモードのアニメーションスクリプト</summary>
+    [SerializeField] public TsuruTsuruAnimation _tsuruTsuruAnimation;
 }

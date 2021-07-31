@@ -10,12 +10,14 @@ public class PauseWindowManager : MonoBehaviour
 {
     /// <summary>ポーズ画面UIオブジェクト</summary>
     [SerializeField] private GameObject _menu;
-    /// <summary>カラマリモードの操作スクリプト</summary>
-    [SerializeField] private CalamariMoveController _calamariController;
-    /// <summary>ネンチャクモードの操作スクリプト</summary>
-    [SerializeField] private NenchakMoveController _nenchakController;
-    /// <summary>ツルツルモードの操作スクリプト</summary>
-    [SerializeField] private TsuruTsuruMoveController _tsurutsuruController;
+    ///// <summary>カラマリモードの操作スクリプト</summary>
+    //[SerializeField] private CalamariMoveController _calamariController;
+    ///// <summary>ネンチャクモードの操作スクリプト</summary>
+    //[SerializeField] private NenchakMoveController _nenchakController;
+    ///// <summary>ツルツルモードの操作スクリプト</summary>
+    //[SerializeField] private TsuruTsuruMoveController _tsurutsuruController;
+    /// <summary>プレイヤーのモード管理</summary>
+    [SerializeField] private PlayerManager _playerManager;
     /// <summary>メニューを閉じる際に一度のみ実行するよう制御するフラグ</summary>
     private bool _menuClose;
 
@@ -23,9 +25,11 @@ public class PauseWindowManager : MonoBehaviour
     {
         if (CrossPlatformInputManager.GetButtonDown("Menu") == true)
         {
-            _calamariController.enabled = false;
-            _nenchakController.enabled = false;
-            _tsurutsuruController.enabled = false;
+            _playerManager._calamariAnimation.PauseAnimation("Scotch_tape_outside");
+            _playerManager._calamariController.enabled = false;
+            _playerManager._nenchakController.enabled = false;
+            _playerManager._tsuruTsuruAnimation.PauseAnimation("Scotch_tape_outside");
+            _playerManager._tsurutsuruController.enabled = false;
             _menu.SetActive(true);
         }
     }
@@ -54,9 +58,9 @@ public class PauseWindowManager : MonoBehaviour
     private IEnumerator MenuCloseHalfSec()
     {
         yield return new WaitForSeconds(0.5f);
-        _calamariController.enabled = true;
-        _nenchakController.enabled = true;
-        _tsurutsuruController.enabled = true;
+        _playerManager._calamariController.enabled = true;
+        _playerManager._nenchakController.enabled = true;
+        _playerManager._tsurutsuruController.enabled = true;
         _menuClose = false;
         _menu.SetActive(false);
 

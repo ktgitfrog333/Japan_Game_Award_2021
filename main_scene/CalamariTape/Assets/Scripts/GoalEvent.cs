@@ -56,9 +56,11 @@ public class GoalEvent : MonoBehaviour, DebugDemo
     {
         _modeChanger.enabled = false;
         _playerManager._calamariController._characterStop = true;
+        _playerManager._calamariAnimation.PauseAnimation("Scotch_tape_outside");
         _playerManager._calamariController.enabled = false;
         _playerManager._nenchakController.enabled = false;
         _playerManager._tsurutsuruController._characterStop = true;
+        _playerManager._tsuruTsuruAnimation.PauseAnimation("Scotch_tape_outside");
         _playerManager._tsurutsuruController.enabled = false;
         _pauseWindowManager.enabled = false;
     }

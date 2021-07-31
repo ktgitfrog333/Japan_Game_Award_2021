@@ -29,12 +29,10 @@ public class ModeChanger : MonoBehaviour
     /// <summary>追従させるカメラを切り替える</summary>
     [SerializeField] CameraPointMove _cameraPoint;
 
-    /// <summary>はさみのオブジェクト</summary>
-    [SerializeField] private GameObject _scissorsObject;
-    /// <summary>はさみのスクリプト</summary>
-    [SerializeField] private Scissors _scissors;
-    /// <summary>はさみコライダーのスクリプト</summary>
-    [SerializeField] private ScissorsCollision _scissorsCollision;
+    /// <summary>モード切り替えエフェクト</summary>
+    [SerializeField] private GameObject _scissorsEffect;
+    /// <summary>パーティクルシステム</summary>
+    [SerializeField] private ParticleSystem _particleSystem;
 
     void Start()
     {
@@ -49,57 +47,50 @@ public class ModeChanger : MonoBehaviour
         // ループ内で複数のモード切り替え入力が発生しないように制御するフラグ
         bool inputActive = false;
 
-        if (_scissorsObject.activeInHierarchy == false)
+        // 入力チェック（ツルツルモードもしくはネンチャクモードからカラマリモード）
+        if (_nenchakInput == false && _tsurutsuruInput == false && inputActive == false && _mode.Equals(_calamari.name.ToString()))
         {
-            // 入力チェック（ツルツルモードもしくはネンチャクモードからカラマリモード）
-            if (_nenchakInput == false && _tsurutsuruInput == false && inputActive == false && _mode.Equals(_calamari.name.ToString()))
+            _calamariInput = false;
+            if (CrossPlatformInputManager.GetButtonDown("RB") == true)
             {
-                _calamariInput = false;
-                if (CrossPlatformInputManager.GetButtonDown("RB") == true)
-                {
-                    _tsurutsuruInput = CrossPlatformInputManager.GetButtonDown("RB");
-                    inputActive = true;
-                }
-                else if (CrossPlatformInputManager.GetButtonDown("LB") == true)
-                {
-                    _nenchakInput = CrossPlatformInputManager.GetButtonDown("LB");
-                    inputActive = true;
-                }
-            }
-
-            // 入力チェック（ツルツルモード）
-            if (_calamariInput == false && inputActive == false && _mode.Equals(_tsurutsuru.name.ToString()))
-            {
-                //// ツルツルモードのみ移動中はモード切り替え不可とする
-                //if (_tsurutsuru.GetComponent<TsuruTsuruMoveController>()._modeChangeEnable == true)
-                //{
-                    _tsurutsuruInput = false;
-                    _calamariInput = CrossPlatformInputManager.GetButtonDown("RB");
-                    inputActive = true;
-                //}
-            }
-
-            // 入力チェック（ネンチャクモード）
-            if (_calamariInput == false && inputActive == false && _mode.Equals(_nenchak.name.ToString()))
-            {
-                _nenchakInput = false;
-                _calamariInput = CrossPlatformInputManager.GetButtonDown("LB");
+                _tsurutsuruInput = CrossPlatformInputManager.GetButtonDown("RB");
                 inputActive = true;
             }
+            else if (CrossPlatformInputManager.GetButtonDown("LB") == true)
+            {
+                _nenchakInput = CrossPlatformInputManager.GetButtonDown("LB");
+                inputActive = true;
+            }
+        }
 
-            // モード切り替え
-            if (_tsurutsuruInput == true)
-            {
-                TsurutsuruModeEnabledChange();
-            }
-            if (_calamariInput == true)
-            {
-                CalamariModeDisabledChange();
-            }
-            if (_nenchakInput == true)
-            {
-                NenchakModeEnabledChange();
-            }
+        // 入力チェック（ツルツルモード）
+        if (_calamariInput == false && inputActive == false && _mode.Equals(_tsurutsuru.name.ToString()))
+        {
+            _tsurutsuruInput = false;
+            _calamariInput = CrossPlatformInputManager.GetButtonDown("RB");
+            inputActive = true;
+        }
+
+        // 入力チェック（ネンチャクモード）
+        if (_calamariInput == false && inputActive == false && _mode.Equals(_nenchak.name.ToString()))
+        {
+            _nenchakInput = false;
+            _calamariInput = CrossPlatformInputManager.GetButtonDown("LB");
+            inputActive = true;
+        }
+
+        // モード切り替え
+        if (_tsurutsuruInput == true)
+        {
+            TsurutsuruModeEnabledChange();
+        }
+        if (_calamariInput == true)
+        {
+            CalamariModeDisabledChange();
+        }
+        if (_nenchakInput == true)
+        {
+            NenchakModeEnabledChange();
         }
     }
 
@@ -124,7 +115,8 @@ public class ModeChanger : MonoBehaviour
             rotation = _nenchak.transform.eulerAngles;
             scale = _nenchak.transform.localScale;
         }
-        PlayScissorsAnimation(_calamari.transform, _calamari.name, position, scale);
+        // エフェクト発生
+        PlayScissorsEffect(position);
 
         _calamari.transform.position = position;
         _calamari.transform.eulerAngles = rotation;
@@ -141,7 +133,8 @@ public class ModeChanger : MonoBehaviour
     private void NenchakModeEnabledChange()
     {
         Debug.Log("ネンチャクモード");
-        PlayScissorsAnimation(_nenchak.transform, _nenchak.name, _calamari.transform.position, _calamari.transform.localScale);
+        // エフェクト発生
+        PlayScissorsEffect(_calamari.transform.position);
 
         _nenchak.transform.position = _calamari.transform.position;
         _nenchak.transform.eulerAngles = _calamari.transform.eulerAngles;
@@ -158,7 +151,8 @@ public class ModeChanger : MonoBehaviour
     private void TsurutsuruModeEnabledChange()
     {
         Debug.Log("ツルツルモード");
-        PlayScissorsAnimation(_tsurutsuru.transform, _tsurutsuru.name, _calamari.transform.position, _calamari.transform.localScale);
+        // エフェクト発生
+        PlayScissorsEffect(_calamari.transform.position);
 
         _tsurutsuru.transform.position = _calamari.transform.position;
         _tsurutsuru.transform.eulerAngles = _calamari.transform.eulerAngles;
@@ -170,36 +164,13 @@ public class ModeChanger : MonoBehaviour
     }
 
     /// <summary>
-    /// はさみを有効にしてオブジェクトへ向かうアニメーション
+    /// モード切り替えエフェクト
     /// </summary>
-    /// <param name="transform">ターゲット位置</param>
-    /// <param name="name">衝突対象オブジェクト名</param>
-    /// <param name="vector3Position">生成位置の座標</param>
-    private void PlayScissorsAnimation(Transform transform, string name, Vector3 vector3Position, Vector3 vector3Scale)
+    /// <param name="position">対象座標</param>
+    private void PlayScissorsEffect(Vector3 position)
     {
-        _scissorsObject.SetActive(true);
-        _scissors._target = transform;
-        _scissors._tracking = true;
-        _scissorsCollision._name = name;
-
-        var position = new Vector3(-2.84f, -0.15f, -1.06f);
-        var rotation = new Vector3(-9.88f, -2.13f, -3.58f);
-        _scissorsObject.transform.position = MultiplyVector3(vector3Position, vector3Scale) + new Vector3(position.x, position.y, position.z);
-        _scissorsObject.transform.eulerAngles = new Vector3(rotation.x, rotation.y, rotation.z);
-    }
-
-    /// <summary>
-    /// ベクター3の乗算<param/>
-    /// スケールをそのまま掛けると離れすぎる為、計算内に補正あり
-    /// </summary>
-    /// <param name="standard">基準となるベクター位置情報</param>
-    /// <param name="multiply">掛ける値（ベクターのスケール指定）</param>
-    /// <returns>計算後のベクター位置情報</returns>
-    private Vector3 MultiplyVector3(Vector3 standard, Vector3 multiply)
-    {
-        float valueX = 1.0f + (multiply.x - 1.0f) / 2;
-        float valueY = 1.0f + (multiply.y - 1.0f) / 2;
-        float valueZ = 1.0f + (multiply.z - 1.0f) / 2;
-        return new Vector3(standard.x * valueX, standard.y * valueY, standard.z * valueZ);
+        _scissorsEffect.SetActive(true);
+        _scissorsEffect.transform.position = position;
+        _particleSystem.Play();
     }
 }
