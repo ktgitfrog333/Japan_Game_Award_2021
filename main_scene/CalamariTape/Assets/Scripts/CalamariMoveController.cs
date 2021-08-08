@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
-using Controller.Wall;
+using Controller.WallHorizontal;
 using Const.Tag;
 using Const.Layer;
 
@@ -95,7 +95,7 @@ public class CalamariMoveController : MonoBehaviour
     /// 1：右方向入力で登り、左方向で下りる<para/>
     /// -1：左方向入力で登り、右方向で下りる
     /// </summary>
-    private int _wallRunHorizontalMode = (int)WallRunHorizontalMode.RIGHT_IS_FRONT;
+    private int _wallRunHorizontalMode = (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT;
 
     /// <summary>カラマリモードのアニメーション</summary>
     [SerializeField] private CalamariAnimation _animation;
@@ -210,11 +210,11 @@ public class CalamariMoveController : MonoBehaviour
             Debug.DrawRay(i, Vector3.left * _registMaxDistance, Color.green);
             if (Physics.Raycast(i, Vector3.right, _registMaxDistance) == true)
             {
-                _wallRunHorizontalMode = (int) WallRunHorizontalMode.RIGHT_IS_FRONT;
+                _wallRunHorizontalMode = (int) WallRunHorizontalFrontMode.RIGHT_IS_FRONT;
             }
             else if (Physics.Raycast(i, Vector3.left, _registMaxDistance) == true)
             {
-                _wallRunHorizontalMode = (int) WallRunHorizontalMode.LEFT_IS_FRONT;
+                _wallRunHorizontalMode = (int) WallRunHorizontalFrontMode.LEFT_IS_FRONT;
             }
         }
     }
@@ -312,7 +312,7 @@ public class CalamariMoveController : MonoBehaviour
         else if (0 < _value._parameter && _value._adhesive == true && _wallRunHorizontal == true)
         {
             // 右側に壁があった際の床上移動と壁移動
-            if (_wallRunHorizontalMode == (int)WallRunHorizontalMode.RIGHT_IS_FRONT)
+            if (_wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT)
             {
                 Debug.DrawRay(_transform.position, Vector3.down * _registMaxDistance, Color.green);
                 if (0f < h)
@@ -333,7 +333,7 @@ public class CalamariMoveController : MonoBehaviour
                 }
             }
             // 左側に壁があった際の床上移動と壁移動
-            else if (_wallRunHorizontalMode == (int)WallRunHorizontalMode.LEFT_IS_FRONT)
+            else if (_wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT)
             {
                 Debug.DrawRay(_transform.position, Vector3.down * _registMaxDistance, Color.green);
                 if (h < 0f)
@@ -619,7 +619,7 @@ public class CalamariMoveController : MonoBehaviour
             {
                 if (Mathf.Abs(_moveVelocity.y) < Mathf.Abs(_moveVelocity.z))
                 {
-                    if (_wallRunHorizontalMode == (int)WallRunHorizontalMode.RIGHT_IS_FRONT)
+                    if (_wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT)
                     {
                         // 正面なら縦向き
                         if (0f < _moveVelocity.z)
@@ -632,7 +632,7 @@ public class CalamariMoveController : MonoBehaviour
                             _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, -90f);
                         }
                     }
-                    else if (_wallRunHorizontalMode == (int)WallRunHorizontalMode.LEFT_IS_FRONT)
+                    else if (_wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT)
                     {
                         // 正面なら縦向き
                         if (0f < _moveVelocity.z)
@@ -648,7 +648,7 @@ public class CalamariMoveController : MonoBehaviour
                 else
                 {
                     // 右側に壁があった際の床上移動と壁移動
-                    if (_wallRunHorizontalMode == (int)WallRunHorizontalMode.RIGHT_IS_FRONT)
+                    if (_wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT)
                     {
                         // 左向きなら横向き
                         if (0f < _moveVelocity.y)
@@ -662,7 +662,7 @@ public class CalamariMoveController : MonoBehaviour
                         }
                     }
                     // 左側に壁があった際の床上移動と壁移動
-                    else if (_wallRunHorizontalMode == (int)WallRunHorizontalMode.LEFT_IS_FRONT)
+                    else if (_wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT)
                     {
                         // 左向きなら横向き
                         if (0f < _moveVelocity.y)

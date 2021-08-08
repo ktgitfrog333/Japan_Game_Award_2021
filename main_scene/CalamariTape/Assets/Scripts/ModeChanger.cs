@@ -32,7 +32,7 @@ public class ModeChanger : MonoBehaviour
     /// <summary>モード切り替えエフェクト</summary>
     [SerializeField] private GameObject _scissorsEffect;
     /// <summary>パーティクルシステム</summary>
-    [SerializeField] private ParticleSystem _particleSystem;
+    [SerializeField] private ParticleSystem[] _particleSystem;
 
     void Start()
     {
@@ -171,6 +171,12 @@ public class ModeChanger : MonoBehaviour
     {
         _scissorsEffect.SetActive(true);
         _scissorsEffect.transform.position = position;
-        _particleSystem.Play();
+        if (0 < _particleSystem.Length)
+        {
+            for (int i = 0; i < _particleSystem.Length; i++)
+            {
+                _particleSystem[i].Play();
+            }
+        }
     }
 }

@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Controller.WallHorizontal
+namespace Controller.WallVertical
 {
     /// <summary>
-    /// 横にある壁に対して横方向へ入力すると登るモードオプション
+    /// 縦にある壁に対して横方向へ入力すると登るモードオプション
     /// </summary>
-    public enum WallRunHorizontalMode
+    public enum WallRunVerticalMode
     {
         /// <summary>0：上に配置</summary>
         TOP = 0,
