@@ -1,3 +1,34 @@
+2021/08/10 12:39
+★ネンチャクモードにて壁移動の振る舞い、耐久値による見た目の変更
+・左スティックの入力状態によって転がらない不具合の修正
+main_scene\CalamariTape\Assets\Animations\Scotch_tape_outside.controller
+・各ステージにてネンチャクモードのコンポネント情報の更新
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+・カラマリモードにてモルモットが動かない不具合の修正
+main_scene\CalamariTape\Assets\Scripts\CalamariAnimation.cs
+・ツルツルモードにてモルモットが動かない不具合の修正
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruAnimation.cs
+・モードチェンジ処理にてネンチャクモードに切り替えた際にモードチェンジメソッド追加
+main_scene\CalamariTape\Assets\Scripts\ModeChanger.cs
+・ネンチャクモードにて回転モーションを追加、移動方向の調整、耐久ゲージに合わせて外観を変更
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+・ネンチャクモードにて移動中にメニュー画面表示でアニメーション停止処理を追加
+main_scene\CalamariTape\Assets\Scripts\PauseWindowManager.cs
+・プレイヤー情報管理へネンチャクモードのアニメーション処理を追加
+main_scene\CalamariTape\Assets\Scripts\PlayerManager.cs
+・ネンチャクモードのマテリアルを作成
+main_scene\CalamariTape\Assets\Models\Materials\NenchakBody.mat
+・ネンチャクモードの回転モーションアニメーションスクリプトを作成
+main_scene\CalamariTape\Assets\Scripts\NenchakAnimation.cs
+・ネンチャクモードの耐久ゲージ管理スクリプトを作成
+main_scene\CalamariTape\Assets\Scripts\NenchakHealth.cs
+・ネンチャクモードの状態管理スクリプトを作成
+main_scene\CalamariTape\Assets\Scripts\NenchakState.cs
+
 2021/08/08 15:37
 ★ツルツルモード見た目変更とネンチャクモード移動処理を変更
 ・モードチェンジ演出オブジェクトをプレハブ化

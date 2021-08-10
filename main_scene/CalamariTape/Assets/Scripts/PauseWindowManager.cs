@@ -27,6 +27,7 @@ public class PauseWindowManager : MonoBehaviour
         {
             _playerManager._calamariAnimation.PauseAnimation("Scotch_tape_outside");
             _playerManager._calamariController.enabled = false;
+            _playerManager._nenchakAnimation.PauseAnimation("Scotch_tape_outside");
             _playerManager._nenchakController.enabled = false;
             _playerManager._tsuruTsuruAnimation.PauseAnimation("Scotch_tape_outside");
             _playerManager._tsurutsuruController.enabled = false;

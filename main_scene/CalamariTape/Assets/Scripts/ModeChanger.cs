@@ -9,12 +9,8 @@ using UnityStandardAssets.CrossPlatformInput;
 /// </summary>
 public class ModeChanger : MonoBehaviour
 {
-    /// <summary>カラマリモードオブジェクト</summary>
-    [SerializeField] private GameObject _calamari;
-    /// <summary>ネンチャクモードオブジェクト</summary>
-    [SerializeField] private GameObject _nenchak;
-    /// <summary>ツルツルモードオブジェクト</summary>
-    [SerializeField] private GameObject _tsurutsuru;
+    /// <summary>プレイヤーのモード管理</summary>
+    [SerializeField] private PlayerManager _playerManager;
 
     /// <summary>カラマリモード切り替え入力フラグ</summary>
     private bool _calamariInput;
@@ -37,9 +33,9 @@ public class ModeChanger : MonoBehaviour
     void Start()
     {
         Debug.Log("カラマリモード");
-        _calamari.SetActive(true);
-        _cameraPoint.PlayerCameraLook(_calamari);
-        _mode = _calamari.name.ToString();
+        _playerManager._calamari.SetActive(true);
+        _cameraPoint.PlayerCameraLook(_playerManager._calamari);
+        _mode = _playerManager._calamari.name.ToString();
     }
 
     private void Update()
@@ -48,7 +44,7 @@ public class ModeChanger : MonoBehaviour
         bool inputActive = false;
 
         // 入力チェック（ツルツルモードもしくはネンチャクモードからカラマリモード）
-        if (_nenchakInput == false && _tsurutsuruInput == false && inputActive == false && _mode.Equals(_calamari.name.ToString()))
+        if (_nenchakInput == false && _tsurutsuruInput == false && inputActive == false && _mode.Equals(_playerManager._calamari.name.ToString()))
         {
             _calamariInput = false;
             if (CrossPlatformInputManager.GetButtonDown("RB") == true)
@@ -64,7 +60,7 @@ public class ModeChanger : MonoBehaviour
         }
 
         // 入力チェック（ツルツルモード）
-        if (_calamariInput == false && inputActive == false && _mode.Equals(_tsurutsuru.name.ToString()))
+        if (_calamariInput == false && inputActive == false && _mode.Equals(_playerManager._tsurutsuru.name.ToString()))
         {
             _tsurutsuruInput = false;
             _calamariInput = CrossPlatformInputManager.GetButtonDown("RB");
@@ -72,7 +68,7 @@ public class ModeChanger : MonoBehaviour
         }
 
         // 入力チェック（ネンチャクモード）
-        if (_calamariInput == false && inputActive == false && _mode.Equals(_nenchak.name.ToString()))
+        if (_calamariInput == false && inputActive == false && _mode.Equals(_playerManager._nenchak.name.ToString()))
         {
             _nenchakInput = false;
             _calamariInput = CrossPlatformInputManager.GetButtonDown("LB");
@@ -103,28 +99,28 @@ public class ModeChanger : MonoBehaviour
         var position = Vector3.zero;
         var rotation = Vector3.zero;
         var scale = new Vector3(1, 1, 1);
-        if (_mode.Equals(_tsurutsuru.name.ToString()))
+        if (_mode.Equals(_playerManager._tsurutsuru.name.ToString()))
         {
-            position = _tsurutsuru.transform.position;
-            rotation = _tsurutsuru.transform.eulerAngles;
-            scale = _tsurutsuru.transform.localScale;
+            position = _playerManager._tsurutsuru.transform.position;
+            rotation = _playerManager._tsurutsuru.transform.eulerAngles;
+            scale = _playerManager._tsurutsuru.transform.localScale;
         }
-        else if (_mode.Equals(_nenchak.name.ToString()))
+        else if (_mode.Equals(_playerManager._nenchak.name.ToString()))
         {
-            position = _nenchak.transform.position;
-            rotation = _nenchak.transform.eulerAngles;
-            scale = _nenchak.transform.localScale;
+            position = _playerManager._nenchak.transform.position;
+            rotation = _playerManager._nenchak.transform.eulerAngles;
+            scale = _playerManager._nenchak.transform.localScale;
         }
         // エフェクト発生
         PlayScissorsEffect(position);
 
-        _calamari.transform.position = position;
-        _calamari.transform.eulerAngles = rotation;
-        _calamari.SetActive(true);
-        _cameraPoint.PlayerCameraLook(_calamari);
-        _nenchak.SetActive(false);
-        _tsurutsuru.SetActive(false);
-        _mode = _calamari.name.ToString();
+        _playerManager._calamari.transform.position = position;
+        _playerManager._calamari.transform.eulerAngles = rotation;
+        _playerManager._calamari.SetActive(true);
+        _cameraPoint.PlayerCameraLook(_playerManager._calamari);
+        _playerManager._nenchak.SetActive(false);
+        _playerManager._tsurutsuru.SetActive(false);
+        _mode = _playerManager._calamari.name.ToString();
     }
 
     /// <summary>
@@ -134,15 +130,16 @@ public class ModeChanger : MonoBehaviour
     {
         Debug.Log("ネンチャクモード");
         // エフェクト発生
-        PlayScissorsEffect(_calamari.transform.position);
+        PlayScissorsEffect(_playerManager._calamari.transform.position);
 
-        _nenchak.transform.position = _calamari.transform.position;
-        _nenchak.transform.eulerAngles = _calamari.transform.eulerAngles;
-        _calamari.SetActive(false);
-        _nenchak.SetActive(true);
-        _cameraPoint.PlayerCameraLook(_nenchak);
-        _tsurutsuru.SetActive(false);
-        _mode = _nenchak.name.ToString();
+        _playerManager._nenchak.transform.position = _playerManager._calamari.transform.position;
+        _playerManager._nenchak.transform.eulerAngles = _playerManager._calamari.transform.eulerAngles;
+        _playerManager._calamari.SetActive(false);
+        _playerManager._nenchak.SetActive(true);
+        _playerManager._nenchakController.OnChange();
+        _cameraPoint.PlayerCameraLook(_playerManager._nenchak);
+        _playerManager._tsurutsuru.SetActive(false);
+        _mode = _playerManager._nenchak.name.ToString();
     }
 
     /// <summary>
@@ -152,15 +149,15 @@ public class ModeChanger : MonoBehaviour
     {
         Debug.Log("ツルツルモード");
         // エフェクト発生
-        PlayScissorsEffect(_calamari.transform.position);
+        PlayScissorsEffect(_playerManager._calamari.transform.position);
 
-        _tsurutsuru.transform.position = _calamari.transform.position;
-        _tsurutsuru.transform.eulerAngles = _calamari.transform.eulerAngles;
-        _calamari.SetActive(false);
-        _nenchak.SetActive(false);
-        _tsurutsuru.SetActive(true);
-        _cameraPoint.PlayerCameraLook(_tsurutsuru);
-        _mode = _tsurutsuru.name.ToString();
+        _playerManager._tsurutsuru.transform.position = _playerManager._calamari.transform.position;
+        _playerManager._tsurutsuru.transform.eulerAngles = _playerManager._calamari.transform.eulerAngles;
+        _playerManager._calamari.SetActive(false);
+        _playerManager._nenchak.SetActive(false);
+        _playerManager._tsurutsuru.SetActive(true);
+        _cameraPoint.PlayerCameraLook(_playerManager._tsurutsuru);
+        _mode = _playerManager._tsurutsuru.name.ToString();
     }
 
     /// <summary>

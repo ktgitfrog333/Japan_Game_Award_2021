@@ -68,12 +68,15 @@
     <Compile Include="Assets\Scripts\ModeChanger.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\LevelReset.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
+    <Compile Include="Assets\Scripts\NenchakAnimation.cs" />
     <Compile Include="Assets\Scripts\DurableValue.cs" />
     <Compile Include="Assets\Scripts\MessageScrollText.cs" />
     <Compile Include="Assets\Scripts\MessageScroll.cs" />
     <Compile Include="Assets\Scripts\ScissorsCollision.cs" />
     <Compile Include="Assets\Scripts\Player_Data_Main.cs" />
+    <Compile Include="Assets\Scripts\NenchakState.cs" />
     <Compile Include="Assets\Scripts\ClearVerticalWall.cs" />
+    <Compile Include="Assets\Scripts\NotAttached\NenchakWallHorizontalDecision.cs" />
     <Compile Include="Assets\Scripts\CursorManager.cs" />
     <Compile Include="Assets\Scripts\CalamariMoveController.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
@@ -93,9 +96,11 @@
     <Compile Include="Assets\Scripts\MessageManager.cs" />
     <Compile Include="Assets\Scripts\TsuruTsuruState.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
+    <Compile Include="Assets\Scripts\Common\WallRunHorizontalMode.cs" />
     <Compile Include="Assets\Scripts\TsuruTsuruMoveController.cs" />
     <Compile Include="Assets\Scripts\Common\WallRunHorizontalFrontMode.cs" />
     <Compile Include="Assets\Scripts\SaveControllerScene.cs" />
+    <Compile Include="Assets\Scripts\ClearHorizontalWall.cs" />
     <Compile Include="Assets\Scripts\TsuruTsuruAnimation.cs" />
     <Compile Include="Assets\Scripts\SceneMove.cs" />
     <Compile Include="Assets\Scripts\GoalEvent.cs" />
@@ -105,9 +110,7 @@
     <Compile Include="Assets\Scripts\ScreenDirectInOut.cs" />
     <Compile Include="Assets\Scripts\CameraPointMove.cs" />
     <Compile Include="Assets\Scripts\PauseWindowManager.cs" />
-    <Compile Include="Assets\Scripts\NotAttached\NenchakWallHorizontalDecision.cs" />
-    <Compile Include="Assets\Scripts\ClearHorizontalWall.cs" />
-    <Compile Include="Assets\Scripts\Common\WallRunHorizontalMode.cs" />
+    <Compile Include="Assets\Scripts\NenchakHealth.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\8K Skybox Pack Free\ReadMe.txt" />

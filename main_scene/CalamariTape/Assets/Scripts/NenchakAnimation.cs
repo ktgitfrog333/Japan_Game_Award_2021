@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ツルツルモードのアニメーション
+/// ネンチャクモードのアニメーション
 /// </summary>
-public class TsuruTsuruAnimation : MonoBehaviour
+public class NenchakAnimation : MonoBehaviour
 {
-    /// <summary>ツルツルモードの状態</summary>
-    [SerializeField] private TsuruTsuruState _state;
+    /// <summary>ネンチャクモードの状態</summary>
+    [SerializeField] private NenchakState _state;
 
     /// <summary>アニメーションスピード</summary>
     private float _animationSpeed = 0f;
@@ -25,7 +25,7 @@ public class TsuruTsuruAnimation : MonoBehaviour
         var result = false;
         if (animatorName.Equals(_state._animatorTape.name))
         {
-            if (0f < Mathf.Abs(_state._animatorTape.speed) && Mathf.Abs(value) == 0f)
+            if (0f < Mathf.Abs(_state._animatorTape.speed) && Mathf.Abs(value) < 1.5f)
             {
                 result = true;
             }
@@ -64,13 +64,9 @@ public class TsuruTsuruAnimation : MonoBehaviour
                 _state._animatorTape.SetFloat(name, value);
             }
         }
-        else if (animatorName.Equals(_state._animatorMarmot.name))
+        if (animatorName.Equals(_state._animatorMarmot.name))
         {
             _state._animatorMarmot.SetFloat(name, value);
-        }
-        else
-        {
-            Debug.Log("不明なAnimator指定:[" + animatorName + "]");
         }
     }
 

@@ -66,7 +66,7 @@ public class CalamariAnimation : MonoBehaviour
         }
         else if (animatorName.Equals(_state._animatorMarmot.name))
         {
-            _state._animatorTape.SetFloat(name, value);
+            _state._animatorMarmot.SetFloat(name, value);
         }
         else
         {

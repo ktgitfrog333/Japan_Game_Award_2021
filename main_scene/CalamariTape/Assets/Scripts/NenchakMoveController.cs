@@ -47,9 +47,6 @@ public class NenchakMoveController : MonoBehaviour
     /// <summary>位置フラグを一時保存</summary>
     [SerializeField] private bool _positionCashDebugOff;
 
-    /// <summary>耐久ゲージ</summary>
-    [SerializeField] private DurableValue _value;
-
     /// <summary>アニメーション</summary>
     [SerializeField] private float _movedSpeedToAnimator;
 
@@ -78,15 +75,13 @@ public class NenchakMoveController : MonoBehaviour
     /// </summary>
     private int _wallRunHorizontalMode = (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT;
 
-    /// <summary>モルモットのアニメーター</summary>
-    [SerializeField] private Animator _animator;
+    /// <summary>ネンチャクモードのアニメーション</summary>
+    [SerializeField] private NenchakAnimation _animation;
 
     /// <summary>テープ（外側）の位置情報</summary>
     [SerializeField] private Transform _tapeOutside;
     /// <summary>モルモットの位置情報</summary>
     [SerializeField] private Transform _morumotto;
-    /// <summary>回転スピード</summary>
-    [SerializeField] private float _rollSpeed = 5f;
 
     /// <summary>SE再生用のゲームオブジェクト</summary>
     [SerializeField] private SfxPlay _sfxPlay;
@@ -106,6 +101,9 @@ public class NenchakMoveController : MonoBehaviour
     /// <summary>一度でも壁（横）に衝突したことがある</summary>
     private bool _wallRunedHztl;
 
+    /// <summary>プレイヤーの耐久値</summary>
+    [SerializeField] private NenchakHealth _health;
+
     void Start()
     {
         _transform = this.transform;
@@ -119,6 +117,9 @@ public class NenchakMoveController : MonoBehaviour
         {
             _mainCameraTransform = Camera.main.transform;
         }
+        var color = _health.ReadMaterial();
+        _health.ReflectMaterial(color);
+        _health._defaultAlpha = _health.ReadMaterial().a;
     }
 
     private void FixedUpdate()
@@ -154,6 +155,15 @@ public class NenchakMoveController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             StartCoroutine(PositionCash());
+        }
+
+        // アニメーションのループ対策
+        if (_wallRunVertical == false && _wallRunHorizontal == false)
+        {
+            if (_animation.getAnimationLoop("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator) == true)
+            {
+                _animation.setAnimetionParameters("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator);
+            }
         }
     }
 
@@ -237,6 +247,16 @@ public class NenchakMoveController : MonoBehaviour
     }
 
     /// <summary>
+    /// モードチェンジで実行するメソッド
+    /// </summary>
+    public void OnChange()
+    {
+        var c = _health.ReadMaterial();
+        _health.ReflectMaterial(c.r, c.g, c.b, _health._defaultAlpha);
+        _health._blinkingMaterialStart = false;
+    }
+
+    /// <summary>
     /// キャラクターの操作制御
     /// </summary>
     private void CharacterMovement()
@@ -244,19 +264,19 @@ public class NenchakMoveController : MonoBehaviour
         var h = CrossPlatformInputManager.GetAxis("Horizontal");
         var v = CrossPlatformInputManager.GetAxis("Vertical");
 
-        if (0 < _value._parameter && _value._adhesive == true && _wallRunVertical == true && _wallRunHorizontal == false)
+        if (0 < _health.Parameter && _health.Adhesive == true && _wallRunVertical == true && _wallRunHorizontal == false)
         {
             // 前後方向で登る制御
             _moveVelocity.x = h * _groundSetMoveSpeed;
             _moveVelocity.y = v * _groundSetMoveSpeed;
         }
-        else if (0 < _value._parameter && _value._adhesive == true && _wallRunHorizontal == true)
+        else if (0 < _health.Parameter && _health.Adhesive == true && _wallRunHorizontal == true)
         {
             // 横方向で登る制御
             _moveVelocity.y = h * _groundSetMoveSpeed * _wallRunHorizontalMode;
             _moveVelocity.z = v * _groundSetMoveSpeed;
         }
-        else if (0 < _value._parameter && _value._adhesive == true && _wallRunedVtcl == true && _wallRunedHztl == false)
+        else if (0 < _health.Parameter && _health.Adhesive == true && _wallRunedVtcl == true && _wallRunedHztl == false)
         {
             // 耐久値がある内は縦方向の入力で登る壁に対して壁の外に出ない挙動にする
             var wall = NenchakWallVerticalDecision.CheckClear(_clearVtclWall);
@@ -277,7 +297,7 @@ public class NenchakMoveController : MonoBehaviour
                 }
             }
         }
-        else if (0 < _value._parameter && _value._adhesive == true && _wallRunedHztl == true)
+        else if (0 < _health.Parameter && _health.Adhesive == true && _wallRunedHztl == true)
         {
             // 耐久値がある内は横方向の入力で登る壁に対して壁の外に出ない挙動にする
             var wall = NenchakWallHorizontalDecision.CheckClear(_clearHztlWall);
@@ -317,7 +337,7 @@ public class NenchakMoveController : MonoBehaviour
                 }
             }
         }
-        else if (_value._parameter <= 0f && _value._adhesive == false)
+        else if (_health.Parameter <= 0f && _health.Adhesive == false)
         {
             _moveVelocity.x = 0f;
             // 重力による加速
@@ -330,15 +350,6 @@ public class NenchakMoveController : MonoBehaviour
         // 値を0へ戻す
         _moveVelocity = Vector3.zero;
         _movedSpeedToAnimator = 0f;
-    }
-
-    /// <summary>
-    /// 移動速度に応じて各オブジェクトを回転させる
-    /// </summary>
-    private void RollObject()
-    {
-        _tapeOutside.eulerAngles += new Vector3(0, 0, _rollSpeed * -1);
-        _morumotto.eulerAngles += new Vector3(_rollSpeed, 0, 0);
     }
 
     /// <summary>
@@ -361,7 +372,11 @@ public class NenchakMoveController : MonoBehaviour
 
         // 移動スピードをanimatorに反映
         _movedSpeedToAnimator = new Vector3(_moveVelocity.x, _moveVelocity.y, _moveVelocity.z).magnitude;
-        _animator.SetFloat("MoveSpeed", _movedSpeedToAnimator);
+        if (0 < _health.Parameter && _health.Adhesive == true)
+        {
+            _animation.setAnimetionParameters("Morumotto", "MoveSpeed", _movedSpeedToAnimator);
+            _animation.setAnimetionParameters("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator);
+        }
         if (0 < _movedSpeedToAnimator)
         {
             PlaySoundEffectMove();
@@ -372,18 +387,29 @@ public class NenchakMoveController : MonoBehaviour
         }
 
         // テープの耐久ゲージを減らす
-        if (0 < _movedSpeedToAnimator && 0 < _value._parameter && _value._adhesive == true && _wallRunVertical == true)
+        if (0 < _movedSpeedToAnimator && 0 < _health.Parameter && _health.Adhesive == true && (_wallRunVertical == true || _wallRunHorizontal == true))
         {
-            RollObject();
             PlaySoundEffectDerableDecrease();
 
-            _value._parameter -= Time.deltaTime;
-            Debug.Log("耐久値：" + _value._parameter);
-            if (_value._parameter <= 0)
+            _health.Parameter -= Time.deltaTime;
+            var m = _health.ReadMaterial();
+            var a = _health.CalcAlpha(_health.Parameter);
+            _health.ReflectMaterial(m.r, m.g, m.b, a);
+            Debug.Log("耐久値：" + _health.Parameter);
+            if (0f < _health.Parameter && _health.Parameter < 2f)
             {
-                _value._parameter = 0f;
-                _value._adhesive = false;
+                if (_health._blinkingMaterialStart == false)
+                {
+                    _health._blinkingMaterialStart = true;
+                    StartCoroutine(_health.BlinkingMaterial());
+                }
+            }
+            else if (_health.Parameter <= 0)
+            {
+                _health.Parameter = 0f;
+                _health.Adhesive = false;
                 Debug.Log("耐久値無し");
+                _animation.PauseAnimation("Scotch_tape_outside");
             }
         }
     }
@@ -446,6 +472,70 @@ public class NenchakMoveController : MonoBehaviour
                     else if (_moveVelocity.x < 0f)
                     {
                         _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 90f);
+                    }
+                }
+            }
+        }
+        else if (_wallRunHorizontal == true)
+        {
+            if (0 < Mathf.Abs(_moveVelocity.y) || 0 < Mathf.Abs(_moveVelocity.z))
+            {
+                if (Mathf.Abs(_moveVelocity.y) < Mathf.Abs(_moveVelocity.z))
+                {
+                    if (_wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT)
+                    {
+                        // 正面なら縦向き
+                        if (0f < _moveVelocity.z)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 90f);
+                        }
+                        else if (_moveVelocity.z < 0f)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, -90f);
+                        }
+                    }
+                    else if (_wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT)
+                    {
+                        // 正面なら縦向き
+                        if (0f < _moveVelocity.z)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, -90f);
+                        }
+                        else if (_moveVelocity.z < 0f)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 90f);
+                        }
+                    }
+                }
+                else
+                {
+                    // 右側に壁があった際の床上移動と壁移動
+                    if (_wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT)
+                    {
+                        // 左向きなら横向き
+                        if (0f < _moveVelocity.y)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 90f, 0f);
+                        }
+                        // 右向きなら横向き
+                        else if (_moveVelocity.y < 0f)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, -90f, 0f);
+                        }
+                    }
+                    // 左側に壁があった際の床上移動と壁移動
+                    else if (_wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT)
+                    {
+                        // 左向きなら横向き
+                        if (0f < _moveVelocity.y)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, -90f, 0f);
+                        }
+                        // 右向きなら横向き
+                        else if (_moveVelocity.y < 0f)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 90f, 0f);
+                        }
                     }
                 }
             }
