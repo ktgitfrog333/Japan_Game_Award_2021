@@ -1,0 +1,9 @@
+﻿ForwardAddのFinalColorにスライダープロパティを1個挟む
+
+_IntensityOfPointLight ("[Lighting] Intensity Of Point Light", Range(0, 1)) = 0.2
+
+
+uniform float _ShadowBoarderMax;
+
+
+fixed4 finalRGBA = fixed4(finalColor * _IntensityOfPointLight,0);
