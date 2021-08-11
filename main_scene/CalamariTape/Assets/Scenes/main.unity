@@ -1810,7 +1810,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5249419069203117132, guid: f154cb7c268327f4fb028376c5de488e, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5249419069203117132, guid: f154cb7c268327f4fb028376c5de488e, type: 3}
       propertyPath: m_TagString
@@ -1820,6 +1820,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4464563e826a4d04a890ea6835019aea, type: 2}
+    - target: {fileID: 5249419069775762938, guid: f154cb7c268327f4fb028376c5de488e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f154cb7c268327f4fb028376c5de488e, type: 3}
 --- !u!4 &476739880 stripped
@@ -4064,7 +4068,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.21018352, y: 0.000000008411012, z: -0.0000000018082488, w: 0.97766197}
+  m_LocalRotation: {x: 0.21018352, y: 0.000000008411013, z: -0.000000001808249, w: 0.97766197}
   m_LocalPosition: {x: -8.91, y: 8.69, z: -6.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4644,6 +4648,11 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!23 &1008830554 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: ad19bce7887389f4fa3bc4d815146e3d, type: 3}
+  m_PrefabInstance: {fileID: 2035535778}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1114497776
 GameObject:
   m_ObjectHideFlags: 0
@@ -5212,7 +5221,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1145615035}
-  m_LocalRotation: {x: 0.21018352, y: 0.000000008411012, z: -0.0000000018082488, w: 0.97766197}
+  m_LocalRotation: {x: 0.21018352, y: 0.000000008411013, z: -0.000000001808249, w: 0.97766197}
   m_LocalPosition: {x: -8.91, y: 8.69, z: -6.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6025,11 +6034,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 602cff782644f60419f5e1864d24239d, type: 3}
---- !u!4 &1411533557 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 602cff782644f60419f5e1864d24239d, type: 3}
-  m_PrefabInstance: {fileID: 1411533556}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1434230227 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8641517965659353847, guid: cbf4f0bcedda17f48ab6e5ad1b5455ac, type: 3}
@@ -7594,6 +7598,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3155151438129695559, guid: 31ba86508af2a184f95ca084898b9f86, type: 3}
+      propertyPath: m_TagString
+      value: VerticalWall
+      objectReference: {fileID: 0}
     - target: {fileID: 4264909062252874765, guid: 31ba86508af2a184f95ca084898b9f86, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -8259,7 +8267,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5249419069203117132, guid: f154cb7c268327f4fb028376c5de488e, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5249419069203117132, guid: f154cb7c268327f4fb028376c5de488e, type: 3}
       propertyPath: m_TagString
@@ -8269,6 +8277,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4464563e826a4d04a890ea6835019aea, type: 2}
+    - target: {fileID: 5249419069775762938, guid: f154cb7c268327f4fb028376c5de488e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f154cb7c268327f4fb028376c5de488e, type: 3}
 --- !u!4 &1755647717 stripped
@@ -9861,6 +9873,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ad19bce7887389f4fa3bc4d815146e3d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 454be66f922b0964284a62f1e6bb8d88, type: 2}
     - target: {fileID: -5754084199372789682, guid: ad19bce7887389f4fa3bc4d815146e3d, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -9895,6 +9911,7 @@ GameObject:
   - component: {fileID: 2035709083}
   - component: {fileID: 2035709086}
   - component: {fileID: 2035709085}
+  - component: {fileID: 2035709087}
   - component: {fileID: 2035709082}
   m_Layer: 0
   m_Name: Calamari
@@ -9989,7 +10006,6 @@ MonoBehaviour:
   _maxJumpMax: 45
   _positionCashDebugOff: 0
   _calamariStop: 0
-  _value: {fileID: 1555774182}
   _wallPosition: {x: 0, y: 0, z: 0}
   _wallRunVertical: 0
   _wallRunHorizontal: 0
@@ -9997,8 +10013,7 @@ MonoBehaviour:
   _maxMaxDistance: 8.5
   _sfxPlay: {fileID: 1525769980}
   _animation: {fileID: 2035709085}
-  _tapeOutside: {fileID: 2035535779}
-  _morumotto: {fileID: 1411533557}
+  _health: {fileID: 2035709087}
 --- !u!143 &2035709083
 CharacterController:
   m_ObjectHideFlags: 0
@@ -10057,6 +10072,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animatorTape: {fileID: 1008830553}
   _animatorMarmot: {fileID: 2004878751}
+  _renderer: {fileID: 1008830554}
+  _value: {fileID: 1555774182}
+--- !u!114 &2035709087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035709078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344a7969f21307b49885ba769b3d951e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _state: {fileID: 2035709086}
+  _alpha: 0
 --- !u!1 &2043753748
 GameObject:
   m_ObjectHideFlags: 0

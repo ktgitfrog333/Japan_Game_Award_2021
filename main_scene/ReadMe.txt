@@ -1,3 +1,28 @@
+2021/08/11 19:00
+★カラマリモードにて壁移動の振る舞い、耐久値による見た目の変更
+・各ステージにてカラマリモードのコンポネント情報の更新、壁オブジェクトのタグ、レイヤー情報の変更
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+・カラマリモードにて縦向きの壁を登るor降りる際の挙動を修正、耐久値によるマテリアルを点滅させる処理を追加
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+・カラマリモードの状態管理にてテープのマテリアル情報と耐久値情報を追加
+main_scene\CalamariTape\Assets\Scripts\CalamariState.cs
+・モードチェンジ処理にてカラマリモードへ変更した際に実行させるメソッドを追加
+main_scene\CalamariTape\Assets\Scripts\ModeChanger.cs
+・レイヤー情報管理スクリプトへ壁レイヤーインデックスを追加
+main_scene\CalamariTape\Assets\Scripts\Common\LayerManager.cs
+・壁レイヤーを追加
+main_scene\CalamariTape\ProjectSettings\TagManager.asset
+・カラマリモードのテープマテリアル用スプライトを作成
+main_scene\CalamariTape\Assets\Images\calamari_graphic.png
+・カラマリモードのテープマテリアルを作成
+main_scene\CalamariTape\Assets\Models\Materials\CalamariBody.mat
+・カラマリモードの耐久値管理スクリプトを作成
+main_scene\CalamariTape\Assets\Scripts\CalamariHealth.cs
+
 2021/08/10 12:39
 ★ネンチャクモードにて壁移動の振る舞い、耐久値による見た目の変更
 ・左スティックの入力状態によって転がらない不具合の修正

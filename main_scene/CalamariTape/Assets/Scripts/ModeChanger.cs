@@ -117,6 +117,7 @@ public class ModeChanger : MonoBehaviour
         _playerManager._calamari.transform.position = position;
         _playerManager._calamari.transform.eulerAngles = rotation;
         _playerManager._calamari.SetActive(true);
+        _playerManager._calamariController.OnChange();
         _cameraPoint.PlayerCameraLook(_playerManager._calamari);
         _playerManager._nenchak.SetActive(false);
         _playerManager._tsurutsuru.SetActive(false);
