@@ -1,3 +1,23 @@
+2021/08/12 17:33
+★各ステージにてオブジェクトが重なった時に点滅しないよう修正、ブロック系の見た目修正
+・各ステージにてオブジェクトが重なった時に点滅しないよう修正、ブロック系の見た目修正
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+
+・登れない壁ブロック、登れる壁ブロック、床マテリアルを作成
+main_scene\CalamariTape\Assets\Prototype Textures\Materials\
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene\
+main_scene\CalamariTape\Assets\Wood Patterns\Wood Patterns Demo\Materials\
+main_scene\CalamariTape\Assets\Prototype Textures\Materials\Pink\
+main_scene\CalamariTape\Assets\Prototype Textures\Materials\Yellow\
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene\
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene\
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene\
+main_scene\CalamariTape\Assets\Wood Patterns\Wood Patterns Demo\Materials\
+
 2021/08/11 19:00
 ★カラマリモードにて壁移動の振る舞い、耐久値による見た目の変更
 ・各ステージにてカラマリモードのコンポネント情報の更新、壁オブジェクトのタグ、レイヤー情報の変更
