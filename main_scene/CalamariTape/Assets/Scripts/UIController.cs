@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Const.Name;
 
 /// <summary>
 ///UI操作スクリプトクラス
@@ -36,6 +37,7 @@ public class UIController : MonoBehaviour
         _frame.SetActive(true);
         _transform.sizeDelta = new Vector2(_width * 1.2f, _height * 1.2f);
         _sfx.PlaySFX("se_select");
+        PushFirstObject();
     }
 
     /// <summary>
@@ -45,5 +47,26 @@ public class UIController : MonoBehaviour
     {
         _frame.SetActive(false);
         _transform.sizeDelta = new Vector2(_width, _height);
+    }
+
+    /// <summary>
+    /// 最後に参照されるメニュー項目情報を親オブジェクトへ格納
+    /// </summary>
+    private void PushFirstObject()
+    {
+        var g = this.gameObject;
+        var p = g.transform.parent;
+        if (p.name.Equals(NameManager.MENU))
+        {
+            var menu = p.GetComponent<Menu>();
+            menu.FirstElement = g.GetComponent<UIController>();
+            menu.FirstObject = g;
+        }
+        else if (p.name.Equals(NameManager.CLEAR_SCREEN))
+        {
+            var clear = p.GetComponent<ClearManager>();
+            clear.FirstElement = g.GetComponent<UIController>();
+            clear.FirstObject = g;
+        }
     }
 }

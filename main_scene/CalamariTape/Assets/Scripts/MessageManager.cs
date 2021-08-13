@@ -13,9 +13,6 @@ public class MessageManager : MonoBehaviour
     [SerializeField] private ModeChanger _modeChanger;
     /// <summary>プレイヤーの各モードごとの制御</summary>
     [SerializeField] private PlayerManager _playerManager;
-    /// <summary>メニュー制御</summary>
-    [SerializeField] private PauseWindowManager _pauseWindowManager;
-
     /// <summary>メッセージ表示中も操作を止めない（デバッグ用）</summary>
     [SerializeField] private bool _controllerDisabled = true;
     /// <summary>表示済みであるか</summary>
@@ -35,7 +32,6 @@ public class MessageManager : MonoBehaviour
                     _playerManager._nenchakController.enabled = false;
                     _playerManager._tsuruTsuruAnimation.PauseAnimation("Scotch_tape_outside");
                     _playerManager._tsurutsuruController.enabled = false;
-                    _pauseWindowManager.enabled = false;
                 }
             }
 
@@ -61,6 +57,5 @@ public class MessageManager : MonoBehaviour
         _playerManager._calamariController.enabled = true;
         _playerManager._nenchakController.enabled = true;
         _playerManager._tsurutsuruController.enabled = true;
-        _pauseWindowManager.enabled = true;
     }
 }

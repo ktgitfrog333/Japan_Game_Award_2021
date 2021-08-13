@@ -779,7 +779,7 @@ GameObject:
   - component: {fileID: 198992270}
   m_Layer: 5
   m_Name: Button_Message_D_000
-  m_TagString: Untagged
+  m_TagString: Message
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1539,7 +1539,7 @@ GameObject:
   - component: {fileID: 432338120}
   m_Layer: 5
   m_Name: Button_Message_B_000
-  m_TagString: Untagged
+  m_TagString: Message
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3184,7 +3184,7 @@ GameObject:
   - component: {fileID: 806754579}
   m_Layer: 5
   m_Name: Button_Message_B_000 (1)
-  m_TagString: Untagged
+  m_TagString: Message
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3747,7 +3747,7 @@ GameObject:
   - component: {fileID: 934352015}
   m_Layer: 5
   m_Name: Button_Message_C_000
-  m_TagString: Untagged
+  m_TagString: Message
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4068,7 +4068,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.21018352, y: -0.000000008411013, z: 0.000000001808249, w: 0.97766197}
+  m_LocalRotation: {x: 0.21018352, y: 0.000000008411013, z: -0.000000001808249, w: 0.97766197}
   m_LocalPosition: {x: -8.91, y: 8.69, z: -6.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4189,7 +4189,7 @@ GameObject:
   - component: {fileID: 975635218}
   m_Layer: 5
   m_Name: Button_Message_A_001
-  m_TagString: Untagged
+  m_TagString: Message
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4451,6 +4451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _menu: {fileID: 785587578}
   _playerManager: {fileID: 978842448}
+  _adviceMessage: {fileID: 983880147}
 --- !u!114 &978842450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5221,7 +5222,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1145615035}
-  m_LocalRotation: {x: 0.21018352, y: -0.000000008411013, z: 0.000000001808249, w: 0.97766197}
+  m_LocalRotation: {x: 0.21018352, y: 0.000000008411013, z: -0.000000001808249, w: 0.97766197}
   m_LocalPosition: {x: -8.91, y: 8.69, z: -6.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6145,7 +6146,7 @@ GameObject:
   - component: {fileID: 1447935689}
   m_Layer: 5
   m_Name: Button_Message_E_000
-  m_TagString: Untagged
+  m_TagString: Message
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11046,6 +11047,18 @@ PrefabInstance:
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
       objectReference: {fileID: 1915616668}
+    - target: {fileID: 5464104997674267850, guid: f645edfb1aefec64fa197e9897fe34b7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5464104997674267850, guid: f645edfb1aefec64fa197e9897fe34b7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5464104997674267850, guid: f645edfb1aefec64fa197e9897fe34b7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5464104997674267851, guid: f645edfb1aefec64fa197e9897fe34b7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

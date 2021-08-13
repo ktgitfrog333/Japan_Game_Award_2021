@@ -10,6 +10,7 @@ TagManager:
   - Wall
   - ClearVerticalWall
   - ClearHorizontalWall
+  - Message
   layers:
   - Default
   - TransparentFX

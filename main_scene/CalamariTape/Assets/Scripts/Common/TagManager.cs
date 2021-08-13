@@ -19,5 +19,7 @@ namespace Const.Tag
         public static readonly string CLEAR_VERTICAL_WALL = "ClearVerticalWall";
         /// <summary>透明ブロック（横）</summary>
         public static readonly string CLEAR_HORIZONTAL_WALL = "ClearHorizontalWall";
+        /// <summary>チュートリアルメッセージ</summary>
+        public static readonly string MESSAGE = "Message";
     }
 }

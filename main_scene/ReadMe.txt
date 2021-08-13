@@ -1,3 +1,25 @@
+2021/08/13 14:50
+★メニュー画面、クリア画面の不具合修正
+・各ステージのメニュー画面、クリア画面オブジェクト更新
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+・メニュー画面、クリア画面を表示中にクリックにて項目非選択とならないよう修正
+main_scene\CalamariTape\Assets\Scripts\ClearManager.cs
+main_scene\CalamariTape\Assets\Scripts\Menu.cs
+main_scene\CalamariTape\Assets\Scripts\UIController.cs
+・チュートリアルメッセージ表示中にメニュー画面表示可能として、メニュー画面表示中はチュートリアルメッセージのテキスト送りを停止する
+main_scene\CalamariTape\Assets\Scripts\MessageManager.cs
+main_scene\CalamariTape\Assets\Scripts\MessageScrollText.cs
+main_scene\CalamariTape\Assets\Scripts\PauseWindowManager.cs
+main_scene\CalamariTape\Assets\Scripts\Common\TagManager.cs
+・タグ管理スクリプトへチュートリアルメッセージタグを追加
+main_scene\CalamariTape\ProjectSettings\TagManager.asset
+・ゲームオブジェクトの名前を管理するスクリプトを作成
+main_scene\CalamariTape\Assets\Scripts\Common\NameManager.cs
+
 2021/08/12 17:33
 ★各ステージにてオブジェクトが重なった時に点滅しないよう修正、ブロック系の見た目修正
 ・各ステージにてオブジェクトが重なった時に点滅しないよう修正、ブロック系の見た目修正

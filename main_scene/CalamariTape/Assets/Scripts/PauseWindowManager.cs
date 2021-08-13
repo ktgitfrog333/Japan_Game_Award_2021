@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using Const.Tag;
 
 /// <summary>
 /// ポーズ画面表示制御スクリプトクラス
@@ -10,16 +11,19 @@ public class PauseWindowManager : MonoBehaviour
 {
     /// <summary>ポーズ画面UIオブジェクト</summary>
     [SerializeField] private GameObject _menu;
-    ///// <summary>カラマリモードの操作スクリプト</summary>
-    //[SerializeField] private CalamariMoveController _calamariController;
-    ///// <summary>ネンチャクモードの操作スクリプト</summary>
-    //[SerializeField] private NenchakMoveController _nenchakController;
-    ///// <summary>ツルツルモードの操作スクリプト</summary>
-    //[SerializeField] private TsuruTsuruMoveController _tsurutsuruController;
     /// <summary>プレイヤーのモード管理</summary>
     [SerializeField] private PlayerManager _playerManager;
     /// <summary>メニューを閉じる際に一度のみ実行するよう制御するフラグ</summary>
     private bool _menuClose;
+    /// <summary>チュートリアルメッセージ一覧UI</summary>
+    [SerializeField] private GameObject _adviceMessage;
+    /// <summary>チュートリアルメッセージ処理</summary>
+    private List<MessageScrollText> _messageText;
+
+    private void Start()
+    {
+        CashMessageText();
+    }
 
     private void Update()
     {
@@ -32,12 +36,48 @@ public class PauseWindowManager : MonoBehaviour
             _playerManager._tsuruTsuruAnimation.PauseAnimation("Scotch_tape_outside");
             _playerManager._tsurutsuruController.enabled = false;
             _menu.SetActive(true);
+            StopAdviceMessages();
         }
     }
 
     private void OnEnable()
     {
         _menuClose = false;
+    }
+
+    /// <summary>
+    /// チュートリアルメッセージをキャッシュ
+    /// </summary>
+    private void CashMessageText()
+    {
+        var cnt = _adviceMessage.transform.childCount;
+        if (0 < cnt)
+        {
+            _messageText = new List<MessageScrollText>();
+            for (var i = 0; i < cnt; i++)
+            {
+                var g = _adviceMessage.transform.GetChild(i);
+                if (g.tag.Equals(TagManager.MESSAGE))
+                {
+                    _messageText.Add(g.GetComponent<MessageScrollText>());
+                }
+            }
+        }
+
+    }
+
+    /// <summary>
+    /// チュートリアルメッセージを一時停止
+    /// </summary>
+    private void StopAdviceMessages()
+    {
+        foreach (var m in _messageText)
+        {
+            if (m.isActiveAndEnabled == true)
+            {
+                m.StopSentence();
+            }
+        }
     }
 
     /// <summary>
@@ -59,12 +99,47 @@ public class PauseWindowManager : MonoBehaviour
     private IEnumerator MenuCloseHalfSec()
     {
         yield return new WaitForSeconds(0.5f);
-        _playerManager._calamariController.enabled = true;
-        _playerManager._nenchakController.enabled = true;
-        _playerManager._tsurutsuruController.enabled = true;
+        if (CheckActiveAdviceMessages() != 0)
+        {
+            _playerManager._calamariController.enabled = true;
+            _playerManager._nenchakController.enabled = true;
+            _playerManager._tsurutsuruController.enabled = true;
+        }
         _menuClose = false;
         _menu.SetActive(false);
+        StartAdviceMessages();
 
         StopCoroutine(MenuCloseHalfSec());
+    }
+
+    /// <summary>
+    /// チュートリアルメッセージの有効チェック
+    /// </summary>
+    /// <returns></returns>
+    private int CheckActiveAdviceMessages()
+    {
+        var result = -1;
+        foreach (var m in _messageText)
+        {
+            if (m.isActiveAndEnabled == true)
+            {
+                result = m.CheckMessageLength();
+            }
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// チュートリアルメッセージを再生
+    /// </summary>
+    private void StartAdviceMessages()
+    {
+        foreach (var m in _messageText)
+        {
+            if (m.isActiveAndEnabled == true)
+            {
+                m.StartSentence();
+            }
+        }
     }
 }

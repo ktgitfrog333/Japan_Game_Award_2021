@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\NenchakHealth.cs" />
     <Compile Include="Assets\Scripts\MessageScroll.cs" />
     <Compile Include="Assets\Scripts\ScissorsCollision.cs" />
+    <Compile Include="Assets\Scripts\CalamariHealth.cs" />
     <Compile Include="Assets\Scripts\Player_Data_Main.cs" />
     <Compile Include="Assets\Scripts\NenchakState.cs" />
     <Compile Include="Assets\Scripts\ClearVerticalWall.cs" />
@@ -111,7 +112,7 @@
     <Compile Include="Assets\Scripts\ScreenDirectInOut.cs" />
     <Compile Include="Assets\Scripts\CameraPointMove.cs" />
     <Compile Include="Assets\Scripts\PauseWindowManager.cs" />
-    <Compile Include="Assets\Scripts\CalamariHealth.cs" />
+    <Compile Include="Assets\Scripts\Common\NameManager.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\8K Skybox Pack Free\ReadMe.txt" />
