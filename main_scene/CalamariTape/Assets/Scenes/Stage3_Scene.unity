@@ -3358,7 +3358,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.21018352, y: -0.000000008411012, z: 0.0000000018082488, w: 0.97766197}
+  m_LocalRotation: {x: 0.21018352, y: 0.000000008411013, z: -0.000000001808249, w: 0.97766197}
   m_LocalPosition: {x: -8.91, y: 8.69, z: -6.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4499,7 +4499,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1145615035}
-  m_LocalRotation: {x: 0.21018352, y: -0.000000008411012, z: 0.0000000018082488, w: 0.97766197}
+  m_LocalRotation: {x: 0.21018352, y: 0.000000008411013, z: -0.000000001808249, w: 0.97766197}
   m_LocalPosition: {x: -8.91, y: 8.69, z: -6.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -8783,8 +8783,10 @@ GameObject:
   - component: {fileID: 2035709084}
   - component: {fileID: 2035709083}
   - component: {fileID: 2035709086}
+  - component: {fileID: 2035709088}
   - component: {fileID: 2035709085}
   - component: {fileID: 2035709087}
+  - component: {fileID: 2035709089}
   - component: {fileID: 2035709082}
   m_Layer: 0
   m_Name: Calamari
@@ -8872,21 +8874,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 5
   _maxMoveSpeed: 6
-  _scale: 1
   _characterController: {fileID: 2035709083}
   _jumpPower: 5
   _jumpMax: 35
   _maxJumpMax: 45
   _positionCashDebugOff: 0
   _calamariStop: 0
-  _wallPosition: {x: 0, y: 0, z: 0}
-  _wallRunVertical: 0
-  _wallRunHorizontal: 0
-  _maxDistance: 2.3
-  _maxMaxDistance: 8.5
+  _wallMove: {fileID: 2035709089}
   _sfxPlay: {fileID: 1525769980}
   _animation: {fileID: 2035709085}
   _health: {fileID: 2035709087}
+  _scaler: {fileID: 2035709088}
 --- !u!143 &2035709083
 CharacterController:
   m_ObjectHideFlags: 0
@@ -8947,6 +8945,9 @@ MonoBehaviour:
   _animatorMarmot: {fileID: 2004878751}
   _renderer: {fileID: 2035535782}
   _value: {fileID: 1555774182}
+  _maxDistance: 2.3
+  _maxMaxDistance: 8.5
+  _sfxPlay: {fileID: 1525769980}
 --- !u!114 &2035709087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8961,6 +8962,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _state: {fileID: 2035709086}
   _alpha: 0
+--- !u!114 &2035709088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035709078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99c8f6b41c94a8b44811d46645960d0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _state: {fileID: 2035709086}
+  _scale: 1
+--- !u!114 &2035709089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035709078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8548450028b8d5e458bd1a681769e172, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _state: {fileID: 2035709086}
+  _scaler: {fileID: 2035709088}
 --- !u!1 &2043753748
 GameObject:
   m_ObjectHideFlags: 0

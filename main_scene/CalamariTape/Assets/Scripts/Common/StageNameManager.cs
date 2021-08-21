@@ -20,7 +20,7 @@ namespace Scene.StageName
         /// <summary>セクション２ - ステージ５</summary>
         public static readonly string SECTION_002_STAGE_005 = "Stage5_Scene";
         /// <summary>セクション２ - ステージ６</summary>
-        public static readonly string SECTION_002_STAGE_006 = "";
+        public static readonly string SECTION_002_STAGE_006 = "Stage6_Scene";
         /// <summary>セクション２ - ステージ７</summary>
         public static readonly string SECTION_002_STAGE_007 = "";
         /// <summary>セクション３ - ステージ８</summary>

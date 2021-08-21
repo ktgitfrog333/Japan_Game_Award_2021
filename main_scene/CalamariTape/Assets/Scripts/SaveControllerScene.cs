@@ -66,6 +66,10 @@ public class SaveControllerScene : MonoBehaviour
         {
             index = (int)StageClearNumber.SECTION_002_STAGE_005;
         }
+        if (name.Equals(StageNameManager.SECTION_002_STAGE_006))
+        {
+            index = (int)StageClearNumber.SECTION_002_STAGE_006;
+        }
         return index;
     }
 }

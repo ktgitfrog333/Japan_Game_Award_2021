@@ -1,3 +1,28 @@
+2021/08/21 20:34
+★（途中）新ギミックの動く壁の実装
+・ステージ追加により、セーブデータを更新
+main_scene\CalamariTape\Assets\data\data.json
+・各ステージのカラマリモードのコンポーネント情報を更新
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+・カラマリモードのプレイヤー情報を各コンポネントへ分割
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+main_scene\CalamariTape\Assets\Scripts\CalamariState.cs
+main_scene\CalamariTape\Assets\Scripts\CalamariScaler.cs
+main_scene\CalamariTape\Assets\Scripts\CalamariWallMove.cs
+・セーブ処理へ新ステージ「Stage6_Scene」追加
+main_scene\CalamariTape\Assets\Scripts\SaveControllerScene.cs
+main_scene\CalamariTape\Assets\Scripts\Common\StageNameManager.cs
+・動く壁の処理を追加
+main_scene\CalamariTape\Assets\Scripts\MoveVerticalWall.cs
+main_scene\CalamariTape\Assets\Scripts\Common\WallRunMoveVerticalMode.cs
+main_scene\CalamariTape\Assets\Scripts\NotAttached\DeadNullReference.cs
+・カラマリモードの大きさ調整処理を別ロジックにて追加
+main_scene\CalamariTape\Assets\Scripts\NotAttached\CalamariStateConf.cs
+
 2021/08/13 14:50
 ★メニュー画面、クリア画面の不具合修正
 ・各ステージのメニュー画面、クリア画面オブジェクト更新
