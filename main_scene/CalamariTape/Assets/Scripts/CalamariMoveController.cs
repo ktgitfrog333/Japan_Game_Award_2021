@@ -233,7 +233,6 @@ public class CalamariMoveController : MonoBehaviour
                 _moveVelocity.y = 0f;
             }
             _moveVelocity.x = h * speed;
-            //TransformMovement();
             // 動く壁だった場合は壁の移動位置に合わせてプレイヤーを移動させる
             _moveVelocity += _wallMove.RigidbodyVelocity;
         }
@@ -382,15 +381,6 @@ public class CalamariMoveController : MonoBehaviour
         }
     }
 
-    ///// <summary>
-    ///// 動く壁だった場合は壁の移動位置に合わせてプレイヤーを移動させる
-    ///// </summary>
-    //private void TransformMovement()
-    //{
-    //    var wall = _wallMove.RigidbodyVelocity;
-    //    _moveVelocity += wall;
-    //}
-
     /// <summary>
     /// 重力制御
     /// </summary>
@@ -435,10 +425,16 @@ public class CalamariMoveController : MonoBehaviour
         if (_positionCashDebugOff == false && (0 < _moveVelocity.x || 0 < _moveVelocity.z))
         {
             _positionCashDebugOff = true;
+            // デバッグ用のコメントアウトの為、残す
             //StartCoroutine(PositionCash());
         }
 
-        // 移動スピードをanimatorに反映
+        /*
+         移動スピードをanimatorに反映
+         ・かつ、横向きの壁を移動中　または　縦向きの壁を移動中
+         ・かつ、耐久ゲージが残っている
+         ・かつ、粘着フラグが有効である
+         */
         if ((_wallMove._wallRunVertical == true || _wallMove._wallRunHorizontal == true) && 0 < _health.Parameter && _health.Adhesive == true)
         {
             _movedSpeedToAnimator = new Vector3(_moveVelocity.x, _moveVelocity.y, 0).magnitude;
@@ -447,19 +443,25 @@ public class CalamariMoveController : MonoBehaviour
         {
             _movedSpeedToAnimator = new Vector3(_moveVelocity.x, 0, _moveVelocity.z).magnitude;
         }
-        _animation.setAnimetionParameters("Morumotto", "MoveSpeed", _movedSpeedToAnimator);
-        _animation.setAnimetionParameters("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator);
-        if (0 < _movedSpeedToAnimator)
+
+        var hAxis = CrossPlatformInputManager.GetAxis("Horizontal");
+        var vAxis = CrossPlatformInputManager.GetAxis("Vertical");
+        if (0.1f <= Mathf.Abs(hAxis) || 0.1f <= Mathf.Abs(vAxis))
         {
-            PlaySoundEffectMove();
-        }
-        else
-        {
-            _sfxPlayedMove = false;
+            _animation.setAnimetionParameters("Morumotto", "MoveSpeed", _movedSpeedToAnimator);
+            _animation.setAnimetionParameters("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator);
+            if (0 < _movedSpeedToAnimator)
+            {
+                PlaySoundEffectMove();
+            }
+            else
+            {
+                _sfxPlayedMove = false;
+            }
         }
 
         // 2点間の距離を測って一時的に停止する処理を呼び出す
-        if (0 < _movedSpeedToAnimator)
+        if (0 < _movedSpeedToAnimator && (0.1f <= Mathf.Abs(hAxis) || 0.1f <= Mathf.Abs(vAxis)))
         {
             if (_distanceFirstPointSaved == false)
             {
@@ -497,19 +499,16 @@ public class CalamariMoveController : MonoBehaviour
             }
         }
 
-        Debug.Log("magnitude:" + Mathf.Abs(_wallMove.RigidbodyVelocity.magnitude));
-        Debug.Log("Horizontal:" + Mathf.Abs(CrossPlatformInputManager.GetAxis("Horizontal")));
-        Debug.Log("Vertical:" + Mathf.Abs(CrossPlatformInputManager.GetAxis("Vertical")));
-        if ((Mathf.Abs(_wallMove.RigidbodyVelocity.magnitude) <= 0f)
-            && ((0f < Mathf.Abs(CrossPlatformInputManager.GetAxis("Horizontal")))
-                || (0f < Mathf.Abs(CrossPlatformInputManager.GetAxis("Vertical")))
-               )
-            )
-        {
-            Debug.Log("ok");
-        }
-        // テープの耐久ゲージを減らす
-        if (0 < _movedSpeedToAnimator && 0 < _health.Parameter && _health.Adhesive == true && (_wallMove._wallRunVertical == true || _wallMove._wallRunHorizontal == true) && (Mathf.Abs(_wallMove.RigidbodyVelocity.magnitude) <= 0f && (0f < Mathf.Abs(CrossPlatformInputManager.GetAxis("Horizontal")) || 0f < Mathf.Abs(CrossPlatformInputManager.GetAxis("Vertical")))))
+        /*
+         テープの耐久ゲージを減らす
+         ・回転アニメーションが再生されている
+         ・かつ、耐久ゲージが残っている
+         ・かつ、粘着フラグが有効である
+         ・かつ、横向きの壁を移動中　または　縦向きの壁を移動中
+         ・かつ、動く壁が止まっている
+         ・かつ、縦方向の入力中　または　横方向の入力中
+         */
+        if (0 < _movedSpeedToAnimator && 0 < _health.Parameter && _health.Adhesive == true && (_wallMove._wallRunVertical == true || _wallMove._wallRunHorizontal == true) && (Mathf.Abs(_wallMove.RigidbodyVelocity.magnitude) <= 0f) && (0.1f <= Mathf.Abs(hAxis) || 0.1f <= Mathf.Abs(vAxis)))
         {
             PlaySoundEffectDerableDecrease();
 
@@ -567,32 +566,37 @@ public class CalamariMoveController : MonoBehaviour
     {
         if (_wallMove._wallRunVertical == true)
         {
-            if (0 < Mathf.Abs(_moveVelocity.y) || 0 < Mathf.Abs(_moveVelocity.x))
+            var hAxis = CrossPlatformInputManager.GetAxis("Horizontal");
+            var vAxis = CrossPlatformInputManager.GetAxis("Vertical");
+            if (0.1f <= Mathf.Abs(hAxis) || 0.1f <= Mathf.Abs(vAxis))
             {
-                if (Mathf.Abs(_moveVelocity.x) < Mathf.Abs(_moveVelocity.y))
+                if (0 < Mathf.Abs(_moveVelocity.y) || 0 < Mathf.Abs(_moveVelocity.x))
                 {
-                    // 上方向なら縦向き
-                    if (0f < _moveVelocity.y)
+                    if (Mathf.Abs(_moveVelocity.x) < Mathf.Abs(_moveVelocity.y))
                     {
-                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 0f);
+                        // 上方向なら縦向き
+                        if (0f < _moveVelocity.y && 0.1f <= vAxis)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 0f);
+                        }
+                        // 下向きなら縦向き
+                        else if (_moveVelocity.y < 0f && vAxis <= -0.1f)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 0f);
+                        }
                     }
-                    // 下向きなら縦向き
-                    else if (_moveVelocity.y < 0f)
+                    else
                     {
-                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 0f);
-                    }
-                }
-                else
-                {
-                    // 左向きなら横向き
-                    if (0f < _moveVelocity.x)
-                    {
-                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, -90f);
-                    }
-                    // 右向きなら横向き
-                    else if (_moveVelocity.x < 0f)
-                    {
-                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 90f);
+                        // 左向きなら横向き
+                        if (0f < _moveVelocity.x && 0.1f <= hAxis)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, -90f);
+                        }
+                        // 右向きなら横向き
+                        else if (_moveVelocity.x < 0f && hAxis <= -0.1f)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 90f);
+                        }
                     }
                 }
             }

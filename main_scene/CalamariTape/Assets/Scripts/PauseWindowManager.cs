@@ -19,6 +19,8 @@ public class PauseWindowManager : MonoBehaviour
     [SerializeField] private GameObject _adviceMessage;
     /// <summary>チュートリアルメッセージ処理</summary>
     private List<MessageScrollText> _messageText;
+    /// <summary>レベルデザインギミック制御</summary>
+    [SerializeField] private StopGimmick _stopGimmick;
 
     private void Start()
     {
@@ -37,6 +39,7 @@ public class PauseWindowManager : MonoBehaviour
             _playerManager._tsurutsuruController.enabled = false;
             _menu.SetActive(true);
             StopAdviceMessages();
+            _stopGimmick.StopAllGimmik();
         }
     }
 
@@ -104,6 +107,7 @@ public class PauseWindowManager : MonoBehaviour
             _playerManager._calamariController.enabled = true;
             _playerManager._nenchakController.enabled = true;
             _playerManager._tsurutsuruController.enabled = true;
+            _stopGimmick.StartAllGimmik();
         }
         _menuClose = false;
         _menu.SetActive(false);

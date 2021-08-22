@@ -28,12 +28,15 @@ public class GoalEvent : MonoBehaviour, DebugDemo
 
     /// <summary>デバッグ</summary>
     [SerializeField] private VisualizeDebugMode _debug;
+    /// <summary>レベルデザインギミック制御</summary>
+    [SerializeField] private StopGimmick _stopGimmick;
 
     private void OnTriggerEnter(Collider other)
     {
         if (_goalTrigger == true && other.gameObject.tag.Equals("Player"))
         {
             StopPlayer();
+            _stopGimmick.StopAllGimmik();
             _clearUI.SetActive(true);
             _sfx.PlaySFX("me_game_clear");
             StartCoroutine(Save());

@@ -35,23 +35,46 @@ public class MoveVerticalWall : MonoBehaviour
             return _rigidbody.velocity;
         }
     }
+    /// <summary>開始位置から終了位置へループ移動</summary>
+    private IEnumerator _moveLoop;
 
-    private void Start()
+    private void Awake()
     {
         // 初期設定
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.useGravity = false;
+    }
 
+    private void Start()
+    {
         _transform = this.gameObject.transform;
         CheckConfig();
         SetLoopPoint();
 
-        StartCoroutine(MoveLoop());
+        _moveLoop = MoveLoop();
+        StartCoroutine(_moveLoop);
     }
 
     private void Update()
     {
         DrawRayIsRoot();
+    }
+
+    /// <summary>
+    /// ギミックの停止・開始を外部から制御
+    /// </summary>
+    /// <param name="flag">停止（false）・再生（true）</param>
+    public void SetActive(bool flag)
+    {
+        if (flag == true)
+        {
+            StartCoroutine(_moveLoop);
+        }
+        else
+        {
+            _rigidbody.velocity = Vector3.zero;
+            StopCoroutine(_moveLoop);
+        }
     }
 
     /// <summary>
@@ -90,7 +113,7 @@ public class MoveVerticalWall : MonoBehaviour
         }
 
         // 移動方向の正負を設定
-        if (_startPoint.magnitude < _endPoint.magnitude)
+        if (0f < _distance)
         {
             _symbol = 1;
         }

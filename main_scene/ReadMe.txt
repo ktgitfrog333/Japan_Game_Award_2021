@@ -1,3 +1,23 @@
+2021/08/22 14:52
+★新ギミックの動く壁をカラマリモードで移動中の処理を追加、メニュー画面表示の際にギミック停止処理を追加
+・各ステージにてギミック停止スクリプトを追加
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage6_Scene.unity
+・カラマリモードにて動く壁を移動中の処理を適用
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+・クリア画面表示の際にギミックを停止する処理を追加
+main_scene\CalamariTape\Assets\Scripts\GoalEvent.cs
+・横向きの動く壁へギミック停止処理を追加
+main_scene\CalamariTape\Assets\Scripts\MoveVerticalWall.cs
+・ポーズ画面表示の際にギミックを停止・開始する処理を追加
+main_scene\CalamariTape\Assets\Scripts\PauseWindowManager.cs
+・ギミック停止スクリプトを作成
+main_scene\CalamariTape\Assets\Scripts\StopGimmick.cs
+
 2021/08/21 20:34
 ★（途中）新ギミックの動く壁の実装
 ・ステージ追加により、セーブデータを更新

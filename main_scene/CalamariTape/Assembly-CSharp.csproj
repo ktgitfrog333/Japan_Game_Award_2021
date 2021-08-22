@@ -109,6 +109,7 @@
     <Compile Include="Assets\Scripts\SaveControllerScene.cs" />
     <Compile Include="Assets\Scripts\ClearHorizontalWall.cs" />
     <Compile Include="Assets\Scripts\Common\WallRunMoveVerticalMode.cs" />
+    <Compile Include="Assets\Scripts\NotAttached\DeadNullReference.cs" />
     <Compile Include="Assets\Scripts\TsuruTsuruAnimation.cs" />
     <Compile Include="Assets\Scripts\SceneMove.cs" />
     <Compile Include="Assets\Scripts\GoalEvent.cs" />
@@ -118,7 +119,7 @@
     <Compile Include="Assets\Scripts\ScreenDirectInOut.cs" />
     <Compile Include="Assets\Scripts\CameraPointMove.cs" />
     <Compile Include="Assets\Scripts\PauseWindowManager.cs" />
-    <Compile Include="Assets\Scripts\NotAttached\DeadNullReference.cs" />
+    <Compile Include="Assets\Scripts\StopGimmick.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\8K Skybox Pack Free\ReadMe.txt" />
