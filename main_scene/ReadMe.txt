@@ -1,3 +1,24 @@
+2021/08/25 9:15
+★ネンチャクモードにて横向きの動く壁対応
+・横向きの動く壁に範囲外判定オブジェクト追加
+main_scene\CalamariTape\Assets\Prefabs\MoveVerticalWall.prefab
+・各ステージの情報を変更
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage6_Scene.unity
+・共通処理の名称変更
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+main_scene\CalamariTape\Assets\Scripts\CalamariWallMove.cs
+main_scene\CalamariTape\Assets\Scripts\NotAttached\CalamariStateConf.cs
+・ネンチャクモードへ横向きの動く壁
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+main_scene\CalamariTape\Assets\Scripts\NenchakState.cs
+main_scene\CalamariTape\Assets\Scripts\NenchakScaler.cs
+main_scene\CalamariTape\Assets\Scripts\NenchakWallMove.cs
+
 2021/08/22 14:52
 ★新ギミックの動く壁をカラマリモードで移動中の処理を追加、メニュー画面表示の際にギミック停止処理を追加
 ・各ステージにてギミック停止スクリプトを追加

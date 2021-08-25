@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using Controller.WallHorizontal;
-using Controller.CalamariState;
-using Const.Tag;
+using Controller.AllmodeState;
 using Const.Layer;
 
 /// <summary>
@@ -130,10 +129,10 @@ public class CalamariMoveController : MonoBehaviour
         _scaler.ScaleChangeForMouse();
 
         // 大きさに合わせて速度を計算
-        _groundSetMoveSpeed = CalamariStateConf.ParameterMatchScale(_moveSpeed, _maxMoveSpeed, _scaler.Scale);
+        _groundSetMoveSpeed = AllmodeStateConf.ParameterMatchScale(_moveSpeed, _maxMoveSpeed, _scaler.Scale);
 
         // 大きさに合わせてジャンプを計算
-        _registedJumpMax = CalamariStateConf.ParameterMatchScale(_jumpMax, _maxJumpMax, _scaler.Scale);
+        _registedJumpMax = AllmodeStateConf.ParameterMatchScale(_jumpMax, _maxJumpMax, _scaler.Scale);
 
         // 空中の移動速度補正
         if (IsGrounded() == false)
@@ -180,6 +179,7 @@ public class CalamariMoveController : MonoBehaviour
         var c = _health.ReadMaterial();
         _health.ReflectMaterial(c.r, c.g, c.b, _health._defaultAlpha);
         _health._blinkingMaterialStart = false;
+        _wallMove._rigidbodyVelocity = Vector3.zero;
     }
 
     /// <summary>
@@ -234,7 +234,7 @@ public class CalamariMoveController : MonoBehaviour
             }
             _moveVelocity.x = h * speed;
             // 動く壁だった場合は壁の移動位置に合わせてプレイヤーを移動させる
-            _moveVelocity += _wallMove.RigidbodyVelocity;
+            _moveVelocity += _wallMove._rigidbodyVelocity;
         }
         // 横方向で登る制御
         else if (0 < _health.Parameter && _health.Adhesive == true && _wallMove._wallRunHorizontal == true)
@@ -508,7 +508,7 @@ public class CalamariMoveController : MonoBehaviour
          ・かつ、動く壁が止まっている
          ・かつ、縦方向の入力中　または　横方向の入力中
          */
-        if (0 < _movedSpeedToAnimator && 0 < _health.Parameter && _health.Adhesive == true && (_wallMove._wallRunVertical == true || _wallMove._wallRunHorizontal == true) && (Mathf.Abs(_wallMove.RigidbodyVelocity.magnitude) <= 0f) && (0.1f <= Mathf.Abs(hAxis) || 0.1f <= Mathf.Abs(vAxis)))
+        if (0 < _movedSpeedToAnimator && 0 < _health.Parameter && _health.Adhesive == true && (_wallMove._wallRunVertical == true || _wallMove._wallRunHorizontal == true) && (Mathf.Abs(_wallMove._rigidbodyVelocity.magnitude) <= 0f) && (0.1f <= Mathf.Abs(hAxis) || 0.1f <= Mathf.Abs(vAxis)))
         {
             PlaySoundEffectDerableDecrease();
 

@@ -5,22 +5,24 @@ using Const.Layer;
 using Controller.AllmodeState;
 using Controller.WallHorizontal;
 using DeadException;
+using Controller.WallVertical;
 
 /// <summary>
-/// カラマリモードにて壁移動を行う
+/// ネンチャクモードにて壁移動を行う
 /// </summary>
-public class CalamariWallMove : MonoBehaviour
+public class NenchakWallMove : MonoBehaviour
 {
-    /// <summary>カラマリモードの状態</summary>
-    [SerializeField] private CalamariState _state;
+    /// <summary>ネンチャクモードの状態</summary>
+    [SerializeField] private NenchakState _state;
 
     /// <summary>壁走り（縦）</summary>
     public bool _wallRunVertical { private set; get; } = false;
+    /// <summary>壁走り（縦）直前のフラグ情報</summary>
+    public bool _wallRunVerticalLast { set; get; } = false;
     /// <summary>壁走り（横）</summary>
     public bool _wallRunHorizontal { private set; get; } = false;
     /// <summary>RayCast判定の距離の処理内で扱う</summary>
     public float _registMaxDistance { private set; get; }
-
     /// <summary>
     /// 横にある壁に対して横方向へ入力すると登るモード<para/>
     /// 1：右方向入力で登り、左方向で下りる<para/>
@@ -28,16 +30,20 @@ public class CalamariWallMove : MonoBehaviour
     /// </summary>
     public int _wallRunHorizontalMode { set; get; } = (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT;
 
-    /// <summary>無重力状態フラグ</summary>
-    public bool _zeroGravity { set; get; }
-    /// <summary>重力有効状態フラグ</summary>
-    public bool _enableGravity { set; get; }
-
     /// <summary>プレイヤーの大きさ</summary>
-    [SerializeField] private CalamariScaler _scaler;
+    [SerializeField] private NenchakScaler _scaler;
 
     /// <summary>摩擦判定</summary>
     public Vector3 _rigidbodyVelocity { set; get; }
+
+    /// <summary>一度でも壁（縦）に衝突したことがある</summary>
+    public bool _wallRunedVtcl { private set; get; }
+    /// <summary>一度でも壁（横）に衝突したことがある</summary>
+    public bool _wallRunedHztl { private set; get; }
+    /// <summary>ネンチャク用の壁（縦）</summary>
+    public GameObject _clearVtclWall { private set; get; }
+    /// <summary>ネンチャク用の壁（横）</summary>
+    public GameObject _clearHztlWall { private set; get; }
 
     private void Start()
     {
@@ -48,12 +54,6 @@ public class CalamariWallMove : MonoBehaviour
     {
         // 大きさに合わせてRayの距離を計算
         _registMaxDistance = AllmodeStateConf.ParameterMatchScale(_state._maxDistance, _state._maxMaxDistance, _scaler.Scale);
-
-        // 壁の接着判定
-        if (IsWallGrounded() == true)
-        {
-            StartCoroutine(EnableGravity());
-        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -62,7 +62,9 @@ public class CalamariWallMove : MonoBehaviour
         if (other.gameObject.tag.Equals(TagManager.VERTICAL_WALL))
         {
             _wallRunVertical = true;
+            _wallRunVerticalLast = false;
             _wallRunHorizontal = false;
+            _wallRunedVtcl = true;
             var parentObject = other.gameObject.transform.parent.gameObject;
             if (DeadNullReference.CheckReferencedComponent(parentObject, "MoveVerticalWall") == true)
             {
@@ -88,6 +90,17 @@ public class CalamariWallMove : MonoBehaviour
             {
                 _wallRunHorizontalMode = (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT;
             }
+            _wallRunedHztl = true;
+        }
+
+        // 一度でも壁に衝突
+        if (_wallRunedVtcl == true)
+        {
+            _clearVtclWall = NenchakWallVerticalDecision.CheckClear(other.gameObject);
+        }
+        if (_wallRunedHztl == true)
+        {
+            _clearHztlWall = NenchakWallHorizontalDecision.CheckClear(other.gameObject);
         }
     }
 
@@ -97,80 +110,26 @@ public class CalamariWallMove : MonoBehaviour
         if (other.gameObject.tag.Equals(TagManager.VERTICAL_WALL))
         {
             _wallRunVertical = false;
-            _rigidbodyVelocity = Vector3.zero;
+            //_rigidbodyVelocity = Vector3.zero;
         }
 
         // 横方向で登る挙動を不可にする
         if (other.gameObject.tag.Equals(TagManager.HORIZONTAL_WALL))
         {
             _wallRunHorizontal = false;
-            StartCoroutine(ZeroGravity());
         }
     }
 
     private void OnEnable()
     {
-        var i = transform.position;
-        Debug.DrawRay(i, Vector3.right * _registMaxDistance, Color.green);
-        Debug.DrawRay(i, Vector3.left * _registMaxDistance, Color.green);
-        // 左右に壁が無くかつ壁昇りモードが残っていた場合はフラグをリセット
-        if (Physics.Raycast(i, Vector3.right, _registMaxDistance) == false && Physics.Raycast(i, Vector3.left, _registMaxDistance) == false && _wallRunHorizontal == true)
-        {
-            _wallRunHorizontal = false;
-        }
-        // 前後に壁が無くかつ壁昇りモードが残っていた場合はフラグをリセット
-        if (Physics.Raycast(i, Vector3.forward, _registMaxDistance) == false && Physics.Raycast(i, Vector3.back, _registMaxDistance) == false && _wallRunVertical == true)
-        {
-            _wallRunVertical = false;
-        }
-        _rigidbodyVelocity = Vector3.zero;
-    }
+        _wallRunVertical = false;
+        _wallRunHorizontal = false;
 
-    /// <summary>
-    /// 一定時間重力有効フラグを有効にする
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator EnableGravity()
-    {
-        _enableGravity = true;
-        yield return new WaitForSeconds(0.5f);
-        _enableGravity = false;
-        StopCoroutine(EnableGravity());
-    }
-
-    /// <summary>
-    /// 一定時間無重力フラグを有効にする
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator ZeroGravity()
-    {
-        _zeroGravity = true;
-        yield return new WaitForSeconds(0.5f);
-        _zeroGravity = false;
-        StopCoroutine(ZeroGravity());
-    }
-
-    /// <summary>
-    /// 壁の接地判定
-    /// </summary>
-    /// <returns>接地状態か否か</returns>
-    private bool IsWallGrounded()
-    {
-        var result = false;
-
-        if (result == false)
-        {
-            Debug.DrawRay(_state._transform.position + Vector3.up * 0.1f, Vector3.down * _registMaxDistance, Color.green);
-            var ray = new Ray(_state._transform.position + Vector3.up * 0.1f, Vector3.down);
-            foreach (RaycastHit hit in Physics.RaycastAll(ray, _registMaxDistance))
-            {
-                if (hit.collider.gameObject.layer == (int)LayerManager.WALL)
-                {
-                    result = true;
-                }
-            }
-        }
-
-        return result;
+        // 壁に衝突した情報をリセット
+        _clearVtclWall = null;
+        _wallRunedVtcl = false;
+        _clearHztlWall = null;
+        _wallRunedHztl = false;
+        //_rigidbodyVelocity = Vector3.zero;
     }
 }

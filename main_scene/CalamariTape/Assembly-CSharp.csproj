@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\CursorManager.cs" />
     <Compile Include="Assets\Scripts\CalamariMoveController.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
+    <Compile Include="Assets\Scripts\StopGimmick.cs" />
     <Compile Include="Assets\Scripts\Common\LayerManager.cs" />
     <Compile Include="Assets\Scripts\Common\NameManager.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\CameraSwitch.cs" />
@@ -119,7 +120,8 @@
     <Compile Include="Assets\Scripts\ScreenDirectInOut.cs" />
     <Compile Include="Assets\Scripts\CameraPointMove.cs" />
     <Compile Include="Assets\Scripts\PauseWindowManager.cs" />
-    <Compile Include="Assets\Scripts\StopGimmick.cs" />
+    <Compile Include="Assets\Scripts\NenchakWallMove.cs" />
+    <Compile Include="Assets\Scripts\NenchakScaler.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\8K Skybox Pack Free\ReadMe.txt" />

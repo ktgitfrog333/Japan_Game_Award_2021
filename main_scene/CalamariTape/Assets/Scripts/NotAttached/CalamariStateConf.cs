@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Controller.CalamariState
+namespace Controller.AllmodeState
 {
     /// <summary>
     /// カラマリモードの状態変化処理
     /// </summary>
-    public static class CalamariStateConf
+    public static class AllmodeStateConf
     {
         /// <summary>
         /// スケールの大きさに合わせて各パラメータを調整する
