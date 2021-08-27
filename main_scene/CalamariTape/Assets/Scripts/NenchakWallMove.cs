@@ -6,6 +6,7 @@ using Controller.AllmodeState;
 using Controller.WallHorizontal;
 using DeadException;
 using Controller.WallVertical;
+using Const.Component;
 
 /// <summary>
 /// ネンチャクモードにて壁移動を行う
@@ -65,10 +66,12 @@ public class NenchakWallMove : MonoBehaviour
             _wallRunVerticalLast = false;
             _wallRunHorizontal = false;
             _wallRunedVtcl = true;
+
+            // 動く壁の情報を取得
             var parentObject = other.gameObject.transform.parent.gameObject;
-            if (DeadNullReference.CheckReferencedComponent(parentObject, "MoveVerticalWall") == true)
+            if (DeadNullReference.CheckReferencedComponent(parentObject, ComponentManager.MOVE_WALLS) == true)
             {
-                var p = parentObject.GetComponent<MoveVerticalWall>();
+                var p = parentObject.GetComponent<MoveWalls>();
                 _rigidbodyVelocity = p.RigidbodyVelocity;
             }
         }
@@ -91,6 +94,14 @@ public class NenchakWallMove : MonoBehaviour
                 _wallRunHorizontalMode = (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT;
             }
             _wallRunedHztl = true;
+
+            // 動く壁の情報を取得
+            var parentObject = other.gameObject.transform.parent.gameObject;
+            if (DeadNullReference.CheckReferencedComponent(parentObject, ComponentManager.MOVE_WALLS) == true)
+            {
+                var p = parentObject.GetComponent<MoveWalls>();
+                _rigidbodyVelocity = p.RigidbodyVelocity;
+            }
         }
 
         // 一度でも壁に衝突

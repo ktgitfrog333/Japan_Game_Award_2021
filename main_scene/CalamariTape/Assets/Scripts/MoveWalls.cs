@@ -7,7 +7,7 @@ using Controller.WallVertical;
 /// <summary>
 /// 動く壁
 /// </summary>
-public class MoveVerticalWall : MonoBehaviour
+public class MoveWalls : MonoBehaviour
 {
     /// <summary>移動方向</summary>
     [SerializeField, Range(0, 2)] private int _moveVector = (int)WallRunMoveVerticalMode.X;

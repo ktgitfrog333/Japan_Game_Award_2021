@@ -60,7 +60,7 @@
     <Compile Include="Assets\Scripts\CalamariWallMove.cs" />
     <Compile Include="Assets\Scripts\NotAttached\NenchakWallVerticalDecision.cs" />
     <Compile Include="Assets\Scripts\Common\WallRunVerticalMode.cs" />
-    <Compile Include="Assets\Scripts\MoveVerticalWall.cs" />
+    <Compile Include="Assets\Scripts\MoveWalls.cs" />
     <Compile Include="Assets\Scripts\Scissors.cs" />
     <Compile Include="Assets\Scripts\TsuruTsuruEffectController.cs" />
     <Compile Include="Assets\Scripts\GameCheck.cs" />
@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\NenchakAnimation.cs" />
     <Compile Include="Assets\Scripts\DurableValue.cs" />
     <Compile Include="Assets\Scripts\MessageScrollText.cs" />
+    <Compile Include="Assets\Scripts\NenchakScaler.cs" />
     <Compile Include="Assets\Scripts\NenchakHealth.cs" />
     <Compile Include="Assets\Scripts\MessageScroll.cs" />
     <Compile Include="Assets\Scripts\ScissorsCollision.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Assets\Scripts\TsuruTsuruState.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Common\WallRunHorizontalMode.cs" />
+    <Compile Include="Assets\Scripts\NenchakWallMove.cs" />
     <Compile Include="Assets\Scripts\TsuruTsuruMoveController.cs" />
     <Compile Include="Assets\Scripts\Common\WallRunHorizontalFrontMode.cs" />
     <Compile Include="Assets\Scripts\SaveControllerScene.cs" />
@@ -120,8 +122,7 @@
     <Compile Include="Assets\Scripts\ScreenDirectInOut.cs" />
     <Compile Include="Assets\Scripts\CameraPointMove.cs" />
     <Compile Include="Assets\Scripts\PauseWindowManager.cs" />
-    <Compile Include="Assets\Scripts\NenchakWallMove.cs" />
-    <Compile Include="Assets\Scripts\NenchakScaler.cs" />
+    <Compile Include="Assets\Scripts\Common\ComponentManager.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\8K Skybox Pack Free\ReadMe.txt" />

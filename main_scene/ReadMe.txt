@@ -1,3 +1,25 @@
+2021/08/27 09:08
+★縦向きの動く壁（カラマリ/ネンチャク）モード対応
+・動く壁の配置変更
+main_scene\CalamariTape\Assets\Scenes\Stage6_Scene.unity
+・カラマリモードにて縦向きの動く壁に対する移動制御の追加
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+main_scene\CalamariTape\Assets\Scripts\CalamariWallMove.cs
+・ネンチャクモードにて縦向きの動く壁に対する移動制御の追加
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+main_scene\CalamariTape\Assets\Scripts\NenchakWallMove.cs
+・ギミック制御処理の対象に縦向きの動く壁を追加
+main_scene\CalamariTape\Assets\Scripts\StopGimmick.cs
+・動く壁を動かすスクリプトコンポーネントを定数化
+main_scene\CalamariTape\Assets\Scripts\NotAttached\DeadNullReference.cs
+main_scene\CalamariTape\Assets\Scripts\Common\ComponentManager.cs
+・【削除】動く壁を動かすスクリプト名を変更
+main_scene\CalamariTape\Assets\Scripts\MoveVerticalWall.cs
+・【追加】動く壁を動かすスクリプト名を変更
+main_scene\CalamariTape\Assets\Scripts\MoveWalls.cs
+・縦向きの動く壁をプレハブ化
+main_scene\CalamariTape\Assets\Prefabs\MoveHorizontalWall.prefab
+
 2021/08/25 9:15
 ★ネンチャクモードにて横向きの動く壁対応
 ・横向きの動く壁に範囲外判定オブジェクト追加

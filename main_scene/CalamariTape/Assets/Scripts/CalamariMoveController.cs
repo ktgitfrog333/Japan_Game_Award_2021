@@ -289,6 +289,8 @@ public class CalamariMoveController : MonoBehaviour
                 ControllGravity();
             }
             _moveVelocity.z = v * speed;
+            // 動く壁だった場合は壁の移動位置に合わせてプレイヤーを移動させる
+            _moveVelocity += _wallMove._rigidbodyVelocity;
         }
         // 壁を登らない
         else
@@ -564,10 +566,10 @@ public class CalamariMoveController : MonoBehaviour
     /// </summary>
     private void CharacterLookAt()
     {
+        var hAxis = CrossPlatformInputManager.GetAxis("Horizontal");
+        var vAxis = CrossPlatformInputManager.GetAxis("Vertical");
         if (_wallMove._wallRunVertical == true)
         {
-            var hAxis = CrossPlatformInputManager.GetAxis("Horizontal");
-            var vAxis = CrossPlatformInputManager.GetAxis("Vertical");
             if (0.1f <= Mathf.Abs(hAxis) || 0.1f <= Mathf.Abs(vAxis))
             {
                 if (0 < Mathf.Abs(_moveVelocity.y) || 0 < Mathf.Abs(_moveVelocity.x))
@@ -603,63 +605,68 @@ public class CalamariMoveController : MonoBehaviour
         }
         else if (_wallMove._wallRunHorizontal == true)
         {
-            if (0 < Mathf.Abs(_moveVelocity.y) || 0 < Mathf.Abs(_moveVelocity.z))
+            if (0.1f <= Mathf.Abs(hAxis) || 0.1f <= Mathf.Abs(vAxis))
             {
-                if (Mathf.Abs(_moveVelocity.y) < Mathf.Abs(_moveVelocity.z))
+                if (0 < Mathf.Abs(_moveVelocity.y) || 0 < Mathf.Abs(_moveVelocity.z))
                 {
-                    if (_wallMove._wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT)
+                    if (Mathf.Abs(_moveVelocity.y) < Mathf.Abs(_moveVelocity.z))
                     {
-                        // 正面なら縦向き
-                        if (0f < _moveVelocity.z)
+                        // 右側に壁があった際の床上移動と壁移動
+                        if (_wallMove._wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT)
                         {
-                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 90f);
+                            // 正面なら縦向き
+                            if (0f < _moveVelocity.z && 0.1f <= vAxis)
+                            {
+                                _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 90f);
+                            }
+                            else if (_moveVelocity.z < 0f && vAxis <= -0.1f)
+                            {
+                                _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, -90f);
+                            }
                         }
-                        else if (_moveVelocity.z < 0f)
+                        // 左側に壁があった際の床上移動と壁移動
+                        else if (_wallMove._wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT)
                         {
-                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, -90f);
+                            // 正面なら縦向き
+                            if (0f < _moveVelocity.z && 0.1f <= vAxis)
+                            {
+                                _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, -90f);
+                            }
+                            else if (_moveVelocity.z < 0f && vAxis <= -0.1f)
+                            {
+                                _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 90f);
+                            }
                         }
                     }
-                    else if (_wallMove._wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT)
+                    else
                     {
-                        // 正面なら縦向き
-                        if (0f < _moveVelocity.z)
+                        // 右側に壁があった際の床上移動と壁移動
+                        if (_wallMove._wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT)
                         {
-                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, -90f);
+                            // 左向きなら横向き
+                            if (0f < _moveVelocity.y && 0.1f <= hAxis)
+                            {
+                                _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 90f, 0f);
+                            }
+                            // 右向きなら横向き
+                            else if (_moveVelocity.y < 0f && hAxis <= -0.1f)
+                            {
+                                _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, -90f, 0f);
+                            }
                         }
-                        else if (_moveVelocity.z < 0f)
+                        // 左側に壁があった際の床上移動と壁移動
+                        else if (_wallMove._wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT)
                         {
-                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 90f);
-                        }
-                    }
-                }
-                else
-                {
-                    // 右側に壁があった際の床上移動と壁移動
-                    if (_wallMove._wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT)
-                    {
-                        // 左向きなら横向き
-                        if (0f < _moveVelocity.y)
-                        {
-                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 90f, 0f);
-                        }
-                        // 右向きなら横向き
-                        else if (_moveVelocity.y < 0f)
-                        {
-                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, -90f, 0f);
-                        }
-                    }
-                    // 左側に壁があった際の床上移動と壁移動
-                    else if (_wallMove._wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT)
-                    {
-                        // 左向きなら横向き
-                        if (0f < _moveVelocity.y)
-                        {
-                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, -90f, 0f);
-                        }
-                        // 右向きなら横向き
-                        else if (_moveVelocity.y < 0f)
-                        {
-                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 90f, 0f);
+                            // 左向きなら横向き
+                            if (0f < _moveVelocity.y && hAxis <= -0.1f)
+                            {
+                                _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, -90f, 0f);
+                            }
+                            // 右向きなら横向き
+                            else if (_moveVelocity.y < 0f && 0.1f <= hAxis)
+                            {
+                                _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 90f, 0f);
+                            }
                         }
                     }
                 }

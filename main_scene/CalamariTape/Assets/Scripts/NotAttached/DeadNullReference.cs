@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Const.Component;
 
 namespace DeadException
 {
@@ -21,9 +22,9 @@ namespace DeadException
             var result = false;
             try
             {
-                if (name.Equals("MoveVerticalWall"))
+                if (name.Equals(ComponentManager.MOVE_WALLS))
                 {
-                    var v = gameObject.GetComponent<MoveVerticalWall>().RigidbodyVelocity;
+                    var v = gameObject.GetComponent<MoveWalls>().RigidbodyVelocity;
                     result = true;
                 }
             }

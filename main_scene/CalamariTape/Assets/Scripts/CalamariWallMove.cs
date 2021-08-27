@@ -5,6 +5,7 @@ using Const.Layer;
 using Controller.AllmodeState;
 using Controller.WallHorizontal;
 using DeadException;
+using Const.Component;
 
 /// <summary>
 /// カラマリモードにて壁移動を行う
@@ -63,10 +64,12 @@ public class CalamariWallMove : MonoBehaviour
         {
             _wallRunVertical = true;
             _wallRunHorizontal = false;
+
+            // 動く壁の情報を取得
             var parentObject = other.gameObject.transform.parent.gameObject;
-            if (DeadNullReference.CheckReferencedComponent(parentObject, "MoveVerticalWall") == true)
+            if (DeadNullReference.CheckReferencedComponent(parentObject, ComponentManager.MOVE_WALLS) == true)
             {
-                var p = parentObject.GetComponent<MoveVerticalWall>();
+                var p = parentObject.GetComponent<MoveWalls>();
                 _rigidbodyVelocity = p.RigidbodyVelocity;
             }
         }
@@ -88,6 +91,14 @@ public class CalamariWallMove : MonoBehaviour
             {
                 _wallRunHorizontalMode = (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT;
             }
+
+            // 動く壁の情報を取得
+            var parentObject = other.gameObject.transform.parent.gameObject;
+            if (DeadNullReference.CheckReferencedComponent(parentObject, ComponentManager.MOVE_WALLS) == true)
+            {
+                var p = parentObject.GetComponent<MoveWalls>();
+                _rigidbodyVelocity = p.RigidbodyVelocity;
+            }
         }
     }
 
@@ -105,6 +116,7 @@ public class CalamariWallMove : MonoBehaviour
         {
             _wallRunHorizontal = false;
             StartCoroutine(ZeroGravity());
+            _rigidbodyVelocity = Vector3.zero;
         }
     }
 

@@ -178,37 +178,9 @@ public class NenchakMoveController : MonoBehaviour
             // 横方向で登る制御
             _moveVelocity.y = h * _groundSetMoveSpeed * _wallMove._wallRunHorizontalMode;
             _moveVelocity.z = v * _groundSetMoveSpeed;
+            // 動く壁だった場合は壁の移動位置に合わせてプレイヤーを移動させる
+            _moveVelocity += _wallMove._rigidbodyVelocity;
         }
-        //else if (0 < _health.Parameter && _health.Adhesive == true && _wallMove._wallRunedVtcl == true && _wallMove._wallRunedHztl == false)
-        //{
-        //    Debug.Log("test_2:");
-        //    // 耐久値がある内は縦方向の入力で登る壁に対して壁の外に出ない挙動にする
-        //    var wall = NenchakWallVerticalDecision.CheckClear(_wallMove._clearVtclWall);
-        //    if (wall != null)
-        //    {
-        //        var direction = NenchakWallVerticalDecision.ShowDirection(wall);
-        //        if ((v < 0f && direction == (int)WallRunVerticalMode.TOP) || (0f < v && direction == (int)WallRunVerticalMode.BOTTOM))
-        //        {
-        //            // 上には移動出来ないが下には移動出来る
-        //            // 下には移動出来ないが上には移動出来る
-        //            _moveVelocity.y = v * _groundSetMoveSpeed;
-        //        }
-        //        else if ((h < 0f && direction == (int)WallRunVerticalMode.RIGHT) || (0f < h && direction == (int)WallRunVerticalMode.LEFT))
-        //        {
-        //            Debug.Log("test_2a:");
-        //            //Debug.Log("Velocity.x:" + _moveVelocity.x);
-        //            // 右には移動出来ないが左には移動出来る
-        //            // 左には移動出来ないが右には移動出来る
-        //            _moveVelocity.x = h * _groundSetMoveSpeed;
-        //        }
-        //        Debug.Log("test_2b:");
-        //        Debug.Log("rd:" + _wallMove._rigidbodyVelocity);
-        //        // 動く壁だった場合は壁の移動位置に合わせてプレイヤーを移動させる
-        //        _moveVelocity += _wallMove._rigidbodyVelocity;
-        //    }
-        //}
-        //Debug.Log("Vertical:" + _wallMove._wallRunVertical);
-        //Debug.Log("Horizontal:" + _wallMove._wallRunHorizontal);
         else if (0f < _health.Parameter && _health.Adhesive == true && _wallMove._wallRunedHztl == true)
         {
             // 耐久値がある内は横方向の入力で登る壁に対して壁の外に出ない挙動にする
@@ -248,6 +220,8 @@ public class NenchakMoveController : MonoBehaviour
                     }
                 }
             }
+            // 動く壁だった場合は壁の移動位置に合わせてプレイヤーを移動させる
+            _moveVelocity += _wallMove._rigidbodyVelocity;
         }
         else if (_health.Parameter <= 0f && _health.Adhesive == false)
         {
@@ -367,10 +341,10 @@ public class NenchakMoveController : MonoBehaviour
     /// </summary>
     private void CharacterLookAt()
     {
+        var hAxis = CrossPlatformInputManager.GetAxis("Horizontal");
+        var vAxis = CrossPlatformInputManager.GetAxis("Vertical");
         if (_wallMove._wallRunVertical == true)
         {
-            var hAxis = CrossPlatformInputManager.GetAxis("Horizontal");
-            var vAxis = CrossPlatformInputManager.GetAxis("Vertical");
             if (0.1f <= Mathf.Abs(hAxis) || 0.1f <= Mathf.Abs(vAxis))
             {
                 if (0 < Mathf.Abs(_moveVelocity.y) || 0 < Mathf.Abs(_moveVelocity.x))
@@ -378,12 +352,12 @@ public class NenchakMoveController : MonoBehaviour
                     if (Mathf.Abs(_moveVelocity.x) < Mathf.Abs(_moveVelocity.y))
                     {
                         // 上方向なら縦向き
-                        if (0f < _moveVelocity.y)
+                        if (0f < _moveVelocity.y && 0.1f <= vAxis)
                         {
                             _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 0f);
                         }
                         // 下向きなら縦向き
-                        else if (_moveVelocity.y < 0f)
+                        else if (_moveVelocity.y < 0f && vAxis <= -0.1f)
                         {
                             _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 0f);
                         }
@@ -391,12 +365,12 @@ public class NenchakMoveController : MonoBehaviour
                     else
                     {
                         // 左向きなら横向き
-                        if (0f < _moveVelocity.x)
+                        if (0f < _moveVelocity.x && 0.1f <= hAxis)
                         {
                             _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, -90f);
                         }
                         // 右向きなら横向き
-                        else if (_moveVelocity.x < 0f)
+                        else if (_moveVelocity.x < 0f && hAxis <= -0.1f)
                         {
                             _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 90f);
                         }
@@ -413,11 +387,11 @@ public class NenchakMoveController : MonoBehaviour
                     if (_wallMove._wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT)
                     {
                         // 正面なら縦向き
-                        if (0f < _moveVelocity.z)
+                        if (0f < _moveVelocity.z && 0.1f <= vAxis)
                         {
                             _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 90f);
                         }
-                        else if (_moveVelocity.z < 0f)
+                        else if (_moveVelocity.z < 0f && vAxis <= -0.1f)
                         {
                             _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, -90f);
                         }
@@ -425,11 +399,11 @@ public class NenchakMoveController : MonoBehaviour
                     else if (_wallMove._wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT)
                     {
                         // 正面なら縦向き
-                        if (0f < _moveVelocity.z)
+                        if (0f < _moveVelocity.z && 0.1f <= vAxis)
                         {
                             _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, -90f);
                         }
-                        else if (_moveVelocity.z < 0f)
+                        else if (_moveVelocity.z < 0f && vAxis <= -0.1f)
                         {
                             _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 90f);
                         }
@@ -441,12 +415,12 @@ public class NenchakMoveController : MonoBehaviour
                     if (_wallMove._wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT)
                     {
                         // 左向きなら横向き
-                        if (0f < _moveVelocity.y)
+                        if (0f < _moveVelocity.y && 0.1f <= hAxis)
                         {
                             _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 90f, 0f);
                         }
                         // 右向きなら横向き
-                        else if (_moveVelocity.y < 0f)
+                        else if (_moveVelocity.y < 0f && hAxis <= -0.1f)
                         {
                             _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, -90f, 0f);
                         }
@@ -455,12 +429,12 @@ public class NenchakMoveController : MonoBehaviour
                     else if (_wallMove._wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT)
                     {
                         // 左向きなら横向き
-                        if (0f < _moveVelocity.y)
+                        if (0f < _moveVelocity.y && hAxis <= -0.1f)
                         {
                             _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, -90f, 0f);
                         }
                         // 右向きなら横向き
-                        else if (_moveVelocity.y < 0f)
+                        else if (_moveVelocity.y < 0f && 0.1f <= hAxis)
                         {
                             _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 90f, 0f);
                         }
