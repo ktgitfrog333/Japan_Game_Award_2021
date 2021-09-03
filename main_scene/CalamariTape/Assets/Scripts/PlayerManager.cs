@@ -18,12 +18,18 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] public CalamariMoveController _calamariController;
     /// <summary>カラマリモードのアニメーションスクリプト</summary>
     [SerializeField] public CalamariAnimation _calamariAnimation;
+    /// <summary>カラマリモードの大きさ変更スクリプト</summary>
+    [SerializeField] public CalamariScaler _calamariScaler;
     /// <summary>ネンチャクモードの操作スクリプト</summary>
     [SerializeField] public NenchakMoveController _nenchakController;
-    /// <summary>ネンチャクモードの操作スクリプト</summary>
+    /// <summary>ネンチャクモードのアニメーションスクリプト</summary>
     [SerializeField] public NenchakAnimation _nenchakAnimation;
+    /// <summary>ネンチャクモードの大きさ変更スクリプト</summary>
+    [SerializeField] public NenchakScaler _nenchakScaler;
     /// <summary>ツルツルモードの操作スクリプト</summary>
     [SerializeField] public TsuruTsuruMoveController _tsurutsuruController;
     /// <summary>ツルツルモードのアニメーションスクリプト</summary>
     [SerializeField] public TsuruTsuruAnimation _tsuruTsuruAnimation;
+    /// <summary>ツルツルモードの大きさ変更スクリプト</summary>
+    [SerializeField] public TsuruTsuruScaler _tsuruTsuruScaler;
 }

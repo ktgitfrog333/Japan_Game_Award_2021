@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using Const.Layer;
+using Controller.AllmodeState;
 
 /// <summary>
 /// プレイヤー操作スクリプトクラス
@@ -18,11 +19,6 @@ public class TsuruTsuruMoveController : MonoBehaviour
     /// <summary>移動速度（最大）</summary>
     [SerializeField] private float _maxMoveSpeed = 8f;
 
-    /// <summary>拡大率</summary>
-    [SerializeField,Range(1, 4)] private float _scale = 1;
-    /// <summary>拡大率の一時保存</summary>
-    private float _registedScale;
-
     /// <summary>プレイヤー移動のコントローラー</summary>
     [SerializeField] private CharacterController _characterController;
 
@@ -37,7 +33,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
     private Vector3 _mainCameraForward;
 
     /// <summary>スティック入力（横）の保存</summary>
-    private float _registedHorizontal;
+    public float _registedHorizontal { private set; get; }
     /// <summary>スティック入力（縦）の保存</summary>
     private float _registedVertical;
 
@@ -63,13 +59,6 @@ public class TsuruTsuruMoveController : MonoBehaviour
     /// <summary>位置フラグを一時保存</summary>
     [SerializeField] private bool _positionCashDebugOff;
 
-    /// <summary>RayCast判定の距離値</summary>
-    [SerializeField] private float _maxDistance = 2.3f;
-    /// <summary>RayCast判定の距離の処理内で扱う</summary>
-    private float _registMaxDistance;
-    /// <summary>RayCast判定の距離値（最大）</summary>
-    [SerializeField] private float _maxMaxDistance = 8.5f;
-
     /// <summary>SE再生用のゲームオブジェクト</summary>
     [SerializeField] private SfxPlay _sfxPlay;
     /// <summary>SE再生中フラグ</summary>
@@ -78,11 +67,6 @@ public class TsuruTsuruMoveController : MonoBehaviour
     /// <summary>モルモットのアニメーター</summary>
     [SerializeField] private TsuruTsuruAnimation _animation;
 
-    /// <summary>テープ（外側）の位置情報</summary>
-    [SerializeField] private Transform _tapeOutside;
-    /// <summary>モルモットの位置情報</summary>
-    [SerializeField] private Transform _morumotto;
-
     /// <summary>エフェクトのスクリプト</summary>
     [SerializeField] private TsuruTsuruEffectController _effectController;
     /// <summary>プレイヤーの移動制御を停止するフラグ</summary>
@@ -90,17 +74,16 @@ public class TsuruTsuruMoveController : MonoBehaviour
 
     /// <summary>移動SE再生中フラグ</summary>
     private bool _sfxPlayedMove;
-    /// <summary>スケール拡大SE再生可フラグ</summary>
-    private bool _sfxPlayedScaleUp;
+
+    /// <summary>地面移動制御</summary>
+    [SerializeField] private TsuruTsuruGroundMove _groundMove;
+    /// <summary>プレイヤーの大きさ</summary>
+    [SerializeField] private TsuruTsuruScaler _scaler;
 
     void Start()
     {
         _transform = this.transform;
-        _registedScale = _scale;
         _groundSetMoveSpeed = _moveSpeed;
-
-        _registMaxDistance = _maxDistance;
-        _sfxPlayedScaleUp = true;
 
         _registedHorizontal = 0f;
         _registedVertical = 0f;
@@ -121,7 +104,6 @@ public class TsuruTsuruMoveController : MonoBehaviour
         {
             _registedHorizontal = 0f;
             _registedVertical = 0f;
-            //_modeChangeEnable = true;
         }
         else
         {
@@ -145,19 +127,14 @@ public class TsuruTsuruMoveController : MonoBehaviour
             _jumpAction = CrossPlatformInputManager.GetButtonDown("Jump");
         }
 
-        ScaleChangeForController();
-        ScaleChangeForMouse();
+        _scaler.ScaleChangeForController();
+        _scaler.ScaleChangeForMouse();
 
-        _registedScale = _scale;
-        _transform.localScale = new Vector3(1, 1, 1) * _scale;
         // 大きさに合わせて速度を計算
-        _groundSetMoveSpeed = ParameterMatchScale(_moveSpeed, _maxMoveSpeed);
+        _groundSetMoveSpeed = AllmodeStateConf.ParameterMatchScale(_moveSpeed, _maxMoveSpeed, _scaler.Scale);
 
         // 大きさに合わせてジャンプを計算
-        _registedJumpMax = ParameterMatchScale(_jumpMax, _maxJumpMax);
-
-        // 大きさに合わせてRayの距離を計算
-        _registMaxDistance = ParameterMatchScale(_maxDistance, _maxMaxDistance);
+        _registedJumpMax = AllmodeStateConf.ParameterMatchScale(_jumpMax, _maxJumpMax, _scaler.Scale);
 
         // 空中の移動速度補正
         if (IsGrounded() == false)
@@ -181,7 +158,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
 
     private void OnEnable()
     {
-        _scale = 1.0f;
+        //_scale = 1.0f;
         OtherActionTsurutsuruStop();
     }
 
@@ -197,12 +174,10 @@ public class TsuruTsuruMoveController : MonoBehaviour
         if (Mathf.Abs(_registedHorizontal) < Mathf.Abs(h))
         {
             _registedHorizontal = h;
-            //_modeChangeEnable = false;
         }
         if (Mathf.Abs(_registedVertical) < Mathf.Abs(v))
         {
             _registedVertical = v;
-            //_modeChangeEnable = false;
         }
 
         var speed = 0f;
@@ -331,15 +306,15 @@ public class TsuruTsuruMoveController : MonoBehaviour
     private bool IsWallCollisitioned()
     {
         bool result = false;
-        Debug.DrawRay(_transform.position, Vector3.forward * _registMaxDistance, Color.green);
-        Debug.DrawRay(_transform.position, Vector3.back * _registMaxDistance, Color.green);
-        Debug.DrawRay(_transform.position, Vector3.left * _registMaxDistance, Color.green);
-        Debug.DrawRay(_transform.position, Vector3.right * _registMaxDistance, Color.green);
+        Debug.DrawRay(_transform.position, Vector3.forward * _groundMove._registMaxDistance, Color.green);
+        Debug.DrawRay(_transform.position, Vector3.back * _groundMove._registMaxDistance, Color.green);
+        Debug.DrawRay(_transform.position, Vector3.left * _groundMove._registMaxDistance, Color.green);
+        Debug.DrawRay(_transform.position, Vector3.right * _groundMove._registMaxDistance, Color.green);
 
         if (result == false && 0 < _registedVertical)
         {
             var ray = new Ray(_transform.position, Vector3.forward);
-            foreach (RaycastHit hit in Physics.RaycastAll(ray, _registMaxDistance))
+            foreach (RaycastHit hit in Physics.RaycastAll(ray, _groundMove._registMaxDistance))
             {
                 if (hit.collider.gameObject.layer == (int)LayerManager.FIELD)
                 {
@@ -353,7 +328,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
         if (result == false && _registedVertical < 0)
         {
             var ray = new Ray(_transform.position, Vector3.back);
-            foreach (RaycastHit hit in Physics.RaycastAll(ray, _registMaxDistance))
+            foreach (RaycastHit hit in Physics.RaycastAll(ray, _groundMove._registMaxDistance))
             {
                 if (hit.collider.gameObject.layer == (int)LayerManager.FIELD)
                 {
@@ -367,7 +342,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
         if (result == false && _registedHorizontal < 0)
         {
             var ray = new Ray(_transform.position, Vector3.left);
-            foreach (RaycastHit hit in Physics.RaycastAll(ray, _registMaxDistance))
+            foreach (RaycastHit hit in Physics.RaycastAll(ray, _groundMove._registMaxDistance))
             {
                 if (hit.collider.gameObject.layer == (int)LayerManager.FIELD)
                 {
@@ -381,7 +356,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
         if (result == false && 0 < _registedHorizontal)
         {
             var ray = new Ray(_transform.position, Vector3.right);
-            foreach (RaycastHit hit in Physics.RaycastAll(ray, _registMaxDistance))
+            foreach (RaycastHit hit in Physics.RaycastAll(ray, _groundMove._registMaxDistance))
             {
                 if (hit.collider.gameObject.layer == (int)LayerManager.FIELD)
                 {
@@ -405,9 +380,9 @@ public class TsuruTsuruMoveController : MonoBehaviour
 
         if (result == false)
         {
-            Debug.DrawRay(_transform.position + Vector3.up * 0.1f, Vector3.down * _registMaxDistance, Color.green);
+            Debug.DrawRay(_transform.position + Vector3.up * 0.1f, Vector3.down * _groundMove._registMaxDistance, Color.green);
             var ray = new Ray(_transform.position + Vector3.up * 0.1f, Vector3.down);
-            foreach (RaycastHit hit in Physics.RaycastAll(ray, _registMaxDistance))
+            foreach (RaycastHit hit in Physics.RaycastAll(ray, _groundMove._registMaxDistance))
             {
                 if (hit.collider.gameObject.layer == (int)LayerManager.FIELD)
                 {
@@ -417,99 +392,6 @@ public class TsuruTsuruMoveController : MonoBehaviour
         }
 
         return result;
-    }
-
-    /// <summary>
-    /// 拡大SEを再生
-    /// </summary>
-    private void PlaySoundEffectScaleUp()
-    {
-        if (_sfxPlayedScaleUp == true)
-        {
-            _sfxPlay.PlaySFX("se_player_expansion");
-        }
-    }
-
-    /// <summary>
-    /// コントーローラーによる拡大・縮小
-    /// </summary>
-    private void ScaleChangeForController()
-    {
-        // 拡大
-        if (CrossPlatformInputManager.GetButton("ScaleUp") == true && CrossPlatformInputManager.GetButton("ScaleDown") == false)
-        {
-            if (_scale < 4.01f)
-            {
-                _scale += 0.01f;
-                PlaySoundEffectScaleUp();
-            }
-            else
-            {
-                _scale = 4.0f;
-                _sfxPlayedScaleUp = false;
-            }
-        }
-        // 縮小
-        else if (CrossPlatformInputManager.GetButton("ScaleDown") == true && CrossPlatformInputManager.GetButton("ScaleUp") == false)
-        {
-            if (0.99f < _scale)
-            {
-                _scale -= 0.01f;
-                _sfxPlayedScaleUp = true;
-            }
-            else
-            {
-                _scale = 1.0f;
-            }
-        }
-    }
-
-    /// <summary>
-    /// マウスホイールによる拡大・縮小
-    /// </summary>
-    private void ScaleChangeForMouse()
-    {
-        var m_scroll = CrossPlatformInputManager.GetAxis("Mouse ScrollWheel");
-        // 拡大
-        if (0.0f < m_scroll)
-        {
-            if (_scale + m_scroll < 4.01f)
-            {
-                _scale += m_scroll;
-                PlaySoundEffectScaleUp();
-            }
-            else
-            {
-                _scale = 4.0f;
-                _sfxPlayedScaleUp = false;
-            }
-        }
-        // 縮小
-        else if (m_scroll < 0.0f)
-        {
-            if (0.99f < _scale + m_scroll)
-            {
-                _scale += m_scroll;
-                _sfxPlayedScaleUp = true;
-            }
-            else
-            {
-                _scale = 1.0f;
-            }
-        }
-    }
-
-    /// <summary>
-    /// スケールの大きさに合わせて各パラメータを調整する
-    /// </summary>
-    /// <param name="min">基準値（初期値/最小値）</param>
-    /// <param name="max">最大値</param>
-    /// <returns>計算後の値</returns>
-    private float ParameterMatchScale(float min, float max)
-    {
-        var v = _scale - 1f;
-        v = min + ((max - min) * (v / 3));
-        return v;
     }
 
     /// <summary>

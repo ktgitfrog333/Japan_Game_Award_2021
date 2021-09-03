@@ -60,10 +60,12 @@
     <Compile Include="Assets\Scripts\CalamariWallMove.cs" />
     <Compile Include="Assets\Scripts\NotAttached\NenchakWallVerticalDecision.cs" />
     <Compile Include="Assets\Scripts\Common\WallRunVerticalMode.cs" />
+    <Compile Include="Assets\Scripts\TsuruTsuruGroundMove.cs" />
     <Compile Include="Assets\Scripts\MoveWalls.cs" />
     <Compile Include="Assets\Scripts\Scissors.cs" />
     <Compile Include="Assets\Scripts\TsuruTsuruEffectController.cs" />
     <Compile Include="Assets\Scripts\GameCheck.cs" />
+    <Compile Include="Assets\Scripts\DoorOpener.cs" />
     <Compile Include="Assets\Scripts\Interface\DebugDemo.cs" />
     <Compile Include="Assets\Scripts\GameRedo.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
@@ -89,14 +91,17 @@
     <Compile Include="Assets\Scripts\Common\LayerManager.cs" />
     <Compile Include="Assets\Scripts\Common\NameManager.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\CameraSwitch.cs" />
+    <Compile Include="Assets\Scripts\MarmotWheel.cs" />
     <Compile Include="Assets\Scripts\CalamariScaler.cs" />
     <Compile Include="Assets\Scripts\GameOverLine.cs" />
+    <Compile Include="Assets\Scripts\BanScaleChange.cs" />
     <Compile Include="Assets\Scripts\UIController.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
     <Compile Include="Assets\Scripts\SfxPlay.cs" />
-    <Compile Include="Assets\Scripts\Menu.cs" />
+    <Compile Include="Assets\Scripts\MenuManager.cs" />
     <Compile Include="Assets\Scripts\NotAttached\CalamariStateConf.cs" />
+    <Compile Include="Assets\Scripts\TsuruTsuruScaler.cs" />
     <Compile Include="Assets\Scripts\Common\StageNameManager.cs" />
     <Compile Include="Assets\Scripts\MoveController.cs" />
     <Compile Include="Assets\Scripts\ClearManager.cs" />
@@ -107,7 +112,9 @@
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Common\WallRunHorizontalMode.cs" />
     <Compile Include="Assets\Scripts\NenchakWallMove.cs" />
+    <Compile Include="Assets\Scripts\MarmotHealth.cs" />
     <Compile Include="Assets\Scripts\TsuruTsuruMoveController.cs" />
+    <Compile Include="Assets\Scripts\Common\AnimatorControllerManager.cs" />
     <Compile Include="Assets\Scripts\Common\WallRunHorizontalFrontMode.cs" />
     <Compile Include="Assets\Scripts\SaveControllerScene.cs" />
     <Compile Include="Assets\Scripts\ClearHorizontalWall.cs" />
@@ -125,8 +132,34 @@
     <Compile Include="Assets\Scripts\Common\ComponentManager.cs" />
   </ItemGroup>
   <ItemGroup>
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\cginc\arkludeDecl.cginc" />
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\cginc\arkludeAdd.cginc" />
+     <None Include="Assets\Wheel\Readme.txt" />
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\StencilWriter.shader" />
      <None Include="Assets\8K Skybox Pack Free\ReadMe.txt" />
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\cginc\arkludeFadeShadowCaster.cginc" />
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\Cutout.shader" />
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\EmissiveFreakStencilWriter.shader" />
      <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
+     <None Include="Assets\Wheel\arktoon Shaders\README_ja.txt" />
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\StencilReaderFade.shader" />
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\Opaque.shader" />
+     <None Include="Assets\Wheel\LICENSE.txt" />
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\cginc\arkludeVertGeom.cginc" />
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\cginc\arkludeFragOnlyStencilWrite.cginc" />
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\cginc\arkludeFrag.cginc" />
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\EmissiveFreakStencilReader.shader" />
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\EmissiveFreakCutout.shader" />
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\StencilReader.shader" />
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\FadeRefracted.shader" />
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\ShaderForgeで変更したらやること.txt" />
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\StencilWriterMaskTexture.shader" />
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\StencilReaderDoubleFadeFade.shader" />
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\EmissiveFreakFade.shader" />
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\Fade.shader" />
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\EmissiveFreakOpaque.shader" />
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\cginc\arkludeOther.cginc" />
+     <None Include="Assets\Wheel\arktoon Shaders\Shaders\EmissiveFreakFadeRefracted.shader" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.2f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

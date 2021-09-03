@@ -4067,7 +4067,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.21018352, y: 0.000000008411011, z: -0.0000000018082486, w: 0.97766197}
+  m_LocalRotation: {x: 0.21018352, y: -0.000000008411011, z: 0.0000000018082486, w: 0.97766197}
   m_LocalPosition: {x: -13.08, y: 8.69, z: -7.437}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4366,10 +4366,13 @@ MonoBehaviour:
   _tsurutsuru: {fileID: 1842392293}
   _calamariController: {fileID: 2035709082}
   _calamariAnimation: {fileID: 2035709085}
+  _calamariScaler: {fileID: 2035709088}
   _nenchakController: {fileID: 1124906949}
   _nenchakAnimation: {fileID: 1124906951}
+  _nenchakScaler: {fileID: 1124906955}
   _tsurutsuruController: {fileID: 1842392298}
   _tsuruTsuruAnimation: {fileID: 1842392301}
+  _tsuruTsuruScaler: {fileID: 1842392303}
 --- !u!114 &978842449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5123,7 +5126,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1145615035}
-  m_LocalRotation: {x: 0.21018352, y: 0.000000008411011, z: -0.0000000018082486, w: 0.97766197}
+  m_LocalRotation: {x: 0.21018352, y: -0.000000008411011, z: 0.0000000018082486, w: 0.97766197}
   m_LocalPosition: {x: -13.08, y: 8.69, z: -7.437}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -8185,11 +8188,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!4 &1792248977 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 393a9298a69ac4a4f98d9fe4a0f88cc4, type: 3}
-  m_PrefabInstance: {fileID: 1792248974}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1830100713
 GameObject:
   m_ObjectHideFlags: 0
@@ -8299,7 +8297,9 @@ GameObject:
   - component: {fileID: 1842392295}
   - component: {fileID: 1842392299}
   - component: {fileID: 1842392302}
+  - component: {fileID: 1842392303}
   - component: {fileID: 1842392301}
+  - component: {fileID: 1842392304}
   - component: {fileID: 1842392298}
   - component: {fileID: 1842392300}
   m_Layer: 0
@@ -8400,19 +8400,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 7
   _maxMoveSpeed: 8
-  _scale: 1
   _characterController: {fileID: 1842392299}
   _jumpPower: 5
   _jumpMax: 35
   _maxJumpMax: 45
   _positionCashDebugOff: 0
-  _maxDistance: 2.3
-  _maxMaxDistance: 8.5
   _sfxPlay: {fileID: 1525769980}
   _animation: {fileID: 1842392301}
-  _tapeOutside: {fileID: 18655511}
-  _morumotto: {fileID: 1792248977}
   _effectController: {fileID: 1842392300}
+  _groundMove: {fileID: 1842392304}
+  _scaler: {fileID: 1842392303}
 --- !u!143 &1842392299
 CharacterController:
   m_ObjectHideFlags: 0
@@ -8472,6 +8469,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animatorTape: {fileID: 18655513}
   _animatorMarmot: {fileID: 1792248976}
+  _maxDistance: 2.3
+  _maxMaxDistance: 8.5
+  _sfxPlay: {fileID: 1525769980}
+--- !u!114 &1842392303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842392293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11d2cf533bc0bce40a72916fd7660693, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _state: {fileID: 1842392302}
+  _scale: 1
+--- !u!114 &1842392304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842392293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02293071bc9d4ba43acc19ea9db06d01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _state: {fileID: 1842392302}
+  _scaler: {fileID: 1842392303}
 --- !u!1 &1842542559 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4629147874634802339, guid: 375b0c8ab0c85ad4492d7fcf5336203b, type: 3}

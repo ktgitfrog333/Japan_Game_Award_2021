@@ -11,6 +11,7 @@ TagManager:
   - ClearVerticalWall
   - ClearHorizontalWall
   - Message
+  - MarmotHealth
   layers:
   - Default
   - TransparentFX

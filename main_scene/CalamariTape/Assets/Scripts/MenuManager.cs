@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// メニュー画面制御スクリプトクラス
 /// </summary>
-public class Menu : MonoBehaviour
+public class MenuManager : MonoBehaviour
 {
     /// <summary>効果音ゲームオブジェクト</summary>
     [SerializeField] private SfxPlay _sfx;

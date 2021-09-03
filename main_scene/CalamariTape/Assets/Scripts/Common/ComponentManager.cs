@@ -11,5 +11,9 @@ namespace Const.Component
     {
         /// <summary>MoveVerticalWallコンポーネント</summary>
         public static readonly string MOVE_WALLS = "MoveWalls";
+        /// <summary>CalamariStateコンポーネント</summary>
+        public static readonly string CALAMARI_STATE = "CalamariState";
+        /// <summary>回し車の制御値</summary>
+        public static readonly string MARMOT_HEALTH = "MarmotHealth";
     }
 }

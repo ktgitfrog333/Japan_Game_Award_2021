@@ -58,7 +58,7 @@ public class UIController : MonoBehaviour
         var p = g.transform.parent;
         if (p.name.Equals(NameManager.MENU))
         {
-            var menu = p.GetComponent<Menu>();
+            var menu = p.GetComponent<MenuManager>();
             menu.FirstElement = g.GetComponent<UIController>();
             menu.FirstObject = g;
         }

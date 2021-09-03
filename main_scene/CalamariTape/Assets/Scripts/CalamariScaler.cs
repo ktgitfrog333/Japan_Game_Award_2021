@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using DeadException;
+using Const.Component;
 
 /// <summary>
 /// カラマリモードの大きさを調整
@@ -31,7 +33,10 @@ public class CalamariScaler : MonoBehaviour
 
     private void Update()
     {
-        _state._transform.localScale = new Vector3(1, 1, 1) * _scale;
+        if (DeadNullReference.CheckReferencedComponent(gameObject, ComponentManager.CALAMARI_STATE) == true)
+        {
+            _state._transform.localScale = new Vector3(1, 1, 1) * _scale;
+        }
     }
 
     private void OnEnable()

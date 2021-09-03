@@ -20,6 +20,7 @@ namespace DeadException
         public static bool CheckReferencedComponent(GameObject gameObject, string name)
         {
             var result = false;
+            var message = "";
             try
             {
                 if (name.Equals(ComponentManager.MOVE_WALLS))
@@ -27,11 +28,42 @@ namespace DeadException
                     var v = gameObject.GetComponent<MoveWalls>().RigidbodyVelocity;
                     result = true;
                 }
+                else if (name.Equals(ComponentManager.CALAMARI_STATE))
+                {
+                    var t = gameObject.GetComponent<CalamariState>()._transform;
+                    if (t == null)
+                    {
+                        result = false;
+                    }
+                    else
+                    {
+                        result = true;
+                    }
+                }
+                else if (name.Equals(ComponentManager.MARMOT_HEALTH))
+                {
+                    var t = gameObject.GetComponent<MarmotHealth>()._health;
+                    result = true;
+                }
             }
             catch (NullReferenceException e)
             {
-                Debug.Log("Null参照：" + e);
+                message = e + "";
                 result = false;
+            }
+            finally
+            {
+                if (result == false)
+                {
+                    if (0 < message.Length)
+                    {
+                        Debug.Log(name + "_Null参照：" + message);
+                    }
+                    else
+                    {
+                        Debug.Log(name + "_Null参照");
+                    }
+                }
             }
 
             return result;

@@ -106,4 +106,13 @@ public class TsuruTsuruAnimation : MonoBehaviour
             Debug.Log("不明なAnimator指定:[" + animatorName + "]");
         }
     }
+
+    /// <summary>
+    /// プレイヤーの回転スピードを変更
+    /// </summary>
+    /// <param name="spinLevel">回転レベル</param>
+    public void PlayFirstSpin(int spinLevel)
+    {
+        _state._animatorTape.SetInteger("RotateLevel", spinLevel);
+    }
 }

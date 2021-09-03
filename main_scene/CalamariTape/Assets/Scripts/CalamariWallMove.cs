@@ -47,13 +47,16 @@ public class CalamariWallMove : MonoBehaviour
 
     private void Update()
     {
-        // 大きさに合わせてRayの距離を計算
-        _registMaxDistance = AllmodeStateConf.ParameterMatchScale(_state._maxDistance, _state._maxMaxDistance, _scaler.Scale);
-
-        // 壁の接着判定
-        if (IsWallGrounded() == true)
+        if (DeadNullReference.CheckReferencedComponent(gameObject, ComponentManager.CALAMARI_STATE) == true)
         {
-            StartCoroutine(EnableGravity());
+            // 大きさに合わせてRayの距離を計算
+            _registMaxDistance = AllmodeStateConf.ParameterMatchScale(_state._maxDistance, _state._maxMaxDistance, _scaler.Scale);
+
+            // 壁の接着判定
+            if (IsWallGrounded() == true)
+            {
+                StartCoroutine(EnableGravity());
+            }
         }
     }
 
