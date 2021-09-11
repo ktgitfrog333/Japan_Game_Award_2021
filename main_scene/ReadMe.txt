@@ -1,3 +1,9 @@
+2021/09/11 23:05
+★ポーズ画面、クリア画面のクリック動作で非選択になる不具合を修正
+・右クリック、マウスホイール押下で非選択になる不具合を修正
+main_scene\CalamariTape\Assets\Scripts\ClearManager.cs
+main_scene\CalamariTape\Assets\Scripts\MenuManager.cs
+
 2021/09/11 17:51
 ★モルモット3Dモデルリソース差し替え
 ・新モルモット歩行アニメーション追加

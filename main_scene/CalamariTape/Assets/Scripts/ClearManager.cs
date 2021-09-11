@@ -19,23 +19,11 @@ public class ClearManager : MonoBehaviour
     /// <summary>選択項目のUIスクリプト</summary>
     [SerializeField] private UIController _firstElement;
     /// <summary>選択項目のUIスクリプト</summary>
-    public UIController FirstElement
-    {
-        set
-        {
-            _firstElement = value;
-        }
-    }
+    public UIController FirstElement { set { _firstElement = value; } }
     /// <summary>選択項目のUIオブジェクト</summary>
     [SerializeField] private GameObject _firstObject;
     /// <summary>選択項目のUIオブジェクト</summary>
-    public GameObject FirstObject
-    {
-        set
-        {
-            _firstObject = value;
-        }
-    }
+    public GameObject FirstObject { set { _firstObject = value; } }
     /// <summary>イベントシステム</summary>
     [SerializeField] private EventSystem _event;
 
@@ -46,7 +34,7 @@ public class ClearManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) == true)
+        if (Input.GetMouseButtonDown(0) == true || Input.GetMouseButtonDown(1) == true || Input.GetMouseButtonDown(2) == true)
         {
             _event.SetSelectedGameObject(_firstObject);
             _firstElement.Selected();
