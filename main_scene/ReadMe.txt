@@ -1,3 +1,19 @@
+2021/09/11 17:51
+★モルモット3Dモデルリソース差し替え
+・新モルモット歩行アニメーション追加
+main_scene\CalamariTape\Assets\Animations\Morumotto.controller
+・各ステージのモルモット3Dモデルリソース差し替え
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage6_Scene.unity
+・旧歩行アニメーションの名前を変更
+main_scene\CalamariTape\Assets\Animations\Morumotto_bk.controller
+・新モルモット3Dモデルを追加
+main_scene\CalamariTape\Assets\Models\morumotto 1.fbx
+
 2021/09/11 15:02
 ★ポーズ画面、クリア画面(1ステージ)リソース差し替え
 ・ポーズ画面、クリア画面のUI素材を追加
