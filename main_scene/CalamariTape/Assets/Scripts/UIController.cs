@@ -38,6 +38,7 @@ public class UIController : MonoBehaviour
         _transform.sizeDelta = new Vector2(_width * 1.2f, _height * 1.2f);
         _sfx.PlaySFX("se_select");
         PushFirstObject();
+        transform.SetAsLastSibling();
     }
 
     /// <summary>

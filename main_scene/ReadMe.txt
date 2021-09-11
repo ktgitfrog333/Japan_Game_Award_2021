@@ -1,3 +1,32 @@
+2021/09/11 15:02
+★ポーズ画面、クリア画面(1ステージ)リソース差し替え
+・ポーズ画面、クリア画面のUI素材を追加
+main_scene\CalamariTape\Assets\Images\game_back_logo.png
+main_scene\CalamariTape\Assets\Images\game_check_logo.png
+main_scene\CalamariTape\Assets\Images\game_pause_logo.png
+main_scene\CalamariTape\Assets\Images\game_proceed.png
+main_scene\CalamariTape\Assets\Images\game_redo_logo.png
+main_scene\CalamariTape\Assets\Images\game_select_logo.png
+・ゲームに戻るUIのプレハブ情報変更
+main_scene\CalamariTape\Assets\Prefabs\GameRedo.prefab
+・ステージを選ぶUIのプレハブ情報変更
+main_scene\CalamariTape\Assets\Prefabs\GameSelect.prefab
+・ステージ1のUIを変更
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・ステージ1のUIを変更（途中）
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+・UI処理にて各UIが選択された時に手前に表示する処理を追加
+main_scene\CalamariTape\Assets\Scripts\UIController.cs
+・旧ポーズ画面、クリア画面のUI素材の名前を変更
+main_scene\CalamariTape\Assets\Images\game_back_logo_.png
+main_scene\CalamariTape\Assets\Images\game_check_logo_bk.png
+main_scene\CalamariTape\Assets\Images\game_pause_logo_bk.png
+main_scene\CalamariTape\Assets\Images\game_proceed_bk.png
+main_scene\CalamariTape\Assets\Images\game_redo_logo_bk.png
+main_scene\CalamariTape\Assets\Images\game_select_logo_bk.png
+・ポーズ画面UIをプレハブ化
+main_scene\CalamariTape\Assets\Prefabs\Menu.prefab
+
 2021/09/11 10:21
 ★ベルトコンベアの実装
 ・デモシーンにてベルトコンベアの配置

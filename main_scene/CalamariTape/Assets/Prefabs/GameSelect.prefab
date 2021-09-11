@@ -70,7 +70,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c681df88c4aa0294e944d5b28c463fdd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e1c1a3b3345805e4fb1dc73faea84cce, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -213,7 +213,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _window: {fileID: 0}
   _sfx: {fileID: 0}
-  _blackBackGround: {fileID: 0}
+  _loadNowSprite: {fileID: 0}
+  _direct: {fileID: 0}
   _nextSceneName: main
   _nextScene: {fileID: 0}
 --- !u!1001 &529994474042667564
