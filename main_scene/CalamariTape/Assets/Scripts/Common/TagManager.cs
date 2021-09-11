@@ -23,5 +23,7 @@ namespace Const.Tag
         public static readonly string MESSAGE = "Message";
         /// <summary>回し車の制御値</summary>
         public static readonly string MARMOT_HEALTH = "MarmotHealth";
+        /// <summary>ベルトコンベア</summary>
+        public static readonly string CONVEYOR = "Conveyor";
     }
 }

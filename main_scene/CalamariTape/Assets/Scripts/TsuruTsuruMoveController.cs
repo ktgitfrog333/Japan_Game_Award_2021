@@ -26,6 +26,8 @@ public class TsuruTsuruMoveController : MonoBehaviour
     private Transform _transform;
     /// <summary>移動時の位置・回転を保存</summary>
     private Vector3 _moveVelocity;
+    /// <summary>移動時の位置・回転を保存</summary>
+    public Vector3 MoveVelocityAngl { get { return _moveVelocity; } }
 
     /// <summary>カメラのトランスフォーム</summary>
     private Transform _mainCameraTransform;

@@ -1,3 +1,35 @@
+2021/09/11 10:21
+★ベルトコンベアの実装
+・デモシーンにてベルトコンベアの配置
+main_scene\CalamariTape\Assets\Scenes\Stage6_Scene.unity
+・カラマリモードにてベルトコンベア用判定を追加
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+・関数名の命名規則にあわせた修正
+main_scene\CalamariTape\Assets\Scripts\MarmotHealth.cs
+・ネンチャクモードにてベルトコンベア用判定を追加
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+・ギミック停止処理へベルトコンベアを追加
+　＋関数名の命名規則にあわせた修正
+main_scene\CalamariTape\Assets\Scripts\StopGimmick.cs
+・ツルツルモードにてベルトコンベア用判定を追加
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruMoveController.cs
+・コンポーネント例外判定の定義を追加
+main_scene\CalamariTape\Assets\Scripts\Common\ComponentManager.cs
+・レイヤー定義へベルトコンベアを追加
+main_scene\CalamariTape\Assets\Scripts\Common\LayerManager.cs
+・タグ定義へベルトコンベアを追加
+main_scene\CalamariTape\Assets\Scripts\Common\TagManager.cs
+・CharacterController、各モードの振る舞い制御スクリプトコンポーネントの例外回避処理を追加
+main_scene\CalamariTape\Assets\Scripts\NotAttached\DeadNullReference.cs
+・ベルトコンベアのアセット追加
+main_scene\CalamariTape\Assets\ModularConveyorTools\*
+・ベルトコンベア上でプレイヤーを動かすスクリプトを作成
+main_scene\CalamariTape\Assets\Scripts\ConveyorMoveCharacter.cs
+・ベルトコンベアの速度定義スクリプトを作成
+main_scene\CalamariTape\Assets\Scripts\Common\ConveyorManager.cs
+・ベルトコンベアの移動方向を定義するスクリプトを作成
+main_scene\CalamariTape\Assets\Scripts\Common\ConveyorMoveMode.cs
+
 2021/09/03 08:57
 ★ケージで回転の実装
 ・各ステージのツルツルモード変更適用

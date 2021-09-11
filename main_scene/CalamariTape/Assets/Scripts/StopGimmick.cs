@@ -14,11 +14,14 @@ public class StopGimmick : MonoBehaviour
     private MoveWalls[] _moveWalls;
     /// <summary>回し車と扉、制御値の処理</summary>
     private MarmotHealth[] _marmotHealths;
+    /// <summary>ベルトコンベアの処理</summary>
+    private ConveyorMoveCharacter[] _conveyors;
 
     private void Start()
     {
         SearchMoveWalls();
         SearchMarmotHealths();
+        SearchConveyors();
     }
 
     /// <summary>
@@ -45,6 +48,19 @@ public class StopGimmick : MonoBehaviour
         if (0 < workLst.Count)
         {
             _marmotHealths = workLst.ToArray();
+        }
+    }
+
+    /// <summary>
+    /// レベルデザイン内にあるベルトコンベアの制御スクリプトをリスト化
+    /// </summary>
+    private void SearchConveyors()
+    {
+        var workLst = getScriptConveyorsList(TagManager.CONVEYOR);
+
+        if (0 < workLst.Count)
+        {
+            _conveyors = workLst.ToArray();
         }
     }
 
@@ -89,6 +105,26 @@ public class StopGimmick : MonoBehaviour
     }
 
     /// <summary>
+    /// 動くギミックをタグ名から取得
+    /// </summary>
+    /// <param name="tagName">タグ名</param>
+    /// <returns>動くギミックオブジェクト</returns>
+    private List<ConveyorMoveCharacter> getScriptConveyorsList(string tagName)
+    {
+        var ary = GameObject.FindGameObjectsWithTag(tagName);
+        var workLst = new List<ConveyorMoveCharacter>();
+        foreach (var obj in ary)
+        {
+            if (DeadNullReference.CheckReferencedComponent(obj, ComponentManager.CONVEYOR_MOVE_CHARACTER) == true)
+            {
+                workLst.Add(obj.GetComponent<ConveyorMoveCharacter>());
+            }
+        }
+
+        return workLst;
+    }
+
+    /// <summary>
     /// 全てのギミックを停止
     /// </summary>
     public void StopAllGimmik()
@@ -106,7 +142,15 @@ public class StopGimmick : MonoBehaviour
         {
             foreach (var script in _marmotHealths)
             {
-                script.setActiveLinkGimmick(false);
+                script.SetActiveLinkGimmick(false);
+            }
+        }
+        // ベルトコンベア
+        if (_conveyors != null && 0 < _conveyors.Length)
+        {
+            foreach (var script in _conveyors)
+            {
+                script.SetActive(false);
             }
         }
     }
@@ -129,7 +173,15 @@ public class StopGimmick : MonoBehaviour
         {
             foreach (var script in _marmotHealths)
             {
-                script.setActiveLinkGimmick(true);
+                script.SetActiveLinkGimmick(true);
+            }
+        }
+        // ベルトコンベア
+        if (_conveyors != null && 0 < _conveyors.Length)
+        {
+            foreach (var script in _conveyors)
+            {
+                script.SetActive(true);
             }
         }
     }

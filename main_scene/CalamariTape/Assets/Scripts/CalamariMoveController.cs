@@ -27,6 +27,14 @@ public class CalamariMoveController : MonoBehaviour
     private Transform _transform;
     /// <summary>移動時の位置・回転を保存</summary>
     private Vector3 _moveVelocity;
+    /// <summary>移動時の位置・回転を保存</summary>
+    public Vector3 MoveVelocityAngl
+    {
+        get
+        {
+            return _moveVelocity;
+        }
+    }
 
     /// <summary>カメラのトランスフォーム</summary>
     private Transform _mainCameraTransform;
@@ -296,7 +304,7 @@ public class CalamariMoveController : MonoBehaviour
         else
         {
             // 慣性あり
-            if ((0 < _moveVelocity.x && h < 0) || (_moveVelocity.x < 0 && 0 < h) || _inertia == true)
+            if (((0 < _moveVelocity.x && h < 0) || (_moveVelocity.x < 0 && 0 < h) || _inertia == true) && IsConveyor(_transform, _wallMove._registMaxDistance) == false)
             {
                 _inertia = true;
                 _moveVelocity.x = (_moveVelocity.x + h * 0.5f) * speed;
@@ -308,7 +316,7 @@ public class CalamariMoveController : MonoBehaviour
             }
 
             // 慣性あり
-            if ((0 < _moveVelocity.z && v < 0) || (_moveVelocity.z < 0 && 0 < v) || _inertia == true)
+            if (((0 < _moveVelocity.z && v < 0) || (_moveVelocity.z < 0 && 0 < v) || _inertia == true) && IsConveyor(_transform, _wallMove._registMaxDistance) == false)
             {
                 _inertia = true;
                 _moveVelocity.z = (_moveVelocity.z + v * 0.5f) * speed;
@@ -376,11 +384,63 @@ public class CalamariMoveController : MonoBehaviour
 
         if (IsGrounded() == false || _inertia == true)
         {
-            // 値を0へ戻す
-            _moveVelocity = Vector3.zero;
-            _movedSpeedToAnimator = 0f;
-            StartCoroutine(inertiaCancel());
+            if (IsConveyor(_transform, _wallMove._registMaxDistance) == false)
+            {
+                // 値を0へ戻す
+                _moveVelocity = Vector3.zero;
+                _movedSpeedToAnimator = 0f;
+                StartCoroutine(inertiaCancel());
+            }
         }
+    }
+
+    /// <summary>
+    /// コンベア接着判定
+    /// </summary>
+    /// <param name="transform">位置・角度・スケール</param>
+    /// <param name="distance">距離</param>
+    /// <returns>接着状態か否か</returns>
+    private bool IsConveyor(Transform transform, float distance)
+    {
+        var result = false;
+        Debug.DrawRay(transform.position + Vector3.up * 0.1f, Vector3.down * distance, Color.green);
+        var rayVtcl = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
+        foreach (RaycastHit hit in Physics.RaycastAll(rayVtcl, distance))
+        {
+            if (hit.collider.gameObject.layer == (int)LayerManager.CONVEYOR)
+            {
+                result = true;
+            }
+        }
+        Debug.DrawRay(transform.position + Vector3.right * 0.1f, Vector3.left * distance, Color.green);
+        var rayHntlLeft = new Ray(transform.position + Vector3.right * 0.1f, Vector3.left);
+        foreach (RaycastHit hit in Physics.RaycastAll(rayHntlLeft, distance))
+        {
+            if (hit.collider.gameObject.layer == (int)LayerManager.CONVEYOR)
+            {
+                result = true;
+            }
+        }
+        Debug.DrawRay(transform.position + Vector3.left * 0.1f, Vector3.right * distance, Color.green);
+        var rayHntlRight = new Ray(transform.position + Vector3.left * 0.1f, Vector3.right);
+        foreach (RaycastHit hit in Physics.RaycastAll(rayHntlRight, distance))
+        {
+            if (hit.collider.gameObject.layer == (int)LayerManager.CONVEYOR)
+            {
+                result = true;
+            }
+        }
+        Debug.DrawRay(transform.position + Vector3.back * 0.1f, Vector3.forward * distance, Color.green);
+        var rayFoBa = new Ray(transform.position + Vector3.back * 0.1f, Vector3.forward);
+        foreach (RaycastHit hit in Physics.RaycastAll(rayFoBa, distance))
+        {
+            if (hit.collider.gameObject.layer == (int)LayerManager.CONVEYOR)
+            {
+                result = true;
+            }
+        }
+
+        return result;
     }
 
     /// <summary>

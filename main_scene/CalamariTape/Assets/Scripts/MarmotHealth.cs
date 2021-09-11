@@ -81,7 +81,7 @@ public class MarmotHealth : MonoBehaviour
     /// オブジェクトに紐づく回し車とドアの有効・無効制御
     /// </summary>
     /// <param name="active">制御フラグ（有効・無効）</param>
-    public void setActiveLinkGimmick(bool active)
+    public void SetActiveLinkGimmick(bool active)
     {
         _wheel.enabled = active;
         _opener.enabled = active;
