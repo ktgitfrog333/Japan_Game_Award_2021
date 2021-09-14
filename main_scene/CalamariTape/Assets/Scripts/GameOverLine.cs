@@ -8,7 +8,7 @@ using UnityEngine;
 public class GameOverLine : MonoBehaviour
 {
     /// <summary>各モード管理</summary>
-    [SerializeField] PlayerManager _playerManager;
+    [SerializeField] private PlayerManager _playerManager;
     /// <summary>カラマリモードの位置</summary>
     private Vector3 _replayPositionCalamari;
     /// <summary>ネンチャクモードの位置</summary>

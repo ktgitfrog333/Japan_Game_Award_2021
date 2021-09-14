@@ -57,6 +57,7 @@
     <Compile Include="Assets\SampleScenes\Scripts\ParticleSceneControls.cs" />
     <Compile Include="Assets\Scripts\NenchakMoveController.cs" />
     <Compile Include="Assets\Scripts\GameSelect.cs" />
+    <Compile Include="Assets\Scripts\Common\ConveyorManager.cs" />
     <Compile Include="Assets\Scripts\CalamariWallMove.cs" />
     <Compile Include="Assets\Scripts\NotAttached\NenchakWallVerticalDecision.cs" />
     <Compile Include="Assets\Scripts\Common\WallRunVerticalMode.cs" />
@@ -101,7 +102,7 @@
     <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
     <Compile Include="Assets\Scripts\SfxPlay.cs" />
     <Compile Include="Assets\Scripts\MenuManager.cs" />
-    <Compile Include="Assets\Scripts\NotAttached\CalamariStateConf.cs" />
+    <Compile Include="Assets\Scripts\NotAttached\AllmodeStateConf.cs" />
     <Compile Include="Assets\Scripts\TsuruTsuruScaler.cs" />
     <Compile Include="Assets\Scripts\Common\StageNameManager.cs" />
     <Compile Include="Assets\Scripts\MoveController.cs" />
@@ -115,7 +116,9 @@
     <Compile Include="Assets\Scripts\NenchakWallMove.cs" />
     <Compile Include="Assets\Scripts\MarmotHealth.cs" />
     <Compile Include="Assets\Scripts\TsuruTsuruMoveController.cs" />
+    <Compile Include="Assets\Scripts\ConveyorMoveCharacter.cs" />
     <Compile Include="Assets\Scripts\Common\AnimatorControllerManager.cs" />
+    <Compile Include="Assets\Scripts\Common\ConveyorMoveMode.cs" />
     <Compile Include="Assets\Scripts\Common\WallRunHorizontalFrontMode.cs" />
     <Compile Include="Assets\Scripts\SaveControllerScene.cs" />
     <Compile Include="Assets\Scripts\ClearHorizontalWall.cs" />
@@ -131,9 +134,7 @@
     <Compile Include="Assets\Scripts\CameraPointMove.cs" />
     <Compile Include="Assets\Scripts\PauseWindowManager.cs" />
     <Compile Include="Assets\Scripts\Common\ComponentManager.cs" />
-    <Compile Include="Assets\Scripts\ConveyorMoveCharacter.cs" />
-    <Compile Include="Assets\Scripts\Common\ConveyorMoveMode.cs" />
-    <Compile Include="Assets\Scripts\Common\ConveyorManager.cs" />
+    <Compile Include="Assets\Scripts\Common\GravityDirection.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Wheel\arktoon Shaders\Shaders\cginc\arkludeDecl.cginc" />

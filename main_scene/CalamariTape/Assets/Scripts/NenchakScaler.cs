@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using Controller.AllmodeState;
+using Controller.Gravity;
 
 /// <summary>
 /// ネンチャクモードの大きさを調整
@@ -14,15 +16,13 @@ public class NenchakScaler : MonoBehaviour
     /// <summary>拡大率</summary>
     [SerializeField, Range(1, 4)] private float _scale = 1;
     /// <summary>拡大率</summary>
-    public float Scale {
-        get
-        {
-            return _scale;
-        }
-    }
+    public float Scale { get { return _scale; } }
 
     /// <summary>スケール拡大SE再生可フラグ</summary>
     private bool _sfxPlayedScaleUp;
+
+    /// <summary>ネンチャクモードにて壁移動を行う</summary>
+    [SerializeField] private NenchakWallMove _wallMove;
 
     private void Start()
     {
@@ -71,6 +71,7 @@ public class NenchakScaler : MonoBehaviour
                 _scale = 1.0f;
             }
         }
+        GravityAction();
     }
 
     /// <summary>
@@ -105,6 +106,45 @@ public class NenchakScaler : MonoBehaviour
             {
                 _scale = 1.0f;
             }
+        }
+        GravityAction();
+    }
+
+    /// <summary>
+    /// 重力による挙動
+    /// </summary>
+    private void GravityAction()
+    {
+        // 壁の接触判定
+        var isWalled = AllmodeStateConf.IsWalled(_state._transform, _wallMove._registMaxDistance);
+        if (isWalled != (int)GravityDirection.AIR)
+        {
+            var ctrl = _state._characterController;
+            var vector = new Vector3();
+            if (isWalled == (int)GravityDirection.VERTICAL)
+            {
+                // 横向きの壁に対する重力修正
+                vector.z = Physics.gravity.y * Time.deltaTime * -1;
+            }
+            else if (isWalled == (int)GravityDirection.HORIZONTAL_LEFT)
+            {
+                // 縦向きの壁（左）に対する重力修正
+                vector.x = Physics.gravity.y * Time.deltaTime;
+            }
+            else if (isWalled == (int)GravityDirection.HORIZONTAL_RIGHT)
+            {
+                // 縦向きの壁（右）に対する重力修正
+                vector.x = Physics.gravity.y * Time.deltaTime * -1;
+            }
+            ctrl.Move(vector);
+        }
+        else if (AllmodeStateConf.IsGrounded(_state._characterController, _state._transform, _wallMove._registMaxDistance) == false)
+        {
+            // 空中
+            var c = _state._characterController;
+            var v = new Vector3();
+            v.y = Physics.gravity.y * Time.deltaTime;
+            c.Move(v);
         }
     }
 

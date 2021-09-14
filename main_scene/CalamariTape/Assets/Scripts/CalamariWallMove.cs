@@ -112,6 +112,7 @@ public class CalamariWallMove : MonoBehaviour
         {
             _wallRunVertical = false;
             _rigidbodyVelocity = Vector3.zero;
+            _scaler._zeroGravity = false;
         }
 
         // 横方向で登る挙動を不可にする
@@ -120,6 +121,7 @@ public class CalamariWallMove : MonoBehaviour
             _wallRunHorizontal = false;
             StartCoroutine(ZeroGravity());
             _rigidbodyVelocity = Vector3.zero;
+            _scaler._zeroGravity = false;
         }
     }
 

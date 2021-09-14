@@ -23,6 +23,8 @@ public class NenchakState : MonoBehaviour
     public Transform _transform { set; get; }
     /// <summary>SE再生用のゲームオブジェクト</summary>
     [SerializeField] public SfxPlay _sfxPlay;
+    /// <summary>キャラクターコントローラー</summary>
+    [SerializeField] public CharacterController _characterController;
 
     private void Start()
     {

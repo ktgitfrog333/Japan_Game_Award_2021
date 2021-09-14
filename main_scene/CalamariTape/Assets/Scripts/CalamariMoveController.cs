@@ -127,7 +127,7 @@ public class CalamariMoveController : MonoBehaviour
     {
         if (_wallMove._wallRunVertical == false && _wallMove._wallRunHorizontal == false)
         {
-            if (IsGrounded() && _jumpAction != true)
+            if (AllmodeStateConf.IsGrounded(_characterController, _transform, _wallMove._registMaxDistance) && _jumpAction != true)
             {
                 _jumpAction = CrossPlatformInputManager.GetButtonDown("Jump");
             }
@@ -143,9 +143,13 @@ public class CalamariMoveController : MonoBehaviour
         _registedJumpMax = AllmodeStateConf.ParameterMatchScale(_jumpMax, _maxJumpMax, _scaler.Scale);
 
         // 空中の移動速度補正
-        if (IsGrounded() == false)
+        if (AllmodeStateConf.IsGrounded(_characterController, _transform, _wallMove._registMaxDistance) == false)
         {
             _airSetMoveSpeed = 2f;
+        }
+        else if (_scaler._zeroGravity == true)
+        {
+            _scaler._zeroGravity = false;
         }
 
         // デバッグ：移動計測のコルーチンを起動する
@@ -204,7 +208,7 @@ public class CalamariMoveController : MonoBehaviour
         }
 
         var speed = 0f;
-        if (IsGrounded() == true)
+        if (AllmodeStateConf.IsGrounded(_characterController, _transform, _wallMove._registMaxDistance) == true)
         {
             speed = _groundSetMoveSpeed;
         }
@@ -343,7 +347,7 @@ public class CalamariMoveController : MonoBehaviour
         // 壁を登らない（または耐久値ゼロ）
         if ((_wallMove._wallRunVertical == false && _wallMove._wallRunHorizontal == false) || _health.Parameter <= 0)
         {
-            if (IsGrounded() == true && _jumpAction == true)
+            if (AllmodeStateConf.IsGrounded(_characterController, _transform, _wallMove._registMaxDistance) == true && _jumpAction == true)
             {
                 // ジャンプ処理
                 _jumpVelocity += _jumpPower;
@@ -353,7 +357,7 @@ public class CalamariMoveController : MonoBehaviour
                 // 効果音を再生する
                 PlaySoundEffectJump();
             }
-            else if (IsGrounded() == false && _jumpAction == true && _jumpVelocity < _registedJumpMax)
+            else if (AllmodeStateConf.IsGrounded(_characterController, _transform, _wallMove._registMaxDistance) == false && _jumpAction == true && _jumpVelocity < _registedJumpMax)
             {
                 // ジャンプ処理
                 _jumpVelocity += _jumpPower;
@@ -363,7 +367,7 @@ public class CalamariMoveController : MonoBehaviour
                 // 効果音を再生する
                 PlaySoundEffectJump();
             }
-            else if (IsGrounded() == false)
+            else if (AllmodeStateConf.IsGrounded(_characterController, _transform, _wallMove._registMaxDistance) == false)
             {
                 // 重力制御
                 ControllGravity();
@@ -382,7 +386,7 @@ public class CalamariMoveController : MonoBehaviour
 
         MoveAndAnimation();
 
-        if (IsGrounded() == false || _inertia == true)
+        if (AllmodeStateConf.IsGrounded(_characterController, _transform, _wallMove._registMaxDistance) == false || _inertia == true)
         {
             if (IsConveyor(_transform, _wallMove._registMaxDistance) == false)
             {
@@ -457,6 +461,10 @@ public class CalamariMoveController : MonoBehaviour
             g = 0f;
             mx = 5f;
             _moveVelocity.x *= mx;
+        }
+        if (_scaler._zeroGravity == true)
+        {
+            g = 0f;
         }
         _moveVelocity.y = Physics.gravity.y * _gravityAcceleration * g;
     }
@@ -792,30 +800,6 @@ public class CalamariMoveController : MonoBehaviour
             _sfxPlayedMove = true;
             _sfxPlay.PlaySFX("se_move");
         }
-    }
-
-    /// <summary>
-    /// 接地判定
-    /// </summary>
-    /// <returns>接地状態か否か</returns>
-    private bool IsGrounded()
-    {
-        var result = _characterController.isGrounded;
-
-        if (result == false)
-        {
-            Debug.DrawRay(_transform.position + Vector3.up * 0.1f, Vector3.down * _wallMove._registMaxDistance, Color.green);
-            var ray = new Ray(_transform.position + Vector3.up * 0.1f, Vector3.down);
-            foreach (RaycastHit hit in Physics.RaycastAll(ray, _wallMove._registMaxDistance))
-            {
-                if (hit.collider.gameObject.layer == (int)LayerManager.FIELD)
-                {
-                    result = true;
-                }
-            }
-        }
-
-        return result;
     }
 
     /// <summary>

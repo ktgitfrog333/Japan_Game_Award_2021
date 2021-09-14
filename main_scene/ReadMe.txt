@@ -1,3 +1,43 @@
+2021/09/14 09:02
+★壁、床の上で大きさを変更する際に空中に浮く挙動を修正
+・クリア画面プレハブにてオブジェクト無効化を初期値に設定
+main_scene\CalamariTape\Assets\Prefabs\ClearScreen.prefab
+・選択アイコンのプレハブにて画像を変更
+main_scene\CalamariTape\Assets\Prefabs\GameFrame.prefab
+・ゲームオーバーエリアのプレハブにて位置情報を変更
+main_scene\CalamariTape\Assets\Prefabs\GameOverLine.prefab
+・縦向きの壁にてレイヤー情報を変更
+main_scene\CalamariTape\Assets\Prefabs\HorizontalWall.prefab
+・横向きの壁にてレイヤー情報を変更
+main_scene\CalamariTape\Assets\Prefabs\VerticalWall.prefab
+・各ステージにてネンチャク、カラマリモード設定を変更
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage6_Scene.unity
+・カラマリモードにて大きさ変更中に重力発生させる処理を追加
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+main_scene\CalamariTape\Assets\Scripts\CalamariScaler.cs
+main_scene\CalamariTape\Assets\Scripts\CalamariState.cs
+main_scene\CalamariTape\Assets\Scripts\CalamariWallMove.cs
+・ゲームオーバーエリア処理にてプレイヤーコンポーネントにプライベート追加
+main_scene\CalamariTape\Assets\Scripts\GameOverLine.cs
+・ネンチャクモードにて大きさ変更中に重力発生させる処理を追加
+main_scene\CalamariTape\Assets\Scripts\NenchakScaler.cs
+main_scene\CalamariTape\Assets\Scripts\NenchakState.cs
+・メニュープレハブ化を解除
+※各シーンのヒエラルキーに依存、及びプレハブ化により既存設定が初期化された？為
+（削除）main_scene\CalamariTape\Assets\Prefabs\Menu.prefab
+・全モード使用スクリプトの名前を変更
+（削除）main_scene\CalamariTape\Assets\Scripts\NotAttached\CalamariStateConf.cs
+（作成）main_scene\CalamariTape\Assets\Scripts\NotAttached\AllmodeStateConf.cs
+・ステージ1をベースにテンプレートシーンを作成
+main_scene\CalamariTape\Assets\Scenes\main 3.scenetemplate
+・重力方向を定義するスクリプトを作成
+main_scene\CalamariTape\Assets\Scripts\Common\GravityDirection.cs
+
 2021/09/11 23:05
 ★ポーズ画面、クリア画面のクリック動作で非選択になる不具合を修正
 ・右クリック、マウスホイール押下で非選択になる不具合を修正
