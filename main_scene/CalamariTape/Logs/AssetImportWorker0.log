@@ -111,3 +111,4 @@ Received Import Request.
 Start importing Assets/Scripts/MarmotWheel.cs using Guid(413f164c47288924bbd96067cf8375c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f3d8138e6fda0b62cd10db845437546d') in 0.003511 seconds
   Import took 0.005749 seconds .
 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
