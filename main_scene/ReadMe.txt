@@ -1,3 +1,39 @@
+2021/09/17 09:07
+★新ギミック　回転リングの実装
+・回転リングのサンプルエリアを作成
+main_scene\CalamariTape\Assets\Scenes\Stage6_Scene.unity
+・新ギミックの一部ロジック共通化により、回し車の一部ロジックを削除
+main_scene\CalamariTape\Assets\Scripts\MarmotWheel.cs
+・コンポーネント定義へ回転リングを追加
+main_scene\CalamariTape\Assets\Scripts\Common\ComponentManager.cs
+・(削除)新ギミック用のプレハブ格納先を変更
+main_scene\CalamariTape\Assets\Prefabs\DoorWheel.prefab
+main_scene\CalamariTape\Assets\Prefabs\MarmotHealth.prefab
+main_scene\CalamariTape\Assets\Prefabs\MarmotWheel.prefab
+main_scene\CalamariTape\Assets\Prefabs\MoveHorizontalWall.prefab
+main_scene\CalamariTape\Assets\Prefabs\MoveVerticalWall.prefab
+・回転リングのモデルを追加
+main_scene\CalamariTape\Assets\Models\circle_ring.fbx
+・回転リングのマテリアル（外側）を追加
+main_scene\CalamariTape\Assets\Models\Materials\circle_material.mat
+・回転リングのマテリアル（内側）を追加
+main_scene\CalamariTape\Assets\Models\Materials\hashira.mat
+・回転リング、回転床のプレハブ化
+main_scene\CalamariTape\Assets\Prefabs\Gimmicks\CircleRing.prefab
+main_scene\CalamariTape\Assets\Prefabs\Gimmicks\CircleScaffold.prefab
+・新ギミック用のフォルダを作成してプレハブを移動
+main_scene\CalamariTape\Assets\Prefabs\Gimmicks\DoorWheel.prefab
+main_scene\CalamariTape\Assets\Prefabs\Gimmicks\MarmotHealth.prefab
+main_scene\CalamariTape\Assets\Prefabs\Gimmicks\MarmotWheel.prefab
+main_scene\CalamariTape\Assets\Prefabs\Gimmicks\MoveHorizontalWall.prefab
+main_scene\CalamariTape\Assets\Prefabs\Gimmicks\MoveVerticalWall.prefab
+・回転リング処理の作成
+main_scene\CalamariTape\Assets\Scripts\CircleRing.cs
+・回転床処理の作成
+main_scene\CalamariTape\Assets\Scripts\CircleScaffold.cs
+・新ギミックのプレイヤー判定の共通化モジュール作成（回し車、回転リング）
+main_scene\CalamariTape\Assets\Scripts\NotAttached\GimmicksDecision.cs
+
 2021/09/14 09:02
 ★壁、床の上で大きさを変更する際に空中に浮く挙動を修正
 ・クリア画面プレハブにてオブジェクト無効化を初期値に設定

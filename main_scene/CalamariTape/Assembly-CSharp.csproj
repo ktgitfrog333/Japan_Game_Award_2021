@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\GameSelect.cs" />
     <Compile Include="Assets\Scripts\Common\ConveyorManager.cs" />
     <Compile Include="Assets\Scripts\CalamariWallMove.cs" />
+    <Compile Include="Assets\Scripts\Common\GravityDirection.cs" />
     <Compile Include="Assets\Scripts\NotAttached\NenchakWallVerticalDecision.cs" />
     <Compile Include="Assets\Scripts\Common\WallRunVerticalMode.cs" />
     <Compile Include="Assets\Scripts\TsuruTsuruGroundMove.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Assets\Scripts\GameCheck.cs" />
     <Compile Include="Assets\Scripts\DoorOpener.cs" />
     <Compile Include="Assets\Scripts\Interface\DebugDemo.cs" />
+    <Compile Include="Assets\Scripts\CircleRing.cs" />
     <Compile Include="Assets\Scripts\GameRedo.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
     <Compile Include="Assets\Scripts\ModeChanger.cs" />
@@ -88,6 +90,7 @@
     <Compile Include="Assets\ModularConveyorTools\Scripts\LinearConveyor.cs" />
     <Compile Include="Assets\Scripts\CursorManager.cs" />
     <Compile Include="Assets\Scripts\CalamariMoveController.cs" />
+    <Compile Include="Assets\Scripts\NotAttached\GimmicksDecision.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\StopGimmick.cs" />
     <Compile Include="Assets\Scripts\Common\LayerManager.cs" />
@@ -134,7 +137,7 @@
     <Compile Include="Assets\Scripts\CameraPointMove.cs" />
     <Compile Include="Assets\Scripts\PauseWindowManager.cs" />
     <Compile Include="Assets\Scripts\Common\ComponentManager.cs" />
-    <Compile Include="Assets\Scripts\Common\GravityDirection.cs" />
+    <Compile Include="Assets\Scripts\CircleScaffold.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Wheel\arktoon Shaders\Shaders\cginc\arkludeDecl.cginc" />

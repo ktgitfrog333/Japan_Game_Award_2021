@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Const.Animator;
+using Controller.Gimmicks;
 
 /// <summary>
 /// 回し車を回転させる
@@ -68,7 +69,7 @@ public class MarmotWheel : MonoBehaviour
             _health._returnUpdateHealth = false;
             _onTriggerExit = false;
         }
-        var r = DecisionCollisionPlayerMode(other.gameObject);
+        var r = GimmicksDecision.DecisionCollisionPlayerMode(other.gameObject, _playerManager, GetType().ToString());
         if (r == 1)
         {
             _tsurutsuruIn = true;
@@ -81,7 +82,7 @@ public class MarmotWheel : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        var r = DecisionCollisionPlayerMode(other.gameObject);
+        var r = GimmicksDecision.DecisionCollisionPlayerMode(other.gameObject, _playerManager, GetType().ToString());
         if (r != -1 && _onTriggerExit == false)
         {
             _onTriggerExit = true;
@@ -205,25 +206,5 @@ public class MarmotWheel : MonoBehaviour
             _animator.SetBool(AnimatorControllerManager.MAWASHIGURUMA_ROTATEBOOL, true);
             _animator.SetFloat(AnimatorControllerManager.MAWASHIGURUMA_ROTATEFLOAT, 1f);
         }
-    }
-
-    /// <summary>
-    /// プレイヤーのモードを判定
-    /// </summary>
-    /// <param name="gameObject">プレイヤー</param>
-    /// <returns>再生・停止・-1は例外</returns>
-    private int DecisionCollisionPlayerMode(GameObject gameObject)
-    {
-        var result = -1;
-        if (gameObject.name.Equals(_playerManager._tsurutsuru.name))
-        {
-            result = 1;
-        }
-        else if (gameObject.name.Equals(_playerManager._calamari.name) || gameObject.name.Equals(_playerManager._nenchak.name))
-        {
-            result = 0;
-        }
-
-        return result;
     }
 }
