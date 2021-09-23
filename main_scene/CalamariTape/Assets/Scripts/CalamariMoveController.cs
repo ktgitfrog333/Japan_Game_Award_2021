@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using Controller.WallHorizontal;
 using Controller.AllmodeState;
-using Const.Layer;
+using DeadException;
+using Const.Component;
 
 /// <summary>
 /// プレイヤー操作スクリプトクラス
@@ -14,7 +15,7 @@ public class CalamariMoveController : MonoBehaviour
     /// <summary>移動速度</summary>
     [SerializeField] private float _moveSpeed = 5f;
     /// <summary>移動速度の初期値</summary>
-    private float _groundSetMoveSpeed;
+    public float _groundSetMoveSpeed { get; set; }
     /// <summary>移動速度の初期値</summary>
     private float _airSetMoveSpeed;
     /// <summary>移動速度（最大）</summary>
@@ -28,13 +29,7 @@ public class CalamariMoveController : MonoBehaviour
     /// <summary>移動時の位置・回転を保存</summary>
     private Vector3 _moveVelocity;
     /// <summary>移動時の位置・回転を保存</summary>
-    public Vector3 MoveVelocityAngl
-    {
-        get
-        {
-            return _moveVelocity;
-        }
-    }
+    public Vector3 MoveVelocityAngl { get { return _moveVelocity; } }
 
     /// <summary>カメラのトランスフォーム</summary>
     private Transform _mainCameraTransform;
@@ -96,9 +91,15 @@ public class CalamariMoveController : MonoBehaviour
 
     /// <summary>プレイヤーの耐久値</summary>
     [SerializeField] private CalamariHealth _health;
-
     /// <summary>プレイヤーの大きさ</summary>
     [SerializeField] private CalamariScaler _scaler;
+
+    /// <summary>横向き入力</summary>
+    public float _horizontal { get; private set; }
+    /// <summary>縦向き入力</summary>
+    public float _vertical { get; private set; }
+    /// <summary>滑る床</summary>
+    private IcePlane _icePlane;
 
     void Start()
     {
@@ -125,11 +126,25 @@ public class CalamariMoveController : MonoBehaviour
 
     private void Update()
     {
+        // 普通の床、滑る床の地面判定
         if (_wallMove._wallRunVertical == false && _wallMove._wallRunHorizontal == false)
         {
-            if (AllmodeStateConf.IsGrounded(_characterController, _transform, _wallMove._registMaxDistance) && _jumpAction != true)
+            // 地面の上にいるか
+            if (AllmodeStateConf.IsGrounded(_characterController, _transform, _wallMove._registMaxDistance) == true && _jumpAction != true)
             {
                 _jumpAction = CrossPlatformInputManager.GetButtonDown("Jump");
+            }
+            // 滑る床の上にいるか
+            var iceObj = AllmodeStateConf.IsIcePlanedAndObject(_characterController, _transform, _wallMove._registMaxDistance);
+            if (iceObj != null && DeadNullReference.CheckReferencedComponent(iceObj, ComponentManager.ICE_PLANE))
+            {
+                _icePlane = iceObj.GetComponent<IcePlane>();
+                _icePlane.OnRayHitEnter(gameObject);
+            }
+            else if (_icePlane != null)
+            {
+                _icePlane.OnRayHitExit();
+                _icePlane = null;
             }
         }
 
@@ -205,6 +220,8 @@ public class CalamariMoveController : MonoBehaviour
         {
             h = CrossPlatformInputManager.GetAxis("Horizontal");
             v = CrossPlatformInputManager.GetAxis("Vertical");
+            _horizontal = h;
+            _vertical = v;
         }
 
         var speed = 0f;
@@ -308,7 +325,7 @@ public class CalamariMoveController : MonoBehaviour
         else
         {
             // 慣性あり
-            if (((0 < _moveVelocity.x && h < 0) || (_moveVelocity.x < 0 && 0 < h) || _inertia == true) && IsConveyor(_transform, _wallMove._registMaxDistance) == false)
+            if (((0 < _moveVelocity.x && h < 0) || (_moveVelocity.x < 0 && 0 < h) || _inertia == true) && AllmodeStateConf.IsConveyor(_transform, _wallMove._registMaxDistance) == false)
             {
                 _inertia = true;
                 _moveVelocity.x = (_moveVelocity.x + h * 0.5f) * speed;
@@ -320,7 +337,7 @@ public class CalamariMoveController : MonoBehaviour
             }
 
             // 慣性あり
-            if (((0 < _moveVelocity.z && v < 0) || (_moveVelocity.z < 0 && 0 < v) || _inertia == true) && IsConveyor(_transform, _wallMove._registMaxDistance) == false)
+            if (((0 < _moveVelocity.z && v < 0) || (_moveVelocity.z < 0 && 0 < v) || _inertia == true) && AllmodeStateConf.IsConveyor(_transform, _wallMove._registMaxDistance) == false)
             {
                 _inertia = true;
                 _moveVelocity.z = (_moveVelocity.z + v * 0.5f) * speed;
@@ -388,7 +405,7 @@ public class CalamariMoveController : MonoBehaviour
 
         if (AllmodeStateConf.IsGrounded(_characterController, _transform, _wallMove._registMaxDistance) == false || _inertia == true)
         {
-            if (IsConveyor(_transform, _wallMove._registMaxDistance) == false)
+            if (AllmodeStateConf.IsConveyor(_transform, _wallMove._registMaxDistance) == false)
             {
                 // 値を0へ戻す
                 _moveVelocity = Vector3.zero;
@@ -396,55 +413,6 @@ public class CalamariMoveController : MonoBehaviour
                 StartCoroutine(inertiaCancel());
             }
         }
-    }
-
-    /// <summary>
-    /// コンベア接着判定
-    /// </summary>
-    /// <param name="transform">位置・角度・スケール</param>
-    /// <param name="distance">距離</param>
-    /// <returns>接着状態か否か</returns>
-    private bool IsConveyor(Transform transform, float distance)
-    {
-        var result = false;
-        Debug.DrawRay(transform.position + Vector3.up * 0.1f, Vector3.down * distance, Color.green);
-        var rayVtcl = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
-        foreach (RaycastHit hit in Physics.RaycastAll(rayVtcl, distance))
-        {
-            if (hit.collider.gameObject.layer == (int)LayerManager.CONVEYOR)
-            {
-                result = true;
-            }
-        }
-        Debug.DrawRay(transform.position + Vector3.right * 0.1f, Vector3.left * distance, Color.green);
-        var rayHntlLeft = new Ray(transform.position + Vector3.right * 0.1f, Vector3.left);
-        foreach (RaycastHit hit in Physics.RaycastAll(rayHntlLeft, distance))
-        {
-            if (hit.collider.gameObject.layer == (int)LayerManager.CONVEYOR)
-            {
-                result = true;
-            }
-        }
-        Debug.DrawRay(transform.position + Vector3.left * 0.1f, Vector3.right * distance, Color.green);
-        var rayHntlRight = new Ray(transform.position + Vector3.left * 0.1f, Vector3.right);
-        foreach (RaycastHit hit in Physics.RaycastAll(rayHntlRight, distance))
-        {
-            if (hit.collider.gameObject.layer == (int)LayerManager.CONVEYOR)
-            {
-                result = true;
-            }
-        }
-        Debug.DrawRay(transform.position + Vector3.back * 0.1f, Vector3.forward * distance, Color.green);
-        var rayFoBa = new Ray(transform.position + Vector3.back * 0.1f, Vector3.forward);
-        foreach (RaycastHit hit in Physics.RaycastAll(rayFoBa, distance))
-        {
-            if (hit.collider.gameObject.layer == (int)LayerManager.CONVEYOR)
-            {
-                result = true;
-            }
-        }
-
-        return result;
     }
 
     /// <summary>

@@ -91,7 +91,7 @@ public class CircleRing : MonoBehaviour
             }
             else if (_playerModeName.Equals(_playerManager._tsurutsuru.name))
             {
-                h = _playerManager._tsurutsuruController._registedHorizontal;
+                h = _playerManager._tsurutsuruController._horizontal;
             }
             if (0.1f <= h)
             {

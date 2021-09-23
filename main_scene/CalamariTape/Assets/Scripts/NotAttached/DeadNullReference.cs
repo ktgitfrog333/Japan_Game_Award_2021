@@ -108,6 +108,18 @@ namespace DeadException
                         result = false;
                     }
                 }
+                else if (name.Equals(ComponentManager.ICE_PLANE))
+                {
+                    var c = gameObject.GetComponent<IcePlane>();
+                    if (c.isActiveAndEnabled == true && c._icePlane == true)
+                    {
+                        result = true;
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                }
             }
             catch (NullReferenceException e)
             {

@@ -7,6 +7,8 @@ using Controller.AllmodeState;
 using Const.Tag;
 using Const.Layer;
 using Controller.WallVertical;
+using DeadException;
+using Const.Component;
 
 /// <summary>
 /// プレイヤー操作スクリプトクラス
@@ -16,7 +18,7 @@ public class NenchakMoveController : MonoBehaviour
     /// <summary>移動速度</summary>
     [SerializeField] private float _moveSpeed = 3f;
     /// <summary>移動速度の初期値</summary>
-    private float _groundSetMoveSpeed;
+    public float _groundSetMoveSpeed { get; set; }
     /// <summary>移動速度（最大）</summary>
     [SerializeField] private float _maxMoveSpeed = 4f;
 
@@ -24,7 +26,7 @@ public class NenchakMoveController : MonoBehaviour
     [SerializeField] private CharacterController _characterController;
 
     /// <summary>移動前の位置・回転を保存</summary>
-    private Transform _transform;
+    public Transform _transform { get; private set; }
     /// <summary>移動時の位置・回転を保存</summary>
     private Vector3 _moveVelocity;
     /// <summary>移動時の位置・回転を保存</summary>
@@ -66,6 +68,13 @@ public class NenchakMoveController : MonoBehaviour
 
     /// <summary>プレイヤーの大きさ</summary>
     [SerializeField] private NenchakScaler _scaler;
+
+    /// <summary>スティック入力（横）の保存</summary>
+    public float _horizontal { get; private set; }
+    /// <summary>スティック入力（縦）の保存</summary>
+    public float _vertical { get; private set; }
+    /// <summary>滑る床</summary>
+    private IcePlane _icePlane;
 
     void Start()
     {
@@ -113,6 +122,19 @@ public class NenchakMoveController : MonoBehaviour
                 _animation.setAnimetionParameters("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator);
             }
         }
+
+        // 滑る床の上にいるか
+        var iceObj = AllmodeStateConf.IsIcePlanedAndObject(_characterController, _transform, _wallMove._registMaxDistance);
+        if (iceObj != null && DeadNullReference.CheckReferencedComponent(iceObj, ComponentManager.ICE_PLANE))
+        {
+            _icePlane = iceObj.GetComponent<IcePlane>();
+            _icePlane.OnRayHitEnter(gameObject);
+        }
+        else if (_icePlane != null)
+        {
+            _icePlane.OnRayHitExit();
+            _icePlane = null;
+        }
     }
 
     private void OnEnable()
@@ -143,6 +165,9 @@ public class NenchakMoveController : MonoBehaviour
     {
         var h = CrossPlatformInputManager.GetAxis("Horizontal");
         var v = CrossPlatformInputManager.GetAxis("Vertical");
+        // 滑る床で使用する為、移動入力を保存
+        _horizontal = h;
+        _vertical = v;
 
         if (0f < _health.Parameter && _health.Adhesive == true && _wallMove._wallRunVertical == true && _wallMove._wallRunHorizontal == false && _wallMove._wallRunedHztl == false)
         {

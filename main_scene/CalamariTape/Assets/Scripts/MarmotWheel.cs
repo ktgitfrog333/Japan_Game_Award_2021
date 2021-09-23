@@ -129,7 +129,7 @@ public class MarmotWheel : MonoBehaviour
     {
         if (_tsurutsuruIn == true)
         {
-            var h = _playerManager._tsurutsuruController._registedHorizontal;
+            var h = _playerManager._tsurutsuruController._horizontal;
             if (0.1f <= h)
             {
                 _spinStart = true;

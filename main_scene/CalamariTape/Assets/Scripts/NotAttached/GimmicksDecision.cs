@@ -30,7 +30,7 @@ namespace Controller.Gimmicks
                     result = 0;
                 }
             }
-            else if (type.Equals(ComponentManager.CIRCLE_RING))
+            else if (type.Equals(ComponentManager.CIRCLE_RING) || type.Equals(ComponentManager.ICE_PLANE))
             {
                 // 回転リング　カラマリモードとツルツルモードのみ
                 if (gameObject.name.Equals(playerManager._calamari.name) || gameObject.name.Equals(playerManager._tsurutsuru.name))

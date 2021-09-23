@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using Const.Layer;
 using Controller.AllmodeState;
+using DeadException;
+using Const.Component;
 
 /// <summary>
 /// プレイヤー操作スクリプトクラス
@@ -13,7 +15,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
     /// <summary>移動速度</summary>
     [SerializeField] private float _moveSpeed = 7f;
     /// <summary>移動速度の初期値</summary>
-    private float _groundSetMoveSpeed;
+    public float _groundSetMoveSpeed { get; set; }
     /// <summary>移動速度の初期値</summary>
     private float _airSetMoveSpeed;
     /// <summary>移動速度（最大）</summary>
@@ -35,9 +37,9 @@ public class TsuruTsuruMoveController : MonoBehaviour
     private Vector3 _mainCameraForward;
 
     /// <summary>スティック入力（横）の保存</summary>
-    public float _registedHorizontal { private set; get; }
+    public float _horizontal { private set; get; }
     /// <summary>スティック入力（縦）の保存</summary>
-    private float _registedVertical;
+    public float _vertical { private set; get; }
 
     /// <summary>ジャンプ力の設定値</summary>
     [SerializeField] private float _jumpPower = 5f;
@@ -81,14 +83,16 @@ public class TsuruTsuruMoveController : MonoBehaviour
     [SerializeField] private TsuruTsuruGroundMove _groundMove;
     /// <summary>プレイヤーの大きさ</summary>
     [SerializeField] private TsuruTsuruScaler _scaler;
+    /// <summary>滑る床</summary>
+    private IcePlane _icePlane;
 
     void Start()
     {
         _transform = this.transform;
         _groundSetMoveSpeed = _moveSpeed;
 
-        _registedHorizontal = 0f;
-        _registedVertical = 0f;
+        _horizontal = 0f;
+        _vertical = 0f;
         _gravityAcceleration = 0f;
         if (Camera.main != null)
         {
@@ -104,8 +108,8 @@ public class TsuruTsuruMoveController : MonoBehaviour
         }
         if (IsWallCollisitioned() == true)
         {
-            _registedHorizontal = 0f;
-            _registedVertical = 0f;
+            _horizontal = 0f;
+            _vertical = 0f;
         }
         else
         {
@@ -118,8 +122,8 @@ public class TsuruTsuruMoveController : MonoBehaviour
     /// </summary>
     public void OtherActionTsurutsuruStop()
     {
-        _registedHorizontal = 0f;
-        _registedVertical = 0f;
+        _horizontal = 0f;
+        _vertical = 0f;
     }
 
     private void Update()
@@ -153,14 +157,25 @@ public class TsuruTsuruMoveController : MonoBehaviour
         // アニメーションのループ対策
         if (_animation.getAnimationLoop("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator) == true)
         {
-            //Debug.Log("停止ループ");
             _animation.setAnimetionParameters("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator);
+        }
+
+        // 滑る床の上にいるか
+        var iceObj = AllmodeStateConf.IsIcePlanedAndObject(_characterController, _transform, _groundMove._registMaxDistance);
+        if (iceObj != null && DeadNullReference.CheckReferencedComponent(iceObj, ComponentManager.ICE_PLANE))
+        {
+            _icePlane = iceObj.GetComponent<IcePlane>();
+            _icePlane.OnRayHitEnter(gameObject);
+        }
+        else if (_icePlane != null)
+        {
+            _icePlane.OnRayHitExit();
+            _icePlane = null;
         }
     }
 
     private void OnEnable()
     {
-        //_scale = 1.0f;
         OtherActionTsurutsuruStop();
     }
 
@@ -173,13 +188,13 @@ public class TsuruTsuruMoveController : MonoBehaviour
         var v = CrossPlatformInputManager.GetAxis("Vertical");
 
         // 入力されたスティック入力をゼロにしない
-        if (Mathf.Abs(_registedHorizontal) < Mathf.Abs(h))
+        if (Mathf.Abs(_horizontal) < Mathf.Abs(h))
         {
-            _registedHorizontal = h;
+            _horizontal = h;
         }
-        if (Mathf.Abs(_registedVertical) < Mathf.Abs(v))
+        if (Mathf.Abs(_vertical) < Mathf.Abs(v))
         {
-            _registedVertical = v;
+            _vertical = v;
         }
 
         var speed = 0f;
@@ -192,8 +207,8 @@ public class TsuruTsuruMoveController : MonoBehaviour
             speed = _airSetMoveSpeed;
         }
 
-        _moveVelocity.x = _registedHorizontal * speed;
-        _moveVelocity.z = _registedVertical * speed;
+        _moveVelocity.x = _horizontal * speed;
+        _moveVelocity.z = _vertical * speed;
 
         if (_mainCameraTransform != null)
         {
@@ -313,7 +328,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
         Debug.DrawRay(_transform.position, Vector3.left * _groundMove._registMaxDistance, Color.green);
         Debug.DrawRay(_transform.position, Vector3.right * _groundMove._registMaxDistance, Color.green);
 
-        if (result == false && 0 < _registedVertical)
+        if (result == false && 0 < _vertical)
         {
             var ray = new Ray(_transform.position, Vector3.forward);
             foreach (RaycastHit hit in Physics.RaycastAll(ray, _groundMove._registMaxDistance))
@@ -327,7 +342,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
             }
         }
 
-        if (result == false && _registedVertical < 0)
+        if (result == false && _vertical < 0)
         {
             var ray = new Ray(_transform.position, Vector3.back);
             foreach (RaycastHit hit in Physics.RaycastAll(ray, _groundMove._registMaxDistance))
@@ -341,7 +356,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
             }
         }
 
-        if (result == false && _registedHorizontal < 0)
+        if (result == false && _horizontal < 0)
         {
             var ray = new Ray(_transform.position, Vector3.left);
             foreach (RaycastHit hit in Physics.RaycastAll(ray, _groundMove._registMaxDistance))
@@ -355,7 +370,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
             }
         }
 
-        if (result == false && 0 < _registedHorizontal)
+        if (result == false && 0 < _horizontal)
         {
             var ray = new Ray(_transform.position, Vector3.right);
             foreach (RaycastHit hit in Physics.RaycastAll(ray, _groundMove._registMaxDistance))

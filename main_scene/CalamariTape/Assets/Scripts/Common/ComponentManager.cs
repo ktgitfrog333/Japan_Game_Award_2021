@@ -29,5 +29,7 @@ namespace Const.Component
         public static readonly string CONVEYOR_MOVE_CHARACTER = "ConveyorMoveCharacter";
         /// <summary>回転リング</summary>
         public static readonly string CIRCLE_RING = "CircleRing";
+        /// <summary>滑る床</summary>
+        public static readonly string ICE_PLANE = "IcePlane";
     }
 }
