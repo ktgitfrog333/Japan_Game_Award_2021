@@ -1,3 +1,48 @@
+2021/09/23 15:24
+★UI差し替え　ポーズ画面、クリア画面、mainシーンテンプレート更新、チュートリアルへフォント適用
+・コングラチュレーションロゴを更新
+main_scene\CalamariTape\Assets\Images\game_allclear_logo.png
+・ゲームに戻るロゴを更新
+main_scene\CalamariTape\Assets\Images\game_back_logo.png
+・遊び方の確認ロゴを更新
+main_scene\CalamariTape\Assets\Images\game_check_logo.png
+・ステージクリアロゴを更新
+main_scene\CalamariTape\Assets\Images\game_clear_logo.png
+・ポーズロゴを更新
+main_scene\CalamariTape\Assets\Images\game_pause_logo.png
+・次のステージを選ぶロゴを更新
+main_scene\CalamariTape\Assets\Images\game_proceed.png
+・もう一度遊ぶロゴを更新
+main_scene\CalamariTape\Assets\Images\game_redo_logo.png
+・他のステージを選ぶロゴを更新
+main_scene\CalamariTape\Assets\Images\game_select_logo.png
+・各シーンにてクリア画面プレハブ情報を更新
+main_scene\CalamariTape\Assets\Prefabs\ClearScreen.prefab
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene\ClearScreen.prefab
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene\ClearScreen.prefab
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene\ClearScreen.prefab
+・mainシーンのシーンテンプレートを更新
+main_scene\CalamariTape\Assets\Scenes\main 3.scenetemplate
+・各シーンにてポーズ画面、クリア画面のUIを更新
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage6_Scene.unity
+・統一フォントの登録
+main_scene\CalamariTape\Assets\Fonts\rounded-mplus-2m-medium.ttf
+・ロゴ画像のバックアップ
+main_scene\CalamariTape\Assets\Images\game_allclear_logo_bk.png
+main_scene\CalamariTape\Assets\Images\game_back_logo_bk.png
+main_scene\CalamariTape\Assets\Images\game_back_logo_bk2.png
+main_scene\CalamariTape\Assets\Images\game_check_logo_bk2.png
+main_scene\CalamariTape\Assets\Images\game_clear_logo_bk.png
+main_scene\CalamariTape\Assets\Images\game_pause_logo_bk2.png
+main_scene\CalamariTape\Assets\Images\game_proceed_bk2.png
+main_scene\CalamariTape\Assets\Images\game_redo_logo_bk2.png
+main_scene\CalamariTape\Assets\Images\game_select_logo_bk2.png
+
 2021/09/23 12:36
 ★新ギミック　滑る床の実装
 ・滑る床のエリアを作成
