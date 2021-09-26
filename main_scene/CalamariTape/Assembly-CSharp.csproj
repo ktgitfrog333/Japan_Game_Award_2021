@@ -80,7 +80,9 @@
     <Compile Include="Assets\Scripts\MessageScrollText.cs" />
     <Compile Include="Assets\Scripts\NenchakScaler.cs" />
     <Compile Include="Assets\Scripts\NenchakHealth.cs" />
+    <Compile Include="Assets\Scripts\NotAttached\GimmickDifferent.cs" />
     <Compile Include="Assets\Scripts\MessageScroll.cs" />
+    <Compile Include="Assets\Scripts\NotAttached\MarmotHealthActiveManager.cs" />
     <Compile Include="Assets\Scripts\ScissorsCollision.cs" />
     <Compile Include="Assets\Scripts\CircleScaffold.cs" />
     <Compile Include="Assets\Scripts\CalamariHealth.cs" />
@@ -105,12 +107,14 @@
     <Compile Include="Assets\Scripts\UIController.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
+    <Compile Include="Assets\Scripts\NotAttached\MoveWallsActiveManager.cs" />
     <Compile Include="Assets\Scripts\SfxPlay.cs" />
     <Compile Include="Assets\Scripts\MenuManager.cs" />
     <Compile Include="Assets\Scripts\NotAttached\AllmodeStateConf.cs" />
     <Compile Include="Assets\Scripts\TsuruTsuruScaler.cs" />
     <Compile Include="Assets\Scripts\Common\StageNameManager.cs" />
     <Compile Include="Assets\Scripts\MoveController.cs" />
+    <Compile Include="Assets\Scripts\Tarzan.cs" />
     <Compile Include="Assets\Scripts\ClearManager.cs" />
     <Compile Include="Assets\Scripts\CalamariAnimation.cs" />
     <Compile Include="Assets\Scripts\Common\StageClearNumber.cs" />
@@ -125,12 +129,14 @@
     <Compile Include="Assets\Scripts\Common\AnimatorControllerManager.cs" />
     <Compile Include="Assets\Scripts\Common\ConveyorMoveMode.cs" />
     <Compile Include="Assets\Scripts\Common\WallRunHorizontalFrontMode.cs" />
+    <Compile Include="Assets\Scripts\Interface\GimmkckActiveManager.cs" />
     <Compile Include="Assets\Scripts\SaveControllerScene.cs" />
     <Compile Include="Assets\Scripts\ClearHorizontalWall.cs" />
     <Compile Include="Assets\Scripts\Common\WallRunMoveVerticalMode.cs" />
     <Compile Include="Assets\Scripts\NotAttached\DeadNullReference.cs" />
     <Compile Include="Assets\Scripts\TsuruTsuruAnimation.cs" />
     <Compile Include="Assets\Scripts\SceneMove.cs" />
+    <Compile Include="Assets\Scripts\NotAttached\ConveyorMoveCharacterActiveManager.cs" />
     <Compile Include="Assets\Scripts\GoalEvent.cs" />
     <Compile Include="Assets\Scripts\CalamariState.cs" />
     <Compile Include="Assets\Scripts\VisualizeDebugMode.cs" />
@@ -139,11 +145,7 @@
     <Compile Include="Assets\Scripts\CameraPointMove.cs" />
     <Compile Include="Assets\Scripts\PauseWindowManager.cs" />
     <Compile Include="Assets\Scripts\Common\ComponentManager.cs" />
-    <Compile Include="Assets\Scripts\NotAttached\MoveWallsActiveManager.cs" />
-    <Compile Include="Assets\Scripts\Interface\GimmkckActiveManager.cs" />
-    <Compile Include="Assets\Scripts\NotAttached\GimmickDifferent.cs" />
-    <Compile Include="Assets\Scripts\NotAttached\MarmotHealthActiveManager.cs" />
-    <Compile Include="Assets\Scripts\NotAttached\ConveyorMoveCharacterActiveManager.cs" />
+    <Compile Include="Assets\Scripts\Rope.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Wheel\arktoon Shaders\Shaders\cginc\arkludeDecl.cginc" />

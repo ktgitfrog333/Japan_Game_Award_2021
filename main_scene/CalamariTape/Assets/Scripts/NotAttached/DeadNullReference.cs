@@ -73,7 +73,7 @@ namespace DeadException
                 else if (name.Equals(ComponentManager.NENCHAK_MOVE_CONTROLLER))
                 {
                     var c = gameObject.GetComponent<NenchakMoveController>();
-                    if (c.enabled == true)
+                    if (c.isActiveAndEnabled == true)
                     {
                         var velocity = c.MoveVelocityAngl;
                         result = true;
@@ -135,13 +135,14 @@ namespace DeadException
             {
                 if (result == false)
                 {
+                    // 確認の為、デバッグログに出力していたが、他のデバッグ表示で邪魔になる為、一時的にコメントアウト
                     if (0 < message.Length)
                     {
-                        Debug.Log(name + "_Null参照：" + message);
+                        //Debug.Log(name + "_Null参照：" + message);
                     }
                     else
                     {
-                        Debug.Log(name + "_Null参照");
+                        //Debug.Log(name + "_Null参照");
                     }
                 }
             }

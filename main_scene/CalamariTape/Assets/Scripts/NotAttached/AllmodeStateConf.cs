@@ -64,8 +64,6 @@ namespace Controller.AllmodeState
         /// <returns>接地状態か否か</returns>
         public static GameObject IsIcePlanedAndObject(CharacterController character, Transform transform, float registMaxDistance)
         {
-            var result = new GameObject();
-
             Debug.DrawRay(transform.position + Vector3.up * 0.1f, Vector3.down * registMaxDistance, Color.green);
             var ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
             foreach (RaycastHit hit in Physics.RaycastAll(ray, registMaxDistance))
@@ -75,12 +73,12 @@ namespace Controller.AllmodeState
                 {
                     if (g.layer == (int)LayerManager.FIELD || g.GetComponent<IcePlane>()._icePlane == true)
                     {
-                        result = g;
+                        return g;
                     }
                 }
             }
 
-            return result.tag.Equals(TagManager.ICE_PLANE) ? result : null;
+            return null;
         }
 
         /// <summary>

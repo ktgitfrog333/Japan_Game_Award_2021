@@ -42,6 +42,25 @@ namespace Controller.Gimmicks
                     result = 0;
                 }
             }
+            else if (type.Equals(new Tarzan().GetType().ToString()))
+            {
+                // ターザン　ネンチャクモードのみ
+                if (gameObject.name.Equals(playerManager._nenchak.name))
+                {
+                    result = 1;
+                }
+                else if (gameObject.name.Equals(playerManager._calamari.name) || gameObject.name.Equals(playerManager._tsurutsuru.name))
+                {
+                    result = 0;
+                }
+            }
+            else if (type.Equals(""))
+            {
+                if (gameObject.name.Equals(playerManager._calamari.name) || gameObject.name.Equals(playerManager._nenchak.name) || gameObject.name.Equals(playerManager._tsurutsuru.name))
+                {
+                    result = 1;
+                }
+            }
 
             return result;
         }

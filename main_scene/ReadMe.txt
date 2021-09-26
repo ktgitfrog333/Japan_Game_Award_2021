@@ -1,3 +1,24 @@
+2021/09/26
+★新ギミック　ターザンの実装、ゲームスタート時にヒエラルキーにゲームオブジェクトが大量生成される不具合を修正
+・ターザンの動作確認エリアの作成
+main_scene\CalamariTape\Assets\Scenes\Stage6_Scene.unity
+・滑る床の上判定にて、不備のあった処理を修正
+main_scene\CalamariTape\Assets\Scripts\NotAttached\AllmodeStateConf.cs
+・コンポーネント例外参照回避処理にて一時的にデバッグをコメントアウト
+main_scene\CalamariTape\Assets\Scripts\NotAttached\DeadNullReference.cs
+・ギミック側からプレイヤーを参照する処理にて、ターザンの条件を追加
+main_scene\CalamariTape\Assets\Scripts\NotAttached\GimmicksDecision.cs
+・ロープのマテリアルを追加
+main_scene\CalamariTape\Assets\Materials\Rope.mat
+・ロープのモデルデータを追加
+main_scene\CalamariTape\Assets\Models\rope.fbx
+・ターザンのオブジェクトをプレハブ化
+main_scene\CalamariTape\Assets\Prefabs\Gimmicks\Tarzan.prefab
+・ロープ（ターザンの子オブジェクト）の処理を作成
+main_scene\CalamariTape\Assets\Scripts\Rope.cs
+・ターザンの処理を作成
+main_scene\CalamariTape\Assets\Scripts\Tarzan.cs
+
 2021/09/23 15:24
 ★UI差し替え　ポーズ画面、クリア画面、mainシーンテンプレート更新、チュートリアルへフォント適用
 ・コングラチュレーションロゴを更新
