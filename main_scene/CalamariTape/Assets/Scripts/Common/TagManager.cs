@@ -27,5 +27,9 @@ namespace Const.Tag
         public static readonly string CONVEYOR = "Conveyor";
         /// <summary>滑る床</summary>
         public static readonly string ICE_PLANE = "IcePlane";
+        /// <summary>プレイヤー</summary>
+        public static readonly string PLAYER = "Player";
+        /// <summary>ダッシュパネル</summary>
+        public static readonly string DASH_PANEL = "DashPanel";
     }
 }

@@ -120,6 +120,42 @@ namespace DeadException
                         result = false;
                     }
                 }
+                else if (name.Equals(new PlayerManager().GetType().ToString()))
+                {
+                    var m = gameObject.GetComponent<PlayerManager>();
+                    if (m.isActiveAndEnabled == true)
+                    {
+                        result = true;
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                }
+                else if (name.Equals(new PlayerEffectController().GetType().ToString()))
+                {
+                    var m = gameObject.GetComponent<PlayerEffectController>();
+                    if (m.isActiveAndEnabled == true)
+                    {
+                        result = true;
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                }
+                else if (name.Equals(new DashPanel().GetType().ToString()))
+                {
+                    var m = gameObject.GetComponent<DashPanel>();
+                    if (m.isActiveAndEnabled == true)
+                    {
+                        result = true;
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                }
             }
             catch (NullReferenceException e)
             {

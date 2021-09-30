@@ -1,3 +1,39 @@
+2021/09/30
+★新ギミック　ダッシュパネル（※シーンごとの変更あり）
+・シーンテンプレートを更新
+main_scene\CalamariTape\Assets\Scenes\main 3.scenetemplate
+・各シーンごとのプレイヤー設定を反映
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage6_Scene.unity
+・プレイヤー管理スクリプトへ、壁との距離判定スクリプトを追加
+main_scene\CalamariTape\Assets\Scripts\PlayerManager.cs
+・ギミック停止処理へダッシュパネルを追加
+main_scene\CalamariTape\Assets\Scripts\StopGimmick.cs
+・タグ管理スクリプトへダッシュパネルのタグ情報を追加
+main_scene\CalamariTape\Assets\Scripts\Common\TagManager.cs
+・全モード判定スクリプトへ壁の衝突判定を追加（衝突エフェクト用）
+main_scene\CalamariTape\Assets\Scripts\NotAttached\AllmodeStateConf.cs
+・コンポネント参照例外回避処理へダッシュパネルの情報を追加
+main_scene\CalamariTape\Assets\Scripts\NotAttached\DeadNullReference.cs
+・ダッシュパネルのモデルを追加
+main_scene\CalamariTape\Assets\Models\dashpanel.fbx
+・ダッシュパネルをプレハブ化
+main_scene\CalamariTape\Assets\Prefabs\Gimmicks\DashPanel.prefab
+・ダッシュパネルの処理を作成
+main_scene\CalamariTape\Assets\Scripts\DashPanel.cs
+・ダッシュ中のプレイヤーを判定する処理を作成
+main_scene\CalamariTape\Assets\Scripts\DashPlayer.cs
+・衝突エフェクト実行スクリプトを作成
+main_scene\CalamariTape\Assets\Scripts\PlayerEffectController.cs
+・ギミック停止用のダッシュパネルを作成
+main_scene\CalamariTape\Assets\Scripts\NotAttached\DashPanelActiveManager.cs
+・壁の衝突情報の構造体を作成
+main_scene\CalamariTape\Assets\Scripts\Struct\FieldWalled.cs
+
 2021/09/26
 ★新ギミック　ターザンの実装、ゲームスタート時にヒエラルキーにゲームオブジェクトが大量生成される不具合を修正
 ・ターザンの動作確認エリアの作成

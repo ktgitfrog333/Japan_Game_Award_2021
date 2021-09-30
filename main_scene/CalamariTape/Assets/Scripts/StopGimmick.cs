@@ -14,6 +14,8 @@ public class StopGimmick : MonoBehaviour
     private MarmotHealthActiveManager _activeMarmotHealths;
     /// <summary>ベルトコンベアの処理</summary>
     private ConveyorMoveCharacterActiveManager _activeConveyorMoveCharacters;
+    /// <summary>ダッシュパネルの処理</summary>
+    private DashPanelActiveManager _activeDashPanel;
 
     private void Start()
     {
@@ -21,6 +23,7 @@ public class StopGimmick : MonoBehaviour
         _activeMoveWalls = new MoveWallsActiveManager();
         _activeMarmotHealths = new MarmotHealthActiveManager();
         _activeConveyorMoveCharacters = new ConveyorMoveCharacterActiveManager();
+        _activeDashPanel = new DashPanelActiveManager();
     }
 
     /// <summary>
@@ -34,6 +37,8 @@ public class StopGimmick : MonoBehaviour
         _activeMarmotHealths.StopGimmik();
         // ベルトコンベア
         _activeConveyorMoveCharacters.StopGimmik();
+        // ダッシュパネル
+        _activeDashPanel.StopGimmik();
     }
 
     /// <summary>
@@ -47,5 +52,7 @@ public class StopGimmick : MonoBehaviour
         _activeMarmotHealths.StartGimmik();
         // ベルトコンベア
         _activeConveyorMoveCharacters.StartGimmik();
+        // ダッシュパネル
+        _activeDashPanel.StartGimmik();
     }
 }

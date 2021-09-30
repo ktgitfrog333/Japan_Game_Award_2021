@@ -78,8 +78,10 @@
     <Compile Include="Assets\Scripts\NenchakAnimation.cs" />
     <Compile Include="Assets\Scripts\DurableValue.cs" />
     <Compile Include="Assets\Scripts\MessageScrollText.cs" />
+    <Compile Include="Assets\Scripts\DashPanel.cs" />
     <Compile Include="Assets\Scripts\NenchakScaler.cs" />
     <Compile Include="Assets\Scripts\NenchakHealth.cs" />
+    <Compile Include="Assets\Scripts\Rope.cs" />
     <Compile Include="Assets\Scripts\NotAttached\GimmickDifferent.cs" />
     <Compile Include="Assets\Scripts\MessageScroll.cs" />
     <Compile Include="Assets\Scripts\NotAttached\MarmotHealthActiveManager.cs" />
@@ -98,11 +100,13 @@
     <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\StopGimmick.cs" />
     <Compile Include="Assets\Scripts\Common\LayerManager.cs" />
+    <Compile Include="Assets\Scripts\PlayerEffectController.cs" />
     <Compile Include="Assets\Scripts\Common\NameManager.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\CameraSwitch.cs" />
     <Compile Include="Assets\Scripts\MarmotWheel.cs" />
     <Compile Include="Assets\Scripts\CalamariScaler.cs" />
     <Compile Include="Assets\Scripts\GameOverLine.cs" />
+    <Compile Include="Assets\Scripts\Struct\FieldWalled.cs" />
     <Compile Include="Assets\Scripts\BanScaleChange.cs" />
     <Compile Include="Assets\Scripts\UIController.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
@@ -132,6 +136,7 @@
     <Compile Include="Assets\Scripts\Interface\GimmkckActiveManager.cs" />
     <Compile Include="Assets\Scripts\SaveControllerScene.cs" />
     <Compile Include="Assets\Scripts\ClearHorizontalWall.cs" />
+    <Compile Include="Assets\Scripts\DashPlayer.cs" />
     <Compile Include="Assets\Scripts\Common\WallRunMoveVerticalMode.cs" />
     <Compile Include="Assets\Scripts\NotAttached\DeadNullReference.cs" />
     <Compile Include="Assets\Scripts\TsuruTsuruAnimation.cs" />
@@ -145,7 +150,7 @@
     <Compile Include="Assets\Scripts\CameraPointMove.cs" />
     <Compile Include="Assets\Scripts\PauseWindowManager.cs" />
     <Compile Include="Assets\Scripts\Common\ComponentManager.cs" />
-    <Compile Include="Assets\Scripts\Rope.cs" />
+    <Compile Include="Assets\Scripts\NotAttached\DashPanelActiveManager.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Wheel\arktoon Shaders\Shaders\cginc\arkludeDecl.cginc" />

@@ -4151,7 +4151,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.21018352, y: 0.000000008411013, z: -0.000000001808249, w: 0.97766197}
+  m_LocalRotation: {x: 0.21018352, y: -0.000000008411012, z: 0.0000000018082488, w: 0.97766197}
   m_LocalPosition: {x: -13.08, y: 8.69, z: -7.437}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4426,6 +4426,7 @@ GameObject:
   - component: {fileID: 978842449}
   - component: {fileID: 978842450}
   - component: {fileID: 978842453}
+  - component: {fileID: 978842454}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4451,12 +4452,15 @@ MonoBehaviour:
   _calamariController: {fileID: 2035709082}
   _calamariAnimation: {fileID: 2035709085}
   _calamariScaler: {fileID: 2035709088}
+  _calamariWallMove: {fileID: 2035709089}
   _nenchakController: {fileID: 1124906949}
   _nenchakAnimation: {fileID: 1124906951}
   _nenchakScaler: {fileID: 1124906955}
+  _nenchakWallMove: {fileID: 1124906954}
   _tsurutsuruController: {fileID: 1842392298}
   _tsuruTsuruAnimation: {fileID: 1842392301}
   _tsuruTsuruScaler: {fileID: 1842392303}
+  _tsuruTsuruGroundMove: {fileID: 1842392304}
 --- !u!114 &978842449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4539,6 +4543,20 @@ MonoBehaviour:
   _debug: 0
   _debugUI: {fileID: 690190005}
   _debuglog: {fileID: 690190004}
+--- !u!114 &978842454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978842447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7256119d5d0cce54ea7c0c6114b7bd5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collisionEffect: {fileID: 1842542559}
+  _particleSystem: {fileID: 1842542561}
 --- !u!1 &983880147
 GameObject:
   m_ObjectHideFlags: 0
@@ -5212,7 +5230,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1145615035}
-  m_LocalRotation: {x: 0.21018352, y: 0.000000008411013, z: -0.000000001808249, w: 0.97766197}
+  m_LocalRotation: {x: 0.21018352, y: -0.000000008411012, z: 0.0000000018082488, w: 0.97766197}
   m_LocalPosition: {x: -13.08, y: 8.69, z: -7.437}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

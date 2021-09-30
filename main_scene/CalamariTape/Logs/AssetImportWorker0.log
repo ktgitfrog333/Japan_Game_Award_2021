@@ -15,11 +15,11 @@ C:/Users/kzpaqu/Documents/Japan_Game_Award_2021/main_scene/CalamariTape
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-62928
+63617
 Successfully changed project path to: C:/Users/kzpaqu/Documents/Japan_Game_Award_2021/main_scene/CalamariTape
 C:/Users/kzpaqu/Documents/Japan_Game_Award_2021/main_scene/CalamariTape
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 36.48 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 34.73 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.2f1 (8fd9074bf66c)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.2f1/Editor/Data/Resources/UnitySubsystems
@@ -35,96 +35,57 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.2f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.2f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56580
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56308
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.001935 seconds.
+Registered in 0.001883 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 33.23 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 33.11 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.002 seconds
+- Completed reload, in  1.017 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.000765 seconds.
+Registered in 0.000797 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.34 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.43 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.727 seconds
+- Completed reload, in  0.742 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
-Refreshing native plugins compatible for Editor in 0.34 ms, found 0 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
+Refreshing native plugins compatible for Editor in 0.35 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1530 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 88.5 MB.
-System memory in use after: 88.2 MB.
+Unloading 1535 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 88.7 MB.
+System memory in use after: 88.4 MB.
 
-Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 1981.
-Total: 2.051800 ms (FindLiveObjects: 0.252000 ms CreateObjectMapping: 0.086800 ms MarkObjects: 1.332500 ms  DeleteObjects: 0.379800 ms)
-
-========================================================================
-Received Import Request.
-  path: Assets/Scenes/Stage6_Scene.unity
-  artifactKey: Guid(c32d7aa3c9b08e449aa84dcc1d2721ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Stage6_Scene.unity using Guid(c32d7aa3c9b08e449aa84dcc1d2721ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c14b41ae51a6a87c6ee42be765e94a34') in 0.010049 seconds
-  Import took 0.012574 seconds .
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 1986.
+Total: 2.010900 ms (FindLiveObjects: 0.172700 ms CreateObjectMapping: 0.062400 ms MarkObjects: 1.288700 ms  DeleteObjects: 0.486300 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 3.227260 seconds.
-  path: Assets/Scripts/Tarzan.cs
-  artifactKey: Guid(2d5db0c844ba0d04db80be7a814646c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Tarzan.cs using Guid(2d5db0c844ba0d04db80be7a814646c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '69b367f700fd0c642d5c4425bf83dd6e') in 0.028866 seconds
-  Import took 0.031871 seconds .
+  path: Assets/Prefabs/Player.prefab
+  artifactKey: Guid(e616a05eeee47ef47b601a24767ff3c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Player.prefab using Guid(e616a05eeee47ef47b601a24767ff3c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1614467f553dc08e682ccf2392c50c57') in 0.061910 seconds
+  Import took 0.065263 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.003412 seconds.
-  path: Assets/Scripts/Tarzan.cs
-  artifactKey: Guid(2d5db0c844ba0d04db80be7a814646c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Tarzan.cs using Guid(2d5db0c844ba0d04db80be7a814646c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '69b367f700fd0c642d5c4425bf83dd6e') in 0.001435 seconds
-  Import took 0.003507 seconds .
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.000883 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.34 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  0.698 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.34 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1487 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 84.7 MB.
-System memory in use after: 84.5 MB.
-
-Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 1984.
-Total: 2.154800 ms (FindLiveObjects: 0.150500 ms CreateObjectMapping: 0.045500 ms MarkObjects: 1.604200 ms  DeleteObjects: 0.353600 ms)
-
-========================================================================
-Received Import Request.
-  Time since last request: 37.173435 seconds.
-  path: Assets/Scripts/Tarzan.cs
-  artifactKey: Guid(2d5db0c844ba0d04db80be7a814646c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Tarzan.cs using Guid(2d5db0c844ba0d04db80be7a814646c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '90826e6e99b6e0505e492e6ae4140663') in 0.003154 seconds
-  Import took 0.006038 seconds .
+  Time since last request: 129.842991 seconds.
+  path: Assets/Scenes/main 3.scenetemplate
+  artifactKey: Guid(bd352d14476677b4cb72bd5a31ff12f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/main 3.scenetemplate using Guid(bd352d14476677b4cb72bd5a31ff12f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e8a18d6bbfc698e6bdede0c62125e74e') in 0.214404 seconds
+  Import took 0.222996 seconds .
 
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file

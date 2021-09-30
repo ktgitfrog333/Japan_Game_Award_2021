@@ -15,6 +15,7 @@ TagManager:
   - Conveyor
   - IcePlane
   - Tarzan
+  - DashPanel
   layers:
   - Default
   - TransparentFX
