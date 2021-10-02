@@ -26,6 +26,9 @@ public class TsuruTsuruScaler : MonoBehaviour
     /// <summary>スケール拡大SE再生可フラグ</summary>
     private bool _sfxPlayedScaleUp;
 
+    /// <summary>無重力状態</summary>
+    public bool _zeroGravity { get; set; } = false;
+
     private void Start()
     {
         _sfxPlayedScaleUp = true;

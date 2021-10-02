@@ -1,3 +1,31 @@
+2021/10/02 21:52
+★新ギミック　トランポリン、プレイヤーの空中速度の修正
+・トランポリン検証エリアを追加
+main_scene\CalamariTape\Assets\Scenes\Stage6_Scene.unity
+・カラマリモードにて下記を実装
+　空中速度を地上と同様にする修正
+　一時停止処理を地上のみにする修正
+　外部オブジェクトから重力変更を可能にする
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+・ネンチャクモードにて外部オブジェクトから重力変更を可能にする
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+main_scene\CalamariTape\Assets\Scripts\NenchakScaler.cs
+・ツルツルモードにて下記を実装
+　空中速度を地上と同様にする修正
+　外部オブジェクトから重力変更を可能にする
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruMoveController.cs
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruScaler.cs
+・トランポリンのモデルデータを追加
+main_scene\CalamariTape\Assets\Models\Trampoline.fbx
+・斜めトランポリンのモデルデータを追加
+main_scene\CalamariTape\Assets\Models\Trampoline2.fbx
+・トランポリンをプレハブ化
+main_scene\CalamariTape\Assets\Prefabs\Gimmicks\Trampoline.prefab
+・斜めトランポリンをプレハブ化
+main_scene\CalamariTape\Assets\Prefabs\Gimmicks\TrampolineSlope.prefab
+・トランポリンの処理を作成
+main_scene\CalamariTape\Assets\Scripts\Trampoline.cs
+
 2021/09/30
 ★新ギミック　ダッシュパネル（※シーンごとの変更あり）
 ・シーンテンプレートを更新

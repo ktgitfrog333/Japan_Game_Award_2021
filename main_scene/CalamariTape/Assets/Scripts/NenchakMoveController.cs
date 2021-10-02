@@ -44,7 +44,7 @@ public class NenchakMoveController : MonoBehaviour
     private float _movedSpeedToAnimator;
 
     /// <summary>重力値の加速度</summary>
-    private float _gravityAcceleration;
+    public float _gravityAcceleration { get; set; }
     /// <summary>壁走り</summary>
     [SerializeField] private NenchakWallMove _wallMove;
 

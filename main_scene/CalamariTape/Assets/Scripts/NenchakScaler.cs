@@ -24,6 +24,9 @@ public class NenchakScaler : MonoBehaviour
     /// <summary>ネンチャクモードにて壁移動を行う</summary>
     [SerializeField] private NenchakWallMove _wallMove;
 
+    /// <summary>無重力状態</summary>
+    public bool _zeroGravity { get; set; } = false;
+
     private void Start()
     {
         _sfxPlayedScaleUp = true;
@@ -138,7 +141,7 @@ public class NenchakScaler : MonoBehaviour
             }
             ctrl.Move(vector);
         }
-        else if (AllmodeStateConf.IsGrounded(_state._characterController, _state._transform, _wallMove._registMaxDistance) == false)
+        else if (AllmodeStateConf.IsGrounded(_state._characterController, _state._transform, _wallMove._registMaxDistance) == false && _zeroGravity == false)
         {
             // 空中
             var c = _state._characterController;

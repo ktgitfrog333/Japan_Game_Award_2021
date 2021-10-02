@@ -16,8 +16,6 @@ public class TsuruTsuruMoveController : MonoBehaviour
     [SerializeField] private float _moveSpeed = 7f;
     /// <summary>移動速度の初期値</summary>
     public float _groundSetMoveSpeed { get; set; }
-    /// <summary>移動速度の初期値</summary>
-    private float _airSetMoveSpeed;
     /// <summary>移動速度（最大）</summary>
     [SerializeField] private float _maxMoveSpeed = 8f;
 
@@ -58,7 +56,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
     private float _movedSpeedToAnimator;
 
     /// <summary>重力値の加速度</summary>
-    private float _gravityAcceleration;
+    public float _gravityAcceleration { get; set; }
 
     /// <summary>位置フラグを一時保存</summary>
     [SerializeField] private bool _positionCashDebugOff;
@@ -142,12 +140,6 @@ public class TsuruTsuruMoveController : MonoBehaviour
         // 大きさに合わせてジャンプを計算
         _registedJumpMax = AllmodeStateConf.ParameterMatchScale(_jumpMax, _maxJumpMax, _scaler.Scale);
 
-        // 空中の移動速度補正
-        if (IsGrounded() == false)
-        {
-            _airSetMoveSpeed = 2f;
-        }
-
         // デバッグ：移動計測のコルーチンを起動する
         if (Input.GetKeyDown(KeyCode.T))
         {
@@ -198,14 +190,8 @@ public class TsuruTsuruMoveController : MonoBehaviour
         }
 
         var speed = 0f;
-        if (IsGrounded() == true)
-        {
-            speed = _groundSetMoveSpeed;
-        }
-        else
-        {
-            speed = _airSetMoveSpeed;
-        }
+        // 空中の移動速度を地上の移動速度と同様にする
+        speed = _groundSetMoveSpeed;
 
         _moveVelocity.x = _horizontal * speed;
         _moveVelocity.z = _vertical * speed;
@@ -245,9 +231,14 @@ public class TsuruTsuruMoveController : MonoBehaviour
             _jumpAction = false;
             _sfxPlayed = false;
             _jumpVelocity = 0f;
+            var g = 1f;
+            if (_scaler._zeroGravity == true)
+            {
+                g = 0f;
+            }
             // 重力による加速
             _gravityAcceleration += Time.deltaTime;
-            _moveVelocity.y = Physics.gravity.y * _gravityAcceleration;
+            _moveVelocity.y = Physics.gravity.y * _gravityAcceleration * g;
         }
 
         MoveAndAnimation();

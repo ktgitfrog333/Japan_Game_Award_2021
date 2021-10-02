@@ -16,6 +16,7 @@ TagManager:
   - IcePlane
   - Tarzan
   - DashPanel
+  - Trampoline
   layers:
   - Default
   - TransparentFX

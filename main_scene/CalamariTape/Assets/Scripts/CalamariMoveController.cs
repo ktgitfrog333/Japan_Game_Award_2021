@@ -16,8 +16,6 @@ public class CalamariMoveController : MonoBehaviour
     [SerializeField] private float _moveSpeed = 5f;
     /// <summary>移動速度の初期値</summary>
     public float _groundSetMoveSpeed { get; set; }
-    /// <summary>移動速度の初期値</summary>
-    private float _airSetMoveSpeed;
     /// <summary>移動速度（最大）</summary>
     [SerializeField] private float _maxMoveSpeed = 6f;
 
@@ -53,7 +51,7 @@ public class CalamariMoveController : MonoBehaviour
     private float _movedSpeedToAnimator;
 
     /// <summary>重力値の加速度</summary>
-    private float _gravityAcceleration;
+    public float _gravityAcceleration { get; set; }
 
     /// <summary>位置フラグを一時保存</summary>
     [SerializeField] private bool _positionCashDebugOff;
@@ -158,11 +156,7 @@ public class CalamariMoveController : MonoBehaviour
         _registedJumpMax = AllmodeStateConf.ParameterMatchScale(_jumpMax, _maxJumpMax, _scaler.Scale);
 
         // 空中の移動速度補正
-        if (AllmodeStateConf.IsGrounded(_characterController, _transform, _wallMove._registMaxDistance) == false)
-        {
-            _airSetMoveSpeed = 2f;
-        }
-        else if (_scaler._zeroGravity == true)
+        if (AllmodeStateConf.IsGrounded(_characterController, _transform, _wallMove._registMaxDistance) == true && _scaler._zeroGravity == true)
         {
             _scaler._zeroGravity = false;
         }
@@ -225,14 +219,8 @@ public class CalamariMoveController : MonoBehaviour
         }
 
         var speed = 0f;
-        if (AllmodeStateConf.IsGrounded(_characterController, _transform, _wallMove._registMaxDistance) == true)
-        {
-            speed = _groundSetMoveSpeed;
-        }
-        else
-        {
-            speed = _airSetMoveSpeed;
-        }
+        // 空中の移動速度を地上の移動速度と同様にする
+        speed = _groundSetMoveSpeed;
 
         // 移動速度を断続的にする制御
         if (_calamariStop == true)
@@ -529,7 +517,8 @@ public class CalamariMoveController : MonoBehaviour
                     point = new Vector2(_transform.position.x, _transform.position.y);
                 }
                 var distance = Vector2.Distance(_distancePoint, point);
-                if (4 < Mathf.Abs(distance) && _distanceFirstPointSaved == true)
+                // 地面の上でしか止めない
+                if (4 < Mathf.Abs(distance) && _distanceFirstPointSaved == true && AllmodeStateConf.IsGrounded(_characterController, _transform, _wallMove._registMaxDistance) == true)
                 {
                     _distanceFirstPointSaved = false;
                     StartCoroutine(CalamariStop());

@@ -83,6 +83,7 @@
     <Compile Include="Assets\Scripts\NenchakHealth.cs" />
     <Compile Include="Assets\Scripts\Rope.cs" />
     <Compile Include="Assets\Scripts\NotAttached\GimmickDifferent.cs" />
+    <Compile Include="Assets\Scripts\NotAttached\DashPanelActiveManager.cs" />
     <Compile Include="Assets\Scripts\MessageScroll.cs" />
     <Compile Include="Assets\Scripts\NotAttached\MarmotHealthActiveManager.cs" />
     <Compile Include="Assets\Scripts\ScissorsCollision.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="Assets\Scripts\Tarzan.cs" />
     <Compile Include="Assets\Scripts\ClearManager.cs" />
     <Compile Include="Assets\Scripts\CalamariAnimation.cs" />
+    <Compile Include="Assets\Scripts\Trampoline.cs" />
     <Compile Include="Assets\Scripts\Common\StageClearNumber.cs" />
     <Compile Include="Assets\Scripts\MessageManager.cs" />
     <Compile Include="Assets\Scripts\TsuruTsuruState.cs" />
@@ -150,7 +152,6 @@
     <Compile Include="Assets\Scripts\CameraPointMove.cs" />
     <Compile Include="Assets\Scripts\PauseWindowManager.cs" />
     <Compile Include="Assets\Scripts\Common\ComponentManager.cs" />
-    <Compile Include="Assets\Scripts\NotAttached\DashPanelActiveManager.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Wheel\arktoon Shaders\Shaders\cginc\arkludeDecl.cginc" />
