@@ -16,6 +16,8 @@ public class StopGimmick : MonoBehaviour
     private ConveyorMoveCharacterActiveManager _activeConveyorMoveCharacters;
     /// <summary>ダッシュパネルの処理</summary>
     private DashPanelActiveManager _activeDashPanel;
+    /// <summary>モード強制解除の処理</summary>
+    private TippedSawActiveManager _activeTippedSaw;
 
     private void Start()
     {
@@ -24,6 +26,7 @@ public class StopGimmick : MonoBehaviour
         _activeMarmotHealths = new MarmotHealthActiveManager();
         _activeConveyorMoveCharacters = new ConveyorMoveCharacterActiveManager();
         _activeDashPanel = new DashPanelActiveManager();
+        _activeTippedSaw = new TippedSawActiveManager();
     }
 
     /// <summary>
@@ -39,6 +42,8 @@ public class StopGimmick : MonoBehaviour
         _activeConveyorMoveCharacters.StopGimmik();
         // ダッシュパネル
         _activeDashPanel.StopGimmik();
+        // モード強制解除
+        _activeTippedSaw.StopGimmik();
     }
 
     /// <summary>
@@ -54,5 +59,7 @@ public class StopGimmick : MonoBehaviour
         _activeConveyorMoveCharacters.StartGimmik();
         // ダッシュパネル
         _activeDashPanel.StartGimmik();
+        // モード強制解除
+        _activeTippedSaw.StartGimmik();
     }
 }

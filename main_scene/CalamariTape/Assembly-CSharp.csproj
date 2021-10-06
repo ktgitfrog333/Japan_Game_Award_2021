@@ -152,6 +152,8 @@
     <Compile Include="Assets\Scripts\CameraPointMove.cs" />
     <Compile Include="Assets\Scripts\PauseWindowManager.cs" />
     <Compile Include="Assets\Scripts\Common\ComponentManager.cs" />
+    <Compile Include="Assets\Scripts\TippedSaw.cs" />
+    <Compile Include="Assets\Scripts\NotAttached\TippedSawActiveManager.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Wheel\arktoon Shaders\Shaders\cginc\arkludeDecl.cginc" />

@@ -17,6 +17,7 @@ TagManager:
   - Tarzan
   - DashPanel
   - Trampoline
+  - TippedSaw
   layers:
   - Default
   - TransparentFX

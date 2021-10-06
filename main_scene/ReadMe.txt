@@ -1,3 +1,24 @@
+2021/10/06 22:18
+★新ギミック　ギミック強制解除の実装
+・ステージ6へギミック強制解除のサンプルエリアを追加
+main_scene\CalamariTape\Assets\Scenes\Stage6_Scene.unity
+・ギミック停止処理へギミック強制解除を追加
+main_scene\CalamariTape\Assets\Scripts\StopGimmick.cs
+main_scene\CalamariTape\Assets\Scripts\NotAttached\TippedSawActiveManager.cs
+・タグ定義へギミック強制解除を追加
+main_scene\CalamariTape\Assets\Scripts\Common\TagManager.cs
+・コンポネント参照例外回避へ下記を追加
+　カラマリ耐久値
+　ネンチャク耐久値
+　チップソー
+main_scene\CalamariTape\Assets\Scripts\NotAttached\DeadNullReference.cs
+・チップソーのモデルデータを追加
+main_scene\CalamariTape\Assets\Models\Tipped_saw.fbx
+・チップソーのプレハブ化
+main_scene\CalamariTape\Assets\Prefabs\Gimmicks\TippedSaw.prefab
+・チップソーの処理を作成
+main_scene\CalamariTape\Assets\Scripts\TippedSaw.cs
+
 2021/10/02 21:52
 ★新ギミック　トランポリン、プレイヤーの空中速度の修正
 ・トランポリン検証エリアを追加

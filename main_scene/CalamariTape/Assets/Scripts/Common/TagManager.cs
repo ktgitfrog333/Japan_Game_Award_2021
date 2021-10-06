@@ -31,5 +31,7 @@ namespace Const.Tag
         public static readonly string PLAYER = "Player";
         /// <summary>ダッシュパネル</summary>
         public static readonly string DASH_PANEL = "DashPanel";
+        /// <summary>モード強制解除</summary>
+        public static readonly string TIPPED_SAW = "TippedSaw";
     }
 }

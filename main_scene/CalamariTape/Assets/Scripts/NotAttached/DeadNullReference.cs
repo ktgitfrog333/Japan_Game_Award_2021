@@ -156,6 +156,46 @@ namespace DeadException
                         result = false;
                     }
                 }
+                else if (name.Equals(new CalamariHealth().GetType().ToString()))
+                {
+                    var m = gameObject.GetComponent<CalamariHealth>();
+                    if (m.isActiveAndEnabled == true)
+                    {
+                        result = true;
+                        var p = m.Parameter;
+                        var a = m.Adhesive;
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                }
+                else if (name.Equals(new NenchakHealth().GetType().ToString()))
+                {
+                    var m = gameObject.GetComponent<NenchakHealth>();
+                    if (m.isActiveAndEnabled == true)
+                    {
+                        result = true;
+                        var p = m.Parameter;
+                        var a = m.Adhesive;
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                }
+                else if (name.Equals(new TippedSaw().GetType().ToString()))
+                {
+                    var m = gameObject.GetComponent<TippedSaw>();
+                    if (m.isActiveAndEnabled == true)
+                    {
+                        result = true;
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                }
             }
             catch (NullReferenceException e)
             {
