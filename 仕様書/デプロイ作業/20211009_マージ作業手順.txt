@@ -1,0 +1,24 @@
+1.「01_モルモットホイーラン_ローカルマージバッチ.bat」の設定を変更する
+　リポジトリと紐づくエクスプローラーの保存先の親
+　　USER_DIRECTORY
+　リポジトリと紐づくフォルダ名
+　　GIT_DIRECTORY
+2.「01_モルモットホイーラン_ローカルマージバッチ.bat」を実行する
+3.「Sourcetree」にて「develop」ブランチへチェックアウトする
+4.tmpから下記のディレクトリへコピーする
+　Morumotto_ Wheerun_Movieディレクトリ
+　Morumotto_ Wheerun_Titleディレクトリ
+　Morumotto_ Wheerun_Selectディレクトリ
+　main_sceneディレクトリ
+　ガントチャートディレクトリ
+　仕様書ディレクトリをtmpへコピー
+　ui_uxディレクトリをtmpへコピー
+5.Morumotto_Wheerunプロジェクトを作成する
+6.Morumotto_Wheerunプロジェクト内にシネマシーンをインストールする
+　モルモットホイーラン_シネマシーン取り込み手順.xlsx
+7.一度、Morumotto_Wheerunプロジェクトを終了する
+8.「InputManager.asset」を下記ディレクトリへ配置する
+　Morumotto_Wheerun\ProjectSettings
+9.「02_モルモットホイーラン_プロジェクト集合バッチ.bat」を実行する
+10.Morumotto_Wheerunプロジェクトを開く
+11.重複したスクリプトファイルを削除する
