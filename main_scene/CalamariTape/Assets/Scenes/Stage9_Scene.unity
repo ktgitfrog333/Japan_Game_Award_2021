@@ -2568,7 +2568,7 @@ Animator:
   m_GameObject: {fileID: 564751697}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9e2e3884246902c47be2e8250523fd2c, type: 2}
+  m_Controller: {fileID: 9100000, guid: be188f739cdbb5248a1414c0056a621f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2728,7 +2728,7 @@ Animator:
   m_GameObject: {fileID: 608190422}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9e2e3884246902c47be2e8250523fd2c, type: 2}
+  m_Controller: {fileID: 9100000, guid: be188f739cdbb5248a1414c0056a621f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3951,7 +3951,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.21018352, y: 0.000000008411012, z: -0.0000000018082488, w: 0.97766197}
+  m_LocalRotation: {x: 0.21018352, y: -0.000000008411011, z: 0.0000000018082486, w: 0.97766197}
   m_LocalPosition: {x: 0.030000154, y: 8.69, z: -6.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -5162,7 +5162,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1145615035}
-  m_LocalRotation: {x: 0.21018352, y: 0.000000008411012, z: -0.0000000018082488, w: 0.97766197}
+  m_LocalRotation: {x: 0.21018352, y: -0.000000008411011, z: 0.0000000018082486, w: 0.97766197}
   m_LocalPosition: {x: 0.030000154, y: 8.69, z: -6.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -7892,7 +7892,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5151527281128177612, guid: fd9263b95975df846be0201864a815e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.31
+      value: -0.69
       objectReference: {fileID: 0}
     - target: {fileID: 5151527281128177612, guid: fd9263b95975df846be0201864a815e7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8130,7 +8130,7 @@ Animator:
   m_GameObject: {fileID: 1712322066}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9e2e3884246902c47be2e8250523fd2c, type: 2}
+  m_Controller: {fileID: 9100000, guid: be188f739cdbb5248a1414c0056a621f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -11199,6 +11199,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 463940900}
     - target: {fileID: 5464104997674267853, guid: be9b4bd3c5383f74b8153e87661faf37, type: 3}
+      propertyPath: _nextSceneName
+      value: Stage9_Scene
+      objectReference: {fileID: 0}
+    - target: {fileID: 5464104997674267853, guid: be9b4bd3c5383f74b8153e87661faf37, type: 3}
       propertyPath: _blackBackGround
       value: 
       objectReference: {fileID: 0}
@@ -11387,6 +11391,10 @@ PrefabInstance:
       propertyPath: _loadNowSprite
       value: 
       objectReference: {fileID: 463940900}
+    - target: {fileID: 2686624885725375214, guid: e9a33c71c3c6e574f84b73eaf28ae7f2, type: 3}
+      propertyPath: _nextSceneName
+      value: Stage9_Scene
+      objectReference: {fileID: 0}
     - target: {fileID: 7402121601526487003, guid: e9a33c71c3c6e574f84b73eaf28ae7f2, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -11413,7 +11421,7 @@ PrefabInstance:
       objectReference: {fileID: 463940900}
     - target: {fileID: 7402121601526487012, guid: e9a33c71c3c6e574f84b73eaf28ae7f2, type: 3}
       propertyPath: _nextSceneName
-      value: Stage10_Scene
+      value: Stage9_Scene
       objectReference: {fileID: 0}
     - target: {fileID: 7402121601526487014, guid: e9a33c71c3c6e574f84b73eaf28ae7f2, type: 3}
       propertyPath: _sfx

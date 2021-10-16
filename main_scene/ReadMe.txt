@@ -1,3 +1,18 @@
+2021/10/16 11:57
+★レベルデザイン　ステージ1～6の実装、7～9追加
+・ステージ1から9を修正（プレイヤーのモルモットのモーション参照エラー解消済み）
+C:\Users\kzpaqu\Documents\Japan_Game_Award_2021\main_scene\CalamariTape\Assets\Scenes\main.unity
+C:\Users\kzpaqu\Documents\Japan_Game_Award_2021\main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+C:\Users\kzpaqu\Documents\Japan_Game_Award_2021\main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+C:\Users\kzpaqu\Documents\Japan_Game_Award_2021\main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+C:\Users\kzpaqu\Documents\Japan_Game_Award_2021\main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+C:\Users\kzpaqu\Documents\Japan_Game_Award_2021\main_scene\CalamariTape\Assets\Scenes\Stage6_Scene.unity
+C:\Users\kzpaqu\Documents\Japan_Game_Award_2021\main_scene\CalamariTape\Assets\Scenes\Stage7_Sence.meta
+C:\Users\kzpaqu\Documents\Japan_Game_Award_2021\main_scene\CalamariTape\Assets\Scenes\Stage8_Sence.meta
+C:\Users\kzpaqu\Documents\Japan_Game_Award_2021\main_scene\CalamariTape\Assets\Scenes\Stage9_Sence.meta
+・テンプレートシーンを更新
+C:\Users\kzpaqu\Documents\Japan_Game_Award_2021\main_scene\CalamariTape\Assets\Scenes\main 3.scenetemplate
+
 2021/10/06 22:18
 ★新ギミック　ギミック強制解除の実装
 ・ステージ6へギミック強制解除のサンプルエリアを追加

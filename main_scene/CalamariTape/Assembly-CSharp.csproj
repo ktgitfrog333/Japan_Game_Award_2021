@@ -132,6 +132,7 @@
     <Compile Include="Assets\Scripts\MarmotHealth.cs" />
     <Compile Include="Assets\Scripts\TsuruTsuruMoveController.cs" />
     <Compile Include="Assets\Scripts\ConveyorMoveCharacter.cs" />
+    <Compile Include="Assets\Scripts\NotAttached\TippedSawActiveManager.cs" />
     <Compile Include="Assets\Scripts\Common\AnimatorControllerManager.cs" />
     <Compile Include="Assets\Scripts\Common\ConveyorMoveMode.cs" />
     <Compile Include="Assets\Scripts\Common\WallRunHorizontalFrontMode.cs" />
@@ -147,13 +148,12 @@
     <Compile Include="Assets\Scripts\GoalEvent.cs" />
     <Compile Include="Assets\Scripts\CalamariState.cs" />
     <Compile Include="Assets\Scripts\VisualizeDebugMode.cs" />
+    <Compile Include="Assets\Scripts\TippedSaw.cs" />
     <Compile Include="Assets\Scripts\GameBack.cs" />
     <Compile Include="Assets\Scripts\ScreenDirectInOut.cs" />
     <Compile Include="Assets\Scripts\CameraPointMove.cs" />
     <Compile Include="Assets\Scripts\PauseWindowManager.cs" />
     <Compile Include="Assets\Scripts\Common\ComponentManager.cs" />
-    <Compile Include="Assets\Scripts\TippedSaw.cs" />
-    <Compile Include="Assets\Scripts\NotAttached\TippedSawActiveManager.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Wheel\arktoon Shaders\Shaders\cginc\arkludeDecl.cginc" />
