@@ -1,3 +1,8 @@
+2021/10/22 18:06
+★不具合修正　InputManagerの移動とジャンプ修正
+・コントローラーの十字入力による移動とジャンプボタンをBボタンへ変更
+main_scene\CalamariTape\ProjectSettings\InputManager.asset
+
 2021/10/22 15:28
 ★不具合修正　BGMの差し替えと音量調整
 ・ステージ2～5のBGM音量を30％下げる
