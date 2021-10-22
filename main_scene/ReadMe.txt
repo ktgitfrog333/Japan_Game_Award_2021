@@ -1,3 +1,18 @@
+2021/10/22 15:03
+★不具合修正　UI外観と挙動の不備
+・ステージ1～9にてポーズ画面、クリア画面の選択アイコンを変更
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage6_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage7_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage8_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage9_Scene.unity
+・ポーズ画面、クリア画面用のアイコン画像ファイルを追加
+main_scene\CalamariTape\Assets\Textures\pause_pencil.png
+
 2021/10/22 09:42
 ★不具合修正　進行不能バグ
 ・ステージ1の一部チュートリアル表示後に操作不能になる不具合を修正
