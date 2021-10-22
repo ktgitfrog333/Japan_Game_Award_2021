@@ -1,3 +1,20 @@
+2021/10/22 15:28
+★不具合修正　BGMの差し替えと音量調整
+・ステージ2～5のBGM音量を30％下げる
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+・ステージ7～9のBGMを変更、BGM音量を30％下げる
+main_scene\CalamariTape\Assets\Scenes\Stage7_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage8_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage9_Scene.unity
+【参考】
+・ステージ7～8
+　⇒「bgm_section_02_03.mp3」のBGM(※変更)
+・ステージ9～10
+　⇒「bgm_section_0405.mp3」のBGM(※変更)
+
 2021/10/22 15:03
 ★不具合修正　UI外観と挙動の不備
 ・ステージ1～9にてポーズ画面、クリア画面の選択アイコンを変更
