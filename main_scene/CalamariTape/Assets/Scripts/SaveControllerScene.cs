@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Scene.StageIndex;
-using Scene.StageName;
+using Scenes.StageIndex;
+using Scenes.StageName;
 
 /// <summary>
 /// セーブデータ操作を実施するスクリプトクラス

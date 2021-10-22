@@ -154,6 +154,7 @@
     <Compile Include="Assets\Scripts\CameraPointMove.cs" />
     <Compile Include="Assets\Scripts\PauseWindowManager.cs" />
     <Compile Include="Assets\Scripts\Common\ComponentManager.cs" />
+    <Compile Include="Assets\Scripts\ResponseSceneInfo.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Wheel\arktoon Shaders\Shaders\cginc\arkludeDecl.cginc" />

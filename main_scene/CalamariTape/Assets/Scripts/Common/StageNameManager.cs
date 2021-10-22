@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scene.StageName
+namespace Scenes.StageName
 {
     /// <summary>
     /// ステージ名を管理する

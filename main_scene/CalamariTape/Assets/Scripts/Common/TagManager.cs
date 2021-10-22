@@ -33,5 +33,7 @@ namespace Const.Tag
         public static readonly string DASH_PANEL = "DashPanel";
         /// <summary>モード強制解除</summary>
         public static readonly string TIPPED_SAW = "TippedSaw";
+        /// <summary>シーン間の情報を受け渡す</summary>
+        public static readonly string RESPONSE_SCENE_INFO = "ResponseSceneInfo";
     }
 }

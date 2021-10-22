@@ -13,5 +13,7 @@ namespace Const.Name
         public static readonly string MENU = "Menu";
         /// <summary>クリア画面</summary>
         public static readonly string CLEAR_SCREEN = "ClearScreen";
+        /// <summary>シーン間の情報を受け渡す</summary>
+        public static readonly string RESPONSE_SCENE_INFO = "ResponseSceneInfo";
     }
 }

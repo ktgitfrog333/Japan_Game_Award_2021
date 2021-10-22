@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scene.StageIndex
+namespace Scenes.StageIndex
 {
     /// <summary>
     /// クリア状態を管理するステージ番号

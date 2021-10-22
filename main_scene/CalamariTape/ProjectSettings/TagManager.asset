@@ -18,6 +18,8 @@ TagManager:
   - DashPanel
   - Trampoline
   - TippedSaw
+  - Fire
+  - ResponseSceneInfo
   layers:
   - Default
   - TransparentFX

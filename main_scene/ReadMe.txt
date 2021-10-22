@@ -1,3 +1,18 @@
+2021/10/22 21:02
+★セレクトシーンへシーン名を渡す実装
+・namespace名の変更による影響
+main_scene\CalamariTape\Assets\Scripts\SaveControllerScene.cs
+main_scene\CalamariTape\Assets\Scripts\Common\StageClearNumber.cs
+main_scene\CalamariTape\Assets\Scripts\Common\StageNameManager.cs
+・シーン遷移処理へ遷移元シーン情報を渡す処理を追加
+main_scene\CalamariTape\Assets\Scripts\SceneMove.cs
+・オブジェクト名管理スクリプトへシーン名を管理するオブジェクトを追加
+main_scene\CalamariTape\Assets\Scripts\Common\NameManager.cs
+・タグ名管理スクリプトへシーン名を管理するオブジェクトを追加
+main_scene\CalamariTape\Assets\Scripts\Common\TagManager.cs
+・次のシーンへシーン情報を渡す処理を作成
+main_scene\CalamariTape\Assets\Scripts\ResponseSceneInfo.cs
+
 2021/10/22 18:06
 ★不具合修正　InputManagerの移動とジャンプ修正
 ・コントローラーの十字入力による移動とジャンプボタンをBボタンへ変更
