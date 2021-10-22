@@ -1,3 +1,12 @@
+2021/10/22 09:42
+★不具合修正　進行不能バグ
+・ステージ1の一部チュートリアル表示後に操作不能になる不具合を修正
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・ステージ4、6、7にて落下箇所によって復帰されない不具合を修正
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage6_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage7_Scene.unity
+
 2021/10/16 18:58
 ★レベルデザイン　ステージ6の修正
 ・ステージ6の見た目（マテリアル）の調整

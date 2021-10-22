@@ -5479,8 +5479,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 4.7403574, z: 1}
-  m_Center: {x: 0, y: 1.870178, z: 0}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &967596576
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10800,7 +10800,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3890080683638684579, guid: 1440fade2ced3e44bb9f83161054dfbb, type: 3}
       propertyPath: m_Size.x
-      value: 28.427847
+      value: 54.256123
       objectReference: {fileID: 0}
     - target: {fileID: 3890080683638684579, guid: 1440fade2ced3e44bb9f83161054dfbb, type: 3}
       propertyPath: m_Size.y
@@ -10808,11 +10808,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3890080683638684579, guid: 1440fade2ced3e44bb9f83161054dfbb, type: 3}
       propertyPath: m_Size.z
-      value: 13.653289
+      value: 32.246796
       objectReference: {fileID: 0}
     - target: {fileID: 3890080683638684579, guid: 1440fade2ced3e44bb9f83161054dfbb, type: 3}
       propertyPath: m_Center.x
-      value: -30.92375
+      value: -22.83618
       objectReference: {fileID: 0}
     - target: {fileID: 3890080683638684579, guid: 1440fade2ced3e44bb9f83161054dfbb, type: 3}
       propertyPath: m_Center.y
@@ -10820,7 +10820,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3890080683638684579, guid: 1440fade2ced3e44bb9f83161054dfbb, type: 3}
       propertyPath: m_Center.z
-      value: 0.5996768
+      value: 0.5671403
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1440fade2ced3e44bb9f83161054dfbb, type: 3}
@@ -11492,8 +11492,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 4.7403574, z: 1}
-  m_Center: {x: 0, y: 1.870178, z: 0}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1853519557
 MeshRenderer:
   m_ObjectHideFlags: 0
