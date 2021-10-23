@@ -1,3 +1,14 @@
+2021/10/23 13:35
+★ステージ10の追加
+・ステージ9にてステージ10への遷移
+main_scene\CalamariTape\Assets\Scenes\Stage9_Scene.unity
+・ステージ10を追加
+　モルモットアニメーション参照エラー解消
+　クリア画面のコングラチュレーション表示
+　ポーズ画面、クリア画面のアイコン画像差し替え
+main_scene\CalamariTape\Assets\Scenes\Stage10_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage10_Scene\*
+
 2021/10/22 21:02
 ★セレクトシーンへシーン名を渡す実装
 ・namespace名の変更による影響
