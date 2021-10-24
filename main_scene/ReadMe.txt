@@ -1,3 +1,14 @@
+2021/10/24 12:49
+★不具合修正　ポーズ画面、クリア画面にてUI操作不備の修正
+・ゲームに戻るを決定後に操作禁止にするよう修正
+main_scene\CalamariTape\Assets\Scripts\GameBack.cs
+・遊び方の確認を決定後に上下入力を禁止にするよう修正
+main_scene\CalamariTape\Assets\Scripts\GameCheck.cs
+・ゲームを遊びなおす決定後に操作禁止にするよう修正
+main_scene\CalamariTape\Assets\Scripts\GameRedo.cs
+・他のステージを選択する決定後に操作禁止にするよう修正
+main_scene\CalamariTape\Assets\Scripts\GameSelect.cs
+
 2021/10/24 10:34
 ★不具合修正　カラマリモードの拡大・縮小、床と壁の移動
 ・縦向きの壁プレハブのタグ、レイヤー情報の変更

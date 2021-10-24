@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Threading.Tasks;
 
 /// <summary>
 /// 遊び方の確認実行スクリプトクラス
@@ -15,23 +17,33 @@ public class GameCheck : MonoBehaviour
     [SerializeField] private GameObject _manual;
     /// <summary>画面表示フラグ</summary>
     private bool _openerFlag;
+    /// <summary>ボタンイベント</summary>
+    private Button _button;
+
+    private void Awake()
+    {
+        _button = GetComponent<Button>();
+    }
 
     /// <summary>
     /// 遊び方の確認イベントを実行
     /// </summary>
-    public void EventGameCheck()
+    public async void EventGameCheck()
     {
         if (_openerFlag == false)
         {
             _sfx.PlaySFX("se_decided");
             _manual.SetActive(true);
             _openerFlag = true;
+            await Task.Delay(100);
+            _button.enabled = false;
         }
         else
         {
             _sfx.PlaySFX("se_close");
             _manual.SetActive(false);
             _openerFlag = false;
+            _button.enabled = true;
         }
     }
 }

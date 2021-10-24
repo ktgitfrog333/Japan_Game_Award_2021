@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// ステージをやりなおす実行スクリプトクラス
@@ -17,14 +19,21 @@ public class GameRedo : MonoBehaviour
     [SerializeField] private string _nextSceneName;
     /// <summary>遷移先のシーン管理</summary>
     [SerializeField] private SceneMove _nextScene;
+    /// <summary>ボタンイベント</summary>
+    private Button _button;
 
     /// <summary>メニューを連続を実行フラグ</summary>
     private bool _flag;
 
+    private void Awake()
+    {
+        _button = GetComponent<Button>();
+    }
+
     /// <summary>
     /// ステージをやりなおすイベントを実行
     /// </summary>
-    public void EventGameRedo()
+    public async void EventGameRedo()
     {
         if (_flag == false)
         {
@@ -34,6 +43,8 @@ public class GameRedo : MonoBehaviour
             _direct._drawLoadNowFadeOutTrigger = true;
 
             _flag = true;
+            await Task.Delay(100);
+            _button.enabled = false;
         }
     }
 }

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// 他のステージを選ぶ実行スクリプトクラス
@@ -19,14 +21,21 @@ public class GameSelect : MonoBehaviour
     [SerializeField] private string _nextSceneName;
     /// <summary>遷移先のシーン管理</summary>
     [SerializeField] private SceneMove _nextScene;
+    /// <summary>ボタンイベント</summary>
+    private Button _button;
 
     /// <summary>メニューを連続を実行フラグ</summary>
     private bool _flag;
 
+    private void Awake()
+    {
+        _button = GetComponent<Button>();
+    }
+
     /// <summary>
     /// 他のステージを選ぶイベントを実行
     /// </summary>
-    public void EventGameSelect()
+    public async void EventGameSelect()
     {
         if (_flag == false)
         {
@@ -37,6 +46,8 @@ public class GameSelect : MonoBehaviour
             Debug.Log("他のステージを選ぶ");
 
             _flag = true;
+            await Task.Delay(100);
+            _button.enabled = false;
         }
     }
 }
