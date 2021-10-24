@@ -164,7 +164,8 @@ public class CalamariScaler : MonoBehaviour
             // 空中
             var c = _state._characterController;
             var v = new Vector3();
-            v.y = Physics.gravity.y * Time.deltaTime;
+            // ホイール入力で早く縮小される際に浮かないようにする
+            v.y = Physics.gravity.y * 10f * Time.deltaTime;
             c.Move(v);
         }
     }

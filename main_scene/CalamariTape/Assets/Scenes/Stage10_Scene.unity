@@ -3787,11 +3787,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5249419069203117132, guid: f52a141af9ae66342aec6e28c7c31b3a, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5249419069203117132, guid: f52a141af9ae66342aec6e28c7c31b3a, type: 3}
       propertyPath: m_TagString
-      value: HorizontalWall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5249419069203117134, guid: f52a141af9ae66342aec6e28c7c31b3a, type: 3}
       propertyPath: m_Materials.Array.data[0]

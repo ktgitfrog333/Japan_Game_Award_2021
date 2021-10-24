@@ -65,7 +65,7 @@ public class CalamariMoveController : MonoBehaviour
     /// <summary>2点間の距離を測る際の一つ目を記録したか否か</summary>
     private bool _distanceFirstPointSaved;
     /// <summary>2点間の距離</summary>
-    private Vector2 _distancePoint;
+    private Vector3 _distancePoint;
 
     /// <summary>SE再生用のゲームオブジェクト</summary>
     [SerializeField] private SfxPlay _sfxPlay;
@@ -457,17 +457,31 @@ public class CalamariMoveController : MonoBehaviour
 
         /*
          移動スピードをanimatorに反映
-         ・かつ、横向きの壁を移動中　または　縦向きの壁を移動中
          ・かつ、耐久ゲージが残っている
          ・かつ、粘着フラグが有効である
          */
-        if ((_wallMove._wallRunVertical == true || _wallMove._wallRunHorizontal == true) && 0 < _health.Parameter && _health.Adhesive == true)
+        if (0f < _health.Parameter && _health.Adhesive == true)
         {
-            _movedSpeedToAnimator = new Vector3(_moveVelocity.x, _moveVelocity.y, 0).magnitude;
+            if (_wallMove._wallRunVertical == true)
+            {
+                // 横向きの壁を移動中
+                _movedSpeedToAnimator = new Vector3(_moveVelocity.x, _moveVelocity.y, 0f).magnitude;
+            }
+            else if (_wallMove._wallRunHorizontal == true)
+            {
+                // 縦向きの壁を移動中
+                _movedSpeedToAnimator = new Vector3(0f, _moveVelocity.y, _moveVelocity.z).magnitude;
+            }
+            else
+            {
+                // 床の上を移動中
+                _movedSpeedToAnimator = new Vector3(_moveVelocity.x, 0f, _moveVelocity.z).magnitude;
+            }
         }
         else
         {
-            _movedSpeedToAnimator = new Vector3(_moveVelocity.x, 0, _moveVelocity.z).magnitude;
+            // 床の上を移動中
+            _movedSpeedToAnimator = new Vector3(_moveVelocity.x, 0f, _moveVelocity.z).magnitude;
         }
 
         var hAxis = CrossPlatformInputManager.GetAxis("Horizontal");
@@ -492,33 +506,22 @@ public class CalamariMoveController : MonoBehaviour
             if (_distanceFirstPointSaved == false)
             {
                 _distanceFirstPointSaved = true;
-                // 壁を登らない
-                if (_wallMove._wallRunVertical == false && _wallMove._wallRunHorizontal == false)
-                {
-                    _distancePoint = new Vector2(_transform.position.x, _transform.position.z);
-                }
-                // 壁を登る
-                else
-                {
-                    _distancePoint = new Vector2(_transform.position.x, _transform.position.y);
-                }
+                _distancePoint = new Vector3(_transform.position.x, _transform.position.y, _transform.position.z);
             }
             else
             {
-                var point = new Vector2();
-                // 壁を登らない
-                if (_wallMove._wallRunVertical == false && _wallMove._wallRunHorizontal == false)
-                {
-                    point = new Vector2(_transform.position.x, _transform.position.z);
-                }
-                // 壁を登る
-                else
-                {
-                    point = new Vector2(_transform.position.x, _transform.position.y);
-                }
-                var distance = Vector2.Distance(_distancePoint, point);
-                // 地面の上でしか止めない
-                if (4 < Mathf.Abs(distance) && _distanceFirstPointSaved == true && AllmodeStateConf.IsGrounded(_characterController, _transform, _wallMove._registMaxDistance) == true)
+                var point = new Vector3();
+                point = new Vector3(_transform.position.x, _transform.position.y, _transform.position.z);
+                var distance = Vector3.Distance(_distancePoint, point);
+                // 一定の距離を移動　かつ　地面の上　または　壁を移動中
+                if (
+                        4 < Mathf.Abs(distance)
+                            && _distanceFirstPointSaved == true
+                            && (
+                                AllmodeStateConf.IsGrounded(_characterController, _transform, _wallMove._registMaxDistance) == true
+                                || AllmodeStateConf.IsWalled(_transform, _wallMove._registMaxDistance) != -1
+                            )
+                )
                 {
                     _distanceFirstPointSaved = false;
                     StartCoroutine(CalamariStop());

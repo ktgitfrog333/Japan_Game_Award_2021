@@ -6,6 +6,7 @@ using Controller.AllmodeState;
 using Controller.WallHorizontal;
 using DeadException;
 using Const.Component;
+using UnityStandardAssets.CrossPlatformInput;
 
 /// <summary>
 /// カラマリモードにて壁移動を行う
@@ -56,6 +57,11 @@ public class CalamariWallMove : MonoBehaviour
             if (IsWallGrounded() == true)
             {
                 StartCoroutine(EnableGravity());
+            }
+            // 無重力状態でも床の上なら停止する
+            if (_zeroGravity == true && AllmodeStateConf.IsGrounded(_state._characterController, _state._transform, _state._maxMaxDistance) == true)
+            {
+                _zeroGravity = false;
             }
         }
     }
@@ -119,7 +125,14 @@ public class CalamariWallMove : MonoBehaviour
         if (other.gameObject.tag.Equals(TagManager.HORIZONTAL_WALL))
         {
             _wallRunHorizontal = false;
-            StartCoroutine(ZeroGravity());
+            // 頂上から降りる場合は重力を残す
+            if (
+                (0f < CrossPlatformInputManager.GetAxis("Horizontal") && _state._transform.position.x < other.gameObject.transform.position.x)
+                    || (CrossPlatformInputManager.GetAxis("Horizontal") < 0f && other.gameObject.transform.position.x < _state._transform.position.x)
+            )
+            {
+                StartCoroutine(ZeroGravity());
+            }
             _rigidbodyVelocity = Vector3.zero;
             _scaler._zeroGravity = false;
         }

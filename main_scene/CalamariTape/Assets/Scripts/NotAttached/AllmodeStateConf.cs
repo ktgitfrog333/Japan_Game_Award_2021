@@ -114,7 +114,7 @@ namespace Controller.AllmodeState
                 var g = hit.collider.gameObject;
                 if (g.tag.Equals(TagManager.HORIZONTAL_WALL))
                 {
-                    if (g.transform.parent.gameObject.layer == (int)LayerManager.WALL)
+                    if (g.layer == (int)LayerManager.WALL)
                     {
                         result = (int)GravityDirection.HORIZONTAL_LEFT;
                     }
@@ -128,7 +128,7 @@ namespace Controller.AllmodeState
                 var g = hit.collider.gameObject;
                 if (g.tag.Equals(TagManager.HORIZONTAL_WALL))
                 {
-                    if (g.transform.parent.gameObject.layer == (int)LayerManager.WALL)
+                    if (g.layer == (int)LayerManager.WALL)
                     {
                         result = (int)GravityDirection.HORIZONTAL_RIGHT;
                     }

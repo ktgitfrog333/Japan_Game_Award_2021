@@ -1,3 +1,25 @@
+2021/10/24 10:34
+★不具合修正　カラマリモードの拡大・縮小、床と壁の移動
+・縦向きの壁プレハブのタグ、レイヤー情報の変更
+　親タグ：名無し、親レイヤー：Fields
+　子タグ：HrizontalWall、子レイヤー：Wall
+main_scene\CalamariTape\Assets\Prefabs\HorizontalWall.prefab
+・各ステージにて縦向きの壁オブジェクトの情報変更
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage10_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage7_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage8_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage9_Scene.unity
+・カラマリモード移動処理にて壁移動が一時停止しない不具合を修正
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+・カラマリモード拡大から縮小した際にかかる重力を増やすよう修正
+main_scene\CalamariTape\Assets\Scripts\CalamariScaler.cs
+・カラマリモードにて頂上に登った際に滑る不具合を修正（※降りられない事象は未解決）
+main_scene\CalamariTape\Assets\Scripts\CalamariWallMove.cs
+・縦向きの壁プレハブのタグ、レイヤー情報の変更に伴い、壁判定処理を変更
+main_scene\CalamariTape\Assets\Scripts\NotAttached\AllmodeStateConf.cs
+
 2021/10/23 13:35
 ★ステージ10の追加
 ・ステージ9にてステージ10への遷移
