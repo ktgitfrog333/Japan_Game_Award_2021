@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4791456871361626307}
   - component: {fileID: 2013179106233909527}
   - component: {fileID: 3414622461905628030}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: VerticalStopTrigger
   m_TagString: VerticalWall
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 3588204564756003527}
   - component: {fileID: 4264909062252874765}
   - component: {fileID: 8764533016742907110}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: VerticalWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2156733171550767069}
   - component: {fileID: 2156733171550767070}
   - component: {fileID: 2156733171550767071}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HorizontalStopTrigger
   m_TagString: HorizontalWall
   m_Icon: {fileID: 0}
@@ -109,9 +109,9 @@ GameObject:
   - component: {fileID: 2156733173573904011}
   - component: {fileID: 2156733173573904008}
   - component: {fileID: 4391981469794280178}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MoveHorizontalWall
-  m_TagString: HorizontalWall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

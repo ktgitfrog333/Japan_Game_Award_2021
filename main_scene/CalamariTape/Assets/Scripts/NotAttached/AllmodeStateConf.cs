@@ -100,7 +100,7 @@ namespace Controller.AllmodeState
                 var g = hit.collider.gameObject;
                 if (g.tag.Equals(TagManager.VERTICAL_WALL))
                 {
-                    if (g.transform.parent.gameObject.layer == (int)LayerManager.WALL)
+                    if (g.layer == (int)LayerManager.WALL)
                     {
                         result = (int)GravityDirection.VERTICAL;
                     }
