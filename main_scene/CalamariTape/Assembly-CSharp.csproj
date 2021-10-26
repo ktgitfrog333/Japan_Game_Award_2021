@@ -94,6 +94,7 @@
     <Compile Include="Assets\Scripts\ClearVerticalWall.cs" />
     <Compile Include="Assets\Scripts\NotAttached\NenchakWallHorizontalDecision.cs" />
     <Compile Include="Assets\ModularConveyorTools\Scripts\LinearConveyor.cs" />
+    <Compile Include="Assets\Scripts\ResponseSceneInfo.cs" />
     <Compile Include="Assets\Scripts\IcePlane.cs" />
     <Compile Include="Assets\Scripts\CursorManager.cs" />
     <Compile Include="Assets\Scripts\CalamariMoveController.cs" />
@@ -154,7 +155,6 @@
     <Compile Include="Assets\Scripts\CameraPointMove.cs" />
     <Compile Include="Assets\Scripts\PauseWindowManager.cs" />
     <Compile Include="Assets\Scripts\Common\ComponentManager.cs" />
-    <Compile Include="Assets\Scripts\ResponseSceneInfo.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Wheel\arktoon Shaders\Shaders\cginc\arkludeDecl.cginc" />

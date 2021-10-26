@@ -53,7 +53,7 @@ public class SceneMove : MonoBehaviour
             // 無い場合は新規に作成する
             g = new GameObject();
             g.name = NameManager.RESPONSE_SCENE_INFO;
-            //g.tag = /*TagManager.RESPONSE_SCENE_INFO*/"ResponseSceneInfo";
+            //g.tag = /*TagManager.RESPONSE_SCENE_INFO */ "ResponseSceneInfo";
             g.AddComponent<ResponseSceneInfo>();
         }
         // 現在のシーン名を次のシーンのオブジェクトへ遷移元のシーン情報としてセット

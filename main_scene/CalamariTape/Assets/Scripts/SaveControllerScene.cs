@@ -24,19 +24,19 @@ public class SaveControllerScene : MonoBehaviour
     /// </summary>
     public void SaveDataWrite()
     {
-        var index = SceneIndexSerch(_stageName);
-        if (-1 != index)
-        {
-            _player_data.stage_clear_number[index] = true;
-            _player_data.Save_Data(_player_data);
-        }
-        else
-        {
-            Debug.Log("セーブデータの書き込みに失敗しました。");
-            Debug.Log("シーン名[" + _stageName + "]に紐づくシーン番号が見つかりません。");
-        }
+        //var index = SceneIndexSerch(_stageName);
+        //if (-1 != index)
+        //{
+        //    _player_data.stage_clear_number[index] = true;
+        //    _player_data.Save_Data(_player_data);
+        //}
+        //else
+        //{
+        //    Debug.Log("セーブデータの書き込みに失敗しました。");
+        //    Debug.Log("シーン名[" + _stageName + "]に紐づくシーン番号が見つかりません。");
+        //}
     }
-    
+
     /// <summary>
     /// 指定されたシーン名とシーン番号を紐づける
     /// ※将来的に他のクラスへ切り離したい
