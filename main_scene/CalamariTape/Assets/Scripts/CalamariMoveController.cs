@@ -128,7 +128,7 @@ public class CalamariMoveController : MonoBehaviour
         if (_wallMove._wallRunVertical == false && _wallMove._wallRunHorizontal == false)
         {
             // 地面の上にいるか
-            if (AllmodeStateConf.IsGrounded(_characterController, _transform, _wallMove._registMaxDistance) == true && _jumpAction != true)
+            if ((AllmodeStateConf.IsGrounded(_characterController, _transform, _wallMove._registMaxDistance) == true/* || AllmodeStateConf.IsConveyor(_transform, _wallMove._registMaxDistance) == true*/) && _jumpAction != true)
             {
                 _jumpAction = CrossPlatformInputManager.GetButtonDown("Jump");
             }

@@ -34,14 +34,26 @@ public class SceneMove : MonoBehaviour
     /// <param name="mode"></param>
     private void LoadedGameScene(Scene next, LoadSceneMode mode)
     {
-        // 次のシーンのヒエラルキーからシーン名を格納するオブジェクトを探す
-        var g = GameObject.FindGameObjectWithTag(TagManager.RESPONSE_SCENE_INFO);
-        if (g == null)
+        GameObject g;
+        try
+        {
+            // 次のシーンのヒエラルキーからシーン名を格納するオブジェクトを探す
+            g = GameObject.Find(TagManager.RESPONSE_SCENE_INFO);
+            if (g == null)
+            {
+                // 無い場合は新規に作成する
+                g = new GameObject();
+                g.name = NameManager.RESPONSE_SCENE_INFO;
+                //g.tag = TagManager.RESPONSE_SCENE_INFO;
+                g.AddComponent<ResponseSceneInfo>();
+            }
+        }
+        catch
         {
             // 無い場合は新規に作成する
             g = new GameObject();
             g.name = NameManager.RESPONSE_SCENE_INFO;
-            g.tag = TagManager.RESPONSE_SCENE_INFO;
+            //g.tag = /*TagManager.RESPONSE_SCENE_INFO*/"ResponseSceneInfo";
             g.AddComponent<ResponseSceneInfo>();
         }
         // 現在のシーン名を次のシーンのオブジェクトへ遷移元のシーン情報としてセット

@@ -126,7 +126,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
 
     private void Update()
     {
-        if (IsGrounded() && _jumpAction != true)
+        if ((AllmodeStateConf.IsGrounded(_characterController, _transform, _groundMove._registMaxDistance) == true/* || AllmodeStateConf.IsConveyor(_transform, _groundMove._registMaxDistance) == true*/) && _jumpAction != true)
         {
             _jumpAction = CrossPlatformInputManager.GetButtonDown("Jump");
         }
@@ -206,7 +206,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
             _moveVelocity = _moveVelocity.z * Vector3.forward + _moveVelocity.x * Vector3.right;
         }
 
-        if (IsGrounded() == true && _jumpAction == true)
+        if (AllmodeStateConf.IsGrounded(_characterController, _transform, _groundMove._registMaxDistance) == true && _jumpAction == true)
         {
             // ジャンプ処理
             _jumpVelocity += _jumpPower;
@@ -216,7 +216,7 @@ public class TsuruTsuruMoveController : MonoBehaviour
             // 効果音を再生する
             PlaySoundEffect();
         }
-        else if (IsGrounded() == false && _jumpAction == true && _jumpVelocity < _registedJumpMax)
+        else if (AllmodeStateConf.IsGrounded(_characterController, _transform, _groundMove._registMaxDistance) == false && _jumpAction == true && _jumpVelocity < _registedJumpMax)
         {
             // ジャンプ処理
             _jumpVelocity += _jumpPower;
@@ -378,29 +378,29 @@ public class TsuruTsuruMoveController : MonoBehaviour
         return result;
     }
 
-    /// <summary>
-    /// 接地判定
-    /// </summary>
-    /// <returns>接地状態か否か</returns>
-    private bool IsGrounded()
-    {
-        var result = _characterController.isGrounded;
+    ///// <summary>
+    ///// 接地判定
+    ///// </summary>
+    ///// <returns>接地状態か否か</returns>
+    //private bool IsGrounded()
+    //{
+    //    var result = _characterController.isGrounded;
 
-        if (result == false)
-        {
-            Debug.DrawRay(_transform.position + Vector3.up * 0.1f, Vector3.down * _groundMove._registMaxDistance, Color.green);
-            var ray = new Ray(_transform.position + Vector3.up * 0.1f, Vector3.down);
-            foreach (RaycastHit hit in Physics.RaycastAll(ray, _groundMove._registMaxDistance))
-            {
-                if (hit.collider.gameObject.layer == (int)LayerManager.FIELD)
-                {
-                    result = true;
-                }
-            }
-        }
+    //    if (result == false)
+    //    {
+    //        Debug.DrawRay(_transform.position + Vector3.up * 0.1f, Vector3.down * _groundMove._registMaxDistance, Color.green);
+    //        var ray = new Ray(_transform.position + Vector3.up * 0.1f, Vector3.down);
+    //        foreach (RaycastHit hit in Physics.RaycastAll(ray, _groundMove._registMaxDistance))
+    //        {
+    //            if (hit.collider.gameObject.layer == (int)LayerManager.FIELD)
+    //            {
+    //                result = true;
+    //            }
+    //        }
+    //    }
 
-        return result;
-    }
+    //    return result;
+    //}
 
     /// <summary>
     /// 移動距離を測定する
