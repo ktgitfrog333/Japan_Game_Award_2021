@@ -91,6 +91,12 @@ public class MarmotWheel : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        // 無効時にアニメーションを止める
+        _animator.SetBool(AnimatorControllerManager.MAWASHIGURUMA_ROTATEBOOL, false);
+    }
+
     /// <summary>
     /// 設定値のチェック
     /// </summary>
