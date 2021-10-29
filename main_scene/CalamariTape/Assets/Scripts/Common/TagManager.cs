@@ -35,5 +35,7 @@ namespace Const.Tag
         public static readonly string TIPPED_SAW = "TippedSaw";
         /// <summary>シーン間の情報を受け渡す</summary>
         public static readonly string RESPONSE_SCENE_INFO = "ResponseSceneInfo";
+        /// <summary>回転リング</summary>
+        public static readonly string CIRCLE_RING = "CircleRing";
     }
 }

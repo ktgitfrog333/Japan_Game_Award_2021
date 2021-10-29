@@ -18,6 +18,8 @@ public class StopGimmick : MonoBehaviour
     private DashPanelActiveManager _activeDashPanel;
     /// <summary>モード強制解除の処理</summary>
     private TippedSawActiveManager _activeTippedSaw;
+    /// <summary>回転リングの処理</summary>
+    private CircleRingActiveManager _activeCircleRing;
 
     private void Start()
     {
@@ -27,6 +29,7 @@ public class StopGimmick : MonoBehaviour
         _activeConveyorMoveCharacters = new ConveyorMoveCharacterActiveManager();
         _activeDashPanel = new DashPanelActiveManager();
         _activeTippedSaw = new TippedSawActiveManager();
+        _activeCircleRing = new CircleRingActiveManager();
     }
 
     /// <summary>
@@ -44,6 +47,8 @@ public class StopGimmick : MonoBehaviour
         _activeDashPanel.StopGimmik();
         // モード強制解除
         _activeTippedSaw.StopGimmik();
+        // 回転リング
+        _activeCircleRing.StopGimmik();
     }
 
     /// <summary>
@@ -61,5 +66,7 @@ public class StopGimmick : MonoBehaviour
         _activeDashPanel.StartGimmik();
         // モード強制解除
         _activeTippedSaw.StartGimmik();
+        // 回転リング
+        _activeCircleRing.StartGimmik();
     }
 }

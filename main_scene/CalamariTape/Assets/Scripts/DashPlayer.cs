@@ -5,6 +5,7 @@ using Const.Tag;
 using DeadException;
 using Controller.AllmodeState;
 using Beans.Field;
+using Const.Name;
 
 /// <summary>
 /// プレイヤーをダッシュさせる
@@ -35,6 +36,18 @@ public class DashPlayer : MonoBehaviour
     private void OnDisable()
     {
         Destroy(GetComponent<DashPlayer>());
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (_playerManager != null)
+        {
+            // ゲームオーバーエリアに落下後にダッシュ状態が保持される不具合の対応
+            if (other.gameObject.name.Equals(NameManager.GAME_OVER_LINE))
+            {
+                _dashPanel.StopAndDestroyDashPlayer(this);
+            }
+        }
     }
 
     void Update()

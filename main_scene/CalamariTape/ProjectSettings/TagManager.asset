@@ -20,6 +20,7 @@ TagManager:
   - TippedSaw
   - Fire
   - ResponseSceneInfo
+  - CircleRing
   layers:
   - Default
   - TransparentFX

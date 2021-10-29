@@ -45,6 +45,15 @@ public class Tarzan : MonoBehaviour
     private bool _throwsPlayerRuning;
     /// <summary>プレイヤーが離れてから少しずつ振り子の勢いと弱めていく処理を排他的にする</summary>
     private bool _stopPendulumRuning;
+    /// <summary>プレイヤーが離れてから少しずつ振り子の勢いと弱めていく</summary>
+    private IEnumerator _stopPendulum;
+    /// <summary>振り幅の最大値をスタート時に記録する</summary>
+    private JointLimits _hingeJointLimits;
+
+    private void Start()
+    {
+        _hingeJointLimits = _hingeJoint.limits;
+    }
 
     void Update()
     {
@@ -221,6 +230,15 @@ public class Tarzan : MonoBehaviour
             {
                 _pauseWindowManager.enabled = false;
             }
+
+            // 振り子から離れて再び掴んだ際に振り子運動を再開する
+            if (_stopPendulum != null)
+            {
+                StopCoroutine(_stopPendulum);
+                _hingeJoint.limits = _hingeJointLimits;
+                _stopPendulumRuning = false;
+                _stopPendulum = null;
+            }
         }
         else if (r == 0 && _nenchakIn == true)
         {
@@ -251,7 +269,12 @@ public class Tarzan : MonoBehaviour
             {
                 _pauseWindowManager.enabled = true;
             }
-            StartCoroutine(StopPendulum());
+            // コルーチン情報をリフレッシュ
+            if (_stopPendulum == null)
+            {
+                _stopPendulum = StopPendulum();
+            }
+            StartCoroutine(_stopPendulum);
             _nenchakIn = false;
         }
     }

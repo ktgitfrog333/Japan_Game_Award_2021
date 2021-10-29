@@ -196,6 +196,18 @@ namespace DeadException
                         result = false;
                     }
                 }
+                else if (name.Equals(new CircleRing().GetType().ToString()))
+                {
+                    var m = gameObject.GetComponent<CircleRing>();
+                    if (m.isActiveAndEnabled == true)
+                    {
+                        result = true;
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                }
             }
             catch (NullReferenceException e)
             {

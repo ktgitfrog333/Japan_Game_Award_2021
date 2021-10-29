@@ -15,5 +15,7 @@ namespace Const.Name
         public static readonly string CLEAR_SCREEN = "ClearScreen";
         /// <summary>シーン間の情報を受け渡す</summary>
         public static readonly string RESPONSE_SCENE_INFO = "ResponseSceneInfo";
+        /// <summary>ゲームオーバーエリアを示すオブジェクト</summary>
+        public static readonly string GAME_OVER_LINE = "GameOverLine";
     }
 }

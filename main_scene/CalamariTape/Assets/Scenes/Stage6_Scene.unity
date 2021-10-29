@@ -9297,6 +9297,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 482473099}
     m_Modifications:
+    - target: {fileID: 5021708712360007418, guid: 32f84ea5b9f489b4c910bd47d93fb3b6, type: 3}
+      propertyPath: m_Size.y
+      value: 5.7100554
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021708712360007418, guid: 32f84ea5b9f489b4c910bd47d93fb3b6, type: 3}
+      propertyPath: m_Center.x
+      value: -0.0044188974
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021708712360007418, guid: 32f84ea5b9f489b4c910bd47d93fb3b6, type: 3}
+      propertyPath: m_Center.y
+      value: 4.1701775
+      objectReference: {fileID: 0}
     - target: {fileID: 5021708712360007420, guid: 32f84ea5b9f489b4c910bd47d93fb3b6, type: 3}
       propertyPath: _health
       value: 
@@ -11050,6 +11062,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 862136173}
     m_Modifications:
+    - target: {fileID: 5021708712360007418, guid: 32f84ea5b9f489b4c910bd47d93fb3b6, type: 3}
+      propertyPath: m_Size.y
+      value: 5.723408
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021708712360007418, guid: 32f84ea5b9f489b4c910bd47d93fb3b6, type: 3}
+      propertyPath: m_Center.x
+      value: -0.0044188974
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021708712360007418, guid: 32f84ea5b9f489b4c910bd47d93fb3b6, type: 3}
+      propertyPath: m_Center.y
+      value: 4.176853
+      objectReference: {fileID: 0}
     - target: {fileID: 5021708712360007420, guid: 32f84ea5b9f489b4c910bd47d93fb3b6, type: 3}
       propertyPath: _health
       value: 
@@ -13110,6 +13134,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2091341073}
     m_Modifications:
+    - target: {fileID: 5021708712360007418, guid: 32f84ea5b9f489b4c910bd47d93fb3b6, type: 3}
+      propertyPath: m_Size.y
+      value: 5.627618
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021708712360007418, guid: 32f84ea5b9f489b4c910bd47d93fb3b6, type: 3}
+      propertyPath: m_Center.x
+      value: -0.0044188974
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021708712360007418, guid: 32f84ea5b9f489b4c910bd47d93fb3b6, type: 3}
+      propertyPath: m_Center.y
+      value: 4.1289597
+      objectReference: {fileID: 0}
     - target: {fileID: 5021708712360007420, guid: 32f84ea5b9f489b4c910bd47d93fb3b6, type: 3}
       propertyPath: _health
       value: 
