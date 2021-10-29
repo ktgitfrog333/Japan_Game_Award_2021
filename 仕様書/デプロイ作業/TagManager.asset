@@ -15,6 +15,7 @@ TagManager:
   - GoalFloor
   - VerticalWall
   - Wall
+  - CircleRing
   layers:
   - Default
   - TransparentFX
