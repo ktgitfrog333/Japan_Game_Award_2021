@@ -304,6 +304,11 @@ public class Tarzan : MonoBehaviour
             {
                 _playerManager._calamari.GetComponent<CharacterController>().Move(_rigidbody.velocity * speed);
             }
+            // プレイヤーを投げる際に重力が優先されないようにする
+            if (DeadNullReference.CheckReferencedComponent(_playerManager._calamari, new CalamariMoveController().GetType().ToString()) == true)
+            {
+                _playerManager._calamariController._gravityAcceleration = 0.25f;
+            }
             speed = speed * fade;
             yield return new WaitForSeconds(0.01f);
         }

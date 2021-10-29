@@ -169,6 +169,8 @@ public class TsuruTsuruMoveController : MonoBehaviour
     private void OnEnable()
     {
         OtherActionTsurutsuruStop();
+        //// 重力加速度をリセット
+        //_gravityAcceleration = 0.2f;
     }
 
     /// <summary>

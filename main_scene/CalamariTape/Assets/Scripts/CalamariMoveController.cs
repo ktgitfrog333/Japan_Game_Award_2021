@@ -187,6 +187,8 @@ public class CalamariMoveController : MonoBehaviour
             _sfxPlayedDerable = false;
             StopCoroutine(SleepTimeSoundEffectDerableDecrease());
         }
+        //// 重力加速度をリセット
+        //_gravityAcceleration = 0.2f;
     }
 
     /// <summary>
