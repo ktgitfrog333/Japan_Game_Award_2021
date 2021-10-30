@@ -21,6 +21,8 @@ public class PauseWindowManager : MonoBehaviour
     private List<MessageScrollText> _messageText;
     /// <summary>レベルデザインギミック制御</summary>
     [SerializeField] private StopGimmick _stopGimmick;
+    /// <summary>プレイヤーモードチェンジ</summary>
+    [SerializeField] private ModeChanger _modeChanger;
 
     private void Start()
     {
@@ -40,6 +42,7 @@ public class PauseWindowManager : MonoBehaviour
             _menu.SetActive(true);
             StopAdviceMessages();
             _stopGimmick.StopAllGimmik();
+            _modeChanger.enabled = false;
         }
     }
 
@@ -108,6 +111,7 @@ public class PauseWindowManager : MonoBehaviour
             _playerManager._nenchakController.enabled = true;
             _playerManager._tsurutsuruController.enabled = true;
             _stopGimmick.StartAllGimmik();
+            _modeChanger.enabled = true;
         }
         _menuClose = false;
         _menu.SetActive(false);
